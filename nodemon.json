@@ -1,7 +1,6 @@
 {
   "ignore": [
-    ".git",
-    "app.js"
+    ".git"
   ],
   "verbose": true
 }
