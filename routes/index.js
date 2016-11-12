@@ -1,9 +1,16 @@
-const s = 's';
+import express from 'express';
 import path from 'path';
-let d = path.dirname(__dirname);
-console.log('d', d);
+let router = express.Router();
+
+router.get('/api', function (req, res) {
+    res.json([{"name": "yuri"}, {"name": "Tal"}]);
+});
 
 
-export {
-    s
-}
+router.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '../', 'views/index.html'));
+});
+
+export default router;
+
+

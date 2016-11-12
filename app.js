@@ -1,12 +1,10 @@
 import express from 'express';
-import path from 'path';
+import router from './routes/index';
 const app = express();
-import {routes} from './routes/index';
 
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'views/index.html'));
-});
-
+app.use('/', router);
 
 export default app;
+
+
