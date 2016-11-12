@@ -1,10 +1,4 @@
-var http = require('http');
+import app from './app';
+import {SERVER} from './config';
 
-function handleRequest(req, res) {
-    res.end('heloo');
-}
-var server = http.createServer(handleRequest);
-server.listen(4000, function () {
-  console.log('lissening on ');
-
-});
+app.listen(SERVER.PORT, () => console.log(`Listening on: ${SERVER.URL()}`));
