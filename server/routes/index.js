@@ -1,5 +1,8 @@
 import express from 'express';
 import path from 'path';
+
+import config from '../config/env';
+
 let router = express.Router();
 
 router.get('/api', function (req, res) {
@@ -8,7 +11,7 @@ router.get('/api', function (req, res) {
 
 
 router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../', 'views/index.html'));
+    res.sendFile(path.join(config.root, 'views/index.html'));
 });
 
 export default router;

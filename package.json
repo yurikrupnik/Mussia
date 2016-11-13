@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js --exec babel-node",
+    "start": "nodemon server/index.js --exec babel-node",
     "test": "mocha --opts .mocharc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "lodash": "^4.16.6"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

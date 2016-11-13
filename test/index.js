@@ -1,7 +1,6 @@
 import http from 'http';
-import {SERVER} from '../config';
-import app from '../app.js';
-import ss from './cof';
+import config from '../server/config/env';
+import app from '../server/app.js';
 
 
 import chai from 'chai';
@@ -12,11 +11,11 @@ let should = chai.should();
 
 describe('Server loading', () => {
     before(function () {
-        app.listen(SERVER.test.PORT);
+        app.listen(config.port);
     });
 
     it('should return 200', done => {
-        http.get(SERVER.test.url(), res => {
+        http.get(`http://${config.ip}:${config.port}`, res => {
             should.equal(200, res.statusCode);
             done();
         })
