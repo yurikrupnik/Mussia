@@ -1,1 +1,3 @@
+server/test
 --compilers js:babel-register
+--recursive

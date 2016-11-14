@@ -21,8 +21,10 @@
     "babel-preset-stage-3": "^6.17.0",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
+    "eslint": "^3.10.1",
     "mocha": "^3.1.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "sinon": "^1.17.6"
   },
   "babel": {
     "presets": [
@@ -32,5 +34,27 @@
       "react"
     ],
     "plugins": []
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true,
+        "impliedStrict": true
+      },
+      "rules": {
+        "quotes": [
+          "error",
+          "double"
+        ]
+      }
+    }
   }
 }

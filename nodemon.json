@@ -1,7 +1,8 @@
 {
   "ignore": [
     ".git",
-    "./test/"
+    "./server/test",
+    "./client/"
   ],
   "verbose": true
 }
