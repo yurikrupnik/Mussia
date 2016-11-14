@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js --exec babel-node",
-    "test": "mocha --opts .mocharc"
+    "test": "mocha --opts .mocharc",
+    "eslint": "eslint ./"
   },
   "author": "",
   "license": "ISC",
@@ -34,27 +35,5 @@
       "react"
     ],
     "plugins": []
-  },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-      "node": true,
-      "es6": true,
-      "browser": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true,
-        "impliedStrict": true
-      },
-      "rules": {
-        "quotes": [
-          "error",
-          "double"
-        ]
-      }
-    }
   }
 }
