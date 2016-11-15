@@ -1,19 +1,12 @@
-import express from 'express';
-import path from 'path';
+import root from './root';
+import payments from './payments';
+import users from './users';
 
-import config from '../config/env';
+export default [
+    root,
+    payments,
+    users
+];
 
-let router = express.Router();
-
-router.get('/api', function (req, res) {
-    res.json([{"name": "yuri"}, {"name": "Tal"}]);
-});
-
-
-router.get('', function (req, res) {
-    res.sendFile(path.join(config.root, 'views/index.html'));
-});
-
-export default router;
 
 
