@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/index.js --exec babel-node",
     "test": "mocha --opts .mocharc",
-    "eslint": "eslint ./"
+    "eslint": "eslint ./",
+    "fulltest": "mocha --opts .mocharc ; eslint ./"
   },
   "author": "",
   "license": "ISC",

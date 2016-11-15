@@ -1,6 +1,5 @@
 /*global describe it expect should*/
-describe('True False', () => {
-
+describe('do', () => {
     it('should return true', () => {
         expect(true).to.equal(true);
         should.equal(true, true);
