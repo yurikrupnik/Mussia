@@ -1,2 +1,2 @@
-// load global test variables
+// /*global describe it*/
 import '../config/global';

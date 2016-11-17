@@ -13,6 +13,11 @@ let all = {
     // Server IP
     ip: process.env.IP || 'localhost',
 
+    // url
+    url: function () {
+        return `http://${all.ip}:${all.port}`;
+    },
+
     // Should we populate the DB with sample data?
     seedDB: false,
 
