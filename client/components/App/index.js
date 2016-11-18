@@ -17,9 +17,18 @@ export default class App extends Component {
 
     }
 
+    handleClick(e){
+        console.log('e', e.type);
+    }
+
     render() {
         return (
-            <div>hellllllllll</div>
+            <div>
+                <p>sga</p>
+                <p>ss</p>
+                <span>some s and smore</span>
+                <button onClick={this.handleClick.bind(this)}>help</button>
+            </div>
         );
     }
 }

@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 export default {
     devtool: 'eval-source-map',
     entry: [
@@ -19,5 +20,19 @@ export default {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
+        new BrowserSyncPlugin({
+            // browse to http://localhost:3000/ during development,
+            // ./public directory is being served
+            host: 'localhost',
+            port: 3000,
+            // server: {baseDir: ['public']}
+            proxy: 'http://localhost:4000',
+        },
+            // plugin options
+            {
+                // prevent BrowserSync from reloading the page
+                // and let Webpack Dev Server take care of this
+                reload: false
+            })
     ]
 };
