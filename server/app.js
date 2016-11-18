@@ -7,7 +7,6 @@ app.use(express.static('client/public'));
 app.use('/', router); // all routes
 app.use(webpack); // webpack middle wares
 
-
 export default app;
 
 
