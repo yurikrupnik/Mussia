@@ -3,10 +3,8 @@
  */
 import express from 'express';
 let router = express.Router();
-import {index, error, requestTime, requestUrl} from './controller';
-router.use(requestTime);
-router.use(requestUrl);
+import {root} from './controller';
 
-router.get('/', index);
+router.get('/', root);
 
 export default router;

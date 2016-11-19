@@ -1,7 +1,7 @@
 import path from 'path';
 import config from '../../config/env';
 
-let index = (req, res) => {
+let root = (req, res) => {
     res.sendFile(path.join(config.root, 'views/index.html'));
 };
 
@@ -17,7 +17,7 @@ let requestUrl = function (req, res, next) {
 };
 
 export {
-    index,
+    root,
     // error,
     requestTime,
     requestUrl
