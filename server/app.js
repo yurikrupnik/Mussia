@@ -9,7 +9,7 @@ app.use(express.static('client/public'));
 // webpack middleware
 app.use(webpack);
 
-// routes
-app.use('/', router); // all routes
+// all routes
+app.use('/', router);
 
 export default app;
