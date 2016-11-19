@@ -1,12 +1,13 @@
 /*global describe it should before*/
 import http from 'http';
+import request from 'superagent';
 import app from '../../app';
 import config from '../../config/env';
 const url = config.url();
 
 describe('Server loading', () => {
     before(function () {
-        app.listen(config.port);
+        app.listen(8080); // can not run on same port as the real server while npm start is up
     });
 
     it('should return 200', done => {

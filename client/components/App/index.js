@@ -26,7 +26,8 @@ export default class App extends Component {
             <div>
                 <p>sga</p>
                 <p>ss</p>
-                <span>some s and smore</span>
+                <span>some s  smore</span>
+                <img src="download.jpeg" alt="no image found"/>
                 <button onClick={this.handleClick.bind(this)}>help</button>
             </div>
         );

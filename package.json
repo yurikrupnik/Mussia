@@ -9,7 +9,7 @@
     "eslint": "eslint ./",
     "fulltest": "mocha --opts .mocharc ; eslint ./"
   },
-  "author": "",
+  "author": "Yuri Krupnik",
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",

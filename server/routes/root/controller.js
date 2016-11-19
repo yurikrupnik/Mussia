@@ -5,6 +5,20 @@ let index = (req, res) => {
     res.sendFile(path.join(config.root, 'views/index.html'));
 };
 
+let requestTime = function (req, res, next) {
+    req.requestTime = Date.now();
+    console.log('Date.now()', Date.now());
+    next()
+};
+
+let requestUrl = function (req, res, next) {
+    console.log('req.url', req.url);
+    next();
+};
+
 export {
-    index
+    index,
+    // error,
+    requestTime,
+    requestUrl
 };
