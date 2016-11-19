@@ -3,8 +3,8 @@
  */
 import express from 'express';
 let router = express.Router();
-import {root} from './controller';
+import handleRoot from './controller';
 
-router.get('/', root);
+router.get('/', handleRoot);
 
 export default router;
