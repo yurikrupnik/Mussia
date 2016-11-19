@@ -7,7 +7,7 @@ export default class App extends Component {
     }
 
     componentDidMount(){
-        request.post('/payments', (err, res) => res.body);
+        request.get('/payments/count', (err, res) => res.body);
     }
 
     handleClick(e){

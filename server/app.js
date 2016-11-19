@@ -10,14 +10,6 @@ app.use(bodyParser.json());
 
 // webpack middleware - todo not needed in test
 app.use(webpack);
-
-
-// app.use('/payments', (req, res) => {
-//     require('./api/payments')
-// });
-// all routes
-// app.use('/', router);
-
 router(app);
 
 

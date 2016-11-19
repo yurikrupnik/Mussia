@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import {databaseUrl} from '../../config/env';
 import Promise from 'bluebird';
+require('./seed');
 
 mongoose.Promise = Promise;
 mongoose.connection.on('error', function (err) {
@@ -10,4 +11,3 @@ mongoose.connection.on('error', function (err) {
 
 export default mongoose.connect(databaseUrl, {});
 
-// require('./seed');
