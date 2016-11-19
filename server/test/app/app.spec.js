@@ -1,41 +1,54 @@
-import http from 'http';
-import request from 'superagent';
+import request from 'supertest';
 import app from '../../app';
-import {host, ip, port} from '../../config/env';
 
 describe('Server loading', () => {
-    before(function () {
-        app.listen(4000); // can not run on same port as the real server while npm start is up
+    describe('Root uri', () => {
+        it('expect to return index.html', done => {
+            request(app)
+                .get('/')
+                .expect('Content-Type', /html/)
+                .expect('X-powered-By', /Express/)
+                .expect(200)
+                .end(function (err, res) {
+                    if (err) throw err;
+                    done();
+                });
+        });
     });
 
-    it('should return 200', done => {
-        http.get(host, res => {
-            should.equal(200, res.statusCode);
-            done();
-        });
-    });
-    //
+    describe('Root uri error', () => {
+        it('expect to return 404 page', done => {
+            request(app)
+                .get('/dsa')
+                .expect('Content-Type', /html/)
+                .expect('X-powered-By', /Express/)
+                .expect(404)
+                .end(function (err, res) {
+                    if (err) throw err;
+                    done();
+                });
+        })
+    })
+
     it('expect to return json', done => {
-        http.get(`${host}/users`, res => {
-            should.equal(200, res.statusCode);
-            // test for jjson
-            return http.get(`${host}/payments`, res => {
-                should.equal(200, res.statusCode);
-                // test for jjson
+        request(app)
+            .post('/payments')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) throw err;
                 done();
             });
-        });
+        request(app)
+            .post('/users')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) throw err;
+                done();
+            });
     });
-    //
-    // it('expect to return json', done => {
-    //     http.get(`${host}/payments`, res => {
-    //         should.equal(200, res.statusCode);
-    //         // test for jjson
-    //         return http.get(`http://${config.ip}:${config.port}/payments`, res => {
-    //             should.equal(200, res.statusCode);
-    //             // test for jjson
-    //             done();
-    //         });
-    //     });
-    // });
+
+
+
 });
