@@ -3,11 +3,16 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../../webpack.config';
 import {env} from './env';
+import initial from 'lodash.initial';
+
+if (env === 'test') {
+    webpackConfig.plugins = initial(webpackConfig.plugins); // last plugin is BrowserSyncPlugin - no reason to start it
+}
 
 let compiler = webpack(webpackConfig);
 let middleware;
 
-if (env === 'development') {
+if (env === 'development' || env === 'test') {
     let options = {
         publicPath: '/',
         stats: {
@@ -19,15 +24,14 @@ if (env === 'development') {
             modules: false
         }
     };
-    middleware =[
+    middleware = [
         webpackDevMiddleware(compiler, options),
         webpackHotMiddleware(compiler)
     ];
 } else {
-    compiler.run(function () {
-        
-    });
-    middleware = function () {};
+    compiler.run(function () {});
+    middleware = function () {
+    };
 }
 
 export default middleware;

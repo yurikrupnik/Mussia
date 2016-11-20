@@ -30,8 +30,8 @@ describe('Server loading', () => {
         })
     })
 
-    describe('JSON requests', () => {
-        it('expect to return json', done => {
+    // describe('JSON requests', () => {
+    //     it('expect to return json', done => {
             // request(app)
             //     .post('/payments')
             //     .expect('Content-Type', /json/)
@@ -48,8 +48,8 @@ describe('Server loading', () => {
             //         if (err) throw err;
             //         done();
             //     });
-        });
-    })
+        // });
+    // })
 
 
 

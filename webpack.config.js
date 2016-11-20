@@ -25,12 +25,10 @@ export default {
             host: 'localhost',
             port: 3000,
             proxy: 'http://localhost:4000',
-        },
-            // plugin options
-            {
-                // prevent BrowserSync from reloading the page
-                // and let Webpack Dev Server take care of this
-                reload: true
-            })
+        }, { // plugin options
+            // prevent BrowserSync from reloading the page
+            // and let Webpack Dev Server take care of this
+            reload: true
+        })
     ]
 };
