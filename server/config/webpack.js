@@ -30,8 +30,7 @@ if (env === 'development' || env === 'test') {
     ];
 } else {
     compiler.run(function () {});
-    middleware = function () {
-    };
+    middleware = function () {};
 }
 
 export default middleware;

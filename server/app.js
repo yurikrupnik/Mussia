@@ -8,7 +8,7 @@ app.set('view', 'html');
 app.use(express.static('client/public'));
 app.use(bodyParser.json());
 
-// webpack middleware - todo not needed in test
+// webpack middleware
 app.use(webpack);
 router(app);
 
