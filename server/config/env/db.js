@@ -17,5 +17,13 @@ mongoose.Promise = global.Promise;
 //     // process.exit(-1);
 // });
 
-export default mongoose.connect(databaseUrl, []); // todo check errors
+
+
+mongoose.connect(databaseUrl, []); // todo check errors
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => console.log('connected to mongoose'));
+
+
+export default mongoose;
 

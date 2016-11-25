@@ -1,4 +1,5 @@
 import Payment from '../../api/payments/payment.model';
+import Friend from '../../api/friends/friend.model';
 // import {createSeedByModel} from '../data/fake';
 
 import faker from 'faker';
@@ -28,3 +29,12 @@ export const createSeedByModel = (Model, count) => {
 
 Payment.find({}).remove()
     .then(() => createSeedByModel(Payment, 50));
+
+// Friend.find({}).remove()
+//     .then(function () {
+//         Friend.create([
+//             {
+//
+//             }
+//         ])
+//     })
