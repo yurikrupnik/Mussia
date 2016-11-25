@@ -1,4 +1,3 @@
-/*global describe it expect should*/
 describe('oomg', () => {
     it('should return true', () => {
         expect(true).to.equal(true);

@@ -20,17 +20,15 @@ export default {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new BrowserSyncPlugin({
-            // browse to http://localhost:3000/ during development,
-            host: 'localhost',
-            port: 3000,
-            proxy: 'http://localhost:4000',
-        },
-            // plugin options
-            {
-                // prevent BrowserSync from reloading the page
-                // and let Webpack Dev Server take care of this
-                reload: false
-            })
+        // new BrowserSyncPlugin({ // un comment when want browsersync
+        //     // browse to http://localhost:3000/ during development,
+        //     host: 'localhost',
+        //     port: 3000,
+        //     proxy: 'http://localhost:4000',
+        // }, { // plugin options
+        //     // prevent BrowserSync from reloading the page
+        //     // and let Webpack Dev Server take care of this
+        //     reload: true
+        // })
     ]
 };

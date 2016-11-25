@@ -1,24 +1,4 @@
 import path from 'path';
-import config from '../../config/env';
+import {root} from '../../config/env';
 
-let index = (req, res) => {
-    res.sendFile(path.join(config.root, 'views/index.html'));
-};
-
-let requestTime = function (req, res, next) {
-    req.requestTime = Date.now();
-    console.log('Date.now()', Date.now());
-    next()
-};
-
-let requestUrl = function (req, res, next) {
-    console.log('req.url', req.url);
-    next();
-};
-
-export {
-    index,
-    // error,
-    requestTime,
-    requestUrl
-};
+export default (req, res) => res.status(200).sendFile(path.join(root, 'views/index.html'));
