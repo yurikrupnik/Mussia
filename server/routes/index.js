@@ -6,12 +6,8 @@ import friends, {friendsUrl} from '../api/friends';
 
 export default (app) => {
     app.use(rootUrl, root);
-    app.use(paymentsUrl, payments);
     app.use(usersUrl, users);
+    app.use(paymentsUrl, payments);
     app.use(friendsUrl, friends);
     app.use(errorUrl, error); // must be last
 }
-
-
-
-

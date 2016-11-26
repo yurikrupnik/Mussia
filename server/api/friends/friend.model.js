@@ -1,4 +1,4 @@
-import mongoose, {Schema, model} from 'mongoose';
+import mongoose from 'mongoose';
 
 
 class Friend {
@@ -17,7 +17,7 @@ let friendMock = new Friend({
 });
 
 
-let FriendSchema = new Schema({
+let FriendSchema = new mongoose.Schema({
     name: String,
     age: Number,
     created_on: Date,
@@ -25,9 +25,4 @@ let FriendSchema = new Schema({
     // tags: { type: [String], index: true }
 });
 
-// console.log('FriendSchema', FriendSchema);
-// console.log('mongoose', mongoose);
-
-
-
-// export default model('Friend', FriendSchema);
+export default mongoose.model('Friend', FriendSchema);

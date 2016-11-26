@@ -3,8 +3,10 @@ let router = express.Router();
 // import {index} from './constroller';
 export let usersUrl = '/users';
 
-router.get(usersUrl, function (req, res) {
-    res.json([12, 34, 5, 67,]);
-});
+let yebal = (req, res) => {
+    res.json([12, 34, 5, 67,])
+};
+
+router.get(usersUrl, yebal);
 
 export default router;
