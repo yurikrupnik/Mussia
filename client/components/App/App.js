@@ -11,7 +11,7 @@ export default class App extends Component {
     }
 
     handleClick(e){
-        console.log('e', e.type);
+        console.log('ess', e.type);
     }
 
     render() {
