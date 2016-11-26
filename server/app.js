@@ -9,7 +9,8 @@ app.use(express.static('client/public'));
 app.use(bodyParser.json());
 
 // webpack middleware
-app.use(webpack);
+webpack(app);
+// router middleware
 router(app);
 
 

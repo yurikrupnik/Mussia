@@ -33,4 +33,6 @@ if (env === 'development' || env === 'test') {
     middleware = function () {};
 }
 
-export default middleware;
+export default (app) => {
+    app.use(middleware);
+}
