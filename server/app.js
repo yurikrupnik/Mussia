@@ -2,16 +2,18 @@ import express from 'express';
 const app = express();
 import router from './routes/index';
 import webpack from './config/webpack';
+import bodyParser from './services/middlewares/bodyParser';
+import views from './services/middlewares/views';
 import db from './config/env/db'; // just loading it for connection
-import bodyParser from 'body-parser';
-app.set('view', 'html');
-app.use(express.static('client/public'));
-app.use(bodyParser.json());
 
+// views middleware
+views(app);
 // webpack middleware
-webpack(app);
+webpack(app); // test
+bodyParser(app); // test
 // router middleware
-router(app);
+app.use(express.static('client/public')); // must be before router
+router(app); // test
 
 
 export default app;

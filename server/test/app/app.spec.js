@@ -3,6 +3,9 @@ import app from '../../app';
 
 describe('Server loading', () => {
     describe('Root uri', () => {
+        beforeEach(function () {
+            app.connect(2000);
+        });
         it('expect to return index.html', done => {
             request(app)
                 .get('/')
