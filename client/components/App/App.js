@@ -17,7 +17,7 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <p>aab</p>
+                <p>shalom from react</p>
                 <p>ssssss</p>
                 <span>some s  smore</span>
                 <img src="download.jpeg" alt="no image found"/>

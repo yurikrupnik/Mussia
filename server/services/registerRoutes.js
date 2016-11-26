@@ -4,6 +4,8 @@ import {root} from '../config/env';
 import foreach from 'lodash.foreach';
 let apiPath = path.join(root, 'api');
 
+// bad idea but nice try, need to learn buffer
+// see http://stackoverflow.com/questions/20018588/how-to-monitor-the-memory-usage-of-node-js for memory usage
 
 let readApiFolders = (folders) => {
     foreach(folders, function (file) {
