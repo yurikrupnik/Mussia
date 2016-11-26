@@ -18,7 +18,7 @@ export default class App extends Component {
         return (
             <div>
                 <p>a</p>
-                <p>ss</p>
+                <p>ssssss</p>
                 <span>some s  smore</span>
                 <img src="download.jpeg" alt="no image found"/>
                 <button onClick={this.handleClick.bind(this)}>help</button>
