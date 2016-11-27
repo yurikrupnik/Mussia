@@ -10,3 +10,6 @@ let yebal = (req, res) => {
 router.get(usersUrl, yebal);
 
 export default router;
+
+
+// node js routes
