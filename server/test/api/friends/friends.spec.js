@@ -1,24 +1,32 @@
-import Friend from '../../../api/friends/friend.model';
-import request from 'superagent';
+import request from 'supertest';
 import app from '../../../app';
-import http from 'http';
-
-describe('Payments api', () => {
-    // before(function () {
-        // app.listen(5000);
-    // });
-    describe('http way', () => {
-        // http.get('http://localhost:5000', (err, res) => {
-        //     console.log('res', res);
-        //     console.log('err', err);
-        // });
+describe('loading express', function () {
+    it('responds to /payments', function testSlash(done) {
+        request(app)
+            .get('/friends')
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function(err, res) {
+                if (err) {
+                    console.log("There's been an error: getting pyments.");
+                    console.log(err);
+                } else {
+                    done();
+                }
+            });
     });
 
-    describe('superagent way', () => {
-        // request(app)
-        //     .get('/payments')
-
+    it('payments count', function testPath(done) {
+        request(app)
+            .get('/friends/count')
+            .expect(200)
+            .end(function(err, res) {
+                if (err) {
+                    console.log("There's been an error: getting students.");
+                    console.log(err);
+                } else {
+                    done();
+                }
+            });
     });
-
-
 });
