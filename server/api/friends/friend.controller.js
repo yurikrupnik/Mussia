@@ -1,15 +1,10 @@
+/**
+ * Using Rails-like standard naming convention for endpoints.
+ * GET     /api/payments              ->  count
+ * POST    /api/payments              ->  show
+ */
 import Friend from './friend.model';
-
-let handleError = (res, statusCode) => {
-    statusCode = statusCode || 500;
-    return (err) => res.status(statusCode).send(err);
-};
-
-let respondWithResult = (res, statusCode) => {
-    statusCode = statusCode || 200;
-    return (entity) => res.status(statusCode).json(entity);
-};
-
+import {handleError, respondWithResult} from '../../services/nodeResponse/apiResponses';
 
 
 export let count = (req, res) => {
