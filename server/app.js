@@ -7,10 +7,8 @@ import views from './services/middlewares/views';
 import './config/env/db'; // just loading it for connection
 
 import cookieParser from 'cookie-parser';
+// import cookieSession from 'cookie-session';
 
-app.set('title', 'Mussia');
-app.get('title'); // "My Site"
-// app.name = 'Mussia';
 app.use(cookieParser());
 // views middleware
 views(app);
@@ -29,16 +27,8 @@ bodyParser(app); // test
  console.log('req.url', req.url);
  next();
  });*/
-app.use(function (req, res, next) {
-    console.log('cookies', req.cookies);
-    next()
-});
+
 // router middleware
 router(app); // test
 
-// cookies log works but no cookies set yet
-// app.use(function (req, res, next) {
-//     console.log('cookies', req.cookies);
-//     next()
-// });
 export default app;
