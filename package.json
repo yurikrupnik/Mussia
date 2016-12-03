@@ -21,10 +21,12 @@
     "lodash.foreach": "^4.5.0",
     "lodash.initial": "^4.1.1",
     "lodash.range": "^3.2.0",
+    "material-ui": "^0.16.4",
     "mongoose": "^4.6.8",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "react-redux": "^4.4.6",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "superagent": "^2.3.0"
   },

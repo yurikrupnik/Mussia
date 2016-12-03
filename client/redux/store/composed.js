@@ -8,5 +8,4 @@ const logger = createLogger();
 
 export default compose(
     applyMiddleware(thunk, promise, logger),
-    DevTools.instrument()
 );

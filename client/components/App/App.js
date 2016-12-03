@@ -1,5 +1,7 @@
 import request from 'superagent';
 import React, {Component} from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import Counter from '../Counter'
 
 export default class App extends Component {
     constructor(props) {
@@ -17,9 +19,12 @@ export default class App extends Component {
     render() {
         return (
             <div>
+
+                <Counter />
                 <p>vpov</p>
                 <p>ssssss</p>
                 <span>some s  smore</span>
+                <RaisedButton label="Default" />
                 <img src="download.jpeg" alt="no image found"/>
                 <button onClick={this.handleClick.bind(this)}>help</button>
             </div>
