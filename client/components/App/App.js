@@ -1,8 +1,9 @@
 import request from 'superagent';
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import Counter from '../Counter'
-import './App.css';
+import Counter from '../Counter';
+import Login from '../Login';
+// import './App.css';
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +21,8 @@ export default class App extends Component {
         return (
             <div>
 
+
+                <Login />
                 <Counter />
                 <p>vpov</p>
                 <p className="title">ssssss</p>
