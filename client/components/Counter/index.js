@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
-// import s from './Login.scss';
-
+// import s from './style.SCSS';
+// console.log('s', s);
+import './counter.scss';
 import {connect} from 'react-redux';
 import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 

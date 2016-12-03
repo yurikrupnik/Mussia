@@ -1,7 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
-
+import autoprefixer from 'autoprefixer';
 export default {
     devtool: 'eval-source-map',
     entry: [
@@ -15,7 +15,16 @@ export default {
     },
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'babel', exclude: /node_modules/,}
+            {test: /\.js$/, loader: 'babel', exclude: /node_modules/,},
+            {
+                test: /\.(css|scss)$/,
+                loaders: [
+                    'style',
+                    'css',
+                    'sass',
+                    'postcss'
+                ]
+            }
         ]
     },
     plugins: [
@@ -28,5 +37,6 @@ export default {
             proxy: 'http://localhost:4000',
             open: false // no auto open
         })
-    ]
+    ],
+    postcss: () => [autoprefixer]
 };
