@@ -7,11 +7,7 @@ class Payments extends ApiHelper {
     }
 
     getPayments() {
-        return this.request(url)
-        // .then((response) => { // for fetch(url)
-        //     console.log('data', response);
-        //     return response.json();
-        // })
+        return this.request.get(`${url}`)
             .then(this.returnBody)
             .catch(this.handleError);
     }

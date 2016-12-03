@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Counter from '../Counter';
 import Login from '../Login';
+
+import payments from '../../api/payments';
 // import './App.css';
 export default class App extends Component {
     constructor(props) {
@@ -13,21 +15,25 @@ export default class App extends Component {
         request.get('/payments/count', (err, res) => res.body);
     }
 
+    handlePaymentsReturn(response) {
+
+    } 
+    
     handleClick(e) {
-        console.log('ess', e.type);
+        return payments.getPayments().then(function (data) {
+            console.log('data', data);
+        });
     }
 
     render() {
         return (
             <div>
-
-
                 <Login />
                 <Counter />
                 <p>vpov</p>
                 <p className="title">ssssss</p>
                 <span>some s  smore</span>
-                <RaisedButton label="Default"/>
+                <RaisedButton onClick={this.handleClick.bind(this)} label="Default"/>
                 <img src="download.jpeg" alt="no image found"/>
                 <button onClick={this.handleClick.bind(this)}>help</button>
             </div>
