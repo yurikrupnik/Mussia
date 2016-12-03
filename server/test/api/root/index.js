@@ -7,7 +7,7 @@ describe('loading express', function () {
             .expect(200)
             .end(function(err, res) {
                 if (err) {
-                    console.log("There's been an error: getting students.");
+                    console.log("There's been an errors: getting students.");
                     console.log(err);
                 } else {
                     done();
@@ -21,7 +21,7 @@ describe('loading express', function () {
             .expect(404)
             .end(function(err, res) {
                 if (err) {
-                    console.log("There's been an error: getting students.");
+                    console.log("There's been an errors: getting students.");
                     console.log(err);
                 } else {
                     done();

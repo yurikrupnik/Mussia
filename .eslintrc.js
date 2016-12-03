@@ -12,22 +12,22 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "no-unused-vars": 0 // do not show React or components as error
+        "no-unused-vars": 0 // do not show React or components as errors
         // "react/jsx-no-undef": 0,
         // "react/jsx-equals-spacing": [1, "always"],
         // "react/prop-types": [1, {"ignore": ["children"]} ],
         // "arrow-parens": [2, "as-needed"],
         // "camelcase": 2,
         // "linebreak-style": [
-        //     "error",
+        //     "errors",
         //     "unix"
         // ],
         // "quotes": [
-        //     "error",
+        //     "errors",
         //     "single"
         // ],
         // "semi": [
-        //     "error",
+        //     "errors",
         //     "always"
         // ]
     },
