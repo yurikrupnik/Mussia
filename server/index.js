@@ -1,7 +1,7 @@
-import app from './app';
+import server from './server';
 import {port, host} from './config/env';
 
-app.listen(port, () => console.log(`Listening on: ${host}`));
-export default app;
+server.listen(port, () => console.log(`Listening on: ${host}`));
+// export default app;
 
 /* eslint-enable no-console */

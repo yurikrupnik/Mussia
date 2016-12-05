@@ -5,12 +5,12 @@ import webpack from './services/middlewares/webpack';
 import bodyParser from './services/middlewares/bodyParser';
 import views from './services/middlewares/views';
 import errors from './services/middlewares/errors';
-import './config/env/db'; // just loading it for connection
 
 import cookieParser from 'cookie-parser';
-// import cookieSession from 'cookie-session';
 
+// import cookieSession from 'cookie-session';
 app.use(cookieParser());
+
 // views middleware
 views(app);
 // statics
