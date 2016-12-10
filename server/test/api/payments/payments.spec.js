@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from '../../../app';
+import server from '../../../server';
 describe('loading express', function () {
     it('responds to /payments', function testSlash(done) {
-        request(app)
+        request(server)
             .get('/payments')
             .expect(200)
             .expect('Content-Type', /json/)
@@ -17,7 +17,7 @@ describe('loading express', function () {
     });
 
     it('payments count', function testPath(done) {
-        request(app)
+        request(server)
             .get('/payments/count')
             .expect(200)
             .end(function(err, res) {

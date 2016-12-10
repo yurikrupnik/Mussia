@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from '../../../app';
+import server from '../../../server';
 describe('loading express', function () {
-    it('responds to /', function testSlash(done) {
-        request(app)
+    it('responds to /', function (done) {
+        request(server)
             .get('/')
             .expect(200)
             .end(function(err, res) {
@@ -16,7 +16,7 @@ describe('loading express', function () {
     });
 
     it('404 everything else', function testPath(done) {
-        request(app)
+        request(server)
             .get('/foo/bar')
             .expect(404)
             .end(function(err, res) {
