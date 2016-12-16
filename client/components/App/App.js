@@ -5,7 +5,7 @@ import Counter from '../Counter';
 import Login from '../Login';
 
 import payments from '../../api/payments';
-// import './App.css';
+import './App.css';
 export default class App extends Component {
     constructor(props) {
         super(props);
