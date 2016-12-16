@@ -4,8 +4,6 @@ import {Provider} from 'react-redux';
 import store from './redux/store/store';
 import MaterialWrapper from './components/Material';
 
-// import './components/style.SCSS';
-import './styles.css';
 export default class Final extends Component {
     render() {
         // const {component, state} = this.props;

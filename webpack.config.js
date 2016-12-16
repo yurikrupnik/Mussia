@@ -16,26 +16,23 @@ export default {
     },
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'babel', exclude: /node_modules/,},
             {
-                test: /\.css$/,
+                test: /\.js$/,
+                loader: 'babel',
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.(css|scss)$/,
                 loader: ExtractTextPlugin.extract({
-                    // fallbackLoader: "style-loader",
-                    loader: "css-loader!sass-loader"
+                    fallbackLoader: "style-loader",
+                    loader: "css!sass!postcss"
                 })
-                // loaders: [
-                //     'style',
-                //     'css',
-                //     'sass',
-                //     'postcss'
-                // ]
-
             }
         ]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin({ filename: 'styles.css', disable: false, allChunks: true }),
+        new ExtractTextPlugin({filename: 'styles.css', disable: false, allChunks: true}),
         new webpack.NoErrorsPlugin(),
         new BrowserSyncPlugin({
             // browse to http://localhost:3000/ during development,
@@ -45,5 +42,5 @@ export default {
             open: false // no auto open
         })
     ],
-    // postcss: () => [autoprefixer]
+    postcss: () => [autoprefixer]
 };

@@ -3,9 +3,9 @@ import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Counter from '../Counter';
 import Login from '../Login';
-
 import payments from '../../api/payments';
-import './App.css';
+import './App.scss';
+import 'flexboxgrid';
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -17,8 +17,8 @@ export default class App extends Component {
 
     handlePaymentsReturn(response) {
 
-    } 
-    
+    }
+
     handleClick(e) {
         return payments.getPayments().then(function (data) {
             console.log('data', data);
