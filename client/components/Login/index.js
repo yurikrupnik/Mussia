@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Register from '../../api/login';
 
-// import FlatButton from 'material-ui/FlatButton;' // todo check why is this commented and remove or fix error
+// import IconButton from 'material-ui/IconButton;' // todo check why is this commented and remove or fix error
 
 // import HelloProps from '../Stam/index.ts';
 
@@ -28,7 +28,6 @@ export default class Login extends Component {
         let formName = 'login';
         return (
             <div>
-
                 <form name={formName} ref={formName}>
                     <div className="yebal">Yuri lru</div>
                     <input type="text" name="name"/>
