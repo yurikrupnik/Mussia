@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Register from '../../api/login';
 // import FlatButton from 'material-ui/FlatButton;'
 
-
+import './Login.scss';
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -26,6 +26,7 @@ export default class Login extends Component {
         return (
             <div>
                 <form name="login" ref={'login'}>
+                    <div className="yebal">Yuri lru</div>
                     <input type="text" name="name"/>
                     <input type="password" name="password"/>
                     <button onClick={this.handleSubmit.bind(this, 'login')}>Send</button>
