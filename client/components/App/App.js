@@ -27,7 +27,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
+            <div className="">
                 <div className="row">
                     <div className="col-xs-4">
                         <div className="box">4</div>

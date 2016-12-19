@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import Register from '../../api/login';
 
-// import IconButton from 'material-ui/IconButton;' // todo check why is this commented and remove or fix error
-
+import FlatButton from 'material-ui/FlatButton';
+import Chip from './chip'
+import GridListExampleSingleLine from './grid-list';
 import './Login.scss';
 export default class Login extends Component {
     constructor(props) {
@@ -26,7 +27,10 @@ export default class Login extends Component {
         let formName = 'login';
         return (
             <div>
+                <GridListExampleSingleLine />
+                <Chip />
                 <form name={formName} ref={formName}>
+                    <FlatButton label="login"/>
                     <div className="yebal">Yuri lru</div>
                     <input type="text" name="name"/>
                     <input type="password" name="password"/>
