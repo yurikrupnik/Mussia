@@ -4,11 +4,6 @@ import {Provider} from 'react-redux';
 import store from './redux/store/store';
 import MaterialWrapper from './components/Material';
 
-import {person} from './es-tests';
-
-console.log('person', person);
-
-
 export default class Final extends Component {
     render() {
         // const {component, state} = this.props;

@@ -7,10 +7,10 @@ export default {
     // Currently we need to add '.ts' to the resolve.extensions array.
     // js Must be present
     resolve: {
-        extensions: ['.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
-    // devtool: 'eval-source-map', // todo check this and the difference now
-    devtool: 'source-map',
+    devtool: 'eval-source-map', // todo check this and the difference now
+    // devtool: 'source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
         path.join(__dirname, './client/app.js')
@@ -23,7 +23,7 @@ export default {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.(js)$/,
                 loaders: ['babel'],
                 exclude: /node_modules/,
             },
@@ -33,6 +33,10 @@ export default {
                     fallbackLoader: "style-loader",
                     loader: "css!sass!postcss"
                 })
+            },
+            {
+                test: /\.ts$/,
+                loader: 'awesome-typescript-loader'
             }
         ]
     },

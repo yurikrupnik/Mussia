@@ -3,8 +3,6 @@ import Register from '../../api/login';
 
 // import IconButton from 'material-ui/IconButton;' // todo check why is this commented and remove or fix error
 
-// import HelloProps from '../Stam/index.ts';
-
 import './Login.scss';
 export default class Login extends Component {
     constructor(props) {

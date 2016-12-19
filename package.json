@@ -64,7 +64,6 @@
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "supertest": "^2.0.1",
-    "ts-babel": "^1.2.2",
     "typescript": "^2.1.4",
     "webpack": "2.1.0-beta.22",
     "webpack-dev-middleware": "^1.8.4",
