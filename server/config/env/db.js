@@ -4,7 +4,7 @@ import {databaseUrl} from '../../config/env';
 require('./seed');
 //
 // let query = Band.findOne({name: "Guns N' Roses"});
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise; // todo play with it
 // mongoose.setPromise(global.Promise);
 // assert.equal(query.exec().constructor, global.Promise);
 // mongoose.connection.on('error', function (err) {

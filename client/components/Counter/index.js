@@ -6,7 +6,7 @@ import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 
 class Counter extends Component {
     static propTypes = {
-        // title: PropTypes.string.isRequired,
+        title: PropTypes.string,
         counter: PropTypes.number.isRequired,
         actions: PropTypes.object.isRequired
     };

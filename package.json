@@ -32,10 +32,7 @@
     "superagent": "^2.3.0"
   },
   "devDependencies": {
-    "@types/react": "^0.14.55",
-    "@types/react-dom": "^0.14.19",
     "autoprefixer": "^6.5.3",
-    "awesome-typescript-loader": "^3.0.0-beta.17",
     "babel-cli": "^6.18.0",
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
@@ -64,6 +61,7 @@
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "supertest": "^2.0.1",
+    "ts-babel": "^1.2.2",
     "typescript": "^2.1.4",
     "webpack": "2.1.0-beta.22",
     "webpack-dev-middleware": "^1.8.4",
