@@ -12,7 +12,6 @@ const history = createBrowserHistory();
 
 const Love = React.createClass({
     render() {
-        debugger
         return (
             <div>
                 <h1>App</h1>

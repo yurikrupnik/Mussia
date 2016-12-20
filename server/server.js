@@ -3,7 +3,6 @@ import socket from 'socket.io';
 import app from './app';
 import './config/env/db'; // connect to mongo
 
-
 let server = http.Server(app);
 let io = socket(server);
 
@@ -15,5 +14,4 @@ io.on('connection', function (socket) {
         io.emit('chat message', msg);
     });
 });
-// import cluster from './services/cluster/Cluster'; // the order makes a difference
 export default server;
