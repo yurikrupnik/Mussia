@@ -12,12 +12,13 @@ const history = createBrowserHistory();
 
 const Love = React.createClass({
     render() {
+        debugger
         return (
             <div>
                 <h1>App</h1>
                 <ul>
-                    <li><Link to="/login">About</Link></li>
-                    <li><Link to="/inbox">Inbox</Link></li>
+                    <li><Link to="/login">login</Link></li>
+                    <li><Link to="/counter">counter</Link></li>
                 </ul>
                 {this.props.children}
             </div>
@@ -68,8 +69,9 @@ export default class App extends Component {
         return (
             <Router history={history}>
                 <Route path="/" component={Love}>
-                    <Router path="/login" component={Login}/>
+                    <Router path="/counter" component={Counter}/>
                 </Route>
+                <Router path="/login" component={Login}/>
             </Router>
         )
         // return (

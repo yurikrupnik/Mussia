@@ -3,7 +3,6 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './redux/store/store';
 import MaterialWrapper from './components/Material';
-// loading styles
 import 'flexboxgrid'; // load flexbox for grid system
 
 export default class Final extends Component {
