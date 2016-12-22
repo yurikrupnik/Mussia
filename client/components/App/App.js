@@ -6,7 +6,7 @@ import Login from '../Login';
 import payments from '../../api/payments';
 import './App.scss';
 
-import { Router, Route, Link } from 'react-router';
+import { Router, Route, Link, hashHistory, browserHistory, IndexRoute} from 'react-router'; // todo work on it!
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 const history = createBrowserHistory();
 
@@ -66,7 +66,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <Router history={history}>
+            <Router history={hashHistory}>
                 <Route path="/" component={Love}>
                     <Router path="/counter" component={Counter}/>
                 </Route>
