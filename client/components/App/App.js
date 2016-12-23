@@ -11,6 +11,19 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 const history = createBrowserHistory();
 
 const Love = React.createClass({
+    componentDidMount() {
+        payments.getCount().then(count => console.log('count', count));
+    },
+
+    handlePaymentsReturn(response) {
+
+    },
+
+    handleClick(e) {
+        return payments.getPayments().then(function (data) {
+            console.log('data', data);
+        });
+    },
     render() {
         return (
             <div>
@@ -19,49 +32,16 @@ const Love = React.createClass({
                     <li><Link to="/login">login</Link></li>
                     <li><Link to="/counter">counter</Link></li>
                 </ul>
+                <RaisedButton onClick={this.handleClick} label="Default"/>
                 {this.props.children}
             </div>
         )
     }
 });
-const About = React.createClass({
-    render() {
-        return <h3>About</h3>
-    }
-});
 
-const Inbox = React.createClass({
-    render() {
-        return (
-            <div>
-                <h2>Inbox</h2>
-                {this.props.children || "Welcome to your Inbox"}
-            </div>
-        )
-    }
-});
-const Message = React.createClass({
-    render() {
-        return <h3>Message {this.props.params.id}</h3>
-    }
-});
 export default class App extends Component {
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        request.get('/payments/count', (err, res) => res.body);
-    }
-
-    handlePaymentsReturn(response) {
-
-    }
-
-    handleClick(e) {
-        return payments.getPayments().then(function (data) {
-            console.log('data', data);
-        });
     }
 
     render() {
@@ -72,7 +52,7 @@ export default class App extends Component {
                 </Route>
                 <Router path="/login" component={Login}/>
             </Router>
-        )
+        );
         // return (
         //     <div className="">
         //         <div className="row">

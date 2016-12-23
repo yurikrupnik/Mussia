@@ -9,8 +9,8 @@ export default {
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
     },
-    devtool: 'eval-source-map', // todo check this and the difference now
-    // devtool: 'source-map',
+    // devtool: 'eval-source-map', // todo check this and the difference now- does not work in browser
+    devtool: 'source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
         path.join(__dirname, './client/app.js')

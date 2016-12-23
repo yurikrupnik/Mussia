@@ -7,9 +7,9 @@ class Payments extends ApiHelper {
     }
 
     getPayments() {
-        return this.request.get(`${url}`)
-            .then(this.returnBody)
-            .catch(this.handleError);
+        return super.request.get(`${url}`)
+            .then(super.returnBody)
+            .catch(super.handleError);
     }
 
     getCount() {
@@ -18,5 +18,8 @@ class Payments extends ApiHelper {
             .catch(this.handleError);
     }
 }
+
+var ex = new Payments();
+debugger
 
 export default new Payments();
