@@ -53,25 +53,5 @@ export default class App extends Component {
                 <Router path="/login" component={Login}/>
             </Router>
         );
-        // return (
-        //     <div className="">
-        //         <div className="row">
-        //             <div className="col-xs-4">
-        //                 <div className="box">4</div>
-        //             </div>
-        //             <div className="col-xs-8">
-        //                 <div className="box">8</div>
-        //             </div>
-        //         </div>
-        //         <Login />
-        //         <Counter />
-        //         <p>vpov</p>
-        //         <p className="title">ssssss</p>
-        //         <span>some s  smore</span>
-        //         <RaisedButton onClick={this.handleClick.bind(this)} label="Default"/>
-        //         <img src="download.jpeg" alt="no image found"/>
-        //         <button onClick={this.handleClick.bind(this)}>help</button>
-        //     </div>
-        // );
     }
 }
