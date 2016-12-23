@@ -5,10 +5,21 @@ import {connect} from 'react-redux';
 import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 
 class Counter extends Component {
+    constructor() {
+        super();
+    }
+
+    // static get propTypes() {
+    //     return {
+    //         title: PropTypes.string,
+    //        counter: PropTypes.number.isRequired,
+    //         actions: PropTypes.object.isRequired
+    //     }
+    // }
     static propTypes = {
-        title: PropTypes.string,
-        counter: PropTypes.number.isRequired,
-        actions: PropTypes.object.isRequired
+        // title: PropTypes.string,
+        // counter: PropTypes.number.isRequired,
+        // actions: PropTypes.object.isRequired
     };
 
     handlePlus() {

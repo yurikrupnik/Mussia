@@ -1,9 +1,24 @@
 import request from 'superagent';
 let returnBody = res => res.body;
 let handleError = err => console.log('err', err);
+
+const METHODS = [
+    'get',
+    'post',
+    'put',
+    'delete'
+];
+
+let symbols =[Symbol('get'), Symbol('post'), Symbol('put'), Symbol('delete')];
+
+console.log('symbols', symbols);
+
 export default class Request {
     // interface - constructor is never called
-
+    * [Symbol.iterator](a) {
+        console.log('a', a);
+            yield {s: 's'};
+    }
     // http methods
     static get get() {
         return request.get;
