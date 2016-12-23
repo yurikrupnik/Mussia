@@ -5,7 +5,7 @@ import Login from '../Login';
 import payments from '../../api/payments';
 import './App.scss';
 
-import { Router, Route, Link, hashHistory, browserHistory, IndexRoute} from 'react-router'; // todo work on it!
+import { Router, Route, Link, hashHistory} from 'react-router'; // todo work on it!
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 const history = createBrowserHistory();
 
