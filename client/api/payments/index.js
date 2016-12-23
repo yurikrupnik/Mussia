@@ -1,18 +1,19 @@
-import ApiHelper from '../ApiHelper';
+import Request from '../Request';
 const url = '/payments';
-class Payments extends ApiHelper {
+class Payments extends Request {
 
-    getPayments() {
-        return ApiHelper.request.get(`${url}`)
-            .then(ApiHelper.body)
-            .catch(this.error);
+    static getPayments() {
+        return Request.get(`${url}`)
+            .then(Request.body)
+            .catch(Request.error);
     }
 
-    getCount() {
-        return ApiHelper.request.get(`${url}/count`)
-            .then(ApiHelper.body)
-            .catch(this.error);
+    static getCount() {
+        return Request.get(`${url}/count`)
+            .then(Request.body)
+            .catch(Request.error);
     }
 }
 
-export default new Payments(); // SINGLETON
+export default Payments;
+// export default new Payments(); // SINGLETON

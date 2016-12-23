@@ -1,17 +1,14 @@
-import ApiHelper from '../ApiHelper';
+import Request from '../Request';
 const url = '/register';
 
-class Register extends ApiHelper {
-    constructor() {
-        super();
-    }
+class Register extends Request {
 
-    logUser(params) {
-        return this.request.post(`${url}`)
+    static logUser(params) {
+        return Request.post(`${url}`)
             .send(params)
-            .then(this.returnBody)
-            .catch(this.handleError);
+            .then(Request.body)
+            .catch(Request.error);
     }
 }
-
-export default new Register();
+// export default new Register();
+export default Register;
