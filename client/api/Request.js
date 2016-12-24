@@ -9,13 +9,6 @@ let handleError = err => {
 export default class Request {
     // interface - constructor is never called
     static create(method = 'get', url = '/', params = null, query = {}, type = 'json') {
-        // console.log('method', method);
-        // console.log('url', url);
-        // console.log('params', params);
-        // console.log('query', query);
-        // console.log('type', type);
-
-
         return request[method](url)
             // .head()
             // .set()
