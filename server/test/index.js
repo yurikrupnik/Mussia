@@ -1,2 +1,2 @@
-// /*global describe it*/
-import '../config/global';
+import chai from 'chai';
+global.expect = chai.expect; // only this needed actually

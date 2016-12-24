@@ -1,17 +1,20 @@
 import path from 'path';
 
 export const root = path.join(__dirname + '/../..');
+
 export const env = process.env.NODE_ENV || 'development';
 export const port = process.env.PORT || 4000;
 export const ip = process.env.IP || '0.0.0.0' || 'localhost';
 export const host = process.env.WEBSITE_HOSTNAME || `http://${ip}:${port}`;
 export const databaseUrl = process.env.DATABASE_URL ||'mongodb://localhost/mussia';
+export const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID = '144997135988664';
+export const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET = '483b8bb0f0aeb26744033814ef8fbc91';
 
-export const analytics = {
-    // https://analytics.google.com/
-    google: { trackingId: process.env.GOOGLE_TRACKING_ID || 'UA-XXXXX-X' },
-
-};
+// export const analytics = {
+//     https://analytics.google.com/
+    // google: { trackingId: process.env.GOOGLE_TRACKING_ID || 'UA-XXXXX-X' },
+//
+// };
 
 export const auth = {
 
