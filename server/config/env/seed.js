@@ -1,5 +1,5 @@
-import Payment from '../../api/payments/payment.model';
-import Friend from '../../api/friends/friend.model';
+// import Payment from '../../api/payments/payment.model';
+// import Friend from '../../api/friends/friend.model';
 // import {createSeedByModel} from '../data/fake';
 
 import faker from 'faker';
