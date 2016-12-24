@@ -9,13 +9,6 @@ class Counter extends Component {
         super();
     }
 
-    // static get propTypes() {
-    //     return {
-    //         title: PropTypes.string,
-    //        counter: PropTypes.number.isRequired,
-    //         actions: PropTypes.object.isRequired
-    //     }
-    // }
     static propTypes = {
         // title: PropTypes.string,
         // counter: PropTypes.number.isRequired,

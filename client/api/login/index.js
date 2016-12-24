@@ -4,11 +4,8 @@ const url = '/register';
 class Register extends Request {
 
     static logUser(params) {
-        return Request.post(`${url}`)
-            .send(params)
-            .then(Request.body)
-            .catch(Request.error);
+        return Request.create('post', url, params);
     }
 }
-// export default new Register();
+
 export default Register;

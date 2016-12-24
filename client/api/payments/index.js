@@ -1,17 +1,15 @@
 import Request from '../Request';
 const url = '/payments';
+const countUrl = `${url}/count`;
+
 class Payments extends Request {
 
     static getPayments() {
-        return Request.get(`${url}`)
-            .then(Request.body)
-            .catch(Request.error);
+        return Request.create('get', url);
     }
 
     static getCount() {
-        return Request.get(`${url}/count`)
-            .then(Request.body)
-            .catch(Request.error);
+        return Request.create('get', countUrl);
     }
 }
 
