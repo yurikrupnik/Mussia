@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Register from '../../api/login';
 
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 import Chip from './chip'
 import GridListExampleSingleLine from './grid-list';
 import './Login.scss';
@@ -27,14 +28,11 @@ export default class Login extends Component {
         let formName = 'login';
         return (
             <div>
-                <GridListExampleSingleLine />
-                <Chip />
                 <form name={formName} ref={formName}>
-                    <FlatButton label="login"/>
-                    <div className="yebal">Yuri lru</div>
-                    <input type="text" name="name"/>
-                    <input type="password" name="password"/>
-                    <button onClick={this.handleSubmit.bind(this, 'login')}>Send</button>
+                    <TextField name="name" />
+                    <TextField name="password"/>
+                    <FlatButton label="login" onClick={this.handleSubmit.bind(this, 'login')} />
+                    {/*<button onClick={this.handleSubmit.bind(this, 'login')}>Send</button>*/}
                 </form>
             </div>
         )
