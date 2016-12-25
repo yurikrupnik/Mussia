@@ -1,6 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules
 .idea
+server/config/secrets.json
 npm-debug.log
 yarn-error.log
 file.txt

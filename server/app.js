@@ -12,9 +12,9 @@ import cookieParser from 'cookie-parser';
 // todo try different tactic not use functions as middlewares
 
 // import cookieSession from 'cookie-session';
-app.use(cookieParser());
 
 bodyParser(app); // test
+app.use(cookieParser());
 app.use(expressValidator());
 // statics
 app.use(express.static('client/public')); // must be before router

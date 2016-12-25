@@ -1,7 +1,7 @@
 // import request from 'supertest';
 // import server from '../../../server';
-// describe('loading express', function () {
-//     it('responds to /payments', function testSlash(done) {
+// describe('Friends', function () {
+//     it('responds to /friends', function testSlash(done) {
 //         request(server)
 //             .get('/friends')
 //             .expect(200)
