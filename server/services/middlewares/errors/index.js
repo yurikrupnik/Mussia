@@ -5,8 +5,13 @@ let handle404 = (req, res, next) => {
 let firstError = (err, req, res, next) => {
     // any errors i throw
     // log it
-    console.errors(err.stack);
-    res.json('errors of some kind');
+    console.error(err.stack); // todo play with error
+    next(err);
+    // res.json('errors of some kind');
+};
+
+let secondError = (err, req, res, next) => {
+    console.log('err', err);
 };
 export default (app) => {
     app.use(handle404);
