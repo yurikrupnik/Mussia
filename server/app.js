@@ -7,6 +7,9 @@ import views from './services/middlewares/views';
 import errors from './services/middlewares/errors';
 import expressValidator from 'express-validator';
 
+import session from 'express-session';
+import morgan from 'morgan';
+
 import cookieParser from 'cookie-parser';
 
 // todo try different tactic not use functions as middlewares
@@ -14,14 +17,23 @@ import cookieParser from 'cookie-parser';
 // import cookieSession from 'cookie-session';
 
 bodyParser(app); // test
+
 app.use(cookieParser());
+app.use(session({
+    secret: 'avi',
+    saveUninitialized: true,
+    resave: true
+}));
 app.use(expressValidator());
+
 // statics
 app.use(express.static('client/public')); // must be before router
 // views middleware
 views(app);
 // webpack middleware
 webpack(app); // test
+// logger
+app.use(morgan('dev'));
 // routes
 router(app); // test
 // errors
