@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
+import React, {Component, PropTypes} from 'react';
+// import withStyles from 'isomorphic-style-loader/lib/withStyles';
+// import './counter.scss';
+import {connect} from 'react-redux';
+import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 
-export default class Counter extends Component {
-
-    constructor(props) {
-        super(props);
+class Counter extends Component {
+    constructor() {
+        super();
+        this.state = {counter: 50};
     }
 
     static propTypes = {
@@ -14,25 +17,25 @@ export default class Counter extends Component {
     };
 
     handlePlus() {
+        let {counter} = this.state;
+        this.setState({counter: counter + 1});
         // const {actions} = this.props;
         // actions.plus();
-        console.log('mi');
-
     }
 
     handleMinus() {
-        console.log('mu');
-
         // const {actions} = this.props;
+        let {counter} = this.state;
+        this.setState({counter: counter - 1});
         // actions.minus();
     }
 
-
     render() {
         return (
-            <div id="counter">
+            <div >
                 <div>
-                    <h1>2</h1>
+                    <h2>hi</h2>
+                    <h1>{this.state.counter}</h1>
                     <div>
                         <button onClick={this.handlePlus.bind(this)}>+</button>
                         <button onClick={this.handleMinus.bind(this)}>-</button>
@@ -43,6 +46,6 @@ export default class Counter extends Component {
     }
 }
 
-// if (document) {
-//     render(<Counter/>, document);
-// }
+
+// export default connect(getCounter, dispatchActions)(Counter);
+export default Counter;

@@ -1,8 +1,6 @@
 {
   "ignore": [
-    ".git",
-    "./test",
-    "./app/client.js"
+    ".git"
   ],
   "verbose": true,
   "exec": ["babel-node"]

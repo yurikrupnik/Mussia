@@ -2,7 +2,6 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../../../../webpack.config';
-
 import {env} from '../../../config/env';
 import initial from 'lodash.initial';
 

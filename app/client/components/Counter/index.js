@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import './counter.scss';
 import {connect} from 'react-redux';
-import {getCounter, dispatchActions} from '../../redux/selectors/counter';
+import {getCounter, dispatchActions} from '../../../redux/selectors/counter';
 
 class Counter extends Component {
     constructor() {
@@ -41,4 +41,5 @@ class Counter extends Component {
 }
 
 
-export default connect(getCounter, dispatchActions)(Counter);
+export default Counter;
+// export default connect(getCounter, dispatchActions)(Counter);

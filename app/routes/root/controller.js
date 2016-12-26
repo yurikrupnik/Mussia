@@ -9,7 +9,7 @@ export default (req, res) => {
 
     // console.log('res', res);
     // let val = 1;
-    let app = ReactDOMServer.renderToString(
+    let app = ReactDOMServer.renderToStaticMarkup(
         <Header />
     );
 
@@ -17,7 +17,8 @@ export default (req, res) => {
     // res.cookie('yebla', 'yebal dva raza');
     res.status(200);
     // res.render('index');
-    res.render('index', {app: app, title: 'new tot;e'});
+    res.locals = {app: app, title: 'new tot;e'};
+    res.render('index');
 
     // setInterval(function () {
         // res.json(html)
