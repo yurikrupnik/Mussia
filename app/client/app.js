@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import counter from '../server/components/counter/counter';
+// import counter from '../app/components/counter/counter';
 // import Header from '../server/components/Header/header';
 function Header(props) {
     // Correct! This use of <div> is legitimate because div is a valid HTML tag:
@@ -27,5 +27,5 @@ function Header(props) {
 //     }
 // }
 //
-render(<Header/>, document.getElementById('row'));
+render(Header, document.getElementById('row'));
 

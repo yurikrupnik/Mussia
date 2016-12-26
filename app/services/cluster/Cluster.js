@@ -1,5 +1,5 @@
 // import server from './server';
-// import {port, host} from './config/env';
+// import {port, host} from './config/config';
 
 const cluster = require('cluster');
 const http = require('http');

@@ -1,5 +1,5 @@
 import monk from 'monk';
-import {databaseUrl} from '../../config/env';
+import {databaseUrl} from './env';
 // require('./seed');
 const db = monk(databaseUrl);
 

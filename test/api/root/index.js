@@ -1,14 +1,13 @@
 import request from 'supertest';
-import server from '../../../server';
-describe('Payment end point', function () {
-    it('responds to /payments', function testSlash(done) {
+import server from '../../../../server';
+describe('loading express', function () {
+    it('responds to /', function (done) {
         request(server)
-            .get('/payments')
+            .get('/')
             .expect(200)
-            .expect('Content-Type', /json/)
             .end(function(err, res) {
                 if (err) {
-                    console.log("There's been an errors: getting pyments.");
+                    console.log("There's been an errors: getting students.");
                     console.log(err);
                 } else {
                     done();
@@ -16,10 +15,10 @@ describe('Payment end point', function () {
             });
     });
 
-    it('payments count', function testPath(done) {
+    it('404 everything else', function testPath(done) {
         request(server)
-            .get('/payments/count')
-            .expect(200)
+            .get('/foo/bar')
+            .expect(404)
             .end(function(err, res) {
                 if (err) {
                     console.log("There's been an errors: getting students.");

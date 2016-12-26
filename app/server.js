@@ -1,7 +1,7 @@
 import http from 'http'
 import socket from 'socket.io';
 import app from './app';
-import './config/env/db'; // connect to mongo
+import './config/db'; // connect to mongo
 
 let server = http.Server(app);
 let io = socket(server);

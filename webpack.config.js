@@ -13,10 +13,10 @@ export default {
     devtool: 'source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
-        path.join(__dirname, './client/app.js')
+        path.join(__dirname, './app/client/app.js')
     ],
     output: {
-        path: path.join(__dirname, './client/public'),
+        path: path.join(__dirname, './app/client/public'),
         filename: '[name].js',
         publicPath: '/public'
     },
