@@ -10,14 +10,14 @@ export default (req, res) => {
     // console.log('res', res);
     // let val = 1;
     let app = ReactDOMServer.renderToString(
-        <Counter />
+        <Header />
     );
 
     // res.locals.yebal = 'shalom';
     // res.cookie('yebla', 'yebal dva raza');
     res.status(200);
-    res.send(app);
-    // res.render('index', {app, title: 'new tot;e'});
+    // res.render('index');
+    res.render('index', {app: app, title: 'new tot;e'});
 
     // setInterval(function () {
         // res.json(html)

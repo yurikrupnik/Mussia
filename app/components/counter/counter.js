@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOMServer from 'react-dom/server';
+import {render} from 'react-dom';
 
 export default class Counter extends Component {
 
@@ -27,23 +27,22 @@ export default class Counter extends Component {
         // actions.minus();
     }
 
+
     render() {
-        React.createElement('div', 'h2', 'vrot');
+        return (
+            <div id="counter">
+                <div>
+                    <h1>2</h1>
+                    <div>
+                        <button onClick={this.handlePlus.bind(this)}>+</button>
+                        <button onClick={this.handleMinus.bind(this)}>-</button>
+                    </div>
+                </div>
+            </div>
+        );
     }
-    // render() {
-    //     return (
-    //         <div >
-    //             <div>
-    //                 <h1>2</h1>
-    //                 <div>
-    //                     <button onClick={this.handlePlus.bind(this)}>+</button>
-    //                     <button onClick={this.handleMinus.bind(this)}>-</button>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // }
 }
 
-
-// ReactDOMServer.render(Counter, document);
+// if (document) {
+//     render(<Counter/>, document);
+// }
