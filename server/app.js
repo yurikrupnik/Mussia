@@ -14,6 +14,7 @@ import cookieParser from 'cookie-parser';
 
 // todo try different tactic not use functions as middlewares
 
+
 // import cookieSession from 'cookie-session';
 
 bodyParser(app); // test
