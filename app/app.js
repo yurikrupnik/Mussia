@@ -17,6 +17,7 @@ import cookieParser from 'cookie-parser';
 
 // import cookieSession from 'cookie-session';
 
+app.use(morgan('dev'));
 bodyParser(app); // test
 
 app.use(cookieParser());
@@ -34,7 +35,6 @@ views(app);
 // webpack middleware
 webpack(app); // test
 // logger
-app.use(morgan('dev'));
 // routes
 router(app); // test
 // errors

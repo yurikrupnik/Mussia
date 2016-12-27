@@ -11,7 +11,7 @@ export default class MaterialWrapper extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <App/>
+                <div>hello from inside muitheme provider</div>
             </MuiThemeProvider>
         )
     }

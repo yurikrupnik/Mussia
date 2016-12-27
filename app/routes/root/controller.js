@@ -9,15 +9,15 @@ export default (req, res) => {
 
     // console.log('res', res);
     // let val = 1;
-    let app = ReactDOMServer.renderToStaticMarkup(
-        <Header />
-    );
+    // let app = ReactDOMServer.renderToStaticMarkup(
+    //     <Header />
+    // );
 
     // res.locals.yebal = 'shalom';
     // res.cookie('yebla', 'yebal dva raza');
     res.status(200);
     // res.render('index');
-    res.locals = {app: app, title: 'new tot;e'};
+    res.locals = {app: 'yabal', title: 'new tot;e'};
     res.render('index');
 
     // setInterval(function () {

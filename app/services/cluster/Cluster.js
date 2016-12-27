@@ -1,10 +1,9 @@
-// import server from './server';
-// import {port, host} from './config/config';
+import server from '../../server';
+import {port, host} from '../../config/env';
 
-const cluster = require('cluster');
-const http = require('http');
-const numCPUs = require('os').cpus().length;
-console.log('numCPUs', numCPUs);
+import cluster from 'cluster'
+import os from 'os';
+const numCPUs = os.cpus().length;
 
 if (cluster.isMaster) {
 // Fork workers.
