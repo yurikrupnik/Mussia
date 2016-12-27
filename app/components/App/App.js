@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Counter from './../counter/counter';
-// import Login from '../Login';
+import Login from './../Login/Login';
 import payments from '../../api/payments/request';
 import './App.scss';
 
-import Material from '../Material';
 
-// import { Router, Route, Link} from 'react-router'; // todo work on it!
+import { Router, Route, Link} from 'react-router'; // todo work on it!
 // import createBrowserHistory from 'history/lib/createBrowserHistory';
 // const history = createBrowserHistory();
 
@@ -30,12 +29,12 @@ const Love = React.createClass({
             <div>
                 <h1>App</h1>
                 <Counter/>
+                <Login />
                 {/*<ul>*/}
                 {/*<li><Link to="/login">login</Link></li>*/}
                 {/*<li><Link to="/counter">counter</Link></li>*/}
                 {/*</ul>*/}
                 <RaisedButton onClick={this.handleClick} label="Default"/>
-                {this.props.children}
             </div>
         )
     }
