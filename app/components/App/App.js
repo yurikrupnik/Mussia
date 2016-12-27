@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-// import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Counter from './../counter/counter';
 // import Login from '../Login';
 // import payments from '../../api/payments';
 import './App.scss';
+
+import Material from '../Material';
 
 // import { Router, Route, Link} from 'react-router'; // todo work on it!
 // import createBrowserHistory from 'history/lib/createBrowserHistory';
@@ -27,10 +29,11 @@ const Love = React.createClass({
         return (
             <div>
                 <h1>App</h1>
-                <ul>
-                    <li><Link to="/login">login</Link></li>
-                    <li><Link to="/counter">counter</Link></li>
-                </ul>
+                <Counter/>
+                {/*<ul>*/}
+                {/*<li><Link to="/login">login</Link></li>*/}
+                {/*<li><Link to="/counter">counter</Link></li>*/}
+                {/*</ul>*/}
                 <RaisedButton onClick={this.handleClick} label="Default"/>
                 {this.props.children}
             </div>
@@ -51,7 +54,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <Counter />
+            <Love />
         );
     }
 }

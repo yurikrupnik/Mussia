@@ -1,19 +1,13 @@
 import React, {Component} from 'react';
-// import App from '../App/App';
+import App from '../App/App';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 require("react-tap-event-plugin")();
-export default class MaterialWrapper extends Component {
-    constructor(props) {
-        super(props)
-    }
 
-    render() {
-        return (
-            <MuiThemeProvider>
-                <div>hello from inside muitheme provider</div>
-            </MuiThemeProvider>
-        )
-    }
+export default () => {
+    return (
+        <MuiThemeProvider>
+            <App />
+        </MuiThemeProvider>
+    )
 }
 

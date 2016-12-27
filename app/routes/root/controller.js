@@ -1,8 +1,6 @@
 // render index.ejs
 import React from 'react'
 import ReactDOMServer from 'react-dom/server';
-import Counter from '../../components/counter/counter';
-import Header from '../../components/Header/header';
 import Wrapper from './../../redux/store/wrapper';
 export default (req, res) => {
     // console.log('req.cookies', req.cookies);
