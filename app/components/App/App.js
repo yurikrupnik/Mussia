@@ -9,34 +9,34 @@ import './App.scss';
 // import createBrowserHistory from 'history/lib/createBrowserHistory';
 // const history = createBrowserHistory();
 
-// const Love = React.createClass({
-//     componentDidMount() {
-//         payments.getCount().then(count => console.log('count', count));
-//     },
-//
-//     handlePaymentsReturn(response) {
-//
-//     },
-//
-//     handleClick(e) {
-//         return payments.getPayments().then(function (data) {
-//             console.log('data', data);
-//         });
-//     },
-//     render() {
-//         return (
-//             <div>
-//                 <h1>App</h1>
-//                 <ul>
-//                     <li><Link to="/login">login</Link></li>
-//                     <li><Link to="/counter">counter</Link></li>
-//                 </ul>
-//                 <RaisedButton onClick={this.handleClick} label="Default"/>
-//                 {this.props.children}
-//             </div>
-//         )
-//     }
-// });
+const Love = React.createClass({
+    componentDidMount() {
+        // payments.getCount().then(count => console.log('count', count));
+    },
+
+    handlePaymentsReturn(response) {
+
+    },
+
+    handleClick(e) {
+        // return payments.getPayments().then(function (data) {
+        //     console.log('data', data);
+        // });
+    },
+    render() {
+        return (
+            <div>
+                <h1>App</h1>
+                <ul>
+                    <li><Link to="/login">login</Link></li>
+                    <li><Link to="/counter">counter</Link></li>
+                </ul>
+                <RaisedButton onClick={this.handleClick} label="Default"/>
+                {this.props.children}
+            </div>
+        )
+    }
+});
 
 // <Router history={hashHistory}>
 // <Route path="/" component={Love}>

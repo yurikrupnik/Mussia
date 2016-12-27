@@ -5,7 +5,6 @@ import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 class Counter extends Component {
     constructor() {
         super();
-        // this.state = {counter: 50};
     }
 
     static propTypes = {
@@ -15,15 +14,11 @@ class Counter extends Component {
     };
 
     handlePlus() {
-        // let {counter} = this.state;
-        // this.setState({counter: counter + 1});
         const {actions} = this.props;
         actions.plus();
     }
 
     handleMinus() {
-        // let {counter} = this.state;
-        // this.setState({counter: counter - 1});
         const {actions} = this.props;
         actions.minus();
     }
@@ -43,6 +38,4 @@ class Counter extends Component {
     }
 }
 
-
 export default connect(getCounter, dispatchActions)(Counter);
-// export default Counter;
