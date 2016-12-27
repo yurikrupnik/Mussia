@@ -48,6 +48,7 @@ export default {
             host: 'localhost',
             port: 3000,
             proxy: 'http://localhost:4000',
+            open: false
         })
     ],
     postcss: () => [autoprefixer]

@@ -1,6 +1,5 @@
-import {applyMiddleware, compose} from 'redux';
+import {compose} from 'redux';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default composeEnhancers(
+export default composeEnhancers();
     // applyMiddleware(thunk, promise, logger),
-);

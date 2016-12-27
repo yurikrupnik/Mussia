@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import Counter from '../Counter';
-import Login from '../Login';
+// import Counter from '../Counter';
+// import Login from '../Login';
 import payments from '../../api/payments';
 import './App.scss';
 
