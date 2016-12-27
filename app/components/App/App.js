@@ -7,9 +7,10 @@ import './App.scss';
 
 
 import { Router, Route, Link} from 'react-router'; // todo work on it!
-// import createBrowserHistory from 'history/lib/createBrowserHistory';
-// const history = createBrowserHistory();
+import createMemoryHistory from 'history/lib/createMemoryHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
+let history = global.document ? createBrowserHistory() : createMemoryHistory();
 const Love = React.createClass({
     componentDidMount() {
         payments.getCount().then(count => console.log('count', count));
@@ -31,8 +32,8 @@ const Love = React.createClass({
                 <Counter/>
                 <Login />
                 {/*<ul>*/}
-                {/*<li><Link to="/login">login</Link></li>*/}
-                {/*<li><Link to="/counter">counter</Link></li>*/}
+                <li><Link to="/login">login</Link></li>
+                <li><Link to="/counter">counter</Link></li>
                 {/*</ul>*/}
                 <RaisedButton onClick={this.handleClick} label="Default"/>
             </div>
@@ -40,12 +41,7 @@ const Love = React.createClass({
     }
 });
 
-// <Router history={hashHistory}>
-// <Route path="/" component={Love}>
-// <Router path="/counter" component={Counter}/>
-// </Route>
-// <Router path="/login" component={Login}/>
-// </Router>
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +49,10 @@ export default class App extends Component {
 
     render() {
         return (
-            <Love />
+            <Router history={history}>
+                <Route path="/" component={Love} />
+                <Route path="/login" component={Login} />
+            </Router>
         );
     }
 }
