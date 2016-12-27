@@ -4,21 +4,22 @@ import {Provider} from 'react-redux';
 import store from './redux/store/store.js';
 
 import 'flexboxgrid'; // load flexbox for grid system
-// import Counter from './components/counter/counter';
-
 import './services/socket/client';
-// import MaterialWrapper from './components/Material';
 
-export default class Final extends Component {
-    render() {
-        // const {component, state} = this.props;
-        return (
-            <Provider store={store}>
-                <div id="some">
-                    app
-                </div>
-            </Provider>)
-    }
-}
+import Wrapper from './redux/store/wrapper';
 
-render(<Final />, document.getElementById('root'));
+// // import MaterialWrapper from './components/Material';
+//
+// export default class Final extends Component {
+//     render() {
+//         // const {component, state} = this.props;
+//         return (
+//             <Provider store={store}>
+//                 <div id="some">
+//                     hello
+//                 </div>
+//             </Provider>)
+//     }
+// }
+
+render(<Wrapper />, document.getElementById('root'));

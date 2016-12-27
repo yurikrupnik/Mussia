@@ -3,21 +3,23 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server';
 import Counter from '../../components/counter/counter';
 import Header from '../../components/Header/header';
+import Wrapper from './../../redux/store/wrapper';
 export default (req, res) => {
     // console.log('req.cookies', req.cookies);
     // console.log('req.session', req.session);
 
     // console.log('res', res);
     // let val = 1;
-    // let app = ReactDOMServer.renderToStaticMarkup(
-    //     <Header />
-    // );
+    let app = ReactDOMServer.renderToString(
+        <Wrapper />
+    );
 
     // res.locals.yebal = 'shalom';
     // res.cookie('yebla', 'yebal dva raza');
     res.status(200);
     // res.render('index');
-    res.locals = {app: 'yabal', title: 'new tot;e'};
+    let title = 'my title';
+    res.locals = {app, title};
     res.render('index');
 
     // setInterval(function () {
