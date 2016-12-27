@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Counter from './../counter/counter';
 // import Login from '../Login';
-// import payments from '../../api/payments';
+import payments from '../../api/payments/request';
 import './App.scss';
 
 import Material from '../Material';
@@ -13,7 +13,7 @@ import Material from '../Material';
 
 const Love = React.createClass({
     componentDidMount() {
-        // payments.getCount().then(count => console.log('count', count));
+        payments.getCount().then(count => console.log('count', count));
     },
 
     handlePaymentsReturn(response) {
@@ -21,9 +21,9 @@ const Love = React.createClass({
     },
 
     handleClick(e) {
-        // return payments.getPayments().then(function (data) {
-        //     console.log('data', data);
-        // });
+        return payments.getPayments().then(function (data) {
+            console.log('data', data);
+        });
     },
     render() {
         return (
