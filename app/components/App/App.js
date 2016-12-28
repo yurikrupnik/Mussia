@@ -33,7 +33,7 @@ const Love = React.createClass({
                 <Login />
                 {/*<ul>*/}
                 <li><Link to="/login">login</Link></li>
-                <li><Link to="/counter">counter</Link></li>
+                <li><Link to="/payments">payments</Link></li>
                 {/*</ul>*/}
                 <RaisedButton onClick={this.handleClick} label="Default"/>
             </div>
@@ -41,6 +41,8 @@ const Love = React.createClass({
     }
 });
 
+
+let Payments = () => (<div>payments</div>);
 
 export default class App extends Component {
     constructor(props) {
@@ -50,8 +52,11 @@ export default class App extends Component {
     render() {
         return (
             <Router history={history}>
-                <Route path="/" component={Love} />
-                <Route path="/login" component={Login} />
+                <Route path="/" component={Love}>
+                    <Route path="/payments" component={Payments}/>
+                    <Route path="/login" component={Login} />
+                </Route>
+
             </Router>
         );
     }

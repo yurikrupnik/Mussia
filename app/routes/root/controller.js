@@ -1,31 +1,68 @@
 // render index.ejs
 import React from 'react'
-import ReactDOMServer from 'react-dom/server';
+import {renderToString} from 'react-dom/server';
 import Wrapper from './../../redux/store/wrapper';
-export default (req, res) => {
-    // console.log('req.cookies', req.cookies);
-    // console.log('req.session', req.session);
 
-    // console.log('res', res);
-    // let val = 1;
-    let app = ReactDOMServer.renderToString(
-        <Wrapper />
+import {createStore} from 'redux';
+import store from '../../redux/store/store';
+
+import {match, RouterContext} from 'react-router'
+
+// import routes from '../../routes'
+// import { fetchCounter } from '../../api/counter'
+export default (req, res) => {
+
+
+
+    // Note that req.url here should be the full URL path from
+    // the original request, including the query string.
+    // match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+    //     if (error) {
+    //         res.status(500).send(error.message)
+    //     } else if (redirectLocation) {
+    //         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    //     } else if (renderProps) {
+    //         // You can also check renderProps.components or renderProps.routes for
+    //         // your "not found" component or route respectively, and send a 404 as
+    //         // below, if you're using a catch-all route.
+    //         res.status(200).render(renderToString(<RouterContext {...renderProps} />))
+    //     } else {
+    //         res.status(404).send('Not found')
+    //     }
+    // });
+    //
+    // fetchCounter(apiResult => {
+    //     // Read the counter from the request, if provided
+    //     // const params = qs.parse(req.query);
+    //     const counter =  apiResult || 0; // parseInt(params.counter, 10) ||
+    //
+    //     // Compile an initial state
+    //     let preloadedState = { counter };
+    //
+    //     // Create a new Redux store instance
+    //     // const store = createStore(counterApp, preloadedState);
+    //
+    //     // Render the component to a string
+    //     // const html = renderToString(
+    //     //     <Provider store={store}>
+    //     //         <App />
+    //     //     </Provider>
+    //     // )
+    //
+    //     // Grab the initial state from our Redux store
+    //     const finalState = store.getState();
+    //
+    //     // Send the rendered page back to the client
+    // });
+    // let initialState = createStore(store, {counter: 204555});
+    let app = renderToString(
+        <Wrapper store={{couter: 29}}/>
     );
 
-    // res.locals.yebal = 'shalom';
-    // res.cookie('yebla', 'yebal dva raza');
     res.status(200);
-    // res.render('index');
     let title = 'my title';
     res.locals = {app, title};
     res.render('index');
+    // res.render('index');
 
-    // setInterval(function () {
-        // res.json(html)
-    // }, 1000);
-    // res.status(200).render('index', {
-    //     title: 'Yeee Baaalll',
-    //     // yebal: 'sss'
-    //     // cookie: res.cookie
-    // });
 }

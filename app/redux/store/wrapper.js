@@ -3,7 +3,9 @@ import {Provider} from 'react-redux';
 import store from './store';
 import Material from '../../components/Material';
 
-export default () => {
+export default ({props}) => {
+    console.log('props', props);
+
     return (
         <Provider store={store}>
             <Material />

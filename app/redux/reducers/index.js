@@ -1,4 +1,3 @@
-// import todos from './todos';
 import counter from './counter';
 // import counters from './counters';
 // import payments from './payments';
