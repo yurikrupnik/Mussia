@@ -3,14 +3,13 @@ import {connect} from 'react-redux';
 import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 
 class Counter extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     static propTypes = {
-        // title: PropTypes.string,
-        // counter: PropTypes.number.isRequired,
-        // actions: PropTypes.object.isRequired
+        counter: PropTypes.number.isRequired,
+        actions: PropTypes.object.isRequired
     };
 
     handlePlus() {
@@ -39,3 +38,4 @@ class Counter extends Component {
 }
 
 export default connect(getCounter, dispatchActions)(Counter);
+// export default Counter;

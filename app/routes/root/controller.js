@@ -3,13 +3,8 @@ import React from 'react'
 import {renderToString} from 'react-dom/server';
 import Wrapper from './../../redux/store/wrapper';
 
-import {createStore} from 'redux';
-import store from '../../redux/store/store';
+// import {createStoreWithInitialState} from '../../redux/store/store';
 
-import {match, RouterContext} from 'react-router'
-
-// import routes from '../../routes'
-// import { fetchCounter } from '../../api/counter'
 export default (req, res) => {
 
 
@@ -54,15 +49,15 @@ export default (req, res) => {
     //
     //     // Send the rendered page back to the client
     // });
-    // let initialState = createStore(store, {counter: 204555});
     let app = renderToString(
-        <Wrapper store={{couter: 29}}/>
+        <Wrapper />
     );
 
     res.status(200);
     let title = 'my title';
     res.locals = {app, title};
     res.render('index');
+    // res.send(initialState);
     // res.render('index');
 
 }

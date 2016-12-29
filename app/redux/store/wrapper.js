@@ -1,11 +1,10 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import store from './store';
+import configStore from './store';
 import Material from '../../components/Material';
 
-export default ({props}) => {
-    console.log('props', props);
-
+export default ({initialState}) => {
+    let store = configStore(initialState);
     return (
         <Provider store={store}>
             <Material />

@@ -4,13 +4,13 @@ import Counter from './../counter/counter';
 import Login from './../Login/Login';
 import payments from '../../api/payments/request';
 import './App.scss';
+let history = global.document ? createBrowserHistory() : createMemoryHistory();
 
 
 import { Router, Route, Link} from 'react-router'; // todo work on it!
 import createMemoryHistory from 'history/lib/createMemoryHistory';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-let history = global.document ? createBrowserHistory() : createMemoryHistory();
 const Love = React.createClass({
     componentDidMount() {
         payments.getCount().then(count => console.log('count', count));
@@ -42,7 +42,18 @@ const Love = React.createClass({
 });
 
 
-let Payments = () => (<div>payments</div>);
+// {/*let Payments = () => (<div>payments</div>);*/}
+
+class Payments extends Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div>payments</div>
+        )
+    }
+}
 
 export default class App extends Component {
     constructor(props) {
@@ -54,7 +65,6 @@ export default class App extends Component {
             <Router history={history}>
                 <Route path="/" component={Love}>
                     <Route path="/payments" component={Payments}/>
-                    <Route path="/login" component={Login} />
                 </Route>
 
             </Router>
