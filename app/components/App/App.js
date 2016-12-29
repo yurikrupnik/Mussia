@@ -4,12 +4,12 @@ import Counter from './../counter/counter';
 import Login from './../Login/Login';
 import payments from '../../api/payments/request';
 import './App.scss';
-let history = global.document ? createBrowserHistory() : createMemoryHistory();
 
 
 import { Router, IndexRoute, Route, Link} from 'react-router'; // todo work on it!
 import createMemoryHistory from 'history/lib/createMemoryHistory';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
+let history = global.document ? createBrowserHistory() : createMemoryHistory();
 
 const Love = React.createClass({
     componentDidMount() {

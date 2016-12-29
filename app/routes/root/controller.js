@@ -20,7 +20,7 @@ export default (req, res) => {
 
     // Note that req.url here should be the full URL path from
     // the original request, including the query string.
-    match({ routes: [''], location: req.url }, (error, redirectLocation, renderProps) => {
+    match({ routes: ['index'], location: req.url }, (error, redirectLocation, renderProps) => {
         console.log('redirectLocation', redirectLocation);
         console.log('renderProps', renderProps);
 
