@@ -7,7 +7,7 @@ import './App.scss';
 let history = global.document ? createBrowserHistory() : createMemoryHistory();
 
 
-import { Router, Route, Link} from 'react-router'; // todo work on it!
+import { Router, IndexRoute, Route, Link} from 'react-router'; // todo work on it!
 import createMemoryHistory from 'history/lib/createMemoryHistory';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
@@ -64,7 +64,7 @@ export default class App extends Component {
         return (
             <Router history={history}>
                 <Route path="/" component={Love}>
-                    <Route path="/payments" component={Payments}/>
+                    <IndexRoute component={Love}/>
                 </Route>
 
             </Router>
