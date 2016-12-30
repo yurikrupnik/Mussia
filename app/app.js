@@ -29,7 +29,7 @@ app.use(session({
 app.use(expressValidator());
 
 // statics
-app.use(express.static('public')); // must be before router
+app.use(express.static('client/public')); // must be before router
 // views middleware
 views(app);
 // webpack middleware
@@ -37,14 +37,9 @@ webpack(app); // test
 // logger
 // routes
 
-// user-agent for materuak ui
+// todo user-agent for materuak ui
 
 
-app.use((req, res, next)=> {
-    global.navigator = global.navigator || {};
-    global.navigator.userAgent = req.headers['user-agent'] || 'all';
-    next();
-});
 router(app); // test
 // errors
 errors(app);

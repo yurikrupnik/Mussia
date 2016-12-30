@@ -6,10 +6,12 @@ import payments from '../../api/payments/request';
 import './App.scss';
 let history = global.document ? createBrowserHistory() : createMemoryHistory();
 
-import { Router, IndexRoute, Route, Link, browserHistory} from 'react-router'; // todo work on it!
+import { Router, IndexRoute, Route, Link} from 'react-router'; // todo work on it!
+
 import createMemoryHistory from 'history/lib/createMemoryHistory';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-export let history = () => global.document ? createBrowserHistory() : createMemoryHistory();
+import { createHistory } from 'history'
+// export let history = () => global.document ? createBrowserHistory() : createMemoryHistory();
 
 const Love = React.createClass({
     componentDidMount() {
@@ -21,21 +23,17 @@ const Love = React.createClass({
     },
 
     handleClick(e) {
-        return payments.getPayments().then(function (data) {
-            console.log('data', data);
-        });
+        // return payments.getPayments().then(function (data) {
+        //     console.log('data', data);
+        // });
     },
     render() {
         return (
             <div>
                 <h1>App</h1>
-                <Counter/>
-                <Login />
-                {/*<ul>*/}
-                <li><Link to="/login">login</Link></li>
-                <li><Link to="/payments">payments</Link></li>
-                {/*</ul>*/}
-                <RaisedButton onClick={this.handleClick} label="Default"/>
+                <ul>
+                    <Link to="/bitch">payments</Link>
+                </ul>
             </div>
         )
     }
@@ -50,7 +48,7 @@ class Payments extends Component {
     }
     render() {
         return (
-            <div>payments</div>
+            <div>payments area</div>
         )
     }
 }
@@ -60,14 +58,18 @@ export default class App extends Component {
         super(props);
     }
 
-    render() {
-        return (
-            <Router history={history}>
-                <Route path="/" component={Love}>
-                    <IndexRoute component={Love}/>
-                </Route>
+    handleError(err) {
+        console.log('err',err );
 
-            </Router>
+    }
+    render() {
+        let routes = {
+            path: '/',
+            location: '/',
+            component: Love
+        };
+        return (
+            <Router routes={routes} history={createMemoryHistory()} onError={this.handleError.bind(this)}/>
         );
     }
 }
