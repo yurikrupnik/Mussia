@@ -8,6 +8,6 @@ import Router from './Router/Router';
 
 
 // todo get the initial stare here and pass it!!
-render(<Router />, document.getElementById('root'));
+render(<Wrapper />, document.getElementById('root'));
 {/*render(<Wrapper initialState={{counter: 2001}}/>, document.getElementById('root'));*/
 }
