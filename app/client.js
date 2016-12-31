@@ -4,7 +4,6 @@ import Wrapper from './redux/store/wrapper';
 import 'flexboxgrid'; // load flexbox for grid system
 import './services/socket/client'; // connect to socket client
 
-// import App from './components/App/App';
 import Router from './Router/Router';
 
 
