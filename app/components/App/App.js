@@ -4,14 +4,8 @@ import Counter from './../counter/counter';
 import Login from './../Login/Login';
 import payments from '../../api/payments/request';
 import './App.scss';
-let history = global.document ? createBrowserHistory() : createMemoryHistory();
 
-import {Router, IndexRoute, Route, Link} from 'react-router'; // todo work on it!
-
-import createMemoryHistory from 'history/lib/createMemoryHistory';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
-import {createHistory} from 'history'
-// export let history = () => global.document ? createBrowserHistory() : createMemoryHistory();
+import {Router, Link, createMemoryHistory} from 'react-router'; // todo work on it!
 
 const Love = React.createClass({
     componentDidMount() {
@@ -34,13 +28,14 @@ const Love = React.createClass({
                 <ul>
                     <Link to="/pay">pay</Link>
                 </ul>
+                {this.props.children}
             </div>
         )
     }
 });
 
 
-// {/*let Payments = () => (<div>payments</div>);*/}
+let Payments = () => (<div>pay</div>);
 
 class Pay extends Component {
     constructor(props) {
@@ -53,45 +48,34 @@ class Pay extends Component {
         )
     }
 }
-
+export let routes = {
+    path: '/',
+    component: Love,
+    childRoutes: [
+        {
+            path: 'pay',
+            component: Pay
+        }
+    ],
+    // getChildRoutes(location, cb) {
+    //     console.log('location', location);
+    //     console.log('cb', cb);
+    //     require.ensure([], (require) => {
+    //         // cb(null, [ require('./AboutRoute') ])
+    //     })
+    // },
+    indexRoute: {
+        component: Payments
+    }
+};
 export default class App extends Component {
     constructor(props) {
         super(props);
     }
 
-    handleError(err) {
-        console.log('err', err);
-
-    }
-
     render() {
-        let routes = [{
-            path: '/',
-            component: Love,
-            childRoutes: [
-                { path: 'pay', component: Pay },
-                // {
-                //     path: 'inbox',
-                //     component: Inbox,
-                //     childRoutes: [{
-                //         path: 'messages/:id',
-                //         onEnter: ({ params }, replace) => replace(`/messages/${params.id}`)
-                //     }]
-                // },
-                // {
-                //     component: Inbox,
-                //     childRoutes: [{
-                //         path: 'messages/:id', component: Message
-                //     }]
-                // }
-            ]
-        }];
         return (
-            <Router history={createMemoryHistory()}>
-                <Route path="/" component={Love}>
-                    <Route path="/pay" component={Pay} />
-                </Route>
-            </Router>
+            <Router routes={routes} history={createMemoryHistory()} />
         );
     }
 }

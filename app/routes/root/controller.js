@@ -1,48 +1,39 @@
 import React from 'react'
 import {renderToString} from 'react-dom/server';
 import Wrapper from './../../redux/store/wrapper';
-import {history} from '../../components/App/App';
-import createMemoryHistory from 'history/lib/createMemoryHistory';
+// import createMemoryHistory from 'history/lib/createMemoryHistory';
 
-import {match, RouterContext, createRoutes} from 'react-router'
+import {match, RouterContext} from 'react-router'
 // import routes from './routes'
 
 
-import App, {history} from '../../components/App/App';
+import App, {routes} from '../../components/App/App';
 
 
 export default (req, res) => {
-    // let routes = createRoutes(history());
-    let app = renderToString(
-        <App />
-    );
-
-    // res.status(200);
-    let title = 'my title';
-    res.locals = {app, title};
-
-    console.log('req.url', req.url);
-
     // Note that req.url here should be the full URL path from
     // the original request, including the query string.
-    // match({routes, location: '/'}, (error, redirectLocation, renderProps) => {
-    //     console.log('redirectLocation', redirectLocation);
-    //     console.log('renderProps', renderProps);
-    //
-    //     if (error) {
-    //         res.status(500).send(error.message)
-    //     } else if (redirectLocation) {
-    //         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    //     } else if (renderProps) {
-    //         // You can also check renderProps.components or renderProps.routes for
-    //         // your "not found" component or route respectively, and send a 404 as
-    //         // below, if you're using a catch-all route.
-    //         res.status(200).render('index', renderToString(<Wrapper {...renderProps} />))
-    //     } else {
-    //         res.status(404).send('twvs');
-    //         res.status(404).send('Not found')
-    //     }
-    // });
+
+    match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
+        if (error) {
+            res.status(500).send(error.message)
+        } else if (redirectLocation) {
+            res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+        } else if (renderProps) {
+            // You can also check renderProps.components or renderProps.routes for
+            // your "not found" component or route respectively, and send a 404 as
+            // below, if you're using a catch-all route.
+            let app = renderToString(
+                <RouterContext {...renderProps}/>
+            );
+            let title = 'my title';
+            res.locals = {app, title};
+            res.status(200);
+            res.render('index');
+        } else {
+            res.status(404).send('Not found')
+        }
+    });
     //
     // fetchCounter(apiResult => {
     //     // Read the counter from the request, if provided
@@ -67,9 +58,9 @@ export default (req, res) => {
     //
     //     // Send the rendered page back to the client
     // });
-    res.locals = {app, title};
-    res.status(200);
-    res.render('index');
+    // res.locals = {app, title};
+    // res.status(200);
+    // res.render('index');
     // res.send(initialState);
     // res.render('index');
 
