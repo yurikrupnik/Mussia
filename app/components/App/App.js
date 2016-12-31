@@ -76,14 +76,5 @@ export let routes = {
     //     component: Pay
     // }
 };
-export default class App extends Component {
-    constructor(props) {
-        super(props);
-    }
 
-    render() {
-        return (
-            <Router history={browserHistory}>{routes}</Router>
-        );
-    }
-}
+export default () => <Router history={browserHistory}>{routes}</Router>;

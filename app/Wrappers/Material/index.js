@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import App from '../App/App';
+// import App from '../App/App';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 require("react-tap-event-plugin")();
