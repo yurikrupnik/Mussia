@@ -5,10 +5,9 @@ import webpack from './services/middlewares/webpack';
 import bodyParser from './services/middlewares/bodyParser';
 import views from './services/middlewares/views';
 import errors from './services/middlewares/errors';
-import expressValidator from 'express-validator';
+import logger from './services/middlewares/logger';
 
 import session from 'express-session';
-import morgan from 'morgan';
 
 import cookieParser from 'cookie-parser';
 
@@ -22,9 +21,8 @@ import {match, RouterContext} from 'react-router'
 import {routes} from './components/App/App';
 
 
-
-app.use(morgan('dev'));
-bodyParser(app); // test
+logger(app);
+bodyParser(app);
 
 app.use(cookieParser());
 app.use(session({
@@ -32,6 +30,8 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
+
+import expressValidator from 'express-validator';
 app.use(expressValidator());
 
 // statics
