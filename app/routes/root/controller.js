@@ -1,9 +1,9 @@
 import React from 'react'
 import {renderToString} from 'react-dom/server';
+import {match, RouterContext} from 'react-router'
 // import Wrapper from './../../redux/store/wrapper';
 // import createMemoryHistory from 'history/lib/createMemoryHistory';
 
-import {match, RouterContext} from 'react-router'
 // import routes from './routes'
 
 
@@ -29,7 +29,7 @@ export default (req, res) => {
             let app = renderToString(
                 <RouterContext {...renderProps}/>
             );
-            let title = 'my title';
+            let title = req.url;
             res.locals = {app, title};
             res.status(200);
             res.render('index');

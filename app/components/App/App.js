@@ -9,7 +9,7 @@ import {Router, Link, browserHistory} from 'react-router'; // todo work on it!
 
 const Love = React.createClass({
     componentDidMount() {
-        payments.getCount().then(count => console.log('count', count));
+        // payments.getCount().then(count => console.log('count', count));
     },
 
     handlePaymentsReturn(response) {

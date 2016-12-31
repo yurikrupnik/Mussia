@@ -16,6 +16,12 @@ import cookieParser from 'cookie-parser';
 
 
 // import cookieSession from 'cookie-session';
+import React from 'react';
+import {renderToString} from 'react-dom/server';
+import {match, RouterContext} from 'react-router'
+import {routes} from './components/App/App';
+
+
 
 app.use(morgan('dev'));
 bodyParser(app); // test
@@ -29,7 +35,7 @@ app.use(session({
 app.use(expressValidator());
 
 // statics
-app.use(express.static('client/public')); // must be before router
+// app.use(express.static('client/public')); // must be before router
 // views middleware
 views(app);
 // webpack middleware
@@ -40,8 +46,31 @@ webpack(app); // test
 // todo user-agent for materuak ui
 
 
+
 router(app); // test
 // errors
+app.use((req, res, next) => {
+    match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
+        if (error) {
+            res.status(500).send(error.message)
+        } else if (redirectLocation) {
+            res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+        } else if (renderProps) {
+            // You can also check renderProps.components or renderProps.routes for
+            // your "not found" component or route respectively, and send a 404 as
+            // below, if you're using a catch-all route.
+            let app = renderToString(
+                <RouterContext {...renderProps}/>
+            );
+            let title = req.url;
+            res.locals = {app, title};
+            res.status(200);
+            res.render('index');
+        } else {
+            res.status(404).send('Not found')
+        }
+    });
+});
 errors(app);
 
 export default app;
