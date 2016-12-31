@@ -1,18 +1,21 @@
 import React from 'react'
 import {renderToString} from 'react-dom/server';
-import Wrapper from './../../redux/store/wrapper';
+// import Wrapper from './../../redux/store/wrapper';
 // import createMemoryHistory from 'history/lib/createMemoryHistory';
 
 import {match, RouterContext} from 'react-router'
 // import routes from './routes'
 
 
-import App, {routes} from '../../components/App/App';
+import {routes} from '../../components/App/App';
 
 
 export default (req, res) => {
     // Note that req.url here should be the full URL path from
     // the original request, including the query string.
+
+    console.log('req.url', req.url);
+
 
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         if (error) {

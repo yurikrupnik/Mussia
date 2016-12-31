@@ -5,7 +5,7 @@ import Login from './../Login/Login';
 import payments from '../../api/payments/request';
 import './App.scss';
 
-import {Router, Link, createMemoryHistory} from 'react-router'; // todo work on it!
+import {Router, Link, browserHistory} from 'react-router'; // todo work on it!
 
 const Love = React.createClass({
     componentDidMount() {
@@ -26,7 +26,11 @@ const Love = React.createClass({
             <div>
                 <h1>App</h1>
                 <ul>
+                    <Link to="/">Dashboard</Link>
+                    <Link to="/demo">demo route</Link>
                     <Link to="/pay">pay</Link>
+                    <Link to="/login">login</Link>
+                    <Link to="/logout">logout</Link>
                 </ul>
                 {this.props.children}
             </div>
@@ -35,7 +39,7 @@ const Love = React.createClass({
 });
 
 
-let Payments = () => (<div>pay</div>);
+let Payments = () => (<div>payments</div>);
 
 class Pay extends Component {
     constructor(props) {
@@ -53,6 +57,10 @@ export let routes = {
     component: Love,
     childRoutes: [
         {
+            path: '/payments',
+            component: Payments
+        },
+        {
             path: 'pay',
             component: Pay
         }
@@ -64,9 +72,9 @@ export let routes = {
     //         // cb(null, [ require('./AboutRoute') ])
     //     })
     // },
-    indexRoute: {
-        component: Payments
-    }
+    // indexRoute: {
+    //     component: Pay
+    // }
 };
 export default class App extends Component {
     constructor(props) {
@@ -75,7 +83,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <Router routes={routes} history={createMemoryHistory()} />
+            <Router history={browserHistory}>{routes}</Router>
         );
     }
 }
