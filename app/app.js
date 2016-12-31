@@ -7,7 +7,7 @@ import errors from './services/middlewares/errors';
 import logger from './services/middlewares/logger';
 import validator from './services/middlewares/validator';
 
-// import router from './routes/index';
+import router from './routes/index';
 
 import routerMiddleware from './Router/middleware'
 
@@ -36,9 +36,9 @@ webpack(app); // test
 
 
 
-// router(app); // test
+router(app); // test
 // errors
-app.use(routerMiddleware);
+app.get('*', routerMiddleware);
 errors(app);
 
 export default app;
