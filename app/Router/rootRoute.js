@@ -15,29 +15,29 @@ export let routes = {
     //
     // },
     component: Root,
-    // childRoutes: [
-    //     paymentsRoute,
-    //     {
-    //         path: 'pay',
-    //         component: Pay
-    //     }
-    // ],
-    getChildRoutes(location, cb) {
-        console.log('location', location);
-        console.log('cb', cb);
-        require.ensure([], function() {
-            // let contacts = require('./routes/payments');
-            // console.log('contacts', contacts);
-
-            cb(null, [require('./routes/payments') ])
-
-        });
-        // require.ensure([], (require) => {
-            // console.log('require', require);
-        // require('./routes/payments') ;
-            // cb(null, [ require('./routes/payments') ]);
-        // })
-    },
+    childRoutes: [
+        paymentsRoute,
+        {
+            path: 'pay',
+            component: Pay
+        }
+    ],
+    // getChildRoutes(location, cb) {
+    //     console.log('location', location);
+    //     console.log('cb', cb);
+    //     require.ensure([], function() {
+    //         // let contacts = require('./routes/payments');
+    //         // console.log('contacts', contacts);
+    //
+    //         cb(null, [paymentsRoute])
+    //
+    //     });
+    //     // require.ensure([], (require) => {
+    //         // console.log('require', require);
+    //     // require('./routes/payments') ;
+    //         // cb(null, [ require('./routes/payments') ]);
+    //     // })
+    // },
     // indexRoute: {
     //     component: Pay
     // }

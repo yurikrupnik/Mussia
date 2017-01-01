@@ -40,13 +40,17 @@ api(app); // test
 // errors
 app.get('*', routerMiddleware);
 app.use(function (req, res, next) {
+    console.log('req', req.url);
+
     if (/public/.test(req.url)) {
         console.log('inside', req.url);
 
         fs.readFile(`${req.url}`, (err, data) => {
             res.writeHead(200, {
-                'Content-Length': res
+                // 'Content-Length':
+                'Content-Type': 'text/javascript',
             });
+            res.send(data);
             // write(data, 'text/javascript', res);
         })
     } else {
