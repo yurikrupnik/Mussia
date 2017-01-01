@@ -39,6 +39,20 @@ webpack(app); // test
 api(app); // test
 // errors
 app.get('*', routerMiddleware);
+app.use(function (req, res, next) {
+    if (/public/.test(req.url)) {
+        console.log('inside', req.url);
+
+        fs.readFile(`${req.url}`, (err, data) => {
+            res.writeHead(200, {
+                'Content-Length': res
+            });
+            // write(data, 'text/javascript', res);
+        })
+    } else {
+        next();
+    }
+});
 errors(app);
 
 export default app;
