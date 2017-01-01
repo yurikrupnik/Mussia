@@ -43,7 +43,6 @@ app.use(function (req, res, next) {
     console.log('req', req.url);
 
     if (/public/.test(req.url)) {
-        console.log('inside', req.url);
 
         fs.readFile(`${req.url}`, (err, data) => {
             res.writeHead(200, {

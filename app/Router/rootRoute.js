@@ -9,11 +9,7 @@ if (typeof require.ensure !== 'function') require.ensure = (d,c) => c(require)
 
 export let routes = {
     path: '/',
-    // getComponents(nextState, callback) {
-    //     console.log('nextState', nextState);
-    //     console.log('callback', callback);
-    //
-    // },
+
     component: Root,
     childRoutes: [
         paymentsRoute,
@@ -22,6 +18,10 @@ export let routes = {
             component: Pay
         }
     ],
+//     getComponents(state, cb) {
+// // do asynchronous stuff to find the components
+//         cb(null, Root)
+//     },
     // getChildRoutes(location, cb) {
     //     console.log('location', location);
     //     console.log('cb', cb);
@@ -29,7 +29,7 @@ export let routes = {
     //         // let contacts = require('./routes/payments');
     //         // console.log('contacts', contacts);
     //
-    //         cb(null, [paymentsRoute])
+    //         cb(null, [paymentsRoute, {path: 'pay', component: Pay}])
     //
     //     });
     //     // require.ensure([], (require) => {

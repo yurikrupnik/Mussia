@@ -19,7 +19,7 @@ export default {
         path: path.join(__dirname, './app/public'),
         filename: '[name].js',
         chunkFilename: '[id].chunk.js',
-        publicPath: '/',
+        publicPath: '/public',
     },
     module: {
         loaders: [

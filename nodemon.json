@@ -1,6 +1,9 @@
 {
   "ignore": [
-    ".git"
+    ".git",
+    "/node_modules",
+    "./app/components",
+    "./app/styles"
   ],
   "verbose": true,
   "exec": ["babel-node"]

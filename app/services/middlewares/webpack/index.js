@@ -15,13 +15,14 @@ let middleware;
 if (env === 'development' || env === 'test') {
     let options = {
         publicPath: '/',
+        noInfo: true,
         stats: {
-            colors: true,
-            hash: false,
-            timings: true,
-            chunks: false,
-            chunkModules: false,
-            modules: false
+            // colors: true,
+            // hash: true,
+            // timings: true,
+            // chunks: true,
+            // chunkModules: true,
+            // modules: true
         }
     };
     middleware = [
