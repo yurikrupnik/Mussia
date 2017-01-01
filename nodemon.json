@@ -4,7 +4,8 @@
     "./node_modules",
     "./app/components",
     "./app/styles",
-    "./app/Wrappers"
+    "./app/Wrappers",
+    "./app/tests"
   ],
   "verbose": true,
   "exec": ["babel-node"]
