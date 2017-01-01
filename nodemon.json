@@ -5,7 +5,10 @@
     "./app/components",
     "./app/styles",
     "./app/Wrappers",
-    "./app/tests"
+    "./app/tests",
+    "./app/public",
+    "./app/redux",
+    "./app/Router"
   ],
   "verbose": true,
   "exec": ["babel-node"]

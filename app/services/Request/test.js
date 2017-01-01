@@ -10,6 +10,10 @@ describe('returnBody function', () => {
     it('expect to return body prop of an object', () => {
         expect(returnBody({body: fakeData})).eql(fakeData);
     });
+
+    it('expect to return body prop of an object', () => {
+        expect(returnBody({})).eql(undefined);
+    });
 });
 
 describe('handleError function', () => { // todo

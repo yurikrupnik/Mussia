@@ -11,10 +11,10 @@ export default class Root extends Component {
                         <Link to="/">Dashboard</Link>
                     </div>
                     <div>
-                        <Link to="/demo">demo route</Link>
+                        <Link to="/count list">count list</Link>
                     </div>
                     <div>
-                        <Link to="/pay">pay</Link>
+                        <Link to="/counter">counter</Link>
                     </div>
                     <div>
                         <Link to="/payments">payments</Link>
