@@ -1,10 +1,11 @@
 import React from 'react';
 import Root from '../Wrappers/Root/Root';
-import paymentsRoute from './routes/payments'
+import paymentsRoute from './routes/payments';
+import counterRoute from './routes/couter';
 let Pay = () => (<div>pay bitch</div>);
 // let Payments = () => (<div>Payments bitch</div>);
 
-if (typeof require.ensure !== 'function') require.ensure = (d,c) => c(require)
+if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
 
 export let routes = {
@@ -13,6 +14,7 @@ export let routes = {
     component: Root,
     childRoutes: [
         paymentsRoute,
+        counterRoute,
         {
             path: 'pay',
             component: Pay
