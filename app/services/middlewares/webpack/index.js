@@ -26,8 +26,8 @@ if (env === 'development' || env === 'test') {
         }
     };
     middleware = [
-        webpackDevMiddleware(compiler, options),
-        webpackHotMiddleware(compiler)
+        webpackHotMiddleware(compiler),
+        webpackDevMiddleware(compiler, options)
     ];
 } else {
     compiler.run(function () {});
