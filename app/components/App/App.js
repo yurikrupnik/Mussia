@@ -41,40 +41,40 @@ const Love = React.createClass({
 
 let Payments = () => (<div>payments</div>);
 
-class Pay extends Component {
-    constructor(props) {
-        super(props);
-    }
+// class Pay extends Component {
+//     constructor(props) {
+//         super(props);
+//     }
+//
+//     render() {
+//         return (
+//             <div>Pay area</div>
+//         )
+//     }
+// }
+// export let routes = {
+//     path: '/',
+//     component: Love,
+//     childRoutes: [
+//         {
+//             path: '/payments',
+//             component: Payments
+//         },
+//         {
+//             path: 'pay',
+//             component: Pay
+//         }
+//     ],
+//     // getChildRoutes(location, cb) {
+//     //     console.log('location', location);
+//     //     console.log('cb', cb);
+//     //     require.ensure([], (require) => {
+//     //         // cb(null, [ require('./AboutRoute') ])
+//     //     })
+//     // },
+//     // indexRoute: {
+//     //     component: Pay
+//     // }
+// };
 
-    render() {
-        return (
-            <div>Pay area</div>
-        )
-    }
-}
-export let routes = {
-    path: '/',
-    component: Love,
-    childRoutes: [
-        {
-            path: '/payments',
-            component: Payments
-        },
-        {
-            path: 'pay',
-            component: Pay
-        }
-    ],
-    // getChildRoutes(location, cb) {
-    //     console.log('location', location);
-    //     console.log('cb', cb);
-    //     require.ensure([], (require) => {
-    //         // cb(null, [ require('./AboutRoute') ])
-    //     })
-    // },
-    // indexRoute: {
-    //     component: Pay
-    // }
-};
-
-export default () => <Router history={browserHistory}>{routes}</Router>;
+{/*export default () => <Router history={browserHistory}>{routes}</Router>;*/}
