@@ -38,7 +38,6 @@ webpack(app); // test
 
 api(app); // test
 // errors
-app.get('*', routerMiddleware);
 app.use(function (req, res, next) {
     console.log('req', req.url);
 
@@ -56,6 +55,7 @@ app.use(function (req, res, next) {
         next();
     }
 });
+app.use('*', routerMiddleware);
 errors(app);
 
 export default app;

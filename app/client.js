@@ -8,5 +8,9 @@ import Wrapper from './redux/store/wrapper';
 // import Router from './Router/Router';
 // import Material from './Wrappers/Material'
 
+let initialState = window.__PRELOADED_STATE__;
+// console.log('state', JSON.parse(state));
+
 // todo get the initial stare here and pass it!!
-render(<Wrapper initialState={{counter: 2001}} />, document.getElementById('root'));
+/*initialState={{counter: 2001}}*/
+render(<Wrapper initialState={initialState} />, document.getElementById('root'));

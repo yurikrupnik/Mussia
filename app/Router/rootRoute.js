@@ -5,7 +5,7 @@ import counterRoute from './routes/couter';
 let Pay = () => (<div>pay bitch</div>);
 // let Payments = () => (<div>Payments bitch</div>);
 
-if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
+if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
 
 
 export let routes = {

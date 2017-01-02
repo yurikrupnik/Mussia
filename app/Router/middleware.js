@@ -3,12 +3,21 @@ import {renderToString} from 'react-dom/server';
 import {match, RouterContext} from 'react-router'
 import {routes} from './rootRoute';
 
+import configureStore from '../redux/store/store'; // reuse wrapper
+import { Provider } from 'react-redux'
 
 function renderHtml(props, response) {
+    let store = configureStore();
+    {/*<Provider store={store}>*/}
+    //// </Provider>
     let app = renderToString(
-        <RouterContext {...props}/>
+            <RouterContext {...props}/>
     );
-    response.locals = {app};
+
+    // const preloadedState = store.getState();
+    // console.log('preloadedState', preloadedState);
+    // '__PRELOADED_STATE__': preloadedState/
+    response.locals = {app,};
     response.status(200);
     response.render('index');
 }
