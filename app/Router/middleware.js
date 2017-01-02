@@ -8,16 +8,13 @@ import { Provider } from 'react-redux'
 
 function renderHtml(props, response) {
     let store = configureStore();
-    {/*<Provider store={store}>*/}
-    //// </Provider>
     let app = renderToString(
+        <Provider store={store}>
             <RouterContext {...props}/>
+        </Provider>
     );
-
-    // const preloadedState = store.getState();
-    // console.log('preloadedState', preloadedState);
-    // '__PRELOADED_STATE__': preloadedState/
-    response.locals = {app,};
+    let state = store.getState();
+    response.locals = {app, state};
     response.status(200);
     response.render('index');
 }

@@ -7,8 +7,16 @@
 </head>
 <body>
  <div id="root"><%=app%></div>
+
  <script>
+
+     window.__PRELOADED_STATE__ = <%-JSON.stringify(state)%>
+
+
  </script>
+
+
+     <!--c = '<% state %>'-->
 <script src="main.js"></script>
 </body>
 </html>
