@@ -55,7 +55,7 @@ app.use(function (req, res, next) {
     //     next();
     // }
 });
-app.use('*', routerMiddleware);
+app.get('*', routerMiddleware);
 errors(app);
 
 export default app;

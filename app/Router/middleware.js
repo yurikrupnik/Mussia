@@ -10,16 +10,16 @@ import request from 'superagent';
 
 
 
-import {got} from '../redux/actions/payments';
-const fetchPayments = () => {
-    return dispatch => {
-        // dispatch(ask());
-        return request.get('http://localhost:4000/payments')
-            .then(response => dispatch(got(response)));
-        // return Payment.getPayments()
-        //     .then(response => dispatch(got(response)))
-    }
-};
+import { fetchPayments, got} from '../redux/actions/payments';
+// const fetchPayments = () => {
+//     return dispatch => {
+//         // dispatch(ask());
+//         return request.get('http://localhost:4000/payments')
+//             .then(response => dispatch(got(response)));
+//         // return Payment.getPayments()
+//         //     .then(response => dispatch(got(response)))
+//     }
+// };
 
 // import {show, count} from '../api/payments/payment.controller';
 
@@ -37,7 +37,7 @@ function renderHtml(props, response) {
     // });
 
     let store = configureStore();
-    store.dispatch(fetchPayments()).then((re) => {
+    // store.dispatch(fetchPayments()).then((data) => {
 
         let state = store.getState();
         console.log('state', state);
@@ -54,7 +54,7 @@ function renderHtml(props, response) {
         response.locals = {app, state};
         response.status(200);
         response.render('index');
-    });
+    // });
     // let app = renderToString(
     //     <Provider store={store}>
     //         <RouterContext {...props}/>
