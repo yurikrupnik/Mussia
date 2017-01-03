@@ -3,7 +3,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {connect} from 'react-redux';
 
 // todo play with those
-import {fetchPayments} from '../../redux/actions/payments';
+// import {fetchPayments} from '../../redux/actions/payments';
 import {getPayments, dispatchActions} from '../../redux/selectors/payments';
 
 class Payments extends Component {
@@ -25,15 +25,11 @@ class Payments extends Component {
         //
         // })
         const {actions} = this.props;
-        actions.fetchPayments();
+        // actions.fetchPayments();
     }
     handleGetPayments(){
-        return fetchPayments().then(function (s) {
-            console.log('s', s);
-
-        });
-        // console.log('fetchPayments', fetchPayments);
-
+        const {actions} = this.props;
+        return actions.fetchPayments();
     }
     render() {
         const {items, isFetching} = this.props;

@@ -1,7 +1,3 @@
-/**
- * Created by yurikrupnik on 20/08/2016.
- */
-
 import {bindActionCreators} from 'redux';
 import * as counterActionCreators from '../actions/payments';
 

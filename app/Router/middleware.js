@@ -3,11 +3,48 @@ import {renderToString} from 'react-dom/server';
 import {match, RouterContext} from 'react-router'
 import {routes} from './rootRoute';
 
+import cors from 'cors';
+
+// request
+import request from 'superagent';
+
+
+// const fetchPayments = () => {
+//     return dispatch => {
+//         // dispatch(ask());
+//         return request.get('http://localhost:3000/payments')
+//             .then(function (data) {
+//                 console.log('data', data);
+// return data;
+//             });
+//         // return Payment.getPayments()
+//         //     .then(response => dispatch(got(response)))
+//     }
+// };
+import {fetchPayments} from '../redux/actions/payments';
+
+
+// import count from '../api/payments/payment.controller';
+
+import Payments from '../api/payments/request';
+
 import configureStore from '../redux/store/store'; // reuse wrapper
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux'
 
 function renderHtml(props, response) {
+    // console.log('fetchPayments()', fetchPayments());
+
+    // Payments.getPayments().then(function (data) {
+    //     console.log('data', data);
+    //
+    // });
+
     let store = configureStore();
+    store.dispatch(fetchPayments()).then((data) => {
+        console.log('data', data);
+
+        console.log(store.getState())
+    });
     let app = renderToString(
         <Provider store={store}>
             <RouterContext {...props}/>
@@ -17,9 +54,14 @@ function renderHtml(props, response) {
     response.locals = {app, state};
     response.status(200);
     response.render('index');
+
 }
 
 export default (req, res) => {
+    // not working todo
+    cors({origin: 'http://localhost.com'});
+    // res.header("Access-Control-Allow-Origin", "http://localhost:4000");
+    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         if (error) {
             res.status(500).send(error.message);
