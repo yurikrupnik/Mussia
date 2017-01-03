@@ -39,7 +39,7 @@ webpack(app); // test
 api(app); // test
 // errors
 app.use(function (req, res, next) {
-    console.log('req', req.url);
+    // console.log('req', req.url);
     next();
     // if (/public/.test(req.url)) {
     //

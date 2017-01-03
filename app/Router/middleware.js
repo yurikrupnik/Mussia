@@ -9,22 +9,19 @@ import cors from 'cors';
 import request from 'superagent';
 
 
-// const fetchPayments = () => {
-//     return dispatch => {
-//         // dispatch(ask());
-//         return request.get('http://localhost:3000/payments')
-//             .then(function (data) {
-//                 console.log('data', data);
-// return data;
-//             });
-//         // return Payment.getPayments()
-//         //     .then(response => dispatch(got(response)))
-//     }
-// };
-import {fetchPayments} from '../redux/actions/payments';
 
+import {got} from '../redux/actions/payments';
+const fetchPayments = () => {
+    return dispatch => {
+        // dispatch(ask());
+        return request.get('http://localhost:4000/payments')
+            .then(response => dispatch(got(response)));
+        // return Payment.getPayments()
+        //     .then(response => dispatch(got(response)))
+    }
+};
 
-// import count from '../api/payments/payment.controller';
+// import {show, count} from '../api/payments/payment.controller';
 
 import Payments from '../api/payments/request';
 
@@ -40,27 +37,43 @@ function renderHtml(props, response) {
     // });
 
     let store = configureStore();
-    store.dispatch(fetchPayments()).then((data) => {
-        console.log('data', data);
+    store.dispatch(fetchPayments()).then((re) => {
 
-        console.log(store.getState())
+        let state = store.getState();
+        console.log('state', state);
+
+        let s = configureStore(state);
+        console.log('s', s);
+
+        // console.log(store.getState())
+        let app = renderToString(
+            <Provider store={s}>
+                <RouterContext {...props}/>
+            </Provider>
+        );
+        response.locals = {app, state};
+        response.status(200);
+        response.render('index');
     });
-    let app = renderToString(
-        <Provider store={store}>
-            <RouterContext {...props}/>
-        </Provider>
-    );
-    let state = store.getState();
-    response.locals = {app, state};
-    response.status(200);
-    response.render('index');
+    // let app = renderToString(
+    //     <Provider store={store}>
+    //         <RouterContext {...props}/>
+    //     </Provider>
+    // );
+    // let state = store.getState();
+    // response.locals = {app, state};
+    // response.status(200);
+    // response.render('index');
 
 }
 
 export default (req, res) => {
     // not working todo
-    cors({origin: 'http://localhost.com'});
-    // res.header("Access-Control-Allow-Origin", "http://localhost:4000");
+    // cors({origin: 'http://localhost.com'});
+
+    // cors({credentials: true, origin: 'http://localhost:4000'});
+
+    // res.header("Access-Control-Allow-Origin", "http://localhost.com");
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         if (error) {

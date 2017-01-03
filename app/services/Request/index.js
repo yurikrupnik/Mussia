@@ -9,7 +9,7 @@ let handleError = err => {
 export default class Request {
     // interface - constructor is never called
     static create(method = 'get', url = '/', params = null, query = {}, type = 'json') {
-        return request[method](url)
+        return request[method]('http://localhost:4000' + url)
         // .head()
         // .set()
             .type(type)

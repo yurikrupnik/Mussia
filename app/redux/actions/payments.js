@@ -13,10 +13,10 @@ const ask = () => {
     }
 };
 
-const got = (response) => {
+export const got = (response) => {
     return {
         type: RECEIVE_PAYMENTS,
-        items: response
+        items: response.body
     }
 };
 
