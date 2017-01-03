@@ -4,7 +4,6 @@
     "./node_modules",
     "./app/components",
     "./app/styles",
-    "./app/Wrappers",
     "./app/tests",
     "./app/public",
     "./app/redux",

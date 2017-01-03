@@ -1,4 +1,4 @@
-import Payment from '../../api/payments';
+import Payment from '../../api/payments/request';
 
 export const REQUEST_PAYMENTS = 'REQUEST_PAYMENTS';
 export const RECEIVE_PAYMENTS = 'RECEIVE_PAYMENTS';

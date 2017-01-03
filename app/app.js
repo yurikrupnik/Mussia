@@ -28,7 +28,7 @@ app.use(session({
 
 validator(app);
 
-app.use(express.static('client/public')); // must be before router
+// app.use(express.static('client/public')); // must be before router
 views(app);
 webpack(app); // test
 
@@ -40,20 +40,20 @@ api(app); // test
 // errors
 app.use(function (req, res, next) {
     console.log('req', req.url);
-
-    if (/public/.test(req.url)) {
-
-        fs.readFile(`${req.url}`, (err, data) => {
-            res.writeHead(200, {
-                // 'Content-Length':
-                'Content-Type': 'text/javascript',
-            });
-            res.send(data);
-            // write(data, 'text/javascript', res);
-        })
-    } else {
-        next();
-    }
+    next();
+    // if (/public/.test(req.url)) {
+    //
+    //     fs.readFile(`${req.url}`, (err, data) => {
+    //         res.writeHead(200, {
+    //             // 'Content-Length':
+    //             'Content-Type': 'text/javascript',
+    //         });
+    //         res.send(data);
+    //         // write(data, 'text/javascript', res);
+    //     })
+    // } else {
+    //     next();
+    // }
 });
 app.use('*', routerMiddleware);
 errors(app);
