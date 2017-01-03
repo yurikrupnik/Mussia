@@ -25,7 +25,7 @@ class Payments extends Component {
         //
         // })
         const {actions} = this.props;
-        // actions.fetchPayments();
+        actions.fetchPayments();
     }
     handleGetPayments(){
         const {actions} = this.props;

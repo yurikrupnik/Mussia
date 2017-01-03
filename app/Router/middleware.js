@@ -11,7 +11,7 @@ import request from 'superagent';
 
 
 import { fetchPayments, got} from '../redux/actions/payments';
-// const fetchPayments = () => {
+// const dfetchPayments = () => {
 //     return dispatch => {
 //         // dispatch(ask());
 //         return request.get('http://localhost:4000/payments')
@@ -29,52 +29,25 @@ import configureStore from '../redux/store/store'; // reuse wrapper
 import {Provider} from 'react-redux'
 
 function renderHtml(props, response) {
-    // console.log('fetchPayments()', fetchPayments());
-
-    // Payments.getPayments().then(function (data) {
-    //     console.log('data', data);
-    //
-    // });
-
     let store = configureStore();
+    // here get the data we need to load the app via server side store creating
     // store.dispatch(fetchPayments()).then((data) => {
 
-        let state = store.getState();
-        console.log('state', state);
+        // console.log('state 2' , state);
 
-        let s = configureStore(state);
-        console.log('s', s);
-
-        // console.log(store.getState())
         let app = renderToString(
-            <Provider store={s}>
+            <Provider store={store}>
                 <RouterContext {...props}/>
             </Provider>
         );
+        let state = store.getState();
         response.locals = {app, state};
         response.status(200);
         response.render('index');
     // });
-    // let app = renderToString(
-    //     <Provider store={store}>
-    //         <RouterContext {...props}/>
-    //     </Provider>
-    // );
-    // let state = store.getState();
-    // response.locals = {app, state};
-    // response.status(200);
-    // response.render('index');
-
 }
 
 export default (req, res) => {
-    // not working todo
-    // cors({origin: 'http://localhost.com'});
-
-    // cors({credentials: true, origin: 'http://localhost:4000'});
-
-    // res.header("Access-Control-Allow-Origin", "http://localhost.com");
-    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         if (error) {
             res.status(500).send(error.message);
