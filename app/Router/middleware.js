@@ -27,6 +27,18 @@ import Payments from '../api/payments/request';
 import configureStore from '../redux/store/store'; // reuse wrapper
 import {Provider} from 'react-redux'
 
+// material
+// import React from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import tabEvent from 'react-tap-event-plugin';
+// import Router from '../../Router/Router';
+
+const muiTheme = getMuiTheme({
+    userAgent: 'all'
+});
+
+
 function renderHtml(props, response) {
     let store = configureStore();
     // here get the data we need to load the app via server side store creating
@@ -36,7 +48,9 @@ function renderHtml(props, response) {
 
         let app = renderToString(
             <Provider store={store}>
-                <RouterContext {...props}/>
+                <MuiThemeProvider muiTheme={muiTheme}>
+                    <RouterContext {...props}/>
+                </MuiThemeProvider>
             </Provider>
         );
         let state = store.getState();
