@@ -4,21 +4,27 @@ import AppWrapper from '../Wrappers/App';
 import {renderToString} from 'react-dom/server';
 import {render} from 'react-dom';
 
+let state;
+
+let renderServer = (res) => {
+    res.status(200);
+    res.render('index');
+};
 
 let renderHtml = (props, response) => {
-    let store = configureStore();
     let app = renderToString(
-        <AppWrapper {...props}/>
+        <AppWrapper state={{}} {...props}/>
     );
-    let state = store.getState();
+
+    let store = configureStore();
+    state = store.getState();
+    console.log('state', state);
+
     response.locals = {app, state};
-    response.status(200);
-    response.render('index');
+    renderServer(response);
 };
 
 let renderToDOM = (initialState = window.__PRELOADED_STATE__) => {
-    console.log('initialState', initialState);
-
     render(<AppWrapper state={initialState} />, document.getElementById('root'));
 };
 

@@ -17,7 +17,7 @@ const muiTheme = getMuiTheme({
 
 export default class AppWrapper extends Component {
     static propTypes = {
-        state: PropTypes.object, // not required on server side rendering
+        state: PropTypes.object.isRequired, // not required on server side rendering
     };
     constructor(props) {
         super(props);
