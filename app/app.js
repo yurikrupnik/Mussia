@@ -8,9 +8,7 @@ import logger from './services/middlewares/logger';
 import validator from './services/middlewares/validator';
 
 import api from './api';
-
-import routerMiddleware from './Router/middleware'
-
+import router from './Router/middleware';
 
 
 // todo try different tactic not use functions as middlewares
@@ -32,12 +30,10 @@ validator(app);
 views(app);
 webpack(app); // test
 
-// todo user-agent for materuak ui
-
-
 
 api(app); // test
-// errors
+router(app);
+
 app.use(function (req, res, next) {
     // console.log('req', req.url);
     next();
@@ -55,7 +51,7 @@ app.use(function (req, res, next) {
     //     next();
     // }
 });
-app.get('*', routerMiddleware);
+// errors
 errors(app);
 
 export default app;

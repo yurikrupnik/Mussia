@@ -47,7 +47,7 @@ function renderHtml(props, response) {
     // });
 }
 
-export default (req, res) => {
+let handleRoutes = (req, res) => {
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
         if (error) {
             res.status(500).send(error.message);
@@ -69,4 +69,8 @@ export default (req, res) => {
             res.status(404).send('Not found')
         }
     });
+};
+
+export default (app) => {
+    app.get('*', handleRoutes);
 }
