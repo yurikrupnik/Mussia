@@ -6,8 +6,7 @@
     "./app/styles",
     "./app/tests",
     "./app/public",
-    "./app/redux",
-    "./app/Router"
+    "./app/redux"
   ],
   "verbose": true,
   "exec": ["babel-node"]
