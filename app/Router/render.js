@@ -16,8 +16,10 @@ let renderHtml = (props, response) => {
     response.render('index');
 };
 
-let renderToDOM = (state) => {
-    render(<AppWrapper state={state} />, document.getElementById('root'));
+let renderToDOM = (initialState = window.__PRELOADED_STATE__) => {
+    console.log('initialState', initialState);
+
+    render(<AppWrapper state={initialState} />, document.getElementById('root'));
 };
 
 
