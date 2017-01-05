@@ -1,5 +1,7 @@
 import Request from '../../services/Request';
 const url = '/payments';
+// const url = '/payments';
+
 const countUrl = `${url}/count`;
 
 class Payments extends Request {

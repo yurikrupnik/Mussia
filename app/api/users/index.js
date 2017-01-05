@@ -17,7 +17,7 @@ let yebal = (req, res) => {
 
 
 // router.get(usersUrl, logger);
-router.get('/', yebal);
+router.get(usersUrl, yebal);
 // router.post(usersUrl, logger, yebal1); // example of defining middle wares for specific routes
 
 export default router;

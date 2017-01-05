@@ -13,8 +13,8 @@ let fullUrl = 'http://localhost:4000';
 
 export default class Request {
     // interface - constructor is never called
-    static create(method = 'get', url = '/', params = null, query = {}, type = 'json') {
-        return request[method](url)
+    static create(method = 'get', url = '', params = null, query = {}, type = 'json') {
+        return request[method](`/api/${url}`)
         // .head()
         // .set()
         //     .type(type)

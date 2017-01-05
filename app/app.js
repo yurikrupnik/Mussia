@@ -8,6 +8,7 @@ import logger from './services/middlewares/logger';
 import validator from './services/middlewares/validator';
 
 import api from './api';
+
 import router from './Router/middleware';
 
 
@@ -30,8 +31,14 @@ validator(app);
 views(app);
 webpack(app); // test
 
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     next();
+// });
 
 api(app); // test
+
 router(app);
 
 app.use(function (req, res, next) {
