@@ -6,7 +6,7 @@ import Router from '../../Router/Router';
 
 tabEvent();
 
-export default () => {
+export default ({}) => {
     console.log('inside myu themere');
 
     const muiTheme = getMuiTheme({

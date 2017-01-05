@@ -6,10 +6,9 @@ import './styles/custom-styles.scss';
 
 import './services/socket/client'; // connect to socket client
 
-import Wrapper from './redux/store/wrapper';
-// import Router from './Router/Router';
-// import Material from './Wrappers/Material'
+import AppWrapper from './Wrappers/App';
 
 let initialState = window.__PRELOADED_STATE__;
+console.log('window.__PRELOADED_STATE__', initialState);
 
-render(<Wrapper initialState={initialState} />, document.getElementById('root'));
+render(<AppWrapper state={initialState} />, document.getElementById('root'));
