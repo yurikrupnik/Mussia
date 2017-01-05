@@ -21,7 +21,9 @@ let renderHtml = (props, response) => {
     console.log('state', state);
 
     response.locals = {app, state};
-    renderServer(response);
+    response.status(200);
+    response.render('index');
+    // renderServer(response);
 };
 
 let renderToDOM = (initialState = window.__PRELOADED_STATE__) => {
