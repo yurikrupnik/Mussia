@@ -3,7 +3,6 @@ import {renderToString} from 'react-dom/server';
 import {match, RouterContext} from 'react-router'
 import {routes} from './rootRoute';
 
-import cors from 'cors';
 
 // request
 import request from 'superagent';
