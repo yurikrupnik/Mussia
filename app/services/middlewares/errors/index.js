@@ -1,6 +1,4 @@
-let handle404 = (req, res, next) => {
-    res.status(404).render('error', {url: req.originalUrl});
-};
+
 
 let firstError = (err, req, res, next) => {
     // any errors i throw
@@ -12,8 +10,9 @@ let firstError = (err, req, res, next) => {
 
 let secondError = (err, req, res, next) => {
     console.log('err', err);
+    throw new Error(err);
 };
 export default (app) => {
-    app.use(handle404);
     app.use(firstError);
+    app.use(secondError);
 }
