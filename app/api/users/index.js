@@ -1,7 +1,7 @@
 import express from 'express';
 let router = express.Router();
 // import {index} from './constroller';
-export let usersUrl = '/users';
+let usersUrl = '/users';
 
 let yebal = (req, res) => {
     res.json([12, 34, 5, 67,])
