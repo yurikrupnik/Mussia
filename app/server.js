@@ -1,10 +1,9 @@
 import http from 'http'
 import app from './app';
 import './config/db'; // connect to mongo
-import {connectToServer} from './services/socket/server';
-
+import connect from './services/socket/server';
 
 let server = http.Server(app);
-connectToServer(server);
+connect(server);
 
 export default server;

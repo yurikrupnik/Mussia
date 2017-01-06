@@ -1,6 +1,6 @@
 let socket = require('socket.io');
 
-export let connectToServer = (server) => {
+export default (server) => {
     let io = socket(server);
     io.on('connection', function (socket) {
         console.log('socket connected');
