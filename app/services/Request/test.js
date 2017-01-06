@@ -34,7 +34,7 @@ describe('handleError function', () => { // todo
 
 
 describe('Request interface', () => {
-    it('expect to have static method create', () => {
+    it('expect to have serveStatics method create', () => {
         expect(Request.create).to.be.a('function');
     });
 

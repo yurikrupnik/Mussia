@@ -7,11 +7,9 @@ import errors from './services/middlewares/errors';
 import logger from './services/middlewares/logger';
 import validator from './services/middlewares/validator';
 import router from './services/middlewares/router';
+import serveStatics from './services/middlewares/serveStatics';
 
 import api from './api';
-
-// import router from './Router/middleware';
-
 
 // todo try different tactic not use functions as middlewares
 logger(app);
@@ -28,7 +26,8 @@ app.use(session({
 
 validator(app);
 
-// app.use(express.static('client/public')); // must be before matchRouter
+serveStatics(app);
+
 views(app);
 webpack(app); // test
 

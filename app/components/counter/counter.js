@@ -27,6 +27,7 @@ class Counter extends Component {
         return (
             <div >
                 <div>
+                    <img src="download.jpeg" alt="gs"/>
                     <h1>{this.props.counter}</h1>
                     <RaisedButton label="Default"/>
                     <div>
