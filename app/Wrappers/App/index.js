@@ -1,8 +1,9 @@
 import React, {PropTypes, Component} from 'react';
-import {RouterContext} from 'react-router'
+import {RouterContext} from 'react-router';
+
 import Router from '../../Router/Router';
 
-import configureStore from '../../redux/store/store'; // reuse wrapper
+import configureStore from '../../redux/store/store';
 import {Provider} from 'react-redux'
 
 

@@ -1,8 +1,9 @@
 import React from 'react'
-import {routes} from '../../../Router/rootRoute';
 import {match} from 'react-router';
-import AppWrapper from '../../../Wrappers/App';
 import {renderToString} from 'react-dom/server';
+
+import {routes} from '../../../Router/rootRoute';
+import AppWrapper from '../../../Wrappers/App';
 
 
 let preRenderString = (props) => renderToString(<AppWrapper state={{}} {...props}/>);
