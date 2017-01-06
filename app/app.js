@@ -6,7 +6,7 @@ import views from './services/middlewares/views';
 import errors from './services/middlewares/errors';
 import logger from './services/middlewares/logger';
 import validator from './services/middlewares/validator';
-// import router from './services/middlewares/router';
+import router from './services/middlewares/router';
 
 import api from './api';
 
@@ -34,7 +34,7 @@ webpack(app); // test
 
 api(app); // test
 
-// router(app);
+router(app);
 
 app.use(function (req, res, next) {
     // console.log('req', req.url);
