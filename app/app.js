@@ -8,10 +8,8 @@ import logger from './services/middlewares/logger';
 import validator from './services/middlewares/validator';
 import router from './services/middlewares/router';
 import serveStatics from './services/middlewares/serveStatics';
+import api from './services/middlewares/api';
 
-import api from './api';
-
-// todo try different tactic not use functions as middlewares
 logger(app);
 bodyParser(app);
 

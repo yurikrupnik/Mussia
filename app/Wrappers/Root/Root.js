@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 export default class Root extends Component {
     render() {
+        console.log('this.props', this.props);
+
         return (
             <div>
                 <h1>App</h1>
