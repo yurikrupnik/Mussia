@@ -77,4 +77,4 @@ let Payments = () => (<div>payments</div>);
 //     // }
 // };
 
-{/*export default () => <Router history={browserHistory}>{routes}</Router>;*/}
+{/*export default () => <matchRouter history={browserHistory}>{routes}</matchRouter>;*/}
