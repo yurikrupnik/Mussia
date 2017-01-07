@@ -1,4 +1,4 @@
-import Counter from '../../components/counter/counter';
+import Counter from '../Wrappers/Counter';
 export default {
     path: 'counter',
     component: Counter

@@ -2,7 +2,7 @@ import React from 'react'
 import {match} from 'react-router';
 import {renderToString} from 'react-dom/server';
 
-import {routes} from '../../../Router/rootRoute';
+import {routes} from '../../../routes';
 import AppWrapper from '../../../Wrappers/App';
 
 

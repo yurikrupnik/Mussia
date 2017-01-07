@@ -1,7 +1,7 @@
 import React from 'react';
 import Root from '../Wrappers/Root/Root';
-import paymentsRoute from './routes/payments';
-import counterRoute from './routes/couter';
+import paymentsRoute from './payments';
+import counterRoute from './couter';
 let Pay = () => (<div>pay bitch</div>);
 // let Payments = () => (<div>Payments bitch</div>);
 

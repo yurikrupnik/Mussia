@@ -1,18 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import {RouterContext} from 'react-router';
-import Router from '../../Router/Router';
-
-
-// import configureStore from '../../redux/store/store';
-// import {Provider} from 'react-redux'
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import tabEvent from 'react-tap-event-plugin';
-// tabEvent();
-//
-// const muiTheme = getMuiTheme({
-//     userAgent: 'all'
-// });
+import Router from '../../Wrappers/Router';
 
 import Material from '../Material';
 import Provider from '../Provider';
