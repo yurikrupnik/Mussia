@@ -5,7 +5,8 @@ import './styles/custom-styles.scss';
 import './services/socket/client'; // connect to socket client
 import AppWrapper from './Wrappers/App';
 import {render} from 'react-dom';
+const ROOT = document.getElementById('root');
 
-let renderToDOM = (initialState = window.__PRELOADED_STATE__) => render(<AppWrapper state={initialState}/>, document.getElementById('root'));
+let renderToDOM = (initialState = window.__PRELOADED_STATE__) => render(<AppWrapper initialState={initialState}/>, ROOT);
 
 renderToDOM();
