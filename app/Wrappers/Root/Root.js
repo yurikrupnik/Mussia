@@ -13,7 +13,7 @@ export default class Root extends Component {
                         <Link to="/">Dashboard</Link>
                     </div>
                     <div>
-                        <Link to="/count list">count list</Link>
+                        <Link to="/counters">Counters</Link>
                     </div>
                     <div>
                         <Link to="/counter">counter</Link>

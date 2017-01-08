@@ -1,7 +1,8 @@
 import React from 'react';
 import Root from '../Wrappers/Root/Root';
 import paymentsRoute from './payments';
-import counterRoute from './couter';
+import counterRoute from './couter'
+import countersRoute from './counters';
 let Pay = () => (<div>pay bitch</div>);
 // let Payments = () => (<div>Payments bitch</div>);
 
@@ -15,6 +16,7 @@ export let routes = {
     childRoutes: [
         paymentsRoute,
         counterRoute,
+        countersRoute,
         {
             path: 'pay',
             component: Pay
