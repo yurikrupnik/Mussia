@@ -4,7 +4,7 @@ import Provider from '../Provider';
 
 export default class AppWrapper extends Component {
     static propTypes = {
-        initialState: PropTypes.object.isRequired, // not required on server side rendering
+        initialState: PropTypes.object, // not required on server side rendering
     };
 
     constructor(props) {

@@ -1,26 +1,15 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class Counter extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default class Counter extends Component {
 
     static propTypes = {
-        counter: PropTypes.number.isRequired,
-        actions: PropTypes.object.isRequired
+        plus: PropTypes.func.isRequired,
+        minus: PropTypes.func.isRequired
     };
 
-    handlePlus() {
-        const {actions} = this.props;
-        actions.plus();
-    }
-
-    handleMinus() {
-        const {actions} = this.props;
-        actions.minus();
+    constructor(props) {
+        super(props);
     }
 
     render() {
@@ -31,8 +20,8 @@ class Counter extends Component {
                     <h1>{this.props.counter}</h1>
                     <RaisedButton label="Default"/>
                     <div>
-                        <button onClick={this.handlePlus.bind(this)}>+</button>
-                        <button onClick={this.handleMinus.bind(this)}>-</button>
+                        <button onClick={this.props.plus}>+</button>
+                        <button onClick={this.props.minus}>-</button>
                     </div>
                 </div>
             </div>
@@ -40,4 +29,3 @@ class Counter extends Component {
     }
 }
 
-export default connect(getCounter, dispatchActions)(Counter);
