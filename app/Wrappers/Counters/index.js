@@ -24,19 +24,18 @@ class Counters extends Component {
 
     render() {
         const {title, counters, actions} = this.props;
-
         return (
             <div >
                 <div >
                     <h1>{title || 'default title'}</h1>
                     <button onClick={actions.addCounter}>Add counter</button>
-                    <button onClick={actions.removeCounter}>Remove counter</button>
                     <div>{counters.map((v,i) => {
                         return (
                             <div key={i}>
                                 <h1>{v}</h1>
                                 <button onClick={this.handlePlus.bind(this, i)}>+</button>
                                 <button onClick={this.handleMinus.bind(this, i)}>-</button>
+                                <button onClick={(e) => actions.removeCounter(i)}>Remove counter</button>
                             </div>
                         )
                     })}</div>
