@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import {connect} from 'react-redux';
 
-// todo play with those
 // import {fetchPayments} from '../../redux/actions/payments';
 import {getPayments, dispatchActions} from '../../redux/selectors/payments';
 
@@ -11,6 +10,7 @@ class Payments extends Component {
     constructor(props) {
         super(props);
     }
+
     static propTypes = {
         actions: PropTypes.object.isRequired,
         isFetching: PropTypes.bool.isRequired,
@@ -36,6 +36,7 @@ class Payments extends Component {
         // let items = [{name: 'teba'}, {name: 'sdas'}];
         return (
             <div>
+                serviuce.what ever u want
                 <h5>Payments</h5>
                 <div>
                     <FlatButton onClick={this.handleGetPayments.bind(this)} label="Default" />
