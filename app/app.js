@@ -23,6 +23,10 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
+
+app.set('x-powered-by', false);
+app.set('view cache', true);
+
 app.use(function (req, res, next) {
     // console.log('req.session', req.session);
     // console.log('res.session', res.session);
