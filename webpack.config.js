@@ -18,8 +18,8 @@ export default {
     output: {
         path: path.join(__dirname, './app/public'),
         filename: '[name].js',
-        chunkFilename: '[id].chunk.js',
-        publicPath: '/public',
+        chunkFilename: '[chunkhash].chunk.js',
+        publicPath: '/',
     },
     module: {
         loaders: [

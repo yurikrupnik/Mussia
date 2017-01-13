@@ -10,6 +10,8 @@ import router from './services/middlewares/router';
 import serveStatics from './services/middlewares/serveStatics';
 import api from './services/middlewares/api';
 
+import fs from 'fs';
+
 logger(app);
 bodyParser(app);
 
@@ -17,10 +19,24 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 app.use(cookieParser());
 app.use(session({
-    secret: 'avi',
+    secret: 'slomo',
     saveUninitialized: true,
     resave: true
 }));
+app.use(function (req, res, next) {
+    // console.log('req.session', req.session);
+    // console.log('res.session', res.session);
+    // console.log('req.session', req.cookies);
+    // console.log('res.session', res.cookies);
+    // console.log('req.url', req.url);
+
+    if (/public/.test(req.url)) {
+
+    } else {
+        next();
+    }
+});
+
 
 validator(app);
 
@@ -33,23 +49,6 @@ api(app); // test
 
 router(app);
 
-app.use(function (req, res, next) {
-    // console.log('req', req.url);
-    next();
-    // if (/public/.test(req.url)) {
-    //
-    //     fs.readFile(`${req.url}`, (err, data) => {
-    //         res.writeHead(200, {
-    //             // 'Content-Length':
-    //             'Content-Type': 'text/javascript',
-    //         });
-    //         res.send(data);
-    //         // write(data, 'text/javascript', res);
-    //     })
-    // } else {
-    //     next();
-    // }
-});
 // errors
 errors(app);
 

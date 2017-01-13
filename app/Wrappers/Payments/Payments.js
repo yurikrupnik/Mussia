@@ -33,7 +33,6 @@ class Payments extends Component {
     }
     render() {
         const {items, isFetching} = this.props;
-        // let items = [{name: 'teba'}, {name: 'sdas'}];
         return (
             <div>
                 serviuce.what ever u want
