@@ -2,12 +2,10 @@
 import React from 'react';
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
 
-let Pay = () => (<div>pay bitch</div>);
+// let Pay = () => (<div>pay bitch</div>);
 export default {
     path: 'payments',
     getComponents(state, cb) {
-
-// do asynchronous stuff to find the components
         cb(null, require('../Wrappers/Payments/Payments'))
     },
     getChildRoutes(location, cb) {
@@ -16,7 +14,7 @@ export default {
                     // require('./payments').default,
                     // require('./counters').default,
                     // require('./couter').default,
-                    {path: 'pay', component: Pay}
+                    require('./couter'),
                 ]
             )
 

@@ -20,11 +20,6 @@ class Payments extends Component {
 
 
     componentDidMount() {
-        // debugger
-        // fetchPayments().then(function (d) {
-        //     console.log('d', d);
-        //
-        // })
         const {actions} = this.props;
         actions.fetchPayments();
     }
@@ -41,7 +36,7 @@ class Payments extends Component {
                     <FlatButton onClick={this.handleGetPayments.bind(this)} label="Default" />
                 </div>
                 <div>
-                    <Link to="/payments/pay" >go to pay</Link>
+                    <Link to="/payments/counter" >go to counter inside payments</Link>
                     <div>count {items.length}</div>
                     {items.length > 0 &&
                     <div>
