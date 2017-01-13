@@ -4,12 +4,9 @@ import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 export default {
-    // Currently we need to add '.ts' to the resolve.extensions array.
-    // js Must be present
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
     },
-    // devtool: 'eval-source-map', // todo check this and the difference now- does not work in browser
     devtool: 'source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',

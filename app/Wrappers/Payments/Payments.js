@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import {connect} from 'react-redux';
 
+import {Link} from 'react-router';
 // import {fetchPayments} from '../../redux/actions/payments';
 import {getPayments, dispatchActions} from '../../redux/selectors/payments';
 
@@ -35,12 +36,12 @@ class Payments extends Component {
         const {items, isFetching} = this.props;
         return (
             <div>
-                serviuce.what ever u want
                 <h5>Payments</h5>
                 <div>
                     <FlatButton onClick={this.handleGetPayments.bind(this)} label="Default" />
                 </div>
                 <div>
+                    <Link to="/payments/pay" >go to pay</Link>
                     <div>count {items.length}</div>
                     {items.length > 0 &&
                     <div>
@@ -49,6 +50,7 @@ class Payments extends Component {
                         })}
                     </div>}
                 </div>
+                {this.props.children}
             </div>
 
         )

@@ -7,6 +7,8 @@ import AppWrapper from './Wrappers/App';
 import {render} from 'react-dom';
 const ROOT = document.getElementById('root');
 
-let renderToDOM = (initialState = window.__PRELOADED_STATE__) => render(<AppWrapper initialState={initialState}/>, ROOT);
+let renderToDOM = (initialState = window.__PRELOADED_STATE__) => render(
+    <AppWrapper initialState={initialState}/>, ROOT
+);
 
 renderToDOM();
