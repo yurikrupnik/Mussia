@@ -55,6 +55,8 @@ export let routes = {
     //     },
     // ]
     getComponents(state, cb) {
+        console.log('state in root route', state);
+
         // do asynchronous stuff to find the components
         cb(null, require('../Wrappers/Root/Root'))
     },

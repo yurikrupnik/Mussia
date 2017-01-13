@@ -1,5 +1,27 @@
-import Counter from '../Wrappers/Counter';
+// import Counter from '../Wrappers/Counter';
+// let Pay = () => {
+//     return <d
+// }
+if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
+
 export default {
     path: 'counter',
-    component: Counter
+    getComponents(state, cb) {
+        console.log('state in counter state', state);
+
+        // do asynchronous stuff to find the components
+        cb(null, require('../Wrappers/Counter'))
+    },
+    getChildRoutes(location, cb) {
+        require.ensure([], function() {
+            cb(null, [
+                    // require('../Wrappers/Example'),
+                    // require('./counters'),
+                    // require('./couter'),
+                    {path: 'example', component: require('../Wrappers/Example')}
+                ]
+            )
+        });
+    },
+    // component: Counter
 }
