@@ -20,7 +20,7 @@ export default class Root extends Component {
                         <Link to="/payments">payments</Link>
                     </div>
                     <div>
-                        <Link to="/login">login</Link>
+                        <Link to="/register">Register</Link>
                     </div>
                     <div>
                         <Link to="/logout">logout</Link>

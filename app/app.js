@@ -10,8 +10,6 @@ import router from './services/middlewares/router';
 import serveStatics from './services/middlewares/serveStatics';
 import api from './services/middlewares/api';
 
-import fs from 'fs';
-
 logger(app);
 bodyParser(app);
 
@@ -26,6 +24,24 @@ app.use(session({
 
 app.set('x-powered-by', false);
 app.set('view cache', true);
+
+
+// =====================================
+// FACEBOOK ROUTES =====================
+// =====================================
+// route for facebook authentication and login
+import auth from './config/auth';
+import passport from 'passport';
+auth(passport);
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+// handle the callback after facebook has authenticated the user
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/profile',
+        failureRedirect: '/'
+    }));
+
 
 app.use(function (req, res, next) {
     next();

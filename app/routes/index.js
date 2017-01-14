@@ -16,6 +16,7 @@ export let routes = {
                 require('./payments'),
                 require('./counters'),
                 require('./couter'),
+                require('./register'),
                 ]
             )
         });
