@@ -28,17 +28,7 @@ app.set('x-powered-by', false);
 app.set('view cache', true);
 
 app.use(function (req, res, next) {
-    // console.log('req.session', req.session);
-    // console.log('res.session', res.session);
-    // console.log('req.session', req.cookies);
-    // console.log('res.session', res.cookies);
-    // console.log('req.url', req.url);
-
-    if (/public/.test(req.url)) {
-
-    } else {
-        next();
-    }
+    next();
 });
 
 
