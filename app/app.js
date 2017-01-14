@@ -64,8 +64,8 @@ app.use((req, res, next)=> {
         next();
     } else {
         console.log('req.isAuthenticated()', req.isAuthenticated());
-        res.redirect('/auth/facebook');
-        // next();
+        // res.redirect('/auth/facebook');
+        next();
     }
 
     // if they aren't redirect them to the home page

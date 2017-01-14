@@ -1,5 +1,5 @@
 import {bindActionCreators} from 'redux';
-import * as counterActionCreators from '../actions/payments';
+import * as counterActionCreators from '../actions/user';
 
 function getUser(state, ownProps) {
     const {user} = state.user;

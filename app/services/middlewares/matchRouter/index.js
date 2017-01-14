@@ -5,9 +5,7 @@ import {renderToString} from 'react-dom/server';
 import {routes} from '../../../routes';
 import AppWrapper from '../../../Wrappers/App';
 
-
 let preRenderString = (props) => renderToString(<AppWrapper state={{}} {...props}/>);
-
 
 export default (req, res, next) => {
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {

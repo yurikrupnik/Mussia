@@ -20,7 +20,7 @@ export const got = (response) => {
     }
 };
 
-export const fetchPayments = () => {
+export const fetchUser = () => {
     return dispatch => {
         dispatch(ask());
         return User.getPayments()
