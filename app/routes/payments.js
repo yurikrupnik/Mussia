@@ -11,9 +11,6 @@ export default {
     getChildRoutes(location, cb) {
         require.ensure([], function () {
             cb(null, [
-                    // require('./payments').default,
-                    // require('./counters').default,
-                    // require('./couter').default,
                     require('./couter'),
                 ]
             )
