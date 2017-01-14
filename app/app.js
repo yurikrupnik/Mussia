@@ -13,14 +13,6 @@ import api from './services/middlewares/api';
 logger(app);
 bodyParser(app);
 
-import session from 'express-session';
-import cookieParser from 'cookie-parser';
-app.use(cookieParser());
-app.use(session({
-    secret: 'slomo',
-    saveUninitialized: true,
-    resave: true
-}));
 
 app.set('x-powered-by', false);
 app.set('view cache', true);
@@ -32,30 +24,50 @@ app.set('view cache', true);
 // route for facebook authentication and login
 import auth from './config/auth';
 import passport from 'passport';
-auth(passport);
-app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-
-// handle the callback after facebook has authenticated the user
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/profile',
-        failureRedirect: '/'
-    }));
 
 
-app.use(function (req, res, next) {
-    next();
-});
 
 
+import session from 'express-session';
+// import cookieParser from 'cookie-parser';
+// app.use(cookieParser());
+app.use(session({
+    secret: 'slomo',
+    saveUninitialized: false,
+    resave: false
+}));
 validator(app);
 
 serveStatics(app);
 
 views(app);
+
 webpack(app); // test
 
+app.use(passport.initialize());
+app.use(passport.session());
+auth(passport);
+
 api(app); // test
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+// handle the callback after facebook has authenticated the user
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/counters',
+        failureRedirect: '/register'
+    }));
+
+app.use((req, res, next)=> {
+    console.log('', );
+
+    if (req.isAuthenticated()) {
+        next();
+    }
+
+    // if they aren't redirect them to the home page
+    // res.redirect('/register');
+});
 
 router(app);
 

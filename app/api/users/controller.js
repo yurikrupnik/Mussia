@@ -25,7 +25,7 @@ export function saveUser(req, res) {
 }
 
 export function deleteUser(req, res) {
-    return Users.find({})
+    return Users.remove()
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
