@@ -6,26 +6,26 @@ import {handleError, respondWithResult} from '../../services/nodeResponse/apiRes
 
 // Gets a list Count
 export function getUser(req, res) {
-    return Payment.find({})
+    return Users.find({})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function updateUser(req, res) {
-    return Payment.find({})
+    return Users.find({})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 
 export function saveUser(req, res) {
-    return Payment.find({})
+    return Users.find({})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function deleteUser(req, res) {
-    return Payment.find({})
+    return Users.find({})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }

@@ -10,5 +10,3 @@ router.delete(usersUrl, deleteUser);
 
 export default router;
 
-
-// node js routes
