@@ -1,24 +1,12 @@
 import express from 'express';
 let router = express.Router();
-// import {index} from './constroller';
+import {getUser, updateUser, saveUser, deleteUser} from './controller';
 let usersUrl = '/users';
 
-let yebal = (req, res) => {
-    res.json([12, 34, 5, 67,])
-};
-// let yebal1 = (req, res) => {
-//     res.json(['shu', 'dasd', 'dsas', 'd',]);
-// };
-//
-// let logger = (req, res, next) => {
-//     console.log('body');
-//     next();
-// };
-
-
-// router.get(usersUrl, logger);
-router.get(usersUrl, yebal);
-// router.post(usersUrl, logger, yebal1); // example of defining middle wares for specific routes
+router.get(usersUrl, getUser);
+router.post(usersUrl, saveUser);
+router.put(usersUrl, updateUser);
+router.delete(usersUrl, deleteUser);
 
 export default router;
 
