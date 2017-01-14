@@ -26,8 +26,6 @@ import auth from './config/auth';
 import passport from 'passport';
 
 
-
-
 import session from 'express-session';
 // import cookieParser from 'cookie-parser';
 // app.use(cookieParser());
@@ -59,16 +57,20 @@ app.get('/auth/facebook/callback',
     }));
 
 app.use((req, res, next)=> {
-    console.log('', );
+    console.log('',);
 
     if (req.isAuthenticated()) {
+        console.log('req.isAuthenticated()', req.isAuthenticated());
         next();
+    } else {
+        console.log('req.isAuthenticated()', req.isAuthenticated());
+        res.redirect('/auth/facebook');
+        // next();
     }
 
     // if they aren't redirect them to the home page
     // res.redirect('/register');
 });
-
 router(app);
 
 // errors

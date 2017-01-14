@@ -8,7 +8,7 @@ export default () => {
 
             <div>
                 <a href="/auth/facebook">Facebook</a>
-            </div>4
+            </div>
             <div>
                 <a href="/auth/github">Github</a>
             </div>
