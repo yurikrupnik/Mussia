@@ -9,10 +9,8 @@ import {getUser, dispatchActions} from '../../redux/selectors/user';
 class Root extends Component {
 
     componentDidMount() {
-        // const {actions} = this.props;
-        // actions.fetchUser();
         if (!this.props.user) {
-            // this.props.location.pathname = '/register';
+            // this.props.router.push('/register');
         }
     }
     render() {

@@ -1,6 +1,5 @@
 import {REQUEST_USER, RECEIVE_USER} from '../actions/user';
 
-// import {removeByIndex, incrementByIndex, decrementByIndex} from './util/util';
 export default (state = {user: null}, action) => {
 
     switch (action.type) {
