@@ -22,8 +22,8 @@ export const got = (response) => {
 
 export const fetchUser = () => {
     return dispatch => {
-        dispatch(ask());
-        return User.getPayments()
-            .then(response => dispatch(got(response)))
+        // dispatch(ask());
+        // return User.getPayments()
+        //     .then(response => dispatch(got(response)))
     }
 };
