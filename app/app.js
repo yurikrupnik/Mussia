@@ -14,6 +14,7 @@ logger(app);
 bodyParser(app);
 
 
+app.enable('trust proxy');
 app.set('x-powered-by', false);
 app.set('view cache', true);
 
@@ -66,7 +67,6 @@ app.get('api/auth/github/callback',
 
 
 app.use((req, res, next)=> {
-    console.log('',);
 
     if (req.isAuthenticated()) {
         console.log('req.isAuthenticated()', req.isAuthenticated());

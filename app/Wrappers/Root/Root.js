@@ -14,6 +14,7 @@ class Root extends Component {
         }
     }
     render() {
+        let {user} = this.props;
         return (
             <div>
                 <h1>App</h1>
@@ -32,12 +33,14 @@ class Root extends Component {
                     <div>
                         <Link to="/payments">payments</Link>
                     </div>
-                    <div>
+
+                    {!user ? <div>
                         <Link to="/register">Register</Link>
-                    </div>
-                    <div>
-                        <Link to="/logout">logout</Link>
-                    </div>
+                    </div> : nul}
+
+                    {user ? <div>
+                    <Link to="/logout">logout</Link>
+                        </div> : null}
                 </ul>
                 {this.props.children}
             </div>
