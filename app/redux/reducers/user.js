@@ -1,6 +1,6 @@
 import {REQUEST_USER, RECEIVED_USER} from '../actions/user';
 
-export default (state = {}, action) => {
+export default (state = null, action) => {
 
     switch (action.type) {
         case RECEIVED_USER:

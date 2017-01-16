@@ -5,8 +5,7 @@
     "./app/components",
     "./app/styles",
     "./app/tests",
-    "./app/public",
-    "./app/redux"
+    "./app/public"
   ],
   "verbose": true,
   "exec": ["babel-node"]

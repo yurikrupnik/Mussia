@@ -1,14 +1,14 @@
 import {bindActionCreators} from 'redux';
-import * as counterActionCreators from '../actions/user';
+import * as userActionCreators from '../actions/user';
 
 function getUser(state, ownProps) {
-    const {user} = state.user;
-    return {user}
+    let {user} = state;
+    return {user};
 }
 
 
 const dispatchActions = (dispatch) => {
-    return {actions: bindActionCreators(counterActionCreators, dispatch)}
+    return {actions: bindActionCreators(userActionCreators, dispatch)}
 };
 
 export {

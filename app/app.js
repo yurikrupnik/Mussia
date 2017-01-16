@@ -49,10 +49,8 @@ auth(passport);
 
 api(app); // test
 
-
+// login facebook
 app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get('/auth/github', passport.authenticate('github', {scope: 'email'}));
-
 // handle the callback after facebook has authenticated the user
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
@@ -60,9 +58,6 @@ app.get('/auth/facebook/callback',
         failureRedirect: '/register'
     }));
 
-app.get('api/auth/github/callback',
-    passport.authenticate('github',
-        { failureRedirect: '/register' }, (req,res)=>res.redirect('/')));
 
 
 

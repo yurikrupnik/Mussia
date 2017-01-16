@@ -1,17 +1,22 @@
 import {bindActionCreators} from 'redux';
-import * as counterActionCreators from '../actions/payments';
+import * as paymentsActionCreators from '../actions/payments';
 
 function getPayments(state, ownProps) {
-    const {items, isFetching} = state.payments;
+    console.log('ownProps', ownProps);
+
+    const {payments, user} = state;
+    // const {items, isFetching} = state.payments;
+    // const {user} = state.user;
     return {
-        items,
-        isFetching
+        items: payments.items,
+        isFetching: payments.isFetching,
+        user
     }
 }
 
 
 const dispatchActions = (dispatch) => {
-    return {actions: bindActionCreators(counterActionCreators, dispatch)}
+    return {actions: bindActionCreators(paymentsActionCreators, dispatch)}
 };
 
 export {

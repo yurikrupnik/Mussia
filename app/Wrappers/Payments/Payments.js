@@ -18,7 +18,6 @@ class Payments extends Component {
         items: PropTypes.array.isRequired,
     };
 
-
     componentDidMount() {
         const {actions} = this.props;
         actions.fetchPayments();
@@ -28,6 +27,8 @@ class Payments extends Component {
         return actions.fetchPayments();
     }
     render() {
+        console.log('this.props', this.props);
+// debugger
         const {items, isFetching} = this.props;
         return (
             <div>
