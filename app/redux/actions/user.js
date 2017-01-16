@@ -1,7 +1,7 @@
 import User from '../../api/users/request';
 
 export const REQUEST_USER = 'REQUEST_USER';
-export const RECEIVE_USER = 'RECEIVE_USER';
+export const RECEIVED_USER = 'RECEIVED_USER';
 
 
 /*
@@ -13,17 +13,15 @@ const ask = () => {
     }
 };
 
-export const got = (response) => {
+export const got = (user) => {
     return {
-        type: RECEIVE_USER,
-        user: response.body || response // this is run on server and client, make sure to make those actions for async data
+        type: RECEIVED_USER,
+        user: user
     }
 };
 
-export const fetchUser = () => {
+export const fountUser = (user) => {
     return dispatch => {
-        // dispatch(ask());
-        // return User.getPayments()
-        //     .then(response => dispatch(got(response)))
+        dispatch(got(user));
     }
 };
