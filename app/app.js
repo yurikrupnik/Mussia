@@ -66,21 +66,6 @@ app.get('api/auth/github/callback',
 
 
 
-app.use((req, res, next)=> {
-
-    if (req.isAuthenticated()) {
-        console.log('req.isAuthenticated()', req.isAuthenticated());
-
-        next();
-    } else {
-        console.log('req.isAuthenticated()', req.isAuthenticated());
-        // res.redirect('/auth/facebook');
-        next();
-    }
-
-    // if they aren't redirect them to the home page
-    // res.redirect('/register');
-});
 router(app);
 
 // errors
