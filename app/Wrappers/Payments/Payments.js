@@ -27,8 +27,6 @@ class Payments extends Component {
         return actions.fetchPayments();
     }
     render() {
-        console.log('this.props', this.props);
-// debugger
         const {items, isFetching} = this.props;
         return (
             <div>
