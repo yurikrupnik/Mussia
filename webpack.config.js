@@ -5,6 +5,7 @@ require.extensions['.scss'] = () => {
 require.extensions['.css'] = () => {
     return;
 };
+
 import path from 'path';
 import webpack from 'webpack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
