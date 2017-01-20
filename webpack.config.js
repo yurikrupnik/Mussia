@@ -45,7 +45,7 @@ export default {
                 loader: 'awesome-typescript-loader'
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|jpeg|woff|woff2|eot|ttf|svg)$/,
                 loader: 'file-loader'
             }
         ]
