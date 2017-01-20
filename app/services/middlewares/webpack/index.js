@@ -3,7 +3,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../../../../webpack.config';
 import {env} from '../../../config/env';
-import initial from 'lodash.initial';
+import {initial} from 'lodash';
 
 if (env === 'test') {
     webpackConfig.plugins = initial(webpackConfig.plugins); // last plugin is BrowserSyncPlugin - no reason to start it
@@ -17,12 +17,12 @@ if (env === 'development' || env === 'test') {
         publicPath: '/',
         noInfo: true,
         stats: {
-            // colors: true,
-            // hash: true,
-            // timings: true,
-            // chunks: true,
-            // chunkModules: true,
-            // modules: true
+            colors: true,
+            hash: true,
+            timings: true,
+            chunks: true,
+            chunkModules: true,
+            modules: true
         }
     };
     middleware = [

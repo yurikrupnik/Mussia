@@ -8,7 +8,8 @@
   ],
   "plugins": [
     [
-      "add-module-exports","transform-es2015-modules-umd",
+      "add-module-exports",
+      "transform-es2015-modules-umd",
       "transform-runtime",
       {
         "regenerator": true

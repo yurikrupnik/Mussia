@@ -5,7 +5,7 @@ import {renderToString} from 'react-dom/server';
 import {routes} from '../../../routes';
 import AppWrapper from '../../../Wrappers/App';
 
-let preRenderString = (props) => renderToString(<AppWrapper state={{}} {...props}/>);
+let preRenderString = (props) => renderToString(<AppWrapper {...props}/>);
 
 export default (req, res, next) => {
     match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
@@ -17,7 +17,7 @@ export default (req, res, next) => {
             res.locals.app = preRenderString(renderProps);
             next();
         } else {
-            res.status(404).render('error');
+            res.redirect('/');
         }
     });
 }
