@@ -37,12 +37,16 @@ export default {
                 test: /\.(css|scss)$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
-                    loader: ['css', 'sass','postcss']
+                    loader: ['css', 'resolve-url', 'sass?sourceMap','postcss']
                 })
             },
             {
                 test: /\.ts$/,
                 loader: 'awesome-typescript-loader'
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'file-loader'
             }
         ]
     },
