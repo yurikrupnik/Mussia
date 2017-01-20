@@ -1,3 +1,10 @@
+// to load sass files at refresh
+require.extensions['.scss'] = () => {
+    return;
+};
+require.extensions['.css'] = () => {
+    return;
+};
 import path from 'path';
 import webpack from 'webpack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
@@ -29,7 +36,7 @@ export default {
                 test: /\.(css|scss)$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
-                    loader: "css!sass!postcss"
+                    loader: ['css', 'sass','postcss']
                 })
             },
             {
@@ -40,7 +47,7 @@ export default {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin({filename: 'styles.css', disable: false, allChunks: true}),
+        new ExtractTextPlugin({filename: '[name].css', disable: false, allChunks: false}),
         new webpack.NoErrorsPlugin(),
         new BrowserSyncPlugin({
             host: 'localhost',

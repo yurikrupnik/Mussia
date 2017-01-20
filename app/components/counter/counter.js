@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
+
+import './counter.scss';
 export default class Counter extends Component {
 
     static propTypes = {
@@ -18,6 +20,7 @@ export default class Counter extends Component {
         return (
             <div >
                 <div>
+                    <div className="ya-yebu">ya-yebu test</div>
                     <img src="download.jpeg" alt="gs"/>
                     <h1>{this.props.counter}</h1>
                     <RaisedButton label="Does nothing" />
