@@ -1,12 +1,12 @@
 import request from 'superagent';
 let returnBody = res => res.body;
 let handleError = err => {
-    if (err.code === 'ECONNREFUSED') {
+    if (err.status === 403) {
         console.log('ECONNREFUSED');
 
     }
-    console.log('yebal', err);
-    throw new Error(err);
+    // console.log('yebal', err);
+    // throw new Error(err);
 };
 
 let fullUrl = 'http://localhost:4000';

@@ -17,7 +17,6 @@ class Root extends Component {
     }
 
     render() {
-        console.log('render this.props', this.props);
         let {user} = this.props;
         return (
             <div>

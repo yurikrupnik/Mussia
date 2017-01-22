@@ -10,11 +10,23 @@ import router from './services/middlewares/router';
 import serveStatics from './services/middlewares/serveStatics';
 import api from './services/middlewares/api';
 
+import {databaseUrl} from './config/env';
+
+let opts = {url: databaseUrl};
+import session from 'express-session';
+let MongoStore = require('connect-mongo')(session);
+app.use(session({
+    secret: 'slomo',
+    saveUninitialized: false,
+    resave: false,
+    store: new MongoStore(opts)
+}));
+
 logger(app);
 bodyParser(app);
 
 
-app.enable('trust proxy');
+// app.enable('trust proxy');
 app.set('x-powered-by', false);
 app.set('view cache', true);
 
@@ -32,19 +44,9 @@ webpack(app); // test
 // route for facebook authentication and login
 import auth from './config/auth';
 import passport from 'passport';
-import session from 'express-session';
-// import cookieParser from 'cookie-parser';
-// app.use(cookieParser());
-app.use(session({
-    secret: 'slomo',
-    saveUninitialized: false,
-    resave: false
-}));
 app.use(passport.initialize());
 app.use(passport.session());
 auth(passport);
-
-
 
 
 api(app); // test
@@ -57,8 +59,6 @@ app.get('/auth/facebook/callback',
         successRedirect: '/',
         failureRedirect: '/register'
     }));
-
-
 
 
 router(app);
