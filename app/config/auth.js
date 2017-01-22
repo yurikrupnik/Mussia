@@ -1,4 +1,3 @@
-// var FacebookStrategy = require('passport-facebook').Strategy;
 import FacebookStrategy from 'passport-facebook';
 import GithubStrategy from 'passport-github'
 import Users from '../api/users/model'
@@ -7,11 +6,15 @@ var secrets = require('./secrets.json');
 
 export default (passport) => {
     passport.serializeUser(function (user, done) {
+        console.log('user', user);
+
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
+        console.log('id', id);
+
         Users.findOne({id}, function (err, user) {
             done(err, user);
         });
@@ -63,6 +66,9 @@ export default (passport) => {
         function (token, refreshToken, profile, done) {
             let provider = profile.provider;
             // asynchronous
+            console.log('token', token);
+            console.log('refreshToken', refreshToken);
+
             process.nextTick(function () {
 
                 // find the user in the database based on their facebook id
