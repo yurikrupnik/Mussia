@@ -13,7 +13,7 @@ const ask = () => {
     }
 };
 
-export const got = (response = {}) => {
+export const got = (response = []) => {
     return {
         type: RECEIVE_PAYMENTS,
         items: response.body || response // this is run on server and client, make sure to make those actions for async data
