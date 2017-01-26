@@ -5,7 +5,6 @@ let forbidden = (req, res, next) => {
         next();
     } else {
         res.status(403).send('fuck');
-        next();
     }
 };
 
