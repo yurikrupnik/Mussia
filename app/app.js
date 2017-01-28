@@ -14,11 +14,8 @@ import passport from './services/middlewares/passport';
 
 
 logger(app);
-app.enable('trust proxy');
-
 app.set('x-powered-by', false);
 app.set('view cache', true);
-// app.set('trust proxy', 'loopback');
 webpack(app); // test
 serveStatics(app);
 bodyParser(app);
