@@ -8,8 +8,9 @@ let handleError = err => {
 
 export default class Request {
     // interface - constructor is never called
-    static create(method = 'get', url = '/', params = null, query = {}, type = 'json') {
-        return request[method](`/api${url}`)
+    static ['read'](url = '', params = null, query = {}, type = 'json') {
+        debugger
+        return request['get'](`/api/${url}`)
         // .head()
         // .set()
         //     .type(type)
@@ -20,6 +21,10 @@ export default class Request {
             // .sortQuery()
             .then(returnBody)
             .catch(handleError);
+    }
+
+    static ['delete']() {
+        return request.delete()
     }
 }
 

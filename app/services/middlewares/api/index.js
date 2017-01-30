@@ -1,5 +1,5 @@
-import api from '../../../api'; // array api middleware
-const preset = '/api';
+import apiMiddlewares from '../../../api'; // array api middleware
+const API_PRESET = '/api';
 let forbidden = (req, res, next) => {
     if (req.user) {
         next();
@@ -9,5 +9,5 @@ let forbidden = (req, res, next) => {
 };
 
 export default (app) => {
-    app.use(preset, forbidden, api); // load all api middlewares
+    app.use(API_PRESET, forbidden, apiMiddlewares); // load all api middlewares
 }

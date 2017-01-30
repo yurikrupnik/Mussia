@@ -1,10 +1,9 @@
 import express from 'express';
 import {count, show} from './payment.controller';
-export let paymentsUrl = '/payments';
+import {mainURL, countURL} from './urls';
 let router = express.Router();
 
-router.get(paymentsUrl, show);
-router.get(paymentsUrl + '/count', count);
+router.get(mainURL, show);
+router.get(countURL, count);
 
-export default router
-
+export default router;

@@ -1,15 +1,16 @@
 import Request from '../../services/Request';
-const url = '/payments';
-const countUrl = `${url}/count`;
+import {mainURL, countURL} from './urls';
 
 class Payments extends Request {
 
+
+    // todo make lots of wierd reqeusts tp play with db and Request
     static getPayments() {
-        return Request.create('get', url);
+        return super.read(mainURL);
     }
 
     static getCount() {
-        return Request.create('get', countUrl);
+        return super.create('get', countURL);
     }
 }
 
