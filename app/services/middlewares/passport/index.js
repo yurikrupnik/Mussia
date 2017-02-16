@@ -11,4 +11,9 @@ export default (app) => {
             failureRedirect: '/register'
         }));
 
+    app.get('/auth/logout', function (req, res, next) {
+        req.logout();
+        next();
+    });
+
 }

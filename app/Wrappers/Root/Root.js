@@ -42,7 +42,7 @@ class Root extends Component {
                     </div>: null}
 
                     {user ? <div>
-                    <Link to="/logout">logout</Link>
+                    <a href="/auth/logout">logout</a>
                         </div>: null}
                 </ul>
                 {this.props.children}

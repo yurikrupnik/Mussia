@@ -8,8 +8,7 @@ let handleError = err => {
 
 export default class Request {
     // interface - constructor is never called
-    static ['read'](url = '', params = null, query = {}, type = 'json') {
-        debugger
+    static read (url = '', params = null, query = {}, type = 'json') {
         return request['get'](`/api/${url}`)
         // .head()
         // .set()
