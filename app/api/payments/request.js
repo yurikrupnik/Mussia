@@ -6,7 +6,7 @@ class Payments extends Request {
 
     // todo make lots of wierd reqeusts tp play with db and Request
     static getPayments() {
-        return super.read(mainURL);
+        return Request.create('get', mainURL);
     }
 
     static getCount() {

@@ -1,4 +1,4 @@
-import Payment from '../../api/payments/request';
+import Payments from '../../api/payments/request';
 
 export const REQUEST_PAYMENTS = 'REQUEST_PAYMENTS';
 export const RECEIVE_PAYMENTS = 'RECEIVE_PAYMENTS';
@@ -23,7 +23,7 @@ export const got = (response = []) => {
 export const fetchPayments = () => {
     return dispatch => {
         dispatch(ask());
-        return Payment.getPayments()
+        return Payments.getPayments()
             .then(response => dispatch(got(response)))
     }
 };

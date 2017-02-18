@@ -9,8 +9,9 @@ export default (req, res, next) => {
     if (req.isAuthenticated()) {
         store.dispatch(fountUser(req.user));
     }
-    store.dispatch(fetchPayments()).then(() => {
+    // store.dispatch(fetchPayments()).then(() => {
         res.locals.state = store.getState();
         next();
-    });
+    // });
+
 }
