@@ -30,14 +30,14 @@ export default {
         loaders: [
             {
                 test: /\.(js)$/,
-                loaders: ['babel'],
+                loaders: ['babel-loader'],
                 exclude: /node_modules/,
             },
             {
                 test: /\.(css|scss)$/,
                 loader: ExtractTextPlugin.extract({
-                    fallbackLoader: "style-loader",
-                    loader: ['css', 'resolve-url', 'sass?sourceMap','postcss']
+                    fallback: "style-loader",
+                    loader: ['css-loader', 'sass-loader?sourceMap']
                 })
             },
             {
@@ -53,13 +53,12 @@ export default {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin({filename: '[name].css', disable: false, allChunks: false}),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new BrowserSyncPlugin({
             host: 'localhost',
             port: 3000,
             proxy: 'http://localhost:4000',
             open: false
         })
-    ],
-    postcss: () => [autoprefixer]
+    ]
 };
