@@ -9,7 +9,6 @@ require.extensions['.css'] = () => {
 import path from 'path';
 import webpack from 'webpack';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
-import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 export default {
     resolve: {
@@ -17,7 +16,6 @@ export default {
     },
     devtool: 'source-map',
     entry: [
-        'webpack-hot-middleware/client?reload=true',
         path.join(__dirname, './app/client.js')
     ],
     output: {
