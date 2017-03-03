@@ -30,23 +30,23 @@ export default {
         loaders: [
             {
                 test: /\.(js)$/,
-                loaders: ['babel-loader'],
+                use: ['babel-loader'],
                 exclude: /node_modules/,
             },
             {
                 test: /\.(css|scss)$/,
-                loader: ExtractTextPlugin.extract({
+                use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    loader: ['css-loader', 'sass-loader?sourceMap']
+                    use: ['css-loader', 'sass-loader?sourceMap', 'postcss-loader']
                 })
             },
             {
                 test: /\.ts$/,
-                loader: 'awesome-typescript-loader'
+                use: 'awesome-typescript-loader'
             },
             {
                 test: /\.(png|jpeg|woff|woff2|eot|ttf|svg)$/,
-                loader: 'file-loader'
+                use: 'file-loader'
             }
         ]
     },
