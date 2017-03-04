@@ -2,19 +2,15 @@ import FacebookStrategy from 'passport-facebook';
 import GithubStrategy from 'passport-github'
 import Users from '../api/users/model'
 
-var secrets = require('./secrets.json');
+let secrets = require('./secrets.json');
 
 export default (passport) => {
     passport.serializeUser(function (user, done) {
-        console.log('user', user);
-
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
-        console.log('id', id);
-
         Users.findOne({id}, function (err, user) {
             done(err, user);
         });
@@ -39,12 +35,12 @@ export default (passport) => {
                         return done(null, user); // user found, return that user
                     } else {
                         // if there is no user found with that facebook id, create them
-                        var newUser = {};
+                        let newUser = {};
 
                         // set all of the facebook information in our user model
                         newUser.id = profile.id; // set the users facebook id
                         newUser.token = token; // we will save the token that facebook provides to the user
-                        newUser.name = profile.displayName || 'custom nanme';
+                        newUser.name = profile.displayName || 'custom name';
                         // newUser.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
                         // newUser.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 
@@ -66,9 +62,6 @@ export default (passport) => {
         function (token, refreshToken, profile, done) {
             let provider = profile.provider;
             // asynchronous
-            console.log('token', token);
-            console.log('refreshToken', refreshToken);
-
             process.nextTick(function () {
 
                 // find the user in the database based on their facebook id
