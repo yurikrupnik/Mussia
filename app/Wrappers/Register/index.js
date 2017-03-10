@@ -1,6 +1,11 @@
 import React from 'react';
 
 export default () => {
+
+    function handleSubmit(e) {
+        e.preventDefault();
+    }
+
     return (
         <div>
             <h1> Node Authentication</h1>
@@ -12,6 +17,12 @@ export default () => {
             <div>
                 <a href="/auth/github">Github</a>
             </div>
+
+            <form>
+                <input type="text"/>
+                <input type="password"/>
+                <button onClick={handleSubmit}>submit</button>
+            </form>
         </div>
     )
 }

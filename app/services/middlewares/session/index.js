@@ -7,7 +7,7 @@ let opts = {url: databaseUrl};
 export default (app) => {
     app.use(session({
         secret: 'slomo',
-        saveUninitialized: false,
+        saveUninitialized: true,
         resave: true,
         store: new MongoStore(opts)
     }));

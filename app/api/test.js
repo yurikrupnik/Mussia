@@ -1,9 +1,10 @@
-// import payments from './payments';
+import {mainURL, countURL} from './payments'; // todo client test func and see if the data we send is correct to the client response
 
 import request from 'supertest';
+import Payments from './payments/request';
 import app from '../app';
 
-describe('GET /', function () {
+describe('GET /', function () { // server test
     it('respond with html', function (done) {
         request(app)
             .get('/')
@@ -14,29 +15,34 @@ describe('GET /', function () {
     });
 });
 
-describe('GET /payments', function () {
-
-    it('responsed with 403', (done) => {
-        request(app)
-            .get('/api/payments')
-            .expect(403, done);
-    })
-});
-
-describe('GET /payments', function () {
-
-    beforeEach(() => {
-
-        // todo register user for authanticated requests
-        // console.log('app', app);
-
-        request(app)
-            .get('/auth/facebook')
-    });
-
-    it('responsed with json ', (done) => {
+describe(`GET api/payments ${mainURL}`, function () {
+    it('respond with 200', (done) => {
         request(app)
             .get('/api/payments')
             .expect(200, done);
+    });
+});
+
+describe(`GET ${countURL}`, function () {
+    it('responsed with json ', (done) => {
+        request(app)
+            .get('/api/payments/count')
+            .expect(200, done);
     })
+});
+
+describe(`GET api/payments ${mainURL}`, function () {
+    it('50 = 50', (done) => {
+        // request(app)
+        //     .get('/api/payments')
+        //     .expect(200, done);
+        // Payments.getPayments().then((a) => {
+        //     expect(a).to.equal(50);
+        //     done();
+        // })
+
+        expect(50).to.equal(50);
+        expect('yuri1').to.equal('yuri1');
+        done();
+    });
 });

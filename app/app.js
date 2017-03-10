@@ -1,5 +1,4 @@
 import express from 'express';
-const app = express();
 import webpack from './services/middlewares/webpack';
 import bodyParser from './services/middlewares/bodyParser';
 import views from './services/middlewares/views';
@@ -12,18 +11,19 @@ import api from './services/middlewares/api';
 import session from './services/middlewares/session';
 import passport from './services/middlewares/passport';
 
+const app = express();
 
 logger(app);
 app.set('x-powered-by', false);
 app.set('view cache', true);
-webpack(app); // test
+webpack(app);
 serveStatics(app);
 bodyParser(app);
 session(app);
 views(app);
 validator(app);
 passport(app);
-api(app); // test
+api(app);
 router(app);
 errors(app);
 
