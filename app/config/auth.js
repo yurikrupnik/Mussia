@@ -79,11 +79,7 @@ export default (passport) => {
         function (token, refreshToken, profile, done) {
             let provider = profile.provider;
             // asynchronous
-            console.log('token', token);
-            console.log('refreshToken', refreshToken);
-
             process.nextTick(function () {
-
                 // find the user in the database based on their facebook id
                 Users.findOne({'id': profile.id}, function (err, user) {
 

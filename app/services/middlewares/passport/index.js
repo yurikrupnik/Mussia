@@ -9,7 +9,8 @@ export default (app) => {
         function(req, res) {
             res.redirect('/');
         });
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+
+    app.get('/auth/facebook',   passport.authenticate('facebook', { scope: ['user_friends', 'manage_pages', 'emails', 'email'] }));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/',
