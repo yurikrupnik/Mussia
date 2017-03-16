@@ -18,10 +18,17 @@ export default () => {
                 <a href="/auth/github">Github</a>
             </div>
 
-            <form>
-                <input type="text"/>
-                <input type="password"/>
-                <button onClick={handleSubmit}>submit</button>
+            <form action="/auth/local" method="post">
+                <div >
+                    <label>Email</label>
+                    <input type="text" name="username"/>
+                </div>
+                <div >
+                    <label>Password</label>
+                    <input type="password"  name="password"/>
+                </div>
+
+                <button type="submit" >Login</button>
             </form>
         </div>
     )

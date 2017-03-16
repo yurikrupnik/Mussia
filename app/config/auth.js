@@ -1,6 +1,7 @@
+import LocalStrategy from 'passport-local';
 import FacebookStrategy from 'passport-facebook';
-import GithubStrategy from 'passport-github'
-import Users from '../api/users/model'
+import GithubStrategy from 'passport-github';
+import Users from '../api/users/model';
 
 var secrets = require('./secrets.json');
 
@@ -14,12 +15,24 @@ export default (passport) => {
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
         console.log('id', id);
-
-        Users.findOne({id}, function (err, user) {
-            done(err, user);
-        });
+        Users.findOne({id}, done);
     });
 
+    // local
+
+    passport.use(new LocalStrategy(function (username, password, done) {
+        console.log('username', username);
+        console.log('password', password);
+
+
+        Users.findOne({name: username}, function (err, user) {
+            debugger
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            // if (!user.verifyPassword(password)) { return done(null, false); } // todo
+            return done(null, user);
+        });
+    }));
     // failure with github register
     passport.use(new GithubStrategy(secrets.github,
         function (token, refreshToken, profile, done) {
