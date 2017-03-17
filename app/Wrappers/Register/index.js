@@ -23,7 +23,7 @@ export default () => {
             <form action="/auth/local" method="post">
                 <div >
                     <label>Email</label>
-                    <input type="text" name="username"/>
+                    <input type="text" name="email"/>
                 </div>
                 <div >
                     <label>Password</label>
