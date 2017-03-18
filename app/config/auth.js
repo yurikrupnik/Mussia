@@ -8,9 +8,8 @@ import bcrypt from 'bcrypt';
 var secrets = require('./secrets.json');
 
 let serialize = (user, done) => done(null, user.id);
-
 let deserialize = (id, done) => Users.findOne({id}, done);
-const localFields = {
+const localStrategyParameters = {
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
@@ -21,50 +20,28 @@ let localStrategy = (req, email, password, done) => {
     Users.findOne({email})
         .then((user) => {
             if (!user) {
-                bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-                let hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-                // .then(function (hash) {
-                console.log('hash', hash);
-
                 let nuser = {
                     email: email,
                     password: password, // delete this, not saving passwords
                     name: 'admin',
-                    hashPassword: hash,
                     id: 12345
                 };
+                nuser.hashPassword = generateHash(password);
                 Users.insert(nuser).then((newUs) => done(null, newUs));
-                // });
-
-            }
-            // if (!compare(password, )) {
-            // }
-            if (!validPassword(password, user.hashPassword)) { return done(null, false); } // todo
-
-            // let user = {
-            //     email: email, password: password
-            // };
-            if (user) {
+            } else {
+                if (!validPassword(password, user.hashPassword)) { return done(null, false); } // todo
                 done(null, user); // user found, return that user
             }
-            // Users.insert(user).then((newUs) => done(null, newUs));
-            // return done(null, user); // save user wtf!!! todo
         })
         .catch((err)=> done(err));
 };
 
 
 function generateHash(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-    // .then(function (hash) {
-    //     return hash;
-    // })
-    // .catch(function (err) {
-    //     console.warn('failed to create hash', err);
-    // });
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10)); // todo not sync
 }
 
-function validPassword(password, hash) {
+function validPassword(password, hash) { // todo not sync
     return bcrypt.compareSync(password, hash);
 }
 
@@ -76,7 +53,7 @@ export default (passport) => {
 
     // local
 
-    passport.use(new LocalStrategy(localFields, localStrategy));
+    passport.use(new LocalStrategy(localStrategyParameters, localStrategy));
     // failure with github register
     passport.use(new GithubStrategy(secrets.github,
         function (token, refreshToken, profile, done) {
@@ -96,7 +73,7 @@ export default (passport) => {
                         return done(null, user); // user found, return that user
                     } else {
                         // if there is no user found with that facebook id, create them
-                        var newUser = {};
+                        let newUser = {};
 
                         // set all of the facebook information in our user model
                         newUser.id = profile.id; // set the users facebook id
@@ -132,7 +109,6 @@ export default (passport) => {
                         } else {
                             // save our user to the database
                             Users.insert(profile._json).then((newUs) => done(null, newUs));
-
                         }
 
                     })
