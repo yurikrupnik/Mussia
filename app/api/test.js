@@ -16,12 +16,18 @@ describe('GET /', function () { // server test
 });
 
 describe('api', () => {
-    // beforeEach(function (done) {
-    //     request(app)
-    //         .post('/auth/local')
-    //         .fields('u')
-    //         // .expect(200, done);
-    // });
+    before(function (done) {
+        // request(app)
+        app.post('/auth/local', function (req, res) {
+            console.log('req', req);
+            res.send('POST request to homepage');
+        });
+        // app.post('/auth/local', {email: 'krupnik.yuri@gmail.com', password: '123456'}, function (user) {
+        //      console.log('user', user);
+        //      return user;
+        // });
+            // .end(done)
+    });
 
     describe(`GET api/payments ${mainURL}`, function () {
         it('respond with 200', (done) => {
