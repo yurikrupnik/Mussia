@@ -1,61 +1,17 @@
-import LocalStrategy from 'passport-local';
+let secrets = require('./secrets.json');
 import FacebookStrategy from 'passport-facebook';
 import GithubStrategy from 'passport-github';
 import Users from '../api/users/model';
-
-import bcrypt from 'bcrypt';
-
-let secrets = require('./secrets.json');
-
-let serialize = (user, done) => done(null, user.id);
-let deserialize = (id, done) => Users.findOne({id}, done);
-const localStrategyParameters = {
-    usernameField: 'email',
-    passwordField: 'password',
-    passReqToCallback: true
-};
-
-let localStrategy = (req, email, password, done) => {
-    Users.findOne({email})
-        .then((user) => {
-            if (!user) {
-                let nuser = {
-                    email: email,
-                    password: password, // delete this, not saving passwords
-                    name: 'admin',
-                    id: 12345
-                };
-                nuser.hashPassword = generateHash(password);
-                Users.insert(nuser).then((newUs) => done(null, newUs));
-            } else {
-                if (!validPassword(password, user.hashPassword)) { return done(null, false); } // todo
-                done(null, user); // user found, return that user
-            }
-        })
-        .catch((err)=> done(err));
-};
-
-function local() {
-    return new LocalStrategy(localStrategyParameters, localStrategy);
-}
-
-function generateHash(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10)); // todo not sync
-}
-
-function validPassword(password, hash) { // todo not sync
-    return bcrypt.compareSync(password, hash);
-}
+import {serialize, deserialize} from '../services/Strategy/serialze';
+import handleLocalStrategy from '../services/Strategy/local';
 
 export default (passport) => {
     passport.serializeUser(serialize);
-
     // used to deserialize the user
     passport.deserializeUser(deserialize);
 
     // local
-
-    passport.use(local());
+    passport.use(handleLocalStrategy);
     // failure with github register
     passport.use(new GithubStrategy(secrets.github,
         function (token, refreshToken, profile, done) {
