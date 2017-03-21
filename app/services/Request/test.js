@@ -16,21 +16,21 @@ describe('returnBody function', () => {
     });
 });
 
-describe('handleError function', () => { // todo
-    let spy = sinon.spy(handleError);
-    let p = new Promise((resolve, reject) => {
-        reject('te');
-    });
-    it('expect to log error', () => {
-        // p.catch(spy);
+// describe('handleError function', () => { // todo
+    // let spy = sinon.spy(handleError);
+    // let p = new Promise((resolve, reject) => {
+    //     reject('te');
+    // });
+    // it('expect to log error', () => {
+    //     p.catch(spy);
         // expect(p).equal('te');
         // console.log('spy.calledOnce', spy.called);
         // spy.calledOnce;
-        expect(spy).to.not.throw('Error');
+        // expect(spy).to.not.throw('Error');
         // expect(spy.calledOnce).to.eqaul(true);
         // expect(spy.calledTwice).to.eqaul(false);
-    });
-});
+    // });
+// });
 
 
 describe('Request interface', () => {
