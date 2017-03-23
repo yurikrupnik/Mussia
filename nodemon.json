@@ -1,8 +1,15 @@
 {
   "ignore": [
     ".git",
-    "./server/test",
-    "./client/"
+    "./node_modules",
+    "./app/components",
+    "./app/styles",
+    "./app/tests",
+    "./app/public",
+    "./app/routes",
+    "./app/services/",
+    "./app/redux/",
+    "./app/Wrappers/"
   ],
   "verbose": true,
   "exec": ["babel-node"]
