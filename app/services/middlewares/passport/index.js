@@ -7,7 +7,8 @@ export default (app) => {
     app.post('/auth/local',
         passport.authenticate('local', { failureRedirect: '/login' }),
         function(req, res) {
-            res.redirect('/');
+            res.send({sessionssss: res.session});
+            // res.redirect('/');
         });
 
     app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));

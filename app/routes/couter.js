@@ -15,9 +15,6 @@ export default {
     getChildRoutes(location, cb) {
         require.ensure([], function() {
             cb(null, [
-                    // require('../Wrappers/Example'),
-                    // require('./counters'),
-                    // require('./couter'),
                     {path: 'example', component: require('../Wrappers/Example')}
                 ]
             )
