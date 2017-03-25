@@ -4,19 +4,14 @@ export default (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
     auth(passport);
-    app.post('/auth/local',
-        passport.authenticate('local', { failureRedirect: '/login' }),
+    app.post('/auth/local', // todo make a find for it and for each here
+        passport.authenticate('local'),
         function(req, res) {
-            res.send({sessionssss: res.session});
-            // res.redirect('/');
+            res.redirect('/');
         });
 
     app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '/',
-            failureRedirect: '/register'
-        }));
+    app.get('/auth/facebook/callback', passport.authenticate('facebook'));
 
     app.get('/auth/logout', function (req, res, next) {
         req.logout();
