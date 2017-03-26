@@ -6,7 +6,7 @@ import {fetchPayments} from '../../../../redux/actions/payments';
 
 export default (req, res, next) => {
     let store = configureStore();
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated()) { // todo client it
         store.dispatch(fountUser(req.user));
     }
     // store.dispatch(fetchPayments()).then(() => {
