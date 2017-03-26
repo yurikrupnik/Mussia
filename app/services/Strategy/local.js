@@ -21,7 +21,7 @@ let localStrategy = (req, email, password, done) => {
     Users.findOne({email})
         .then((user) => {
             if (!user) {
-                let nuser = {
+                let nuser = { // todo use here some User model constructor
                     email: email,
                     password: password, // delete this, not saving passwords
                     name: 'admin',

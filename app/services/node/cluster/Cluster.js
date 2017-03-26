@@ -1,7 +1,7 @@
-import server from '../../server';
-import {port, host} from '../../config/env';
-//
-import cluster from 'cluster'
+import server from '../../../server';
+import {port, host} from '../../../config/env';
+
+import cluster from 'Cluster'
 console.log('cluster', cluster);
 
 import os from 'os';

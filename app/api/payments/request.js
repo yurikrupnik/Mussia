@@ -1,4 +1,4 @@
-import Request from '../../services/Request';
+import Request from '../../services/client/Request';
 import {mainURL, countURL} from './urls';
 
 class Payments extends Request {
