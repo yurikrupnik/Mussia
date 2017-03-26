@@ -1,5 +1,5 @@
 import path from 'path';
-import {root} from '../../../config/env';
+import {root} from '../../../../config/env';
 
 export default (app) => { // set view engine, look for render middleware
     app.set('view engine', 'ejs');

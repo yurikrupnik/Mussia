@@ -1,6 +1,6 @@
 import session from 'express-session';
 import connect from 'connect-mongo';
-import {databaseUrl} from '../../../config/env';
+import {databaseUrl} from '../../../../config/env';
 let MongoStore = connect(session);
 let opts = {url: databaseUrl};
 

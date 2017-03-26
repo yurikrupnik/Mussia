@@ -1,4 +1,4 @@
-import apiMiddlewares from '../../../api'; // array api middleware
+import apiMiddlewares from '../../../../api'; // array api middleware
 const API_PRESET = '/api';
 let forbidden = (req, res, next) => {
     if (req.user && req.isAuthenticated()) {

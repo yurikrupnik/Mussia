@@ -4,7 +4,7 @@
  * POST    /api/payments              ->  show
  */
 import Friend from './friend.model';
-import {handleError, respondWithResult} from '../../services/nodeResponse/apiResponses';
+import {handleError, respondWithResult} from '../../services/node/nodeResponse/apiResponses';
 
 
 export let count = (req, res) => {

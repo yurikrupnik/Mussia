@@ -1,6 +1,6 @@
 
 import Payment from './payment.model';
-import {handleError, respondWithResult} from '../../services/nodeResponse/apiResponses';
+import {handleError, respondWithResult} from '../../services/node/nodeResponse/apiResponses';
 
 
 
