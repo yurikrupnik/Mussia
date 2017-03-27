@@ -1,13 +1,11 @@
 import LocalStrategy from 'passport-local';
-import Users from '../../../api/users/model';
-import {validatePassword, generateHash} from '../../node/pass-hash';
-
+import Users from '../../../../api/users/model';
+import {validatePassword, generateHash} from '../../../node/pass-hash';
 const params = {
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 };
-
 
 let strategy = (req, email, password, done) => {
     Users.findOne({email})

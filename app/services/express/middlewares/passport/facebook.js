@@ -1,12 +1,13 @@
 import FacebookStrategy from 'passport-facebook';
-import Users from '../../../api/users/model';
+import Users from '../../../../api/users/model';
 let secrets = require('./secrets.json');
 
 function fbcallback(token, refreshToken, profile, done) {
     // asynchronous
     process.nextTick(function () {
         // find the user in the database based on their facebook id
-        Users.findOne({'id': profile.id})
+        let id = profile.id;
+        Users.findOne({id})
             .then(function (user) {
                 // if the user is found, then log them in
                 if (user) {
@@ -21,6 +22,5 @@ function fbcallback(token, refreshToken, profile, done) {
     });
 }
 
-export default new FacebookStrategy(secrets.facebook,
+export default new FacebookStrategy(secrets.facebook, fbcallback);
     // facebook will send back the token and profile
-    fbcallback);
