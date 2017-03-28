@@ -1,4 +1,4 @@
-import {serialize, deserialize} from './serialze';
+import {serialize, deserialize} from './utils';
 import localStrategy from './local';
 import facebookStrategy from './facebook';
 
