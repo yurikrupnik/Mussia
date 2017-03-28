@@ -1,6 +1,15 @@
 import passport from 'passport';
 import auth from './auth';
 
+const socialNetworks = ['facebook'];
+
+function createSocialNetworkRoutes(app) {
+    socialNetworks.forEach(function (network) {
+        app.get(`/auth/${network}`, setSocialAuth(network));
+        app.get(`/auth/${network}/callback`, setSocialAuth(network));
+    });
+}
+
 function handleLogin(req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         if (err) {
@@ -23,13 +32,15 @@ function handleLogout(req, res, next) {
     next();
 }
 
+function setSocialAuth(provider) {
+    return passport.authenticate(provider, {scope: ['email']});
+}
 
 export default (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
     auth(passport);
     app.post('/auth/local', handleLogin);
-    app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
-    app.get('/auth/facebook/callback', passport.authenticate('facebook'));
     app.get('/auth/logout', handleLogout);
+    createSocialNetworkRoutes(app);
 }
