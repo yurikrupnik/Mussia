@@ -1,9 +1,8 @@
 import passport from 'passport';
 import auth from './auth';
 
-const socialNetworks = ['facebook'];
-
 function createSocialNetworkRoutes(app) {
+    const socialNetworks = ['facebook'];
     socialNetworks.forEach(function (network) {
         app.get(`/auth/${network}`, setSocialAuth(network));
         app.get(`/auth/${network}/callback`, setSocialAuth(network));
