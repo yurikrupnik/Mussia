@@ -1,3 +1,4 @@
+import passport from 'passport';
 import {validatePassword, generateHash} from '../../../node/pass-hash';
 import Users from '../../../../api/users/model';
 
@@ -73,16 +74,54 @@ function socialNetworkStrategy(token, refreshTocken, profile, done) {
     process.nextTick(socialAppsRegisterCallback(profile, done));
 }
 
-let localStrategyHandler = (req, email, password, done) => {
+function localStrategyHandler(req, email, password, done) {
     Users.findOne({email})
         .then(checkUser(email, password, done))
         .catch(done);
-};
+}
+
+function handleLogin(req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/login');
+        }
+        req.logIn(user, function (err) {
+            if (err) {
+                return next(err);
+            }
+            return res.redirect('/');
+        });
+    })(req, res, next);
+}
+
+function handleLogout(req, res, next) {
+    req.logout();
+    next();
+}
+
+function setSocialAuth(provider) {
+    return passport.authenticate(provider, {scope: ['email']});
+}
+
+function createSocialNetworkRoutes(app) {
+    const socialNetworks = ['facebook'];
+    socialNetworks.forEach(function (network) {
+        app.get(`/auth/${network}`, setSocialAuth(network));
+        app.get(`/auth/${network}/callback`, setSocialAuth(network));
+    });
+}
 
 export {
     serialize,
     deserialize,
     checkUser,
     socialNetworkStrategy,
-    localStrategyHandler
+    localStrategyHandler,
+    createSocialNetworkRoutes,
+    handleLogin,
+    handleLogout
 }
