@@ -33,7 +33,7 @@ function checkValidUser(user, done) {
     }
 }
 
-function checkUser(email, password, done) {
+function checkUserByEmailAndPass(email, password, done) {
     return function (user) {
         if (!user) {
             let nuser = { // todo use here some User model constructor
@@ -76,13 +76,12 @@ function socialNetworkStrategy(token, refreshTocken, profile, done) {
 
 function localStrategyHandler(req, email, password, done) {
     Users.findOne({email})
-        .then(checkUser(email, password, done))
+        .then(checkUserByEmailAndPass(email, password, done))
         .catch(done);
 }
 
 function handleLogin(req, res, next) {
     passport.authenticate('local', function (err, user, info) {
-
         if (err) {
             return next(err);
         }
@@ -118,7 +117,6 @@ function createSocialNetworkRoutes(app) {
 export {
     serialize,
     deserialize,
-    checkUser,
     socialNetworkStrategy,
     localStrategyHandler,
     createSocialNetworkRoutes,
