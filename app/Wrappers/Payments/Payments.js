@@ -16,6 +16,7 @@ class Payments extends Component {
         actions: PropTypes.object.isRequired,
         isFetching: PropTypes.bool.isRequired,
         items: PropTypes.array.isRequired,
+        user: PropTypes.object
     };
 
     componentDidMount() {
@@ -27,7 +28,10 @@ class Payments extends Component {
         return actions.fetchPayments();
     }
     render() {
-        const {items, isFetching} = this.props;
+        const {items, isFetching, user} = this.props;
+        console.log('isFetching', isFetching);
+        console.log('user', user);
+
         return (
             <div>
                 <h5>Payments</h5>

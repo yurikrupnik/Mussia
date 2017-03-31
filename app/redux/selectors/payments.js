@@ -5,8 +5,11 @@ function getPayments(state, ownProps) {
     const {payments, user} = state;
     // const {items, isFetching} = state.payments;
     // const {user} = state.user;
+    // console.log('user', user);
+
     return {
         items: payments.items,
+        user: user,
         isFetching: payments.isFetching
     }
 }
