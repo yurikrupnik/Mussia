@@ -2,15 +2,11 @@ import {bindActionCreators} from 'redux';
 import * as paymentsActionCreators from '../actions/payments';
 
 function getPayments(state, ownProps) {
-    const {payments, user} = state;
-    // const {items, isFetching} = state.payments;
-    // const {user} = state.user;
-    // console.log('user', user);
+    console.log('ownProps', ownProps);
 
+    const {payments} = state;
     return {
-        items: payments.items,
-        user: user,
-        isFetching: payments.isFetching
+        data: payments.data,
     }
 }
 

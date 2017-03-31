@@ -14,9 +14,7 @@ class Payments extends Component {
 
     static propTypes = {
         actions: PropTypes.object.isRequired,
-        isFetching: PropTypes.bool.isRequired,
-        items: PropTypes.array.isRequired,
-        user: PropTypes.object
+        data: PropTypes.array.isRequired,
     };
 
     componentDidMount() {
@@ -28,9 +26,9 @@ class Payments extends Component {
         return actions.fetchPayments();
     }
     render() {
-        const {items, isFetching, user} = this.props;
-        console.log('isFetching', isFetching);
-        console.log('user', user);
+        const {data, isFetching, user} = this.props;
+        // console.log('isFetching', isFetching);
+        // console.log('data', data);
 
         return (
             <div>
@@ -40,10 +38,10 @@ class Payments extends Component {
                 </div>
                 <div>
                     <Link to="/payments/counter" >go to counter inside payments</Link>
-                    <div>count {items.length}</div>
-                    {items.length > 0 &&
+                    <div>count {data.length}</div>
+                    {data.length > 0 &&
                     <div>
-                        {items.map((val, i) => {
+                        {data.map((val, i) => {
                             return <div key={i}>{val.name}</div>
                         })}
                     </div>}
