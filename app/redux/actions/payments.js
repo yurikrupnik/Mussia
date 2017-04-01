@@ -1,5 +1,5 @@
 import Payments from '../../api/payments/request';
-console.log('Payment', Payments.url);
+// console.log('Payment', Payments.url);
 
 export const REQUEST_PAYMENTS = 'REQUEST_PAYMENTS';
 export const RECEIVE_PAYMENTS = 'RECEIVE_PAYMENTS';
