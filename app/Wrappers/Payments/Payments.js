@@ -6,7 +6,28 @@ import {Link} from 'react-router';
 // import {fetchPayments} from '../../redux/actions/payments';
 import {getPayments, dispatchActions} from '../../redux/selectors/payments';
 
-class Payments extends Component {
+class Shit extends Component {
+
+    static propTypes = {
+        actions: PropTypes.object.isRequired,
+        // data: PropTypes.array.isRequired,
+    };
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        connect(getPayments, dispatchActions)(this);
+    }
+}
+
+
+
+
+
+
+class Payments extends Shit {
 
     constructor(props) {
         super(props);
@@ -19,11 +40,11 @@ class Payments extends Component {
 
     componentDidMount() {
         const {actions} = this.props;
-        actions.fetchPayments();
+        actions.fetch();
     }
     handleGetPayments(){
         const {actions} = this.props;
-        return actions.fetchPayments();
+        return actions.fetch();
     }
     render() {
         const {data, isFetching, user} = this.props;
@@ -53,4 +74,5 @@ class Payments extends Component {
     }
 }
 
+// export default Payments;
 export default connect(getPayments, dispatchActions)(Payments);
