@@ -1,7 +1,7 @@
-import {GET} from './payment.controller';
-import {URL} from './urls';
+import {GET, count} from './payment.controller';
+import {URL, countURL} from './urls';
 import router from './../../services/express/Router';
 router.get(URL, GET);
-// router.get(countURL, count);
+router.get(countURL, count);
 
 export default router;
