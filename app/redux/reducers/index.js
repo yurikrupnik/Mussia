@@ -3,6 +3,7 @@ import counters from './counters';
 import payments from './payments';
 import user from './user';
 import errors from './errors';
+import loading from './loading';
 import {combineReducers} from 'redux';
 
 const reducers = {
@@ -10,6 +11,7 @@ const reducers = {
     counters,
     counter,
     payments,
+    loading,
     errors
 };
 

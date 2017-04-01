@@ -1,6 +1,6 @@
-import {REQUEST_SENT, REQUEST_RECEIVED} from '../actions/isFetching';
+import {REQUEST_SENT, REQUEST_RECEIVED} from '../actions/loading';
 
-export default (state = false, action) => {
+let loading = (state = false, action) => {
     switch (action.type) {
         case REQUEST_SENT:
             return !state;
@@ -9,4 +9,6 @@ export default (state = false, action) => {
         default:
             return state;
     }
-}
+};
+
+export default loading;

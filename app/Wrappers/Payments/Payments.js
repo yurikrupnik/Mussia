@@ -47,7 +47,7 @@ class Payments extends Shit {
         return actions.fetch();
     }
     render() {
-        const {data, isFetching, user} = this.props;
+        const {data} = this.props;
         // console.log('isFetching', isFetching);
         // console.log('data', data);
 
