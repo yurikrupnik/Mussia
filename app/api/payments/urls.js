@@ -1,4 +1,4 @@
 export default {
-    mainURL: '/payments',
+    URL: '/payments',
     countURL: '/payments/count'
 }
