@@ -3,7 +3,7 @@ import Payments from '../../api/payments/request';
 
 export const REQUEST_PAYMENTS = 'REQUEST_PAYMENTS';
 export const RECEIVE_PAYMENTS = 'RECEIVE_PAYMENTS';
-
+import {requestSent, requestReceived} from '../../redux/actions/loading';
 import {isFunction} from 'lodash';
 
 /*
@@ -17,20 +17,21 @@ const requestData = () => {
 
 export const receivedData = (dispatch) => {
     // async
-    return function (response = []) {
-        // console.log('response', response);
+    return (res = []) => {
         return dispatch({
             type: RECEIVE_PAYMENTS,
-            data: response.body || response // this is run on server and client, make sure to make those actions for async data
+            data: res.body || res // this is run on server and client, make sure to make those actions for async data
         });
     };
 };
 
 export const fetch = () => {
     return dispatch => {
-        dispatch(requestData);
+        dispatch(requestData());
+        dispatch(requestSent());
         return Payments.get()
             .then(dispatch(receivedData))
+            .then(dispatch(requestReceived))
             .then(function (response) {
                 console.log('response', response);
                 return response;

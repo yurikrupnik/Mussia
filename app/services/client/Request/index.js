@@ -3,7 +3,6 @@ import configureStore from '../../../redux/store/store';
 import {requestSent, requestReceived} from '../../../redux/actions/loading';
 
 let returnBody = (res) => {
-    requestReceived();
     return res.body;
 };
 let handleError = err => {
@@ -37,26 +36,6 @@ let handleError = err => {
 
 
 export default class Request {
-    // interface - constructor is never called
-    // static ['read'] (url = '', params = null, query = {}, type = 'json') {
-    //     return request['get'](`/api/${url}`)
-    //     // .head()
-    //     // .set()
-    //     //     .type(type)
-    //         // .accept(type)
-    //         // .set('Content-Type', 'application/json')
-    //         .query(query)
-    //         .send(params)
-    //         // .sortQuery()
-    //         .then(returnBody)
-    //         .catch(handleError);
-    // }
-    //
-    //
-    // static ['delete']() {
-    //     return request.delete()
-    // }
-
     static create(method = 'get', url = '/', params = null, query = {}, type = 'json') {
         // requestSent({
         //     method,
@@ -66,7 +45,7 @@ export default class Request {
         // });
 
         // let store = configureStore();
-        // store.dispatch(requestSent(url, method));
+        // store.dispatch(requestSent);
         // store.dispatch(requestSent);
         // req(requestReceived);
         return request[method](`/api${url}`)
@@ -80,6 +59,7 @@ export default class Request {
             // .sortQuery()
             // .then(res)
             .then(returnBody)
+            // .then(requestReceived)
             .catch(handleError);
     }
 }
