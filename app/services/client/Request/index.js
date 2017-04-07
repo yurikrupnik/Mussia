@@ -1,6 +1,4 @@
 import request from 'superagent';
-import configureStore from '../../../redux/store/store';
-import {requestSent, requestReceived} from '../../../redux/actions/loading';
 
 let returnBody = (res) => {
     return res.body;
@@ -13,27 +11,6 @@ let handleError = err => {
         console.log('found 404 - do some shit if want', err);
     }
 };
-
-// function res(data) {
-//     let s = '';
-//     return function (a) {
-//         console.log('', );
-//
-//         let num = 134 - 4;
-//         let store = configureStore();
-//         store.dispatch(requestSent);
-//         // requestReceived();
-//         return data;
-//     }
-// }
-// function req(data) {
-//     // console.log('data', data);
-//     // let store = configureStore();
-//     // store.dispatch(requestSent);
-//     requestSent()
-//     // return data;
-// }
-
 
 export default class Request {
     static create(method = 'get', url = '/', params = null, query = {}, type = 'json') {
