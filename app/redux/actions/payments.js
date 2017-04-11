@@ -3,7 +3,7 @@ import Payments from '../../api/payments/request';
 
 export const REQUEST_PAYMENTS = 'REQUEST_PAYMENTS';
 export const RECEIVE_PAYMENTS = 'RECEIVE_PAYMENTS';
-import {requestSent, requestReceived} from '../../redux/actions/loading';
+import {requestSent, requestReceived, requestError} from '../../redux/actions/loading';
 import {isFunction} from 'lodash';
 
 /*
@@ -35,6 +35,7 @@ export const fetch = () => {
             .then(function (response) {
                 console.log('response', response);
                 return response;
-            });
+            })
+            .catch(dispatch(requestError));
     }
 };

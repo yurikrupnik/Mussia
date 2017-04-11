@@ -6,28 +6,7 @@ import {Link} from 'react-router';
 // import {fetchPayments} from '../../redux/actions/payments';
 import {getPayments, dispatchActions} from '../../redux/selectors/payments';
 
-class Shit extends Component {
-
-    static propTypes = {
-        actions: PropTypes.object.isRequired,
-        // data: PropTypes.array.isRequired,
-    };
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        connect(getPayments, dispatchActions)(this);
-    }
-}
-
-
-
-
-
-
-class Payments extends Shit {
+class Payments extends Component {
 
     constructor(props) {
         super(props);
@@ -48,9 +27,6 @@ class Payments extends Shit {
     }
     render() {
         const {data} = this.props;
-        // console.log('isFetching', isFetching);
-        // console.log('data', data);
-
         return (
             <div>
                 <h5>Payments</h5>
