@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 import Count from '../../components/counter/counter';

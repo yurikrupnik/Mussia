@@ -21,6 +21,7 @@
     "flexboxgrid": "^6.3.1",
     "material-ui": "^0.17.0",
     "monk": "^4.0.0",
+    "prop-types": "^15.5.8",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "react-redux": "^5.0.3",

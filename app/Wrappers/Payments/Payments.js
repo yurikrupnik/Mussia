@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import {connect} from 'react-redux';
 
@@ -21,20 +22,22 @@ class Payments extends Component {
         const {actions} = this.props;
         actions.fetch();
     }
-    handleGetPayments(){
+
+    handleGetPayments() {
         const {actions} = this.props;
         return actions.fetch();
     }
+
     render() {
         const {data} = this.props;
         return (
             <div>
                 <h5>Payments</h5>
                 <div>
-                    <FlatButton onClick={this.handleGetPayments.bind(this)} label="Default" />
+                    <FlatButton onClick={this.handleGetPayments.bind(this)} label="Default"/>
                 </div>
                 <div>
-                    <Link to="/payments/counter" >go to counter inside payments</Link>
+                    <Link to="/payments/counter">go to counter inside payments</Link>
                     <div>count {data.length}</div>
                     {data.length > 0 &&
                     <div>
