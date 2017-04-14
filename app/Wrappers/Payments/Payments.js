@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import {connect} from 'react-redux';
-
 import {Link} from 'react-router';
-// import {fetchPayments} from '../../redux/actions/payments';
-import {getPayments, dispatchActions} from '../../redux/selectors/payments';
+import {getStateByModelPrefix, dispatchActions} from '../../redux/selectors/payments';
 
 class Payments extends Component {
 
@@ -13,15 +11,19 @@ class Payments extends Component {
         super(props);
     }
 
+    static get prefix() {
+        return 'payments';
+    }
+
     static propTypes = {
         actions: PropTypes.object.isRequired,
-        data: PropTypes.array.isRequired,
+        data: PropTypes.object.isRequired,
     };
 
     componentDidMount() {
         const {actions} = this.props;
         actions.fetch({someShit: false});
-    }
+     }
 
     handleGetPayments() {
         const {actions} = this.props;
@@ -29,7 +31,7 @@ class Payments extends Component {
     }
 
     render() {
-        const {data} = this.props;
+        const {data} = this.props.data;
         return (
             <div>
                 <h5>Payments</h5>
@@ -53,5 +55,4 @@ class Payments extends Component {
     }
 }
 
-// export default Payments;
-export default connect(getPayments, dispatchActions)(Payments);
+export default connect(getStateByModelPrefix(Payments.prefix), dispatchActions)(Payments);
