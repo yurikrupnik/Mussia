@@ -17,6 +17,7 @@ export let routes = {
                 require('./counters'),
                 require('./couter'),
                 require('./register'),
+                require('./sluts'),
                 ]
             )
         });
