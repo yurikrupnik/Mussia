@@ -20,12 +20,12 @@ class Payments extends Component {
 
     componentDidMount() {
         const {actions} = this.props;
-        actions.fetch();
+        actions.fetch({someShit: false});
     }
 
     handleGetPayments() {
         const {actions} = this.props;
-        return actions.fetch();
+        return actions.fetch({someShit: true});
     }
 
     render() {

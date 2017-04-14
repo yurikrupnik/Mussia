@@ -1,41 +1,57 @@
 import Payments from '../../api/payments/request';
-// console.log('Payment', Payments.url);
 
-export const REQUEST_PAYMENTS = 'REQUEST_PAYMENTS';
-export const RECEIVE_PAYMENTS = 'RECEIVE_PAYMENTS';
-import {requestSent, requestReceived, requestError} from '../../redux/actions/loading';
-import {isFunction} from 'lodash';
-
-/*
- * action creators
- */
-const requestData = () => {
+function createActions(url) {
+    const URL = url.replace('/', '').toUpperCase();
     return {
-        type: REQUEST_PAYMENTS
+        [`REQUEST_${URL}`]: `REQUEST_${URL}`,
+        [`RECEIVE_${URL}`]: `RECEIVE_${URL}`,
+        [`ERROR_${URL}`]: `ERROR_${URL}`,
+
+    }
+}
+
+function urlToUpper(url) {
+    return url.replace('/', '').toUpperCase();
+}
+const requestData = (url) => {
+    const URL = urlToUpper(url);
+    return {
+        type: `REQUEST_${URL}`
     }
 };
 
-export const receivedData = (dispatch) => {
+export const receivedData = (url) => (dispatch) => {
+    const URL = urlToUpper(url);
     // async
     return (res = []) => {
         return dispatch({
-            type: RECEIVE_PAYMENTS,
+            type: `RECEIVE_${URL}`,
             data: res.body || res // this is run on server and client, make sure to make those actions for async data
         });
     };
 };
+export let actions = createActions(Payments.url);
+
+export const REQUEST_PAYMENTS = 'REQUEST_PAYMENTS';
+export const RECEIVE_PAYMENTS = 'RECEIVE_PAYMENTS';
+export const ERROR_PAYMENTS = 'ERROR_PAYMENTS';
+
+
+
+/*
+ * action creators
+ */
+
 
 export const fetch = () => {
     return dispatch => {
-        dispatch(requestData());
-        dispatch(requestSent());
+        dispatch(requestData(Payments.url));
         return Payments.get()
-            .then(dispatch(receivedData))
-            .then(dispatch(requestReceived))
-            .then(function (response) {
-                console.log('response', response);
-                return response;
-            })
-            .catch(dispatch(requestError));
+            .then(dispatch(receivedData(Payments.url)))
+            .catch(function (err) {
+                console.log('err', err);
+
+            });
+            // .catch(dispatch(requestError));
     }
 };
