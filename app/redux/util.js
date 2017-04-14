@@ -4,32 +4,21 @@ const REQUEST = 'REQUEST';
 const RECEIVE = 'RECEIVE';
 const ERROR = 'ERROR';
 
-
-function createActions(url) {
+const createActions = url => {
     const URL = url.replace('/', '').toUpperCase();
     return {
         [`REQUEST_${URL}`]: `REQUEST_${URL}`,
         [`RECEIVE_${URL}`]: `RECEIVE_${URL}`,
         [`ERROR_${URL}`]: `ERROR_${URL}`,
 
-    }
-}
-
-function handleRequest(state) {
-    return Object.assign({}, state, {isFetching: true});
-}
-
-function handleReceive(state, data) {
-    return Object.assign({}, state, {data, isFetching: false, isReceived: true});
-}
-
-function handleError(state) {
-    return Object.assign({}, state, {error: {fuck: true}});
-}
-
-function createReducerByUrl(initialState, url) {
+    };
+};
+const handleRequest = state => Object.assign({}, state, {isFetching: true});
+const handleReceive = (state, data) => Object.assign({}, state, {data, isFetching: false, isReceived: true});
+const handleError = state => Object.assign({}, state, {error: {fuck: true}});
+const createReducerByUrl = (initialState, url) => {
     let actions = createActions(url);
-    return function (state = initialState, action) {
+    return (state = initialState, action) => {
         let {type, data} = action;
         if (actions.hasOwnProperty(action.type)) {
             if (type.startsWith(REQUEST)) {
@@ -43,20 +32,14 @@ function createReducerByUrl(initialState, url) {
             return state;
         }
     }
-}
-
-// handle fetch
-function urlToUpper(url) {
-    return url.replace('/', '').toUpperCase();
-}
-
-function requestData(url) {
+};
+const urlToUpper = str => str.replace('/', '').toUpperCase();
+const requestData = url => {
     const URL = urlToUpper(url);
     return {
         type: `${REQUEST}_${URL}`
-    }
-}
-
+    };
+};
 const receivedData = url => dispatch => {
     const URL = urlToUpper(url);
     // async
@@ -67,7 +50,6 @@ const receivedData = url => dispatch => {
         });
     };
 };
-
 const createFetch = Resource => params => dispatch => {
     dispatch(requestData(Resource.url));
     // console.log('params', params);
@@ -78,21 +60,11 @@ const createFetch = Resource => params => dispatch => {
         });
     // .catch(dispatch(requestError));
 };
-
-function createDispatcher(actions) {
-    return dispatch => {
-        return {
-            actions: bindActionCreators(actions, dispatch)
-        };
-    };
-}
-
-function getStateByModelPrefix(prefix) {
-    return (state, ownProps) => {
-        let data = state[prefix];
-        return {data};
-    }
-}
+const createDispatcher = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
+const getStateByModelPrefix = prefix => (state, ownProps) => {
+    const data = state[prefix];
+    return {data};
+};
 
 export {
     createReducerByUrl,

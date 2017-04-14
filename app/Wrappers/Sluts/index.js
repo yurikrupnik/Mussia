@@ -21,7 +21,7 @@ class Sluts extends Component {
     };
 
     static defaultProps = {
-        data: {}
+        data: {data:[]}
     };
 
     componentDidMount() {

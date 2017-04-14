@@ -1,8 +1,6 @@
 import request from 'superagent';
 
-let returnBody = (res) => {
-    return res.body;
-};
+let returnBody = res => res.body;
 let handleError = err => {
     if (err.status === 403) {
         console.log('found 403 - do some shit if want', err);
