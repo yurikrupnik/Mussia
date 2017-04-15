@@ -10,7 +10,7 @@ export function count(req, res) {
 
 // Gets a list of Payments
 export function GET(req, res) {
-    return Model.find({})
+    return Model.find({}, 'name')
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
