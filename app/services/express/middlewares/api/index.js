@@ -1,7 +1,6 @@
-import apiMiddlewares from '../../../../api'; // array api middleware
+import apiMiddleware from '../../../../api'; // array api middleware
 import forbidden from './forbidden';
-const preset = '/api';
-
+import {apiPrefix} from '../../../../config/env';
 export default (app) => {
-    app.use(preset, forbidden, apiMiddlewares);
+    app.use(apiPrefix, forbidden, apiMiddleware);
 }

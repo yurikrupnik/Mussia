@@ -8,11 +8,36 @@ export function count(req, res) {
         .catch(handleError(res));
 }
 
-// Gets a list of Payments
-export function GET(req, res) {
+export function CREATE(req, res) { // POST
     return Model.find({}, 'name')
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
+
+// Gets a list of Payments
+export function READ(req, res) { // GET
+
+    let query = {};
+    let fields = 'name';
+
+    return Model.find(query, fields)
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+export function UPDATE(req, res) { // UPDATE
+    return Model.find({}, 'name')
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+export function DELETE(req, res) { // DELETE
+    return Model.find({}, 'name')
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+
+
 
 

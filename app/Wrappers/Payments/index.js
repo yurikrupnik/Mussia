@@ -11,7 +11,7 @@ class Payments extends Component {
         super(props);
     }
 
-    static get prefix() {
+    static get prefix() { // prefix to know which
         return 'payments';
     }
 
@@ -27,7 +27,7 @@ class Payments extends Component {
 
     handleGetPayments() {
         const {actions} = this.props;
-        return actions.fetch({someShit: true});
+        return actions.fetch({fields: 'info'});
     }
 
     render() {

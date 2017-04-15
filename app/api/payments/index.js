@@ -1,7 +1,10 @@
-import {GET, count} from './payment.controller';
-import {URL, countURL} from './urls';
+import {READ, CREATE, UPDATE, DELETE} from './payment.controller';
+import {URL} from './urls';
 import router from './../../services/express/Router';
-router.get(URL, GET);
-router.get(countURL, count);
+
+router.get(URL, READ);
+router.post(URL, CREATE);
+// router.update(URL, UPDATE);
+router.delete(URL, DELETE);
 
 export default router;

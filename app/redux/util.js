@@ -52,8 +52,8 @@ const receivedData = url => dispatch => {
 };
 const createFetch = Resource => params => dispatch => {
     dispatch(requestData(Resource.url));
-    // console.log('params', params);
-    return Resource.get(params)
+    console.log('params', params);
+    return Resource.read(params)
         .then(dispatch(receivedData(Resource.url)))
         .catch(function (err) {
             console.log('err', err);
