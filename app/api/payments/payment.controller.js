@@ -17,6 +17,9 @@ export function CREATE(req, res) { // POST
 // Gets a list of Payments
 export function READ(req, res) { // GET
 
+    console.log('req.query', req.query);
+    console.log('req.params', req.params);
+
     let query = {};
     let fields = 'name';
 

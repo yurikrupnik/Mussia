@@ -22,6 +22,7 @@ class Payments extends Component {
 
     componentDidMount() {
         const {actions} = this.props;
+        debugger
         actions.read({fields: 'name'}, {yalublu: false});
      }
 

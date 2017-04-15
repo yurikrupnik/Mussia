@@ -50,10 +50,11 @@ const receivedData = url => dispatch => {
         });
     };
 };
-const createRead = Resource => params => dispatch => {
+const createRead = Resource => (query, params) => dispatch => {
     dispatch(requestData(Resource.url));
-    console.log('params', params);
-    return Resource.read(params)
+    // console.log('query', query);
+    // console.log('params', params);
+    return Resource.read(params, query)
         .then(dispatch(receivedData(Resource.url)))
         .catch(function (err) {
             console.log('err', err);

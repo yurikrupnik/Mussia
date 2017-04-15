@@ -11,6 +11,9 @@ class Payments extends Request {
     }
     // todo make lots of wierd reqeusts tp play with db and Request
     static read(query, params) {
+        console.log('query', query);
+        console.log('params', params);
+
         return Request.createRead(URL, query, params);
     }
 

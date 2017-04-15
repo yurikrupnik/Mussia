@@ -31,6 +31,10 @@ export default class Request {
             .catch(handleError);
     }
 
+    static createDelete() {
+
+    }
+
     static handleUrl(url) {
         return `${apiPrefix}${url}`;
     }
@@ -47,9 +51,6 @@ export default class Request {
 
     }
 
-    static createDelete() {
-
-    }
 
     // static create(url = '/', params = null, query = {}, type = 'json') {
     //     // requestSent({
