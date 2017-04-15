@@ -50,7 +50,7 @@ const receivedData = url => dispatch => {
         });
     };
 };
-const createFetch = Resource => params => dispatch => {
+const createRead = Resource => params => dispatch => {
     dispatch(requestData(Resource.url));
     console.log('params', params);
     return Resource.read(params)
@@ -70,5 +70,5 @@ export {
     createReducerByUrl,
     createDispatcher,
     getStateByModelPrefix,
-    createFetch
+    createRead
 }

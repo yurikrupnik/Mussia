@@ -1,4 +1,4 @@
 import Payments from '../../api/payments/request';
-import {createFetch} from '../util';
+import {createRead} from '../util';
 
-export const fetch = createFetch(Payments);
+export const read = createRead(Payments);

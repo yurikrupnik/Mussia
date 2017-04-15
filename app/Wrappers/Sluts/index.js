@@ -26,12 +26,12 @@ class Sluts extends Component {
 
     componentDidMount() {
         const {actions} = this.props;
-        actions.fetch({someShit: false});
+        actions.read({someShit: false});
     }
 
     handleGetPayments() {
         const {actions} = this.props;
-        return actions.fetch({someShit: true});
+        return actions.read({someShit: true});
     }
 
     render() {

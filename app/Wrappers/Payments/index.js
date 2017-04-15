@@ -22,12 +22,12 @@ class Payments extends Component {
 
     componentDidMount() {
         const {actions} = this.props;
-        actions.fetch({someShit: false});
+        actions.read({fields: 'name'}, {yalublu: false});
      }
 
     handleGetPayments() {
         const {actions} = this.props;
-        return actions.fetch({fields: 'info'});
+        return actions.read({fields: 'info'}, {yalublu: true});
     }
 
     render() {

@@ -1,4 +1,4 @@
-import Payments from '../../api/sluts/request';
-import {createFetch} from '../util';
+import Sluts from '../../api/sluts/request';
+import {createRead} from '../util';
 
-export const fetch = createFetch(Payments);
+export const read = createRead(Sluts);

@@ -7,8 +7,8 @@ class Sluts extends Request {
         return URL;
     }
     // todo make lots of wierd reqeusts tp play with db and Request
-    static get() {
-        return Request.create('get', URL);
+    static read() {
+        return Request.createRead(URL);
     }
 
     // static getCou/nt() {
