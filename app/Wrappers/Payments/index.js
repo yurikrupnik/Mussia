@@ -21,14 +21,23 @@ class Payments extends Component {
     };
 
     componentDidMount() {
-        const {actions} = this.props;
-        debugger
-        actions.read({fields: 'name'}, {yalublu: false});
+        // const {actions} = this.props;
+        // actions.read({fields: 'name'}, {yalublu: false});
      }
 
-    handleGetPayments() {
+    handleGet() {
         const {actions} = this.props;
         return actions.read({fields: 'info'}, {yalublu: true});
+    }
+
+    handlePost() {
+        const {actions} = this.props;
+        return actions.post({fields: 'info'}, {yalublu: true});
+    }
+
+    handleDelete() {
+        const {actions} = this.props;
+        return actions.delete({fields: 'info'}, {yalublu: true});
     }
 
     render() {
@@ -37,7 +46,9 @@ class Payments extends Component {
             <div>
                 <h5>Payments</h5>
                 <div>
-                    <FlatButton onClick={this.handleGetPayments.bind(this)} label="Default"/>
+                    <FlatButton onClick={this.handleGet.bind(this)} label="GET"/>
+                    <FlatButton onClick={this.handlePost.bind(this)} label="POST"/>
+                    <FlatButton onClick={this.handleDelete.bind(this)} label="DELETE"/>
                 </div>
                 <div>
                     <Link to="/payments/counter">go to counter inside payments</Link>

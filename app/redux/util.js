@@ -50,6 +50,15 @@ const receivedData = url => dispatch => {
         });
     };
 };
+
+const createDispatcher = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
+const getStateByModelPrefix = prefix => (state, ownProps) => {
+    // get the wanted data from the state - example prefix for Payments Wrapper is 'payments'
+    // todo get it from the class name it self
+    const data = state[prefix];
+    return {data};
+};
+
 const createRead = Resource => (query, params) => dispatch => {
     dispatch(requestData(Resource.url));
     // console.log('query', query);
@@ -61,15 +70,40 @@ const createRead = Resource => (query, params) => dispatch => {
         });
     // .catch(dispatch(requestError));
 };
-const createDispatcher = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
-const getStateByModelPrefix = prefix => (state, ownProps) => {
-    const data = state[prefix];
-    return {data};
+
+const createPost = Resource => (query, params) => dispatch => {
+    dispatch({
+        type: 'SEND'
+    });
+    // console.log('query', query);
+    // console.log('params', params);
+    return Resource.post(params, query)
+        .then(dispatch(receivedData(Resource.url)))
+        .catch(function (err) {
+            console.log('err', err);
+        });
+    // .catch(dispatch(requestError));
+};
+
+const createDelete = Resource => (query, params) => dispatch => {
+    dispatch({
+        type: 'DELETE'
+    });
+    // console.log('query', query);
+    // console.log('params', params);
+    return Resource.delete(params, query)
+        .then(dispatch(receivedData(Resource.url)))
+        .catch(function (err) {
+            console.log('err', err);
+        });
+    // .catch(dispatch(requestError));
 };
 
 export {
     createReducerByUrl,
     createDispatcher,
     getStateByModelPrefix,
-    createRead
+    createRead,
+    createPost,
+    createDelete
 }

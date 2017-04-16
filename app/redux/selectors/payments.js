@@ -1,4 +1,4 @@
-import * as actions  from '../actions/payments';
+import {actions}  from '../actions/payments';
 import {getStateByModelPrefix, createDispatcher} from '../util'
 
 const dispatchActions = createDispatcher(actions);

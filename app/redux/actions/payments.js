@@ -1,4 +1,9 @@
 import Payments from '../../api/payments/request';
-import {createRead} from '../util';
+import {createRead, createPost, createDelete} from '../util';
 
-export const read = createRead(Payments);
+export const actions = {
+    read: createRead(Payments),
+    post: createPost(Payments),
+    delete: createDelete(Payments),
+    // put: createRead(Payments),
+};

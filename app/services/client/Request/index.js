@@ -24,15 +24,25 @@ export default class Request {
         return request[this.handleMethod(type)](this.handleUrl(url))
             .query(query)
             .send(params)
-            // .sortQuery()
-            // .then(res)
             .then(returnBody)
-            // .then(requestReceived)
             .catch(handleError);
     }
 
-    static createDelete() {
+    static createDelete(url, query, params) {
+        let type = 'delete';
+        return request[this.handleMethod(type)](this.handleUrl(url))
+            .query(query)
+            .send(params)
+            .then(returnBody)
+            .catch(handleError);
+    }
 
+    static createPost(url, query, params) {
+        let type = 'create';
+        return request[this.handleMethod(type)](this.handleUrl(url))
+            .send(params)
+            .then(returnBody)
+            .catch(handleError);
     }
 
     static handleUrl(url) {
@@ -45,10 +55,6 @@ export default class Request {
         } else {
             throw Error('wrong method')
         }
-    }
-
-    static createPost() {
-
     }
 
 
