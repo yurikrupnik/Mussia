@@ -1,9 +1,4 @@
 import Payments from '../../api/payments/request';
-import {createRead, createPost, createDelete} from '../util';
+import CRUDActions from '../utils/CRUDActions';
+export default new CRUDActions(Payments);
 
-export const actions = {
-    read: createRead(Payments),
-    post: createPost(Payments),
-    delete: createDelete(Payments),
-    // put: createRead(Payments),
-};

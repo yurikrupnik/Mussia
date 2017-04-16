@@ -15,9 +15,10 @@ const handleDelete = state => Object.assign({}, state, {error: {fuck: true}});
 const ACTIONS = [
     {actionName: REQUEST, handler: handleRequest},
     {actionName: RECEIVE, handler: handleReceive},
-    {actionName: ERROR, handler: handleError},
+
     {actionName: SEND, handler: handleSend},
     {actionName: DELETE, handler: handleDelete},
+    {actionName: ERROR, handler: handleError},
 ];
 
 const createActionsByUrl = url => {
