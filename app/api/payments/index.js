@@ -4,7 +4,7 @@ import router from './../../services/express/Router';
 
 router.get(URL, READ);
 router.post(URL, CREATE);
-// router.update(URL, UPDATE);
+// router.put(URL, UPDATE);
 router.delete(URL, DELETE);
 
 export default router;

@@ -1,6 +1,6 @@
 
 import Model from './payment.model';
-import {handleError, respondWithResult} from '../../services/node/nodeResponse/apiResponses';
+import {handleError, respondWithResult, respondWithDelete} from '../../services/node/nodeResponse/apiResponses';
 // Gets a list Count
 export function count(req, res) {
     return Model.count()
@@ -29,15 +29,22 @@ export function READ(req, res) { // GET
 }
 
 export function UPDATE(req, res) { // UPDATE
-    return Model.find({}, 'name')
+    return Model.findOneAndUpdate({})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function DELETE(req, res) { // DELETE
-    return Model.find({}, 'name')
-        .then(respondWithResult(res))
-        .catch(handleError(res));
+    if (Array.isArray(req.body) && req.body.length) {
+        return Model.remove({_id: {$in: req.body}})
+            .then(respondWithDelete(res))
+            .catch(handleError(res));
+    } else {
+        return Model.findOneAndDelete({_id: req.body.id})
+            .then(respondWithDelete(res))
+            .catch(handleError(res));
+    }
+
 }
 
 
