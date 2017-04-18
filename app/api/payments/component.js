@@ -28,7 +28,7 @@ class Payments extends Component {
     componentDidMount() {
         // const {actions} = this.props;
         // actions.read({fields: 'name'}, {yalublu: false});
-     }
+    }
 
     handleGet() {
         const {actions} = this.props;
