@@ -21,9 +21,9 @@ class Payments extends Request {
         return Request.createPost(URL, query, params);
     }
 
-    static 'delete' (query, ob = {}) {
+    static 'delete' (query, params) { // delete is saved word in js
 
-        return Request.createDelete(URL, query, ob);
+        return Request.createDelete(URL, query, params);
     }
 
     // static getCount() {

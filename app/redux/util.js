@@ -6,11 +6,23 @@ const SEND = 'SEND';
 
 const ERROR = 'ERROR';
 
-const handlePending = (state, payload) => Object.assign({}, state, {active: true});
-const handleFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: payload});
+const handleReadPending = (state, payload) => Object.assign({}, state, {active: true});
+const handleReadFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: payload});
 const handleError = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
 // const handleSend = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
-const handleDelete = (state, payload) => Object.assign({}, state, {error: {omg: true}});
+const handleDeletePending = (state, payload) => {
+    console.log('payload', payload);
+    // let {id} = payload;
+    return Object.assign({}, state, {data: []});
+};
+
+const handleDeleteFulfilled = (state, payload) => {
+    console.log('payload', payload);
+
+    // let {id} = payload;
+
+    return Object.assign({}, state, {data: []});
+};
 
 const urlToUpper = str => str.replace('/', '').toUpperCase();
 
@@ -19,16 +31,16 @@ const ACTIONS = [
     {
         actionName: READ,
         handlers: {
-            PENDING: handlePending,
-            FULFILLED: handleFulfilled,
+            PENDING: handleReadPending,
+            FULFILLED: handleReadFulfilled,
             ERROR: handleError,
         }
     },
     {
         actionName: DELETE,
         handlers: {
-            PENDING: handlePending,
-            FULFILLED: handleDelete,
+            PENDING: handleDeletePending,
+            FULFILLED: handleDeleteFulfilled,
             ERROR: handleError,
         }
     }
@@ -41,7 +53,7 @@ const ACTIONS = [
 // reducer shit
 const createActionsByUrl = url => {
     const URL = urlToUpper(url);
-    return ACTIONS.reduce((current, next) => {
+    return ACTIONS.reduce((current, next) => { // current will be actual reducer
         let {handlers, actionName} = next;
         _.forEach(handlers, (handler, key) => {
             current[`${actionName}_${URL}_${key}`] = handler;
@@ -55,17 +67,17 @@ const createReducerByUrl = (initialState, url) => {
     return (state = initialState, action) => {
         let {type, payload} = action;
         if (actions.hasOwnProperty(type)) { // instead of switch- if false return state
+            debugger;
             return actions[type](state, payload);
         } else {
             return state;
         }
     }
 };
-// todo make middleware to control async actions like promise middle ware
+
 const dispatchActionByPrefixAndUrl = (model, query, params, prefix) => {
     const URL = urlToUpper(model.url);
     const method = prefix.toLowerCase();
-    debugger
     return {
         type: `${prefix}_${URL}`,
         payload: model[method](query, params)
@@ -74,19 +86,6 @@ const dispatchActionByPrefixAndUrl = (model, query, params, prefix) => {
 const getData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, READ);
 const sendData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, SEND);
 const deleteData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, DELETE);
-// const receivedData = url => dispatch => {
-//     const URL = urlToUpper(url);
-//     // async
-//     return (res = []) => { // todo see if need this , check server side
-//         return dispatch({
-//             type: `${RECEIVE}_${URL}`,
-//             payload: res.body || res // this is run on server and client, make sure to make those actions for async data
-//         });
-//     };
-// };
-// end todo
-
-
 const createDispatcher = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
 const getStateByModelPrefix = prefix => (state, ownProps) => {
     // get the wanted data from the state - example prefix for Payments Wrapper is 'payments'
@@ -97,40 +96,12 @@ const getStateByModelPrefix = prefix => (state, ownProps) => {
 
 const createRead = Resource => (query, params) => dispatch => {
     dispatch(getData(Resource, query, params));
-    // console.log('query', query);
-    // console.log('params', params);
-    // return Resource.read(params, query)
-    //     .then(dispatch(receivedData(Resource.url)))
-    //     .catch(function (err) {
-    //         console.log('err', err);
-    //     });
-    // .catch(dispatch(requestError));
 };
 
-const createPost = Resource => (query, params) => dispatch => {
-    dispatch(sendData(Resource.url, query, params));
-    // console.log('query', query);
-    // console.log('params', params);
-    // return Resource.post(params, query)
-    //     .then(dispatch(receivedData(Resource.url)))
-    //     .catch(function (err) {
-    //         console.log('err', err);
-    //     });
-    // .catch(dispatch(requestError));
-};
+const createPost = Resource => (query, params) => dispatch => dispatch(sendData(Resource, query, params));
 
-const createDelete = Resource => (query, params) => dispatch => {
-    dispatch(deleteData(Resource, query, params));
-    // dispatch(deleteData(Resource.url));
-    // console.log('query', query);
-    // console.log('params', params);
-    // return Resource.delete(params, query)
-    //     .then(dispatch(receivedData(Resource.url)))
-    //     .catch(function (err) {
-    //         console.log('err', err);
-    //     });
-    // .catch(dispatch(requestError));
-};
+
+const createDelete = Resource => (query, params) => dispatch => dispatch(deleteData(Resource, query, params));
 
 export {
     createReducerByUrl,
