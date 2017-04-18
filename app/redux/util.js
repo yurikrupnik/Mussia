@@ -1,15 +1,16 @@
 import {bindActionCreators} from 'redux';
 import _ , {has, get, forEeach} from 'lodash';
 const READ = 'READ';
-const ERROR = 'ERROR';
-const SEND = 'SEND';
 const DELETE = 'DELETE';
+const SEND = 'SEND';
 
-const handlePending = state => Object.assign({}, state, {isFetching: true});
-const handleFulfilled = (state, payload) => Object.assign({}, state, {data: payload, isFetching: false, isReceived: true});
-const handleError = state => Object.assign({}, state, {error: {fuck: true}});
-const handleSend = state => Object.assign({}, state, {error: {fuck: true}});
-const handleDelete = state => Object.assign({}, state, {error: {fuck: true}});
+const ERROR = 'ERROR';
+
+const handlePending = (state, payload) => Object.assign({}, state, {active: true});
+const handleFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: payload});
+const handleError = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
+// const handleSend = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
+const handleDelete = (state, payload) => Object.assign({}, state, {error: {omg: true}});
 
 const urlToUpper = str => str.replace('/', '').toUpperCase();
 
@@ -23,6 +24,14 @@ const ACTIONS = [
             ERROR: handleError,
         }
     },
+    {
+        actionName: DELETE,
+        handlers: {
+            PENDING: handlePending,
+            FULFILLED: handleDelete,
+            ERROR: handleError,
+        }
+    }
     // {actionName: SEND, handler: handleSend},
     // {actionName: DELETE, handler: handleDelete},
     // {actionName: ERROR, handler: handleError},
@@ -56,6 +65,7 @@ const createReducerByUrl = (initialState, url) => {
 const dispatchActionByPrefixAndUrl = (model, query, params, prefix) => {
     const URL = urlToUpper(model.url);
     const method = prefix.toLowerCase();
+    debugger
     return {
         type: `${prefix}_${URL}`,
         payload: model[method](query, params)
