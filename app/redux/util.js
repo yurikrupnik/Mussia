@@ -1,5 +1,5 @@
 import {bindActionCreators} from 'redux';
-import _ , {has, get, forEeach} from 'lodash';
+import _ , {has, get, forEeach, includes} from 'lodash';
 const READ = 'READ';
 const DELETE = 'DELETE';
 const SEND = 'SEND';
@@ -9,19 +9,13 @@ const ERROR = 'ERROR';
 const handleReadPending = (state, payload) => Object.assign({}, state, {active: true});
 const handleReadFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: payload});
 const handleError = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
-// const handleSend = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
 const handleDeletePending = (state, payload) => {
-    console.log('payload', payload);
-    // let {id} = payload;
-    return Object.assign({}, state, {data: []});
+    return Object.assign({}, state, {active: true});
 };
 
-const handleDeleteFulfilled = (state, payload) => {
-    console.log('payload', payload);
-
-    // let {id} = payload;
-
-    return Object.assign({}, state, {data: []});
+const handleDeleteFulfilled = (state, deletedIds) => {
+    const data = state.data.filter(val => !includes(deletedIds, val._id));
+    return Object.assign({}, state, {active: false, data});
 };
 
 const urlToUpper = str => str.replace('/', '').toUpperCase();

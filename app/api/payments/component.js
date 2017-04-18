@@ -41,14 +41,12 @@ class Payments extends Component {
     }
 
     handleDelete(item) {
-        debugger;
         const {actions} = this.props;
-        // todo handle id by url param and multiple deletes;
         const {selected} = this.state;
         if (selected.length) {
             return actions.delete(selected.map(v => v._id)); // multi
         } else {
-            return actions.delete({id: item._id}); // one
+            return actions.delete([item._id]); // one
         }
     }
 

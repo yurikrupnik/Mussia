@@ -28,11 +28,10 @@ export default class Request {
             .catch(handleError);
     }
 
-    static createDelete(url, query, params) {
+    static createDelete(url, ids) {
         let type = 'delete';
         return request[this.handleMethod(type)](this.handleUrl(url))
-            .query(query)
-            .send(params)
+            .send(ids)
             .then(returnBody)
             .catch(handleError);
     }
