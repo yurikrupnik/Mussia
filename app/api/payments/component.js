@@ -43,8 +43,10 @@ class Payments extends Component {
     handleDelete(item) {
         const {actions} = this.props;
         const {selected} = this.state;
-        if (selected.length) {
-            return actions.delete(selected.map(v => v._id)); // multi
+        if (selected.length) { // anyway send array of ids to delete
+            const ids = selected.map(v => v._id);
+            this.setState({selected: []});
+            return actions.delete(ids); // multi
         } else {
             return actions.delete([item._id]); // one
         }

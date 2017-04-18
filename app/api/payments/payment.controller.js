@@ -42,7 +42,6 @@ export function DELETE(req, res) {
     return Model.remove({_id: {$in: ids}})
         .then(respondWithDelete(res))
         .catch(handleError(res));
-
 }
 
 
