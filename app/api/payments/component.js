@@ -41,6 +41,7 @@ class Payments extends Component {
     }
 
     handleDelete(item) {
+        debugger;
         const {actions} = this.props;
         // todo handle id by url param and multiple deletes;
         const {selected} = this.state;

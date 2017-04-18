@@ -9,6 +9,6 @@ export let respondWithResult = (res, statusCode) => {
 };
 
 export let respondWithDelete = (res, statusCode) => {
-    statusCode = statusCode || 204;
+    statusCode = statusCode || 200;
     return entry => res.status(statusCode).json({deleted: true});
 };

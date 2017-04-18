@@ -67,7 +67,6 @@ const createReducerByUrl = (initialState, url) => {
     return (state = initialState, action) => {
         let {type, payload} = action;
         if (actions.hasOwnProperty(type)) { // instead of switch- if false return state
-            debugger;
             return actions[type](state, payload);
         } else {
             return state;
