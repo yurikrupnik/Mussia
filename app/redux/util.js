@@ -1,4 +1,4 @@
-import {bindActionCreators} from 'redux';
+
 import _ , {has, get, forEeach, includes} from 'lodash';
 const READ = 'READ';
 const DELETE = 'DELETE';
@@ -38,9 +38,6 @@ const ACTIONS = [
             ERROR: handleError,
         }
     }
-    // {actionName: SEND, handler: handleSend},
-    // {actionName: DELETE, handler: handleDelete},
-    // {actionName: ERROR, handler: handleError},
 ];
 
 
@@ -76,10 +73,11 @@ const dispatchActionByPrefixAndUrl = (model, query, params, prefix) => {
         payload: model[method](query, params)
     };
 };
+
 const getData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, READ);
 const sendData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, SEND);
 const deleteData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, DELETE);
-const createDispatcher = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
+
 const getStateByModelPrefix = prefix => (state, ownProps) => {
     // get the wanted data from the state - example prefix for Payments Wrapper is 'payments'
     // todo get it from the class name it self
@@ -87,9 +85,7 @@ const getStateByModelPrefix = prefix => (state, ownProps) => {
     return {data};
 };
 
-const createRead = Resource => (query, params) => dispatch => {
-    dispatch(getData(Resource, query, params));
-};
+const createRead = Resource => (query, params) => dispatch => dispatch(getData(Resource, query, params));
 
 const createPost = Resource => (query, params) => dispatch => dispatch(sendData(Resource, query, params));
 
@@ -98,7 +94,6 @@ const createDelete = Resource => (query, params) => dispatch => dispatch(deleteD
 
 export {
     createReducerByUrl,
-    createDispatcher,
     getStateByModelPrefix,
     createRead,
     createPost,

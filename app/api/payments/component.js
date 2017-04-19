@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
-import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {getStateByModelPrefix, dispatchActions} from '../../redux/selectors/payments';
-
-
+import connect from './redux';
 
 class Payments extends Component {
 
@@ -14,10 +11,6 @@ class Payments extends Component {
         this.state = {
             selected: []
         }
-    }
-
-    static get prefix() { // prefix to know which
-        return 'payments';
     }
 
     static propTypes = {
@@ -31,8 +24,11 @@ class Payments extends Component {
     }
 
     handleGet() {
-        const {actions} = this.props;
-        return actions.read({fields: 'info'}, {yalublu: true});
+        const {actions, location} = this.props;
+        const {query} = location;
+        debugger;
+
+        return actions.read(query, {yalublu: true}); // todo automatic resourse - must use mongoose i think
     }
 
     handlePost() {
@@ -87,4 +83,4 @@ class Payments extends Component {
     }
 }
 
-export default connect(getStateByModelPrefix(Payments.prefix), dispatchActions)(Payments);
+export default connect(Payments);
