@@ -1,5 +1,5 @@
 // import Request from '../../services/client/Request';
-import {URL, countURL} from './config';
+import {url} from './config';
 
 //
 import request from 'superagent';
@@ -62,7 +62,7 @@ class Payments extends Request {
     // static URL = URL;
 
     static get url() {
-        return URL;
+        return url;
         // return URL;
     }
     // todo make lots of wierd reqeusts tp play with db and Request
@@ -72,16 +72,16 @@ class Payments extends Request {
 
         console.log('this.name', this.name);
 
-        return Request.createRead(URL, query, params);
+        return Request.createRead(url, query, params);
     }
 
     static post(query, params) {
-        return Request.createPost(URL, query, params);
+        return Request.createPost(url, query, params);
     }
 
     static 'delete' (query, params) { // delete is saved word in js
 
-        return Request.createDelete(URL, query, params);
+        return Request.createDelete(url, query, params);
     }
 
     // static getCount() {
