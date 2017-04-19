@@ -1,5 +1,5 @@
 export default {
-    URL: '/payments',
+    url: '/payments',
     selector: 'payments',
     model: 'payments'
 }

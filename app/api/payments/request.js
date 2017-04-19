@@ -1,5 +1,5 @@
 // import Request from '../../services/client/Request';
-import {URL, countURL} from './urls';
+import {URL, countURL} from './config';
 
 //
 import request from 'superagent';

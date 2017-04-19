@@ -81,11 +81,12 @@ const getData = (model, query, params) => dispatchActionByPrefixAndUrl(model, qu
 const sendData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, SEND);
 const deleteData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, DELETE);
 
-const getStateByModelPrefix = prefix => (state, ownProps) => {
-    // get the wanted data from the state - example prefix for Payments Wrapper is 'payments'
-    // todo get it from the class name it self
-    const data = state[prefix];
-    return {data};
+const getStateBySelector = selector => (state, ownProps) => {
+    if (has(state, selector)) {
+        return {[selector]: state[selector]};
+    }
+    // const selector = state[prefix];
+    return {};
 };
 
 // create shit
@@ -97,7 +98,7 @@ const createDelete = Resource => (query, params) => dispatch => dispatch(deleteD
 
 export {
     createReducerByUrl,
-    getStateByModelPrefix,
+    getStateBySelector,
     createRead,
     createPost,
     createDelete

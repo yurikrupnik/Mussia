@@ -1,5 +1,5 @@
 import {READ, CREATE, UPDATE, DELETE} from './payment.controller';
-import {URL} from './urls';
+import {URL} from './config';
 import router from './../../services/express/Router';
 
 router.get(URL, READ);

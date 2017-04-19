@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
 import connect from './redux';
-
-import {URL, selector} from './urls';
+import resource from './request';
+import {selector} from './config';
 
 //
 // import request from 'superagent';
@@ -25,14 +25,27 @@ class Payments extends Component {
 
     constructor(props) {
         super(props);
+        // this.selector = selector;
         this.state = {
             selected: []
         }
     }
 
+    static get selector() {
+        return selector;
+    }
+
+    static get resource() {
+        return resource;
+    }
+
+    static get url() {
+        return resource.url;
+    }
+
     static propTypes = {
         actions: PropTypes.object.isRequired,
-        data: PropTypes.object.isRequired,
+        [selector]: PropTypes.object.isRequired,
     };
 
     componentDidMount() {
@@ -51,6 +64,7 @@ class Payments extends Component {
     handlePost() {
         const {actions} = this.props;
         return actions.post({fields: 'info'}, {yalublu: true});
+
     }
 
     handleDelete(item) {
@@ -71,7 +85,7 @@ class Payments extends Component {
     }
 
     render() {
-        const {data} = this.props.data;
+        const {data} = this.props[selector];
         const {selected} = this.state;
         return (
             <div>
