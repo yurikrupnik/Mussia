@@ -1,5 +1,7 @@
 
-const READ = 'READ';
-const DELETE = 'DELETE';
-const SEND = 'SEND';
-const ERROR = 'ERROR';
+export default {
+    'create': 'post', // client: server
+    'read': 'get',
+    'update': 'post',
+    'delete': 'delete'
+};

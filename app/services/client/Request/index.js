@@ -11,12 +11,8 @@ let handleError = err => {
     }
 };
 
-const httpMap = {
-    'create': 'post',
-    'read': 'get',
-    'update': 'post',
-    'delete': 'delete'
-};
+import httpMap from '../../../redux/http-methods-map';
+
 
 export default class Request {
     static createRead(url, query, params) {
@@ -30,7 +26,7 @@ export default class Request {
 
     static createDelete(url, ids) {
         let type = 'delete';
-        return request[this.handleMethod(type)](this.handleUrl(url))
+        return request[this.handleMethod(type)](this.handleApiUrl(url))
             .send(ids)
             .then(returnBody)
             .catch(handleError);
@@ -38,7 +34,7 @@ export default class Request {
 
     static createPost(url, query, params) {
         let type = 'create';
-        return request[this.handleMethod(type)](this.handleUrl(url))
+        return request[this.handleMethod(type)](this.handleApiUrl(url))
             .send(params)
             .then(returnBody)
             .catch(handleError);
@@ -55,37 +51,9 @@ export default class Request {
             throw Error('wrong method')
         }
     }
-
-
-    // static create(url = '/', params = null, query = {}, type = 'json') {
-    //     // requestSent({
-    //     //     method,
-    //     //     url,
-    //     //     params,
-    //     //     query
-    //     // });
-    //
-    //     // let store = configureStore();
-    //     // store.dispatch(requestSent);
-    //     // store.dispatch(requestSent);
-    //     // req(requestReceived);
-    //     return request[method](`/api${url}`)
-    //     // .head()
-    //     // .set()
-    //     //     .type(type)
-    //     // .accept(type)
-    //     // .set('Content-Type', 'application/json')
-    //         .query(query)
-    //         .send(params)
-    //         // .sortQuery()
-    //         // .then(res)
-    //         .then(returnBody)
-    //         // .then(requestReceived)
-    //         .catch(handleError);
-    // }
 }
 
-export {
-    returnBody,
-    handleError
-}
+// export {
+//     returnBody,
+//     handleError
+// }

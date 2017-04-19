@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
 import connect from './redux';
 
-import {URL} from './urls';
+import {URL, selector} from './urls';
 
 //
 // import request from 'superagent';
@@ -42,10 +42,10 @@ class Payments extends Component {
 
     handleGet() {
         const {actions, location} = this.props;
-        const {query, search} = location;
-        debugger;
+        const {pathname, query, search} = location;
+        // handle pathname for routes not on http://localhost:3000/payments but someurl/payments
 
-        return actions.read(query, {yalublu: true}); // todo automatic resourse - must use mongoose i think
+        return actions.read(query, {yalublu: true}, pathname); // todo automatic resourse - must use mongoose i think
     }
 
     handlePost() {
