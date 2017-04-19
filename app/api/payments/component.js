@@ -6,6 +6,21 @@ import connect from './redux';
 
 import {URL} from './urls';
 
+//
+// import request from 'superagent';
+// class SmartComponent {
+//     constructor(props) {
+//         // super(props);
+//     }
+//
+//     render() {
+//         return (
+//             <div></div>
+//         );
+//     }
+// }
+//
+
 class Payments extends Component {
 
     constructor(props) {
@@ -27,7 +42,7 @@ class Payments extends Component {
 
     handleGet() {
         const {actions, location} = this.props;
-        const {query} = location;
+        const {query, search} = location;
         debugger;
 
         return actions.read(query, {yalublu: true}); // todo automatic resourse - must use mongoose i think

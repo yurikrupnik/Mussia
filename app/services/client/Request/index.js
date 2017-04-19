@@ -12,16 +12,16 @@ let handleError = err => {
 };
 
 const httpMap = {
-    'read': 'get',
     'create': 'post',
-    'update': 'update',
+    'read': 'get',
+    'update': 'post',
     'delete': 'delete'
 };
 
 export default class Request {
     static createRead(url, query, params) {
         let type = 'read';
-        return request[this.handleMethod(type)](this.handleUrl(url))
+        return request[this.handleMethod(type)](this.handleApiUrl(url))
             .query(query)
             .send(params)
             .then(returnBody)
@@ -44,7 +44,7 @@ export default class Request {
             .catch(handleError);
     }
 
-    static handleUrl(url) {
+    static handleApiUrl(url) {
         return `${apiPrefix}${url}`;
     }
 

@@ -8,5 +8,7 @@ const actions = Actions(Payments);
 
 // todo test
 export default (component) => {
+    // todo try build here the reducer  §§§§§§§§§§§§§
+    const prefix = '';
     return connect(getStateByModelPrefix('payments'), createDispatcher(actions))(component);
 }
