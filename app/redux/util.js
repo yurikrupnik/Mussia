@@ -20,6 +20,10 @@ const reduceDeleteFulfilled = (state, payload) => {
 const urlToUpper = str => str.replace('/', '').toUpperCase();
 
 // actions map
+
+// const actions =
+
+
 const ACTIONS = [
     {
         actionName: READ,
@@ -84,12 +88,12 @@ const getStateByModelPrefix = prefix => (state, ownProps) => {
     return {data};
 };
 
+// create shit
 const createRead = Resource => (query, params) => dispatch => dispatch(getData(Resource, query, params));
-
 const createPost = Resource => (query, params) => dispatch => dispatch(sendData(Resource, query, params));
-
-
 const createDelete = Resource => (query, params) => dispatch => dispatch(deleteData(Resource, query, params));
+// end of create shit
+
 
 export {
     createReducerByUrl,

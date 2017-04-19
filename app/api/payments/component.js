@@ -4,6 +4,8 @@ import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
 import connect from './redux';
 
+import {URL} from './urls';
+
 class Payments extends Component {
 
     constructor(props) {
