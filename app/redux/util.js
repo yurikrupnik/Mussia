@@ -3,20 +3,19 @@ import _ , {has, get, forEeach, includes} from 'lodash';
 const READ = 'READ';
 const DELETE = 'DELETE';
 const SEND = 'SEND';
-
 const ERROR = 'ERROR';
 
-const handleReadPending = (state, payload) => Object.assign({}, state, {active: true});
-const handleReadFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: payload});
-const handleError = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
-const handleDeletePending = (state, payload) => {
-    return Object.assign({}, state, {active: true});
-};
 
-const handleDeleteFulfilled = (state, deletedIds) => {
-    const data = state.data.filter(val => !includes(deletedIds, val._id));
+// app reducers
+const reduceReadPending = (state, payload) => Object.assign({}, state, {active: true});
+const reduceReadFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: payload});
+const reduceError = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
+const reduceDeletePending = (state, payload) => Object.assign({}, state, {active: true});
+const reduceDeleteFulfilled = (state, payload) => {
+    const data = state.data.filter(val => !includes(payload, val._id));
     return Object.assign({}, state, {active: false, data});
 };
+// end app reducers
 
 const urlToUpper = str => str.replace('/', '').toUpperCase();
 
@@ -25,17 +24,17 @@ const ACTIONS = [
     {
         actionName: READ,
         handlers: {
-            PENDING: handleReadPending,
-            FULFILLED: handleReadFulfilled,
-            ERROR: handleError,
+            PENDING: reduceReadPending,
+            FULFILLED: reduceReadFulfilled,
+            ERROR: reduceError,
         }
     },
     {
         actionName: DELETE,
         handlers: {
-            PENDING: handleDeletePending,
-            FULFILLED: handleDeleteFulfilled,
-            ERROR: handleError,
+            PENDING: reduceDeletePending,
+            FULFILLED: reduceDeleteFulfilled,
+            ERROR: reduceError,
         }
     }
 ];

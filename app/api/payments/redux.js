@@ -8,6 +8,5 @@ const actions = Actions(Payments);
 
 // todo test
 export default (component) => {
-    debugger
     return connect(getStateByModelPrefix('payments'), createDispatcher(actions))(component);
 }
