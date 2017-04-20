@@ -34,19 +34,20 @@ export default class Request {
         return request[this.handleMethod(type)](this.handleApiUrl(url))
     }
 
-    static createRead(url, query, params) {
+    static createRead(url, query, params, body) {
         let type = 'read';
         return this.getResource(type, url)
             .query(query)
-            .send(params)
+            .send(body)
             .then(returnBody)
             .catch(handleError);
     }
 
-    static createDelete(url, ids) {
+    static createDelete(url, query, params, body) {
         let type = 'delete';
         return this.getResource(type, url)
-            .send(ids)
+            .query(query)
+            .send(body)
             .then(returnBody)
             .catch(handleError);
     }

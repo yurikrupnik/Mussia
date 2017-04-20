@@ -58,9 +58,9 @@ class Payments extends Component {
         if (selected.length) { // anyway send array of ids to delete
             const ids = selected.map(v => v._id);
             this.setState({selected: []});
-            return actions.delete(ids); // multi
+            return actions.delete(query, {}, ids); // multi
         } else {
-            return actions.delete([item._id]); // one
+            return actions.delete(query, {}, [item._id]); // one
         }
     }
 

@@ -19,8 +19,8 @@ export function READ(req, res) {
 
     console.log('req.query', req.query);
     console.log('req.params', req.params);
-
-    let query = {};
+    const {query, params, body} = req;
+    // let query = {};
     let fields = 'name';
 
     return Model.find(query, fields)

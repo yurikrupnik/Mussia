@@ -73,21 +73,10 @@ const createReducerBySelector = (initialState, selector) => {
 const dispatchActionByPrefixAndUrl = (resource, query, params, body, prefix) => {
     let URL = urlToUpper(resource.url);
     const method = prefix.toLowerCase();
-    debugger
-    // if (has(resource, method)) {
-        console.log('method', method);
-        console.log('resource', resource);
-
-        return {
-            type: `${prefix}_${URL}`,
-            // payload: resource[method].query(query).send(body).then(res => res.body)
-            payload: resource[method](query, params)
-        };
-    // } else {
-    //     return {
-    //         type: 'FUCKING_ERROR_CREATEING_' + method
-    //     }
-    // }
+    return {
+        type: `${prefix}_${URL}`,
+        payload: resource[method](query, params, body) // always pass query params and body to the requets
+    };
 };
 
 const getData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, READ);
