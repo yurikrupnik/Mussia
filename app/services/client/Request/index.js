@@ -38,7 +38,6 @@ export default class Request {
         let type = 'read';
         return this.getResource(type, url)
             .query(query)
-            .send(body)
             .then(returnBody)
             .catch(handleError);
     }

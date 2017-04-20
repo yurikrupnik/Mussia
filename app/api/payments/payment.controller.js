@@ -17,6 +17,7 @@ export function CREATE(req, res) { // POST
 // Gets a list of Payments
 export function READ(req, res) {
 
+    // todo , req does not containts body in get methods
     console.log('req.query', req.query);
     console.log('req.params', req.params);
     const {query, params, body} = req;

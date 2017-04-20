@@ -41,7 +41,9 @@ class Payments extends Component {
     handleGet() {
         const {actions, location} = this.props;
         const {pathname, query, search} = location;
-        actions.read(query, {yalublu: true}, pathname); // todo automatic resourse - must use mongoose i think
+        actions.read(query, {yalublu: true}, {
+            fields: ['name', 'info']
+        });
     }
 
     handlePost() {
