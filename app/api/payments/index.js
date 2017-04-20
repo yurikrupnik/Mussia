@@ -1,9 +1,10 @@
-import express from 'express';
-import {count, show} from './payment.controller';
-import {mainURL, countURL} from './urls';
-let router = express.Router();
+import {READ, CREATE, UPDATE, DELETE} from './payment.controller';
+import {url} from './config';
+import router from './../../services/express/Router';
 
-router.get(mainURL, show);
-router.get(countURL, count);
+router.get(url, READ);
+router.post(url, CREATE);
+router.post(url+'/:id', UPDATE);
+router.delete(url, DELETE);
 
 export default router;

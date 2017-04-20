@@ -36,6 +36,9 @@ class Root extends Component {
                     <div>
                         <Link to="/payments">payments</Link>
                     </div>
+                    <div>
+                        <Link to="/sluts">Sluts</Link>
+                    </div>
 
                     {!user ? <div>
                         <Link to="/register">Register</Link>

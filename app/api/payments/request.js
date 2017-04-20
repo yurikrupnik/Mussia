@@ -1,17 +1,28 @@
-import Request from '../../services/Request';
-import {mainURL, countURL} from './urls';
+import Request from '../../services/client/Request';
+import {url} from './config';
 
 class Payments extends Request {
-
-
-    // todo make lots of wierd reqeusts tp play with db and Request
-    static getPayments() {
-        return Request.create('get', mainURL);
+    constructor(url) {
+        super(url); // Request is just an object to handle superagent
+        this.url = url;
     }
 
-    static getCount() {
-        return super.create('get', countURL);
+    create(query, params, body) {
+        return Request.callCreate(this.url, query, params, body);
+    }
+
+    // todo make lots of wierd reqeusts tp play with db and Request
+    read(query, params, body) {
+        return Request.callRead(this.url, query, params, body);
+    }
+
+    update(query, params, body) {
+        return Request.callUpdate(this.url, query, params, body);
+    }
+
+    'delete' (query, params, body) { // delete is saved word in js
+        return Request.callDelete(this.url, query, params, body);
     }
 }
 
-export default Payments;
+export default new Payments(url);

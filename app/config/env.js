@@ -6,3 +6,4 @@ export const port = process.env.PORT || 4000;
 export const ip = process.env.IP || '0.0.0.0' || 'localhost';
 export const host = process.env.WEBSITE_HOSTNAME || `http://${ip}:${port}`;
 export const databaseUrl = process.env.DATABASE_URL ||'mongodb://localhost/mussia';
+export const apiPrefix = '/api';

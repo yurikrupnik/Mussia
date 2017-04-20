@@ -1,3 +1,4 @@
-import db from '../../config/db';
-export default db.get('payments');
+import {getModelByName} from '../../config/db';
+import {model} from './config';
+export default getModelByName(model);
 

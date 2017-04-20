@@ -1,21 +1,51 @@
-
-import Payment from './payment.model';
-import {handleError, respondWithResult} from '../../services/nodeResponse/apiResponses';
-
-
-
+import Model from './payment.model';
+import {has} from 'lodash';
+import {handleError, respondWithResult, respondWithDelete} from '../../services/node/nodeResponse/apiResponses';
 // Gets a list Count
 export function count(req, res) {
-    return Payment.count()
+    return Model.count()
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+export function CREATE(req, res) {
+    const {body} = req;
+    return Model.insert(body)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 // Gets a list of Payments
-export function show(req, res) {
-    return Payment.find({})
+export function READ(req, res) {
+
+    // todo , req does not containts body in get methods
+    const {query, params, body} = req;
+    // let query = {};
+    let fields = '';
+
+    return Model.find(query, fields)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
+
+export function UPDATE(req, res) {
+    const {query, params, body} = req;
+    return Model.findOneAndUpdate({})
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+export function DELETE(req, res) {
+    const {query, params, body} = req;
+    const field = 'id'; // todo symbol it
+    let ids = has(body, field) ? [body[field]] : body;
+    res.ids = ids;
+    return Model.remove({_id: {$in: ids}})
+        .then(respondWithDelete(res))
+        .catch(handleError(res));
+}
+
+
+
 
 

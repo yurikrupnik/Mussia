@@ -5,16 +5,6 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div id="fb-root"></div>
-    <script>
-        (function(d, s, id) {/* facebook - icon shit todo ejs template*/
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=144997135988664";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
      <script>
          window.__PRELOADED_STATE__ = <%-JSON.stringify(state)%>
      </script>
@@ -22,7 +12,5 @@
          <%=app%>
      </div>
     <script src="main.js"></script>
-
-    
 </body>
 </html>

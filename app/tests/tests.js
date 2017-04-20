@@ -3,5 +3,5 @@ global.expect = chai.expect; // only this needed actually
 
 
 
-import '../services/Request/test';
+import '../services/client/Request/test';
 import '../api/test';

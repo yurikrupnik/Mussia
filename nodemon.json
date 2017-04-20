@@ -7,8 +7,6 @@
     "./app/tests",
     "./app/public",
     "./app/routes",
-    "./app/services/",
-    "./app/redux/",
     "./app/Wrappers/"
   ],
   "verbose": true,
