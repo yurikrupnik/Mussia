@@ -17,11 +17,6 @@ const reduceDeleteFulfilled = (state, payload) => {
 };
 // end app reducers
 
-const urlToUpper = str => str.replace('/', '').toUpperCase();
-
-// actions map
-
-// const actions =
 
 
 const ACTIONS = [
@@ -71,7 +66,7 @@ const createReducerBySelector = (initialState, selector) => {
 
 
 const dispatchActionByPrefixAndUrl = (resource, query, params, body, prefix) => {
-    let URL = urlToUpper(resource.url);
+    const URL = resource.url.replace('/', '').toUpperCase();
     const method = prefix.toLowerCase();
     return {
         type: `${prefix}_${URL}`,
