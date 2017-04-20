@@ -49,16 +49,15 @@ export default class Request {
             .catch(handleError);
     }
 
-    static callCreate(url, query, params) {
+    static callCreate(url, query, params, body) {
         let type = 'create';
         return this.getResource(type, url)
-            .query(query)
-            .send(params)
+            .send(body)
             .then(returnBody)
             .catch(handleError);
     }
 
-    static callUpdate(url, query, params) {
+    static callUpdate(url, query, params, body) {
         let type = 'update';
         return this.getResource(type, url)
             .query(query)

@@ -16,6 +16,9 @@ const reduceDeleteFulfilled = (state, payload) => {
     const data = state.data.filter(val => !includes(payload, val._id));
     return Object.assign({}, state, {active: false, data});
 };
+
+const reduceCreatePending = (state, payload) => Object.assign({}, state, {active: true});
+const reduceCreateFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: [...state.data, payload]});
 // end app reducers
 
 
@@ -40,8 +43,8 @@ const ACTIONS = [
     {
         actionName: CREATE,
         handlers: {
-            PENDING: reduceDeletePending,
-            FULFILLED: reduceDeleteFulfilled,
+            PENDING: reduceCreatePending,
+            FULFILLED: reduceCreateFulfilled,
             ERROR: reduceError,
         }
     },

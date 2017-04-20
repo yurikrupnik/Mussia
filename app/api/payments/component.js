@@ -47,14 +47,17 @@ class Payments extends Component {
     }
 
     handleCreate() {
-        const {actions} = this.props;
-        return actions.create({fields: 'info'}, {yalublu: true});
+        const {actions, location} = this.props;
+        const {pathname, query, search} = location;
+        return actions.create(query, {}, {name: 'yuri', info: 'love'});
 
     }
 
     handleUpdate() {
-        const {actions} = this.props;
-        return actions.update({fields: 'info'}, {yalublu: true});
+        const {actions, location} = this.props;
+        const {pathname, query, search} = location;
+        // const {actions} = this.props;
+        return actions.update(query, {yalublu: true});
 
     }
 
@@ -96,6 +99,7 @@ class Payments extends Component {
                         {data.map((val, i) => {
                             return <div key={i}>
                                 <h2 onClick={this.setSelected.bind(this, val)}>{val.name}</h2>
+                                <div>{val.info}</div>
                                 <button onClick={this.handleDelete.bind(this, val)}>delete</button>
                             </div>
                         })}

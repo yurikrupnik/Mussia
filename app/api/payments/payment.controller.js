@@ -8,8 +8,9 @@ export function count(req, res) {
         .catch(handleError(res));
 }
 
-export function CREATE(req, res) { // POST
-    return Model.find({}, 'name')
+export function CREATE(req, res) {
+    const {body} = req;
+    return Model.insert(body)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
@@ -18,11 +19,9 @@ export function CREATE(req, res) { // POST
 export function READ(req, res) {
 
     // todo , req does not containts body in get methods
-    console.log('req.query', req.query);
-    console.log('req.params', req.params);
     const {query, params, body} = req;
     // let query = {};
-    let fields = 'name';
+    let fields = '';
 
     return Model.find(query, fields)
         .then(respondWithResult(res))
@@ -30,6 +29,7 @@ export function READ(req, res) {
 }
 
 export function UPDATE(req, res) {
+    const {query, params, body} = req;
     return Model.findOneAndUpdate({})
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -37,8 +37,7 @@ export function UPDATE(req, res) {
 
 export function DELETE(req, res) {
     const {query, params, body} = req;
-
-    const field = 'id';
+    const field = 'id'; // todo symbol it
     let ids = has(body, field) ? [body[field]] : body;
     res.ids = ids;
     return Model.remove({_id: {$in: ids}})
