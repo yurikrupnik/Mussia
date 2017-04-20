@@ -1,8 +1,6 @@
 import request from 'superagent';
 import {apiPrefix} from '../../../config/env';
 
-import _ from 'lodash';
-
 let returnBody = res => res.body;
 let handleError = err => {
     if (err.status === 403) {
@@ -34,7 +32,7 @@ export default class Request {
         return request[this.handleMethod(type)](this.handleApiUrl(url))
     }
 
-    static createRead(url, query, params, body) {
+    static callRead(url, query, params, body) {
         let type = 'read';
         return this.getResource(type, url)
             .query(query)
@@ -42,7 +40,7 @@ export default class Request {
             .catch(handleError);
     }
 
-    static createDelete(url, query, params, body) {
+    static callDelete(url, query, params, body) {
         let type = 'delete';
         return this.getResource(type, url)
             .query(query)
@@ -51,9 +49,19 @@ export default class Request {
             .catch(handleError);
     }
 
-    static createPost(url, query, params) {
+    static callCreate(url, query, params) {
         let type = 'create';
         return this.getResource(type, url)
+            .query(query)
+            .send(params)
+            .then(returnBody)
+            .catch(handleError);
+    }
+
+    static callUpdate(url, query, params) {
+        let type = 'update';
+        return this.getResource(type, url)
+            .query(query)
             .send(params)
             .then(returnBody)
             .catch(handleError);

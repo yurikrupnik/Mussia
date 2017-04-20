@@ -46,9 +46,15 @@ class Payments extends Component {
         });
     }
 
-    handlePost() {
+    handleCreate() {
         const {actions} = this.props;
-        return actions.post({fields: 'info'}, {yalublu: true});
+        return actions.create({fields: 'info'}, {yalublu: true});
+
+    }
+
+    handleUpdate() {
+        const {actions} = this.props;
+        return actions.update({fields: 'info'}, {yalublu: true});
 
     }
 
@@ -78,8 +84,9 @@ class Payments extends Component {
             <div>
                 <h5>Payments</h5>
                 <div>
-                    <FlatButton onClick={this.handleGet.bind(this)} label="GET"/>
-                    <FlatButton onClick={this.handlePost.bind(this)} label="POST"/>
+                    <FlatButton onClick={this.handleGet.bind(this)} label="get"/>
+                    <FlatButton onClick={this.handleCreate.bind(this)} label="create"/>
+                    <FlatButton onClick={this.handleUpdate.bind(this)} label="update"/>
                     <FlatButton onClick={this.handleDelete.bind(this, selected)} label="delete many"/>
                 </div>
                 <div>

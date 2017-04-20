@@ -1,9 +1,10 @@
 
 import _ , {has, get, forEeach, includes} from 'lodash';
+const CREATE = 'CREATE';
 const READ = 'READ';
+const UPDATE = 'UPDATE';
 const DELETE = 'DELETE';
-const SEND = 'SEND';
-const ERROR = 'ERROR';
+// const ERROR = 'ERROR';
 
 
 // app reducers
@@ -35,9 +36,32 @@ const ACTIONS = [
             FULFILLED: reduceDeleteFulfilled,
             ERROR: reduceError,
         }
+    },
+    {
+        actionName: CREATE,
+        handlers: {
+            PENDING: reduceDeletePending,
+            FULFILLED: reduceDeleteFulfilled,
+            ERROR: reduceError,
+        }
+    },
+    {
+        actionName: UPDATE,
+        handlers: {
+            PENDING: reduceDeletePending,
+            FULFILLED: reduceDeleteFulfilled,
+            ERROR: reduceError,
+        }
     }
 ];
 
+// selector
+const getStateBySelector = selector => (state, ownProps) => {
+    if (has(state, selector)) {
+        return {[selector]: state[selector]};
+    }
+    return {};
+};
 
 // reducer shit
 const createActionsBySelector = selector => {
@@ -64,38 +88,33 @@ const createReducerBySelector = (initialState, selector) => {
 };
 
 
-
-const dispatchActionByPrefixAndUrl = (resource, query, params, body, prefix) => {
-    const URL = resource.url.replace('/', '').toUpperCase();
-    const method = prefix.toLowerCase();
-    return {
-        type: `${prefix}_${URL}`,
-        payload: resource[method](query, params, body) // always pass query params and body to the requets
-    };
-};
-
-const getData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, READ);
-const sendData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, SEND);
-const deleteData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, DELETE);
-
-const getStateBySelector = selector => (state, ownProps) => {
-    if (has(state, selector)) {
-        return {[selector]: state[selector]};
-    }
-    return {};
-};
-
-// create shit
-const createRead = Resource => (query, params, body) => dispatch => dispatch(getData(Resource, query, params, body));
-const createPost = Resource => (query, params, body) => dispatch => dispatch(sendData(Resource, query, params, body));
-const createDelete = Resource => (query, params, body) => dispatch => dispatch(deleteData(Resource, query, params, body));
-// end of create shit
+// const dispatchActionByPrefixAndUrl = (resource, query, params, body, prefix) => {
+//     const URL = resource.url.replace('/', '').toUpperCase();
+//     const method = prefix.toLowerCase();
+//     return {
+//         type: `${prefix}_${URL}`,
+//         payload: resource[method](query, params, body) // always pass query params and body to the requets
+//     };
+// };
+//
+// const getData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, READ);
+// const createData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, CREATE);
+// const deleteData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, DELETE);
+// const updateData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, UPDATE);
+//
+// // create shit
+// const createRead = Resource => (query, params, body) => dispatch => dispatch(getData(Resource, query, params, body));
+// const createCreate = Resource => (query, params, body) => dispatch => dispatch(createData(Resource, query, params, body));
+// const createDelete = Resource => (query, params, body) => dispatch => dispatch(deleteData(Resource, query, params, body));
+// const createUpdate = Resource => (query, params, body) => dispatch => dispatch(updateData(Resource, query, params, body));
+// // end of create shit
 
 
 export {
     createReducerBySelector,
     getStateBySelector,
-    createRead,
-    createPost,
-    createDelete
+    // createRead,
+    // createCreate,
+    // createDelete,
+    // createUpdate
 }
