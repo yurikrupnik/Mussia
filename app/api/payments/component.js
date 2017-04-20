@@ -2,24 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router';
-import connect from './redux';
 import resource from './request';
-import {selector} from './config';
-
-//
-// import request from 'superagent';
-// class SmartComponent {
-//     constructor(props) {
-//         // super(props);
-//     }
-//
-//     render() {
-//         return (
-//             <div></div>
-//         );
-//     }
-// }
-//
+import {selector, url} from './config';
+import smartConnect from '../../redux/smart-component';
 
 class Payments extends Component {
 
@@ -40,8 +25,12 @@ class Payments extends Component {
     }
 
     static get url() {
-        return resource.url;
+        return url;
     }
+
+    // static get url() {
+    //     return resource.url;
+    // }
 
     static propTypes = {
         actions: PropTypes.object.isRequired,
@@ -115,4 +104,4 @@ class Payments extends Component {
     }
 }
 
-export default connect(Payments);
+export default smartConnect(Payments);

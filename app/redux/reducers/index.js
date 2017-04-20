@@ -1,7 +1,6 @@
 import counter from './counter';
 import counters from './counters';
-// import payments from './payments';
-import {payments} from '../../api/payments/redux';
+import payments from '../../api/payments/reducer';
 
 import sluts from './sluts';
 import user from './user';

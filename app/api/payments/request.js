@@ -69,9 +69,6 @@ class Payments extends Request {
     static read(query, params) {
         // console.log('query', query);
         // console.log('params', params);
-
-        console.log('this.name', this.name);
-
         return Request.createRead(url, query, params);
     }
 
