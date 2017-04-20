@@ -4,12 +4,25 @@ if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require);
 
 class Route {
     constructor(path) {
-        this.path = path;
+        this.path = path + '(/:id)';
     }
 
     getComponents(state, cb) {
         const {pathname} = state.location;
-        cb(null, require(`../api${pathname}/component`));
+        console.log('pathname', pathname);
+        let index = pathname.indexOf('/', 1);
+        let path = pathname.slice(0, index + 1);
+        console.log('pathname', pathname);
+        console.log('path', path);
+
+
+        try {
+            cb(null, require(`../api${pathname}/component`));
+        } catch (err) {
+            console.log('err', err);
+
+            throw new Error("fuck me");
+        }
     }
 
     // getChildRoutes(location, cb) {

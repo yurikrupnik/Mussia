@@ -19,6 +19,9 @@ const reduceDeleteFulfilled = (state, payload) => {
 
 const reduceCreatePending = (state, payload) => Object.assign({}, state, {active: true});
 const reduceCreateFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: [...state.data, payload]});
+
+const reduceUpdatePending = (state, payload) => Object.assign({}, state, {active: true});
+const reduceUpdateFulfilled = (state, payload) => Object.assign({}, state, {active: false});
 // end app reducers
 
 
@@ -51,8 +54,8 @@ const ACTIONS = [
     {
         actionName: UPDATE,
         handlers: {
-            PENDING: reduceDeletePending,
-            FULFILLED: reduceDeleteFulfilled,
+            PENDING: reduceUpdatePending,
+            FULFILLED: reduceUpdateFulfilled,
             ERROR: reduceError,
         }
     }
@@ -91,33 +94,7 @@ const createReducerBySelector = (initialState, selector) => {
 };
 
 
-// const dispatchActionByPrefixAndUrl = (resource, query, params, body, prefix) => {
-//     const URL = resource.url.replace('/', '').toUpperCase();
-//     const method = prefix.toLowerCase();
-//     return {
-//         type: `${prefix}_${URL}`,
-//         payload: resource[method](query, params, body) // always pass query params and body to the requets
-//     };
-// };
-//
-// const getData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, READ);
-// const createData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, CREATE);
-// const deleteData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, DELETE);
-// const updateData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, UPDATE);
-//
-// // create shit
-// const createRead = Resource => (query, params, body) => dispatch => dispatch(getData(Resource, query, params, body));
-// const createCreate = Resource => (query, params, body) => dispatch => dispatch(createData(Resource, query, params, body));
-// const createDelete = Resource => (query, params, body) => dispatch => dispatch(deleteData(Resource, query, params, body));
-// const createUpdate = Resource => (query, params, body) => dispatch => dispatch(updateData(Resource, query, params, body));
-// // end of create shit
-
-
 export {
     createReducerBySelector,
     getStateBySelector,
-    // createRead,
-    // createCreate,
-    // createDelete,
-    // createUpdate
 }
