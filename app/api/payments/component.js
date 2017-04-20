@@ -45,7 +45,7 @@ class Payments extends Component {
 
     static propTypes = {
         actions: PropTypes.object.isRequired,
-        [selector]: PropTypes.object.isRequired,
+        // [selector]: PropTypes.object.isRequired,
     };
 
     componentDidMount() {
@@ -85,6 +85,7 @@ class Payments extends Component {
     }
 
     render() {
+        debugger;
         const {data} = this.props[selector];
         const {selected} = this.state;
         return (

@@ -60,7 +60,6 @@ const createReducerBySelector = (initialState, selector) => {
     let actions = createActionsBySelector(selector);
     return (state = initialState, action) => {
         let {type, payload} = action;
-        debugger;
         if (actions.hasOwnProperty(type)) { // instead of switch- if false return state
             return actions[type](state, payload);
         } else {
