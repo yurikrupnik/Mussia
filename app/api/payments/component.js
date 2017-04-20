@@ -28,25 +28,19 @@ class Payments extends Component {
         return url;
     }
 
-    // static get url() {
-    //     return resource.url;
-    // }
-
     static propTypes = {
         actions: PropTypes.object.isRequired,
-        // [selector]: PropTypes.object.isRequired,
+        [selector]: PropTypes.object.isRequired,
     };
 
     componentDidMount() {
-        // const {actions} = this.props;
-        // actions.read({fields: 'name'}, {yalublu: false});
+        const {actions} = this.props;
+        actions.read({fields: 'name'}, {yalublu: false});
     }
 
     handleGet() {
         const {actions, location} = this.props;
         const {pathname, query, search} = location;
-        // handle pathname for routes not on http://localhost:3000/payments but someurl/payments
-
         return actions.read(query, {yalublu: true}, pathname); // todo automatic resourse - must use mongoose i think
     }
 
@@ -57,7 +51,9 @@ class Payments extends Component {
     }
 
     handleDelete(item) {
-        const {actions} = this.props;
+        const {actions, location} = this.props;
+        const {pathname, query, search} = location;
+        // const {actions} = this.props;
         const {selected} = this.state;
         if (selected.length) { // anyway send array of ids to delete
             const ids = selected.map(v => v._id);
@@ -74,7 +70,6 @@ class Payments extends Component {
     }
 
     render() {
-        debugger;
         const {data} = this.props[selector];
         const {selected} = this.state;
         return (

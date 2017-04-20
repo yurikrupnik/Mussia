@@ -1,6 +1,8 @@
 import request from 'superagent';
 import {apiPrefix} from '../../../config/env';
 
+import _ from 'lodash';
+
 let returnBody = res => res.body;
 let handleError = err => {
     if (err.status === 403) {
@@ -15,45 +17,44 @@ import httpMap from '../../../redux/http-methods-map';
 
 
 export default class Request {
-    static createRead(url, query, params) {
-        let type = 'read';
-        return request[this.handleMethod(type)](this.handleApiUrl(url))
-            .query(query)
-            .send(params)
-            .then(returnBody)
-            .catch(handleError);
-    }
 
-    static createDelete(url, ids) {
-        let type = 'delete';
-        return request[this.handleMethod(type)](this.handleApiUrl(url))
-            .send(ids)
-            .then(returnBody)
-            .catch(handleError);
-    }
 
-    static createPost(url, query, params) {
-        let type = 'create';
-        return request[this.handleMethod(type)](this.handleApiUrl(url))
-            .send(params)
-            .then(returnBody)
-            .catch(handleError);
+    constructor(url) {
+        _.forEach(httpMap, (v, k) => {
+            this[k] = request[v](this.handleApiUrl(url));
+                // .query(query)
+                // .send(params)
+                // .then(returnBody)
+                // .catch(handleError);
+        });
     }
-
-    static handleApiUrl(url) {
+    handleApiUrl(url) {
         return `${apiPrefix}${url}`;
     }
 
-    static handleMethod(type) {
-        if (type in httpMap) {
-            return httpMap[type];
-        } else {
-            throw Error('wrong method')
-        }
-    }
-}
+    // static createRead(url, query, params) {
+    //     let type = 'read';
+    //     return request[this.handleMethod(type)](this.handleApiUrl(url))
+    //         .query(query)
+    //         .send(params)
+    //         .then(returnBody)
+    //         .catch(handleError);
+    // }
+    //
+    // static createDelete(url, ids) {
+    //     let type = 'delete';
+    //     return request[this.handleMethod(type)](this.handleApiUrl(url))
+    //         .send(ids)
+    //         .then(returnBody)
+    //         .catch(handleError);
+    // }
+    //
+    // static createPost(url, query, params) {
+    //     let type = 'create';
+    //     return request[this.handleMethod(type)](this.handleApiUrl(url))
+    //         .send(params)
+    //         .then(returnBody)
+    //         .catch(handleError);
+    // }
 
-// export {
-//     returnBody,
-//     handleError
-// }
+}

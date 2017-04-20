@@ -17,7 +17,7 @@ const reduceDeleteFulfilled = (state, payload) => {
 };
 // end app reducers
 
-const urlToUpper = str => str.replace('/', '').toUpperCase();
+// const urlToUpper = str => str.replace('/', '').toUpperCase();
 
 // actions map
 
@@ -60,6 +60,7 @@ const createReducerBySelector = (initialState, selector) => {
     let actions = createActionsBySelector(selector);
     return (state = initialState, action) => {
         let {type, payload} = action;
+        debugger;
         if (actions.hasOwnProperty(type)) { // instead of switch- if false return state
             return actions[type](state, payload);
         } else {
@@ -68,18 +69,26 @@ const createReducerBySelector = (initialState, selector) => {
     }
 };
 
-const dispatchActionByPrefixAndUrl = (model, query, params, prefix) => {
-    const URL = urlToUpper(model.url);
+const dispatchActionByPrefixAndUrl = (resource, query, params, prefix) => {
+    debugger;
+    let URL = 'PAYMENTS'; // TODO REMOVE
     const method = prefix.toLowerCase();
-    return {
-        type: `${prefix}_${URL}`,
-        payload: model[method](query, params)
-    };
+    if (has(resource, method)) {
+        debugger
+        return {
+            type: `${prefix}_${URL}`,
+            payload: resource[method].query(query).send(params).then(res => res.body)
+        };
+    } else {
+        return {
+            type: 'FUCKING_ERROR_CREATEING_' + method
+        }
+    }
 };
 
-const getData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, READ);
-const sendData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, SEND);
-const deleteData = (model, query, params) => dispatchActionByPrefixAndUrl(model, query, params, DELETE);
+const getData = (resource, query, params) => dispatchActionByPrefixAndUrl(resource, query, params, READ);
+const sendData = (resource, query, params) => dispatchActionByPrefixAndUrl(resource, query, params, SEND);
+const deleteData = (resource, query, params) => dispatchActionByPrefixAndUrl(resource, query, params, DELETE);
 
 const getStateBySelector = selector => (state, ownProps) => {
     if (has(state, selector)) {
