@@ -17,7 +17,7 @@ const reduceDeleteFulfilled = (state, payload) => {
 };
 // end app reducers
 
-// const urlToUpper = str => str.replace('/', '').toUpperCase();
+const urlToUpper = str => str.replace('/', '').toUpperCase();
 
 // actions map
 
@@ -60,7 +60,6 @@ const createReducerBySelector = (initialState, selector) => {
     let actions = createActionsBySelector(selector);
     return (state = initialState, action) => {
         let {type, payload} = action;
-        debugger;
         if (actions.hasOwnProperty(type)) { // instead of switch- if false return state
             return actions[type](state, payload);
         } else {
@@ -69,26 +68,31 @@ const createReducerBySelector = (initialState, selector) => {
     }
 };
 
-const dispatchActionByPrefixAndUrl = (resource, query, params, prefix) => {
-    debugger;
-    let URL = 'PAYMENTS'; // TODO REMOVE
+
+
+const dispatchActionByPrefixAndUrl = (resource, query, params, body, prefix) => {
+    let URL = urlToUpper(resource.url);
     const method = prefix.toLowerCase();
-    if (has(resource, method)) {
-        debugger
+    debugger
+    // if (has(resource, method)) {
+        console.log('method', method);
+        console.log('resource', resource);
+
         return {
             type: `${prefix}_${URL}`,
-            payload: resource[method].query(query).send(params).then(res => res.body)
+            // payload: resource[method].query(query).send(body).then(res => res.body)
+            payload: resource[method](query, params)
         };
-    } else {
-        return {
-            type: 'FUCKING_ERROR_CREATEING_' + method
-        }
-    }
+    // } else {
+    //     return {
+    //         type: 'FUCKING_ERROR_CREATEING_' + method
+    //     }
+    // }
 };
 
-const getData = (resource, query, params) => dispatchActionByPrefixAndUrl(resource, query, params, READ);
-const sendData = (resource, query, params) => dispatchActionByPrefixAndUrl(resource, query, params, SEND);
-const deleteData = (resource, query, params) => dispatchActionByPrefixAndUrl(resource, query, params, DELETE);
+const getData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, READ);
+const sendData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, SEND);
+const deleteData = (resource, query, params, body) => dispatchActionByPrefixAndUrl(resource, query, params, body, DELETE);
 
 const getStateBySelector = selector => (state, ownProps) => {
     if (has(state, selector)) {
@@ -98,9 +102,9 @@ const getStateBySelector = selector => (state, ownProps) => {
 };
 
 // create shit
-const createRead = Resource => (query, params) => dispatch => dispatch(getData(Resource, query, params));
-const createPost = Resource => (query, params) => dispatch => dispatch(sendData(Resource, query, params));
-const createDelete = Resource => (query, params) => dispatch => dispatch(deleteData(Resource, query, params));
+const createRead = Resource => (query, params, body) => dispatch => dispatch(getData(Resource, query, params, body));
+const createPost = Resource => (query, params, body) => dispatch => dispatch(sendData(Resource, query, params, body));
+const createDelete = Resource => (query, params, body) => dispatch => dispatch(deleteData(Resource, query, params, body));
 // end of create shit
 
 

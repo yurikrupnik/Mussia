@@ -34,14 +34,14 @@ class Payments extends Component {
     };
 
     componentDidMount() {
-        const {actions} = this.props;
-        actions.read({fields: 'name'}, {yalublu: false});
+        // const {actions} = this.props;
+        // actions.read({fields: 'name'}, {yalublu: false});
     }
 
     handleGet() {
         const {actions, location} = this.props;
         const {pathname, query, search} = location;
-        return actions.read(query, {yalublu: true}, pathname); // todo automatic resourse - must use mongoose i think
+        actions.read(query, {yalublu: true}, pathname); // todo automatic resourse - must use mongoose i think
     }
 
     handlePost() {

@@ -35,7 +35,8 @@ export function UPDATE(req, res) {
 }
 
 export function DELETE(req, res) {
-    const {body} = req;
+    const {query, params, body} = req;
+
     const field = 'id';
     let ids = has(body, field) ? [body[field]] : body;
     res.ids = ids;

@@ -18,43 +18,45 @@ import httpMap from '../../../redux/http-methods-map';
 
 export default class Request {
 
-
-    constructor(url) {
-        _.forEach(httpMap, (v, k) => {
-            this[k] = request[v](this.handleApiUrl(url));
-                // .query(query)
-                // .send(params)
-                // .then(returnBody)
-                // .catch(handleError);
-        });
+    static handleMethod(type) {
+        if (type in httpMap) {
+            return httpMap[type];
+        } else {
+            throw Error('wrong method')
+        }
     }
-    handleApiUrl(url) {
+
+    static handleApiUrl(url) {
         return `${apiPrefix}${url}`;
     }
 
-    // static createRead(url, query, params) {
-    //     let type = 'read';
-    //     return request[this.handleMethod(type)](this.handleApiUrl(url))
-    //         .query(query)
-    //         .send(params)
-    //         .then(returnBody)
-    //         .catch(handleError);
-    // }
-    //
-    // static createDelete(url, ids) {
-    //     let type = 'delete';
-    //     return request[this.handleMethod(type)](this.handleApiUrl(url))
-    //         .send(ids)
-    //         .then(returnBody)
-    //         .catch(handleError);
-    // }
-    //
-    // static createPost(url, query, params) {
-    //     let type = 'create';
-    //     return request[this.handleMethod(type)](this.handleApiUrl(url))
-    //         .send(params)
-    //         .then(returnBody)
-    //         .catch(handleError);
-    // }
+    static getResource(type, url) {
+        return request[this.handleMethod(type)](this.handleApiUrl(url))
+    }
+
+    static createRead(url, query, params) {
+        let type = 'read';
+        return this.getResource(type, url)
+            .query(query)
+            .send(params)
+            .then(returnBody)
+            .catch(handleError);
+    }
+
+    static createDelete(url, ids) {
+        let type = 'delete';
+        return this.getResource(type, url)
+            .send(ids)
+            .then(returnBody)
+            .catch(handleError);
+    }
+
+    static createPost(url, query, params) {
+        let type = 'create';
+        return this.getResource(type, url)
+            .send(params)
+            .then(returnBody)
+            .catch(handleError);
+    }
 
 }
