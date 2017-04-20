@@ -45,21 +45,22 @@ const ACTIONS = [
 
 
 // reducer shit
-const createActionsByUrl = url => {
-    const URL = urlToUpper(url);
-    return ACTIONS.reduce((current, next) => { // current will be actual reducer
+const createActionsBySelector = selector => {
+    const sel = selector.toUpperCase();
+    return _.reduce(ACTIONS, (current, next) => { // current will be actual reducer
         let {handlers, actionName} = next;
         _.forEach(handlers, (handler, key) => {
-            current[`${actionName}_${URL}_${key}`] = handler;
+            current[`${actionName}_${sel}_${key}`] = handler;
         });
         return current;
     }, {});
 };
 
-const createReducerByUrl = (initialState, url) => {
-    let actions = createActionsByUrl(url);
+const createReducerBySelector = (initialState, selector) => {
+    let actions = createActionsBySelector(selector);
     return (state = initialState, action) => {
         let {type, payload} = action;
+        debugger;
         if (actions.hasOwnProperty(type)) { // instead of switch- if false return state
             return actions[type](state, payload);
         } else {
@@ -85,7 +86,6 @@ const getStateBySelector = selector => (state, ownProps) => {
     if (has(state, selector)) {
         return {[selector]: state[selector]};
     }
-    // const selector = state[prefix];
     return {};
 };
 
@@ -97,7 +97,7 @@ const createDelete = Resource => (query, params) => dispatch => dispatch(deleteD
 
 
 export {
-    createReducerByUrl,
+    createReducerBySelector,
     getStateBySelector,
     createRead,
     createPost,
