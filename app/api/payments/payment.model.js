@@ -1,4 +1,4 @@
-import db from '../../config/db';
+import {getModelByName} from '../../config/db';
 import {model} from './config';
-export default db.get(model);
+export default getModelByName(model);
 
