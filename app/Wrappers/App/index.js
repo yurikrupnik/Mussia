@@ -85,18 +85,21 @@ let Routes = (props) => (
 import Payments from '../../api/payments/component';
 import Counter from '../Counter';
 import Counters from '../Counters';
+import Register from '../Register';
 
 const Nav = (props) => {
-    console.log('nav props: ', props);
+    console.log('props', props);
+
     return (
         <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/payments">Payments</Link></li>
+            <li><Link to="/about">About</Link></li>
             <li><Link to="/counter">Counter</Link></li>
             <li><Link to="/counters">Counters</Link></li>
+            <li><Link to="/register">Register</Link></li>
         </ul>
     );
-
 };
 const Dashboard = (props) => {
     console.log('props', props);
@@ -105,20 +108,19 @@ const Dashboard = (props) => {
 }
 
 
-const Rou = ({match}) => {
-    console.log('props', match);
-
+const Rou = () => {
     return (
    <div>
        <Router>
            <div>
                <Nav/>
                <Route path="/" component={Dashboard}/>
-               <Route path="/about" component={About}/>
+               <Route exact={true} path="/about" component={About}/>
                <Route path="/topics" component={Topics}/>
                <Route path="/payments" component={Payments}/>
                <Route path="/counter" component={Counter}/>
                <Route path="/counters" component={Counters}/>
+               <Route path="/register" component={Register}/>
            </div>
        </Router>
    </div>
