@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getCounter, dispatchActions} from '../../redux/selectors/counter';
 import Count from '../../components/counter/counter';
-
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    PrivateRoute,
+    withRouter,
+    Switch,
+    StaticRouter
+} from 'react-router-dom'
 class CounterWrapper extends Component {
     static propTypes = {
         counter: PropTypes.number.isRequired,

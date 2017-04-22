@@ -4,7 +4,7 @@ import matchRouter from './matchRouter';
 
 export default (app) => {
     app.get('*', [
-        matchRouter,
+        // matchRouter,
         state,
         render,
     ]);
