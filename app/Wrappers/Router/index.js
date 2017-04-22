@@ -1,40 +1,70 @@
 // all routes will be wrapped in material provider
-import React from 'react';
+import React ,{Component} from 'react';
 import PropTypes from 'prop-types';
 // import {Router, browserHistory, RouterContext} from 'react-router';
-import {routes} from '../../routes';
+// import {routes} from '../../routes';
 import Material from '../Material';
 import {
     BrowserRouter as Router,
     Route,
     Link,
     PrivateRoute,
-    withRouter,
+    // withRouter,
     Switch,
     StaticRouter
 } from 'react-router-dom'
 
+import {withRouter} from 'react-router';
+
+// import Payments from '../../api/payments/component'
+
+const Nav = ({match}) => (
+    <div>
+        <h1>App</h1>
+        <ul>
+
+            <div>
+                <Link to="/" from="/payments"/>
+            </div>
+
+        </ul>
+    </div>
+);
+
+const App = (props) => (
+    <div>
+        <Nav {...props}/>
+
+    </div>
+);
 
 
-import Root from '../../Wrappers/Root/Root'
-import Payments from '../../api/payments/component'
-
-export default (props) => {
+let Ele = (props) => {
     // handle server render and client render
-    let RoutesWrapper = global.window ?
-        (<Router>
-            <Switch>
-                <Route to="/payments" render={(val => {
-                    return (<Payments/>)
-                })} />
-            </Switch>
-        </Router>) :
-        <StaticRouter {...props} />;
-
-    return (
-        <Material component={RoutesWrapper}/>
-    )
+    // let RoutesWrapper = global.window ?
+    //     App :
+    return (<StaticRouter context={{}} />)
+    // return (
+    // );
+    // return RoutesWrapper
+    // return (
+    //     <Material component={RoutesWrapper}/>
+    // )
 };
+
+class Shit extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            withRouter(<Ele/>)
+        )
+    }
+}
+
+export default Shit;
 // import { withRouter } from 'react-router'
 
 // A simple component that shows the pathname of the current location

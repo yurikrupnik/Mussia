@@ -9,8 +9,7 @@ import { StaticRouter } from 'react-router'
 
 export default (req, res, next) => {
     const context = {};
-
-
+    console.log('context', context);
     const html = renderToString(
         <StaticRouter
             location={req.url}
@@ -25,6 +24,9 @@ export default (req, res, next) => {
             Location: context.url
         });
         res.end()
+            // can use the `context.status` that
+            // we added in RedirectWithStatus
+        // req.redirect(context.status, context.url);
     } else {
         res.locals.app = html;
         next();

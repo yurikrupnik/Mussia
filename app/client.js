@@ -1,8 +1,9 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom'
 import 'flexboxgrid'; // load flexbox for grid system
 import './styles/custom-styles.scss';
 import './services/node/socket/client'; // connect to socket client
-import AppWrapper from './Wrappers/App';
+import App from './Wrappers/App';
 import {render} from 'react-dom';
 const ROOT = document.getElementById('root');
 //
@@ -82,7 +83,8 @@ const ROOT = document.getElementById('root');
 //     </Router>
 // )
 let renderToDOM = (initialState = window.__PRELOADED_STATE__) => render(
-    <AppWrapper initialState={initialState}/>, ROOT
+    <App initialState={initialState}/>
+    , ROOT
 );
 
 renderToDOM();

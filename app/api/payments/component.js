@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import resource from './request';
 import {selector, url} from './config';
 import smartConnect from '../../redux/smart-component';
@@ -105,7 +105,6 @@ class Payments extends Component {
                         })}
                     </div>}
                 </div>
-                {this.props.children}
             </div>
 
         )
