@@ -1,10 +1,53 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
-import {Link, withRouter} from 'react-router';
+// import {Link, withRouter} from 'react-router';
 import resource from './request';
 import {selector, url} from './config';
 import smartConnect from '../../redux/smart-component';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    PrivateRoute,
+    withRouter,
+    Switch,
+    StaticRouter
+} from 'react-router-dom'
+
+const Payment = ({match}) => {
+    console.log('Payment match', match);
+
+    return (
+        <div>
+            <h3>{match.params.paymentId}</h3>
+        </div>
+    );
+};
+
+const PaymentsData = ({match, data}) =>{
+    return ( data ?
+        <div>
+            <div>count {data.length}</div>
+            {data.length > 0 &&
+            <div>
+                {data.map((val, i) => {
+                    let to = `${match.url}/${val._id}`;
+                    console.log('to', to);
+
+                    return <div key={i}>
+                        <Link to={to}>
+                            {to}
+                        </Link>
+                        <h2>{val.name}</h2>
+                        <div>{val.info}</div>
+                        <button >delete</button>
+                    </div>
+                })}
+            </div>}
+        </div> : null
+    )
+};
 
 class Payments extends Component {
 
@@ -81,31 +124,28 @@ class Payments extends Component {
     }
 
     render() {
+        const {match} = this.props;
         const {data} = this.props[selector];
         const {selected} = this.state;
         return (
-            <div>
-                <h5>Payments</h5>
+            <Router>
                 <div>
-                    <FlatButton onClick={this.handleGet.bind(this)} label="get"/>
-                    <FlatButton onClick={this.handleCreate.bind(this)} label="create"/>
-                    <FlatButton onClick={this.handleUpdate.bind(this)} label="update"/>
-                    <FlatButton onClick={this.handleDelete.bind(this, selected)} label="delete many"/>
-                </div>
-                <div>
-                    <div>count {data.length}</div>
-                    {data.length > 0 &&
+                    <h5>Payments</h5>
                     <div>
-                        {data.map((val, i) => {
-                            return <div key={i}>
-                                <h2 onClick={this.setSelected.bind(this, val)}>{val.name}</h2>
-                                <div>{val.info}</div>
-                                <button onClick={this.handleDelete.bind(this, val)}>delete</button>
-                            </div>
-                        })}
-                    </div>}
+                        <FlatButton onClick={this.handleGet.bind(this)} label="get"/>
+                        <FlatButton onClick={this.handleCreate.bind(this)} label="create"/>
+                        <FlatButton onClick={this.handleUpdate.bind(this)} label="update"/>
+                        <FlatButton onClick={this.handleDelete.bind(this, selected)} label="delete many"/>
+                    </div>
+
+                    <Route exact={true} path={`${match.url}/:paymentId`} component={Payment}/>
+                    <Route exact={true} path={`${match.url}`} render={(val) => {
+                        return (
+                            <PaymentsData data={data} {...this.props}/>
+                        )
+                    }}/>
                 </div>
-            </div>
+            </Router>
 
         )
     }
