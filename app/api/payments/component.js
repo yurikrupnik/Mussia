@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
-// import {Link, withRouter} from 'react-router';
 import resource from './request';
 import {selector, url} from './config';
 import smartConnect from '../../redux/smart-component';
@@ -16,16 +15,24 @@ import {
 } from 'react-router-dom'
 
 const Payment = ({match}) => {
-    console.log('Payment match', match);
-
+    const {paymentId} = match.params;
     return (
         <div>
-            <h3>{match.params.paymentId}</h3>
+            <h3>{paymentId}</h3>
+
+            <form name="yuri">
+                <input type="text" name="name"/>
+                <input type="text" name="info"/>
+            </form>
+
+
         </div>
     );
 };
 
-const PaymentsData = ({match, data}) =>{
+const PaymentsData = ({match, data, methods}) =>{
+    console.log('methods', methods);
+
     return ( data ?
         <div>
             <div>count {data.length}</div>
@@ -33,15 +40,13 @@ const PaymentsData = ({match, data}) =>{
             <div>
                 {data.map((val, i) => {
                     let to = `${match.url}/${val._id}`;
-                    console.log('to', to);
-
                     return <div key={i}>
                         <Link to={to}>
                             {to}
                         </Link>
                         <h2>{val.name}</h2>
                         <div>{val.info}</div>
-                        <button >delete</button>
+                        <button onClick={methods.delete.bind(null, val)}>delete</button>
                     </div>
                 })}
             </div>}
@@ -127,6 +132,12 @@ class Payments extends Component {
         const {match} = this.props;
         const {data} = this.props[selector];
         const {selected} = this.state;
+        const methods = {
+            update: this.handleUpdate,
+            // get: this.handleGet,
+            // create: this.handleCreate,
+            delete: this.handleDelete.bind(this)
+        };
         return (
             <Router>
                 <div>
@@ -141,7 +152,7 @@ class Payments extends Component {
                     <Route exact={true} path={`${match.url}/:paymentId`} component={Payment}/>
                     <Route exact={true} path={`${match.url}`} render={(val) => {
                         return (
-                            <PaymentsData data={data} {...this.props}/>
+                            <PaymentsData data={data} methods={methods} match={match} />
                         )
                     }}/>
                 </div>
