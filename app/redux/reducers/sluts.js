@@ -1,5 +1,5 @@
 import Sluts from '../../api/sluts/request';
-import {createReducerBySelector} from '../util';
+// import {createReducerBySelector} from '../util';
 let initialState = {
     data: [],
     isFetching: false,
@@ -9,6 +9,6 @@ let initialState = {
 };
 
 export default createReducerBySelector(initialState, Sluts.url);
-
+// export default function () {}
 
 

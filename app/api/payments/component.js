@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import resource from './request';
 import {selector, url} from './config';
-import smartConnect from '../../redux/smart-component';
+import smartConnect from '../../services/client/crud/component';
 import {
     BrowserRouter as Router,
     Route,

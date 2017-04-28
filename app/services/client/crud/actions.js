@@ -1,14 +1,11 @@
-// import {createRead, createCreate, createDelete, createUpdate} from './util';
-const CREATE = 'CREATE';
-const READ = 'READ';
-const UPDATE = 'UPDATE';
-const DELETE = 'DELETE';
+import {CREATE, READ, UPDATE, DELETE} from './config';
+
 const dispatchAsyncActionByResource = (resource, query, params, body, prefix) => {
     const URL = resource.url.replace('/', '').toUpperCase();
     const method = prefix.toLowerCase();
     return {
         type: `${prefix}_${URL}`,
-        payload: resource[method](query, params, body) // always pass query params and body to the requets
+        payload: resource[method](query, params, body) // always pass query params and body to the requests
     };
 };
 
@@ -25,7 +22,7 @@ const dispatchUpdate = Resource => (query, params, body) => dispatch => dispatch
 class Actions { // crud actions for the client - create by model
     constructor(model) {
         this.read = dispatchRead(model);
-        this.create= dispatchCreate(model);
+        this.create = dispatchCreate(model);
         this.delete = dispatchDelete(model);
         this.update = dispatchUpdate(model);
     }
