@@ -1,21 +1,19 @@
 import {bindActionCreators} from 'redux';
-
-import _ , {has, get, forEeach, includes} from 'lodash';
-// import Actions from './actions';
+import _ from 'lodash';
 import {ACTIONS} from './config';
+
 // create dispatcher by actions amd bind to props as map to dispatcher
 export const createDispatcherByActions = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
 
-// export const setActionsOnDispatch = resource =>
-// selector
+// selectors
 const getStateBySelector = selector => (state, ownProps) => {
-    if (has(state, selector)) {
+    if (_.has(state, selector)) {
         return {[selector]: state[selector]};
     }
     return {};
 };
 
-// reducer shit
+// reducer creation
 const createActionsBySelector = selector => {
     const _selector = selector.toUpperCase();
     return _.reduce(ACTIONS, (current, next) => { // current will be actual reducer
