@@ -10,22 +10,6 @@ import {
     StaticRouter
 } from 'react-router-dom'
 
-const Home = (props) => (
-    <div>
-        <h2>Home</h2>
-        <Link to="/payments">payments</Link>
-        <Link to="/topics">topics</Link>
-        <Link to="/counter">Counter</Link>
-        <Link to="/counters">Counters</Link>
-    </div>
-);
-
-const About = () => (
-    <div>
-        <h2>About</h2>
-    </div>
-);
-
 const Topics = ({match}) => {
     return (
         <Router>
@@ -70,6 +54,12 @@ import Counter from '../Counter';
 import Counters from '../Counters';
 import Register from '../Register';
 
+const Dashboard = (props) => {
+    // console.log('props', props);
+
+    return (<div>Dashboard</div>)
+};
+
 const Nav = (props) => {
     // console.log('props', props);
 
@@ -86,26 +76,143 @@ const Nav = (props) => {
     );
 };
 
-const Dashboard = (props) => {
-    // console.log('props', props);
+const PaymentsData = ({match, data, methods}) =>{
+    console.log('methods', methods);
 
-    return (<div>Dashboard</div>)
+    return ( data ?
+            <div>
+                <div>count {data.length}</div>
+                {data.length > 0 &&
+                <div>
+                    {data.map((val, i) => {
+                        let to = `${match.url}/${val._id}`;
+                        return <div key={i}>
+                            <Link to={to}>
+                                {to}
+                            </Link>
+                            <h2>{val.name}</h2>
+                            <div>{val.info}</div>
+                            <button onClick={methods.delete.bind(null, val)}>delete</button>
+                        </div>
+                    })}
+                </div>}
+            </div> : null
+    )
+};
+const Create = (props) => {
+    const schema = {
+        props: {
+            name: {
+                type: 'string',
+            },
+            info: {
+                type: 'string'
+            }
+        }
+    };
+    return (
+        <form name={'nir'}>
+            <input type="text"/>
+            <input type="text"/>
+        </form>
+    )
 };
 
+const routes = [
 
+    {
+        path: '/',
+        component: Dashboard,
+        // routes: [
+        //     {
+        //         path: '/topics',
+        //         component: Topics,
+        //         exact: true
+        //     },
+        //     {
+        //         path: '/counter',
+        //         component: Counter
+        //     },
+        //     {
+        //         path: '/counters',
+        //         component: Counters
+        //     },
+        //     {
+        //         path: '/register',
+        //         component: Register
+        //     },
+        //     {
+        //         path: '/payments',
+        //         component: Payments
+        //     }
+        // ],
+        exact: true
+    },
+    {
+        path: '/topics',
+        component: Topics,
+        exact: true
+    },
+    {
+        path: '/counter',
+        component: Counter
+    },
+    {
+        path: '/counters',
+        component: Counters
+    },
+    {
+        path: '/register',
+        component: Register
+    },
+    {
+        path: '/payments',
+        component: Payments,
+        routes: [
+            {
+                path: '/payments/create',
+                component: Create
+            },
+            {
+                path: '/payments/data',
+                component: PaymentsData
+            }
+        ]
+    }
+];
+
+// wrap <Route> and use this everywhere instead, then when
+// sub routes are added to any route it'll work
+const RouteWithSubRoutes = (route) => (
+    <Route path={route.path} exact={route.exact} render={props => (
+        // pass the sub-routes down to keep nesting
+        <route.component {...props} routes={route.routes}/>
+    )}/>
+);
+
+const RouteConfigExample = () => (
+    <Router>
+        <div>
+            <ul>
+                <li><Link to="/tacos">Tacos</Link></li>
+                <li><Link to="/sandwiches">Sandwiches</Link></li>
+            </ul>
+
+            {routes.map((route, i) => (
+                <RouteWithSubRoutes key={i} {...route}/>
+            ))}
+        </div>
+    </Router>
+);
 const Rou = () => {
     return (
         <div>
             <Router>
                 <div>
                     <Nav/>
-                    <Route exact={true} path="/" component={Dashboard}/>
-                    <Route exact={true} path="/about" component={About}/>
-                    <Route exact={true} path="/topics" component={Topics}/>
-                    <Route exact={true} path="/payments" component={Payments}/>
-                    <Route exact={true} path="/counter" component={Counter}/>
-                    <Route exact={true} path="/counters" component={Counters}/>
-                    <Route exact={true} path="/register" component={Register}/>
+                    {routes.map((route, i) => (
+                        <RouteWithSubRoutes key={i} {...route}/>
+                    ))}
                 </div>
             </Router>
         </div>

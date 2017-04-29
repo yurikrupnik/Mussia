@@ -30,28 +30,39 @@ const Payment = ({match}) => {
     );
 };
 
-const PaymentsData = ({match, data, methods}) =>{
-    console.log('methods', methods);
+// const PaymentsData = ({match, data, methods}) =>{
+//     console.log('methods', methods);
+//
+//     return ( data ?
+//         <div>
+//             <div>count {data.length}</div>
+//             {data.length > 0 &&
+//             <div>
+//                 {data.map((val, i) => {
+//                     let to = `${match.url}/${val._id}`;
+//                     return <div key={i}>
+//                         <Link to={to}>
+//                             {to}
+//                         </Link>
+//                         <h2>{val.name}</h2>
+//                         <div>{val.info}</div>
+//                         <button onClick={methods.delete.bind(null, val)}>delete</button>
+//                     </div>
+//                 })}
+//             </div>}
+//         </div> : null
+//     )
+// };
 
-    return ( data ?
-        <div>
-            <div>count {data.length}</div>
-            {data.length > 0 &&
-            <div>
-                {data.map((val, i) => {
-                    let to = `${match.url}/${val._id}`;
-                    return <div key={i}>
-                        <Link to={to}>
-                            {to}
-                        </Link>
-                        <h2>{val.name}</h2>
-                        <div>{val.info}</div>
-                        <button onClick={methods.delete.bind(null, val)}>delete</button>
-                    </div>
-                })}
-            </div>}
-        </div> : null
-    )
+const RouteWithSubRoutes = (route) => {
+    console.log('route', route);
+
+    return (
+        <Route path={route.path} exact={route.exact} render={props => (
+            // pass the sub-routes down to keep nesting
+            <route.component {...props} routes={route.routes}/>
+        )}/>
+    );
 };
 
 class Payments extends Component {
@@ -129,7 +140,7 @@ class Payments extends Component {
     }
 
     render() {
-        const {match} = this.props;
+        const {match, routes} = this.props;
         const {data} = this.props[selector];
         const {selected} = this.state;
         const methods = {
@@ -138,23 +149,32 @@ class Payments extends Component {
             // create: this.handleCreate,
             delete: this.handleDelete.bind(this)
         };
+        console.log('data', data);
+        // routes.data = 'sda';
         return (
             <Router>
                 <div>
                     <h5>Payments</h5>
                     <div>
-                        <FlatButton onClick={this.handleGet.bind(this)} label="get"/>
-                        <FlatButton onClick={this.handleCreate.bind(this)} label="create"/>
-                        <FlatButton onClick={this.handleUpdate.bind(this)} label="update"/>
-                        <FlatButton onClick={this.handleDelete.bind(this, selected)} label="delete many"/>
-                    </div>
+                        <ul>
+                            <li><Link to={`${match.url}/create`}>create</Link></li>
+                            <li><Link to={`${match.url}/data`} data={data}>data</Link></li>
+                            {/*<li><Link to="/payments">Payments</Link></li>*/}
+                            {/*<li><Link to="/topics">Topics</Link></li>*/}
+                            {/*<li><Link to="/about">About</Link></li>*/}
+                            {/*<li><Link to="/counter">Counter</Link></li>*/}
+                            {/*<li><Link to="/counters">Counters</Link></li>*/}
+                            {/*<li><Link to="/register">Register</Link></li>*/}
+                        </ul>
 
-                    <Route exact={true} path={`${match.url}/:paymentId`} component={Payment}/>
-                    <Route exact={true} path={`${match.url}`} render={(val) => {
-                        return (
-                            <PaymentsData data={data} methods={methods} match={match} />
-                        )
-                    }}/>
+                        <FlatButton onClick={this.handleGet.bind(this)} label="get"/>
+                        {/*<FlatButton onClick={this.handleCreate.bind(this)} label="create"/>*/}
+                        {/*<FlatButton onClick={this.handleUpdate.bind(this)} label="update"/>*/}
+                        {/*<FlatButton onClick={this.handleDelete.bind(this, selected)} label="delete many"/>*/}
+                    </div>
+                    {routes.map((route, i) => (
+                        <RouteWithSubRoutes key={i} {...route}/>
+                    ))}
                 </div>
             </Router>
 
