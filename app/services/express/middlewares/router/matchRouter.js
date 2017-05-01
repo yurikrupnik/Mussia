@@ -3,7 +3,7 @@ import React from 'react'
 // import {routes} from '../../../../routes';
 
 import {renderToString} from 'react-dom/server';
-import AppWrapper from '../../../../Wrappers/App';
+import App from '../../../../components/Smart/App';
 import { StaticRouter } from 'react-router'
 {/*let preRenderString = (props) => renderToString(<AppWrapper {...props}/>);*/}
 
@@ -15,7 +15,7 @@ export default (req, res, next) => {
             location={req.url}
             context={context}
         >
-            <AppWrapper/>
+            <App/>
         </StaticRouter>
     );
 

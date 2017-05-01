@@ -1,5 +1,5 @@
 import React from 'react';
-import configureStore from '../../redux/store/store';
+import configureStore from '../../../redux/store/store';
 import {Provider} from 'react-redux';
 
 export default ({initialState, component}) => {

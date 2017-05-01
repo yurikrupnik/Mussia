@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getStateBySelector, createDispatcherByResource} from './util';
+import {getStateBySelector, createDispatcherByResource} from '../../services/client/crud/util';
 
 export default (Resource, component) => {
     let {resource, selector, url} = Resource;

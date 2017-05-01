@@ -50,10 +50,10 @@ const Topic = ({match}) => (
 );
 
 
-import Payments from '../../api/payments/component';
-import Counter from '../Counter';
-import Counters from '../Counters';
-import Register from '../Register';
+import Payments from '../../../api/payments/component';
+// import Counter from '../../';
+// import Counters from '/../../Counters';
+// import Register from '/../../Register';
 
 const Dashboard = (props) => {
     // console.log('props', props);
@@ -62,16 +62,16 @@ const Dashboard = (props) => {
 };
 
 const Nav = (props) => {
-    // console.log('props', props);
+    console.log('props', props);
 
     return (
         <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/settings">Settings</Link></li>
             <li><Link to="/payments">Payments</Link></li>
             <li><Link to="/topics">Topics</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/counter">Counter</Link></li>
-            <li><Link to="/counters">Counters</Link></li>
+            {/*<li><Link to="/counter">Counter</Link></li>*/}
+            {/*<li><Link to="/counters">Counters</Link></li>*/}
             <li><Link to="/register">Register</Link></li>
         </ul>
     );
@@ -107,7 +107,7 @@ class PaymentsData extends Component {
     }
 }
 
-import smartComponent from '../../services/client/crud/component';
+import smartComponent from '../index';
 
 let conected = smartComponent(Payments, PaymentsData);
 
@@ -145,21 +145,21 @@ const routes = [
     {
         path: '/topics',
         component: Topics,
-        exact: true
+         exact: true
     },
-    {
-        path: '/counter',
-        component: Counter,
-        exact: true
-    },
-    {
-        path: '/counters',
-        component: Counters
-    },
-    {
-        path: '/register',
-        component: Register
-    },
+    // {
+    //     // path: '/counter',
+    //     // component: Counter,
+    //     // exact: true
+    // },
+    // {
+    //     // path: '/counters',
+    //     // component: Counters
+    // },
+    // {
+    //     // path: '/register',
+    //     // component: Register
+    // },
     {
         path: '/payments',
         component: Payments,
@@ -185,12 +185,15 @@ const routes = [
 
 // wrap <Route> and use this everywhere instead, then when
 // sub routes are added to any route it'll work
-const RouteWithSubRoutes = (route) => (
-    <Route path={route.path} exact={route.exact} render={props => (
-        // pass the sub-routes down to keep nesting
-        <route.component {...props} routes={route.routes}/>
-    )}/>
-);
+const RouteWithSubRoutes = (route) => {
+    debugger;
+    return (
+        <Route path={route.path} exact={route.exact} render={props => (
+            // pass the sub-routes down to keep nesting
+            <route.component {...props} routes={route.routes}/>
+        )}/>
+    );
+};
 
 const Rou = (props) => {
     return (
@@ -208,8 +211,8 @@ const Rou = (props) => {
 };
 
 
-import MaterialWrapper from '../Material';
-import ProviderWrapper from '../Provider';
+import MaterialWrapper from '../../Utils/Material';
+import ProviderWrapper from '../../Utils/Provider';
 
 class App extends Component {
     static propTypes = {
@@ -223,8 +226,7 @@ class App extends Component {
     render() {
         let {initialState} = this.props; // pass initial state of the app - redux currently
         return (
-            <MaterialWrapper
-                component={<ProviderWrapper initialState={initialState} component={<Rou />}/>}
+            <MaterialWrapper component={<ProviderWrapper initialState={initialState} component={<Rou />}/>}
             />
         );
     }
