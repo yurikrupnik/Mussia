@@ -13,54 +13,8 @@ import {
     StaticRouter
 } from 'react-router-dom'
 
-const Payment = ({match}) => {
-    const {paymentId} = match.params;
-    return (
-        <div>
-            <h3>{paymentId}</h3>
 
-            <form name="yuri">
-                <input type="text" name="name"/>
-                <input type="text" name="info"/>
-            </form>
-
-
-        </div>
-    );
-};
-
-// const PaymentsData = ({match, data, methods}) =>{
-//     console.log('methods', methods);
-//
-//     return ( data ?
-//         <div>
-//             <div>count {data.length}</div>
-//             {data.length > 0 &&
-//             <div>
-//                 {data.map((val, i) => {
-//                     let to = `${match.url}/${val._id}`;
-//                     return <div key={i}>
-//                         <Link to={to}>
-//                             {to}
-//                         </Link>
-//                         <h2>{val.name}</h2>
-//                         <div>{val.info}</div>
-//                         <button onClick={methods.delete.bind(null, val)}>delete</button>
-//                     </div>
-//                 })}
-//             </div>}
-//         </div> : null
-//     )
-// };
-
-const RouteWithSubRoutes = (route) => {
-    return (
-        <Route path={route.path} exact={route.exact} render={props => (
-            // pass the sub-routes down to keep nesting
-            <route.component {...props} routes={route.routes}/>
-        )}/>
-    );
-};
+import RouteWithSubRoutes from '../../components/Utils/RouteWithRoutes';
 
 class Payments extends Component {
 
@@ -128,15 +82,6 @@ class Payments extends Component {
 
     render() {
         const {match, routes} = this.props;
-        // const {data} = this.props[selector];
-        // const {selected} = this.state;
-        // const methods = {
-        //     update: this.handleUpdate,
-        //     get: this.handleGet,
-        //     create: this.handleCreate,
-        //     delete: this.handleDelete.bind(this)
-        // };
-        debugger
         return (
             <Router>
                 <div>

@@ -53,7 +53,7 @@ const Topic = ({match}) => (
 import Payments from '../../../api/payments/component';
 // import Counter from '../../';
 // import Counters from '/../../Counters';
-// import Register from '/../../Register';
+import Register from '../../Smart/Register';
 
 const Dashboard = (props) => {
     // console.log('props', props);
@@ -145,7 +145,7 @@ const routes = [
     {
         path: '/topics',
         component: Topics,
-         exact: true
+        exact: true
     },
     // {
     //     // path: '/counter',
@@ -156,10 +156,10 @@ const routes = [
     //     // path: '/counters',
     //     // component: Counters
     // },
-    // {
-    //     // path: '/register',
-    //     // component: Register
-    // },
+    {
+        path: '/register',
+        component: Register
+    },
     {
         path: '/payments',
         component: Payments,
@@ -183,16 +183,7 @@ const routes = [
     }
 ];
 
-// wrap <Route> and use this everywhere instead, then when
-// sub routes are added to any route it'll work
-const RouteWithSubRoutes = (route) => {
-    return (
-        <Route path={route.path} exact={route.exact} render={props => (
-            // pass the sub-routes down to keep nesting
-            <route.component {...props} routes={route.routes}/>
-        )}/>
-    );
-};
+import RouteWithSubRoutes from '../../Utils/RouteWithRoutes';
 
 const Rou = (props) => {
     return (
