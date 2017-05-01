@@ -66,10 +66,6 @@ class Payments extends Component {
 
     constructor(props) {
         super(props);
-        // this.selector = selector;
-        this.state = {
-            selected: []
-        }
     }
 
     static get selector() {
@@ -83,11 +79,6 @@ class Payments extends Component {
     static get url() {
         return url;
     }
-
-    static propTypes = {
-        // actions: PropTypes.object.isRequired,
-        // [selector]: PropTypes.object.isRequired,
-    };
 
     // componentDidMount() {
     //     // const {actions} = this.props;
@@ -145,14 +136,23 @@ class Payments extends Component {
         //     create: this.handleCreate,
         //     delete: this.handleDelete.bind(this)
         // };
+        debugger
         return (
             <Router>
                 <div>
                     <h5>Payments</h5>
                     <div>
                         <ul>
-                            <li><Link to={`${match.url}/create`}>create</Link></li>
-                            <li><Link to={`${match.url}/data`}>data</Link></li>
+                            {
+                                routes.map(function (route, i) {
+                                    let path = route.path;
+                                    return (
+                                        <li key={i}><Link to={`${path}`}>{path}</Link></li>
+                                    )
+                                })
+                            }
+                            {/*<li><Link to={`${match.url}/create`}>create</Link></li>*/}
+                            {/*<li><Link to={`${match.url}/data`}>data</Link></li>*/}
                             {/*<li><Link to="/ptopicsayments">Payments</Link></li>*/}
                             {/*<li><Link to="/">Topics</Link></li>*/}
                             {/*<li><Link to="/about">About</Link></li>*/}

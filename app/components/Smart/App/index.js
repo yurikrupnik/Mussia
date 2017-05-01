@@ -186,7 +186,6 @@ const routes = [
 // wrap <Route> and use this everywhere instead, then when
 // sub routes are added to any route it'll work
 const RouteWithSubRoutes = (route) => {
-    debugger;
     return (
         <Route path={route.path} exact={route.exact} render={props => (
             // pass the sub-routes down to keep nesting
