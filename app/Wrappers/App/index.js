@@ -77,10 +77,6 @@ const Nav = (props) => {
     );
 };
 
-import {connect} from 'react-redux';
-import {getStateBySelector, createDispatcherByResource} from '../../services/client/crud/util'
-// import Payments from '../../api/payments/component';
-
 class PaymentsData extends Component {
     constructor(props) {
         super(props);
@@ -88,7 +84,7 @@ class PaymentsData extends Component {
 
     // static propTypes = {
     //     actions: PropTypes.object.isRequired,
-    //     [selector]: PropTypes.object.isRequired,
+    //     [Payments.selector]: PropTypes.object.isRequired,
     // };
 
     componentDidMount() {
@@ -115,10 +111,9 @@ class PaymentsData extends Component {
     }
 }
 
-// let conected = connect(getPayments)(PaymentsData)
-let conected = connect(
-    getStateBySelector(Payments.selector),
-    createDispatcherByResource(Payments.resource))(PaymentsData);
+import smartComponent from '../../services/client/crud/component';
+
+let conected = smartComponent(Payments, PaymentsData);
 
 const Create = (props) => {
     const schema = {
