@@ -9,7 +9,7 @@ import {
     withRouter,
     Switch,
     StaticRouter
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 const Topics = ({match}) => {
     return (
@@ -78,26 +78,47 @@ const Nav = (props) => {
 };
 
 import {connect} from 'react-redux';
+import {getStateBySelector, createDispatcherByResource} from '../../services/client/crud/util'
+// import Payments from '../../api/payments/component';
 
-class PaymentsData extends Component{
+class PaymentsData extends Component {
     constructor(props) {
         super(props);
     }
 
-    render() {
-        console.log('this.props', this.props);
+    // static propTypes = {
+    //     actions: PropTypes.object.isRequired,
+    //     [selector]: PropTypes.object.isRequired,
+    // };
 
+    componentDidMount() {
+        // const {actions} = this.props;
+        const {actions, location, match} = this.props;
+        const {pathname, query, search} = location;
+        actions.read(query, {yalublu: true}, {
+            fields: ['name', 'info']
+        });
+    }
+
+    render() {
+        const {payments, match} = this.props;
+        const {data, count} = payments;
         return (
-            <div>ha</div>
+            <div> payments {
+                data.map(function (v, i) {
+                    return <div key={i}>
+                        <Link to={`${match.url}/${v._id}`}>{v.name}</Link>
+                    </div>
+                })
+            }</div>
         )
     }
 }
-function getPayments(state) {
-    return {payments: state.payments};
-}
 
-let conected = connect(getPayments)(PaymentsData)
-
+// let conected = connect(getPayments)(PaymentsData)
+let conected = connect(
+    getStateBySelector(Payments.selector),
+    createDispatcherByResource(Payments.resource))(PaymentsData);
 
 const Create = (props) => {
     const schema = {
@@ -118,34 +139,16 @@ const Create = (props) => {
     )
 };
 
-const routes = [
+const Edit = ({match}) => {
+    return (
+        <h3>ID: {match.params.id}</h3>
+    )
+};
 
+const routes = [
     {
         path: '/',
         component: Dashboard,
-        // routes: [
-        //     {
-        //         path: '/topics',
-        //         component: Topics,
-        //         exact: true
-        //     },
-        //     {
-        //         path: '/counter',
-        //         component: Counter
-        //     },
-        //     {
-        //         path: '/counters',
-        //         component: Counters
-        //     },
-        //     {
-        //         path: '/register',
-        //         component: Register
-        //     },
-        //     {
-        //         path: '/payments',
-        //         component: Payments
-        //     }
-        // ],
         exact: true
     },
     {
@@ -155,7 +158,8 @@ const routes = [
     },
     {
         path: '/counter',
-        component: Counter
+        component: Counter,
+        exact: true
     },
     {
         path: '/counters',
@@ -171,11 +175,18 @@ const routes = [
         routes: [
             {
                 path: '/payments/create',
-                component: Create
+                component: Create,
+                exact: true
             },
             {
                 path: '/payments/data',
-                component: conected
+                component: conected,
+                exact: true,
+            },
+            {
+                path: '/payments/data/:id',
+                component: Edit,
+                exact: true
             }
         ]
     }

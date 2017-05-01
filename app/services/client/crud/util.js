@@ -43,7 +43,7 @@ const createDispatcherByActions = actions => dispatch => ({actions: bindActionCr
 const createDispatcherByResource = resource => createDispatcherByActions(Actions(resource));
 
 export {
-    createDispatcherByResource,
     createReducerBySelector,
+    createDispatcherByResource,
     getStateBySelector,
 }
