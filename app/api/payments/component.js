@@ -177,4 +177,4 @@ class Payments extends Component {
     }
 }
 
-export default withRouter(smartConnect(Payments));
+export default smartConnect(Payments)

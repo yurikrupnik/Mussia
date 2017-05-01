@@ -1,9 +1,8 @@
 import {bindActionCreators} from 'redux';
 import _ from 'lodash';
 import {ACTIONS} from './config';
-
+import Actions from './actions';
 // create dispatcher by actions amd bind to props as map to dispatcher
-export const createDispatcherByActions = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
 
 // selectors
 const getStateBySelector = selector => (state, ownProps) => {
@@ -38,7 +37,13 @@ const createReducerBySelector = (initialState, selector) => {
     }
 };
 
+// actions
+const createDispatcherByActions = actions => dispatch => ({actions: bindActionCreators(actions, dispatch)});
+
+const createDispatcherByResource = resource => createDispatcherByActions(Actions(resource));
+
 export {
+    createDispatcherByResource,
     createReducerBySelector,
     getStateBySelector,
 }

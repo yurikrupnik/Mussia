@@ -77,28 +77,28 @@ const Nav = (props) => {
     );
 };
 
-const PaymentsData = (props) =>{
-    return ( //data ?
-            <div>
-                {/*<FlatButton onClick={props.methods.handleGet} label="get"/>*/}
-                <div>count {data.length}</div>
-                {data.length > 0 &&
-                <div>
-                    {data.map((val, i) => {
-                        let to = `${match.url}/${val._id}`;
-                        return <div key={i}>
-                            <Link to={to}>
-                                {to}
-                            </Link>
-                            <h2>{val.name}</h2>
-                            <div>{val.info}</div>
-                            <button onClick={props.methods.delete.bind(null, val)}>delete</button>
-                        </div>
-                    })}
-                </div>}
-            </div> //: null
-    )
-};
+import {connect} from 'react-redux';
+
+class PaymentsData extends Component{
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        console.log('this.props', this.props);
+
+        return (
+            <div>ha</div>
+        )
+    }
+}
+function getPayments(state) {
+    return {payments: state.payments};
+}
+
+let conected = connect(getPayments)(PaymentsData)
+
+
 const Create = (props) => {
     const schema = {
         props: {
@@ -175,7 +175,7 @@ const routes = [
             },
             {
                 path: '/payments/data',
-                component: PaymentsData
+                component: conected
             }
         ]
     }
@@ -190,22 +190,7 @@ const RouteWithSubRoutes = (route) => (
     )}/>
 );
 
-const RouteConfigExample = () => (
-    <Router>
-        <div>
-            <ul>
-                <li><Link to="/tacos">Tacos</Link></li>
-                <li><Link to="/sandwiches">Sandwiches</Link></li>
-            </ul>
-
-            {routes.map((route, i) => (
-                <RouteWithSubRoutes key={i} {...route}/>
-            ))}
-        </div>
-    </Router>
-);
 const Rou = (props) => {
-    debugger
     return (
         <div>
             <Router>
@@ -234,11 +219,10 @@ class App extends Component {
     }
 
     render() {
-        debugger;
         let {initialState} = this.props; // pass initial state of the app - redux currently
         return (
             <MaterialWrapper
-                component={<ProviderWrapper initialState={initialState} component={<Rou {...this.props}/>}/>}
+                component={<ProviderWrapper initialState={initialState} component={<Rou />}/>}
             />
         );
     }
