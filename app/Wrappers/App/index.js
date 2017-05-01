@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import FlatButton from 'material-ui/FlatButton';
 import {
     BrowserRouter as Router,
     Route,
@@ -76,11 +77,10 @@ const Nav = (props) => {
     );
 };
 
-const PaymentsData = ({match, data, methods}) =>{
-    console.log('methods', methods);
-
-    return ( data ?
+const PaymentsData = (props) =>{
+    return ( //data ?
             <div>
+                {/*<FlatButton onClick={props.methods.handleGet} label="get"/>*/}
                 <div>count {data.length}</div>
                 {data.length > 0 &&
                 <div>
@@ -92,11 +92,11 @@ const PaymentsData = ({match, data, methods}) =>{
                             </Link>
                             <h2>{val.name}</h2>
                             <div>{val.info}</div>
-                            <button onClick={methods.delete.bind(null, val)}>delete</button>
+                            <button onClick={props.methods.delete.bind(null, val)}>delete</button>
                         </div>
                     })}
                 </div>}
-            </div> : null
+            </div> //: null
     )
 };
 const Create = (props) => {
@@ -204,7 +204,8 @@ const RouteConfigExample = () => (
         </div>
     </Router>
 );
-const Rou = () => {
+const Rou = (props) => {
+    debugger
     return (
         <div>
             <Router>
@@ -233,9 +234,12 @@ class App extends Component {
     }
 
     render() {
+        debugger;
         let {initialState} = this.props; // pass initial state of the app - redux currently
         return (
-            <MaterialWrapper component={<ProviderWrapper initialState={initialState} component={<Rou/>}/>}/>
+            <MaterialWrapper
+                component={<ProviderWrapper initialState={initialState} component={<Rou {...this.props}/>}/>}
+            />
         );
     }
 }

@@ -55,8 +55,6 @@ const Payment = ({match}) => {
 // };
 
 const RouteWithSubRoutes = (route) => {
-    console.log('route', route);
-
     return (
         <Route path={route.path} exact={route.exact} render={props => (
             // pass the sub-routes down to keep nesting
@@ -109,7 +107,6 @@ class Payments extends Component {
         const {actions, location} = this.props;
         const {pathname, query, search} = location;
         return actions.create(query, {}, {name: 'yuri', info: 'love'});
-
     }
 
     handleUpdate() {
@@ -145,12 +142,10 @@ class Payments extends Component {
         const {selected} = this.state;
         const methods = {
             update: this.handleUpdate,
-            // get: this.handleGet,
-            // create: this.handleCreate,
+            get: this.handleGet,
+            create: this.handleCreate,
             delete: this.handleDelete.bind(this)
         };
-        console.log('data', data);
-        // routes.data = 'sda';
         return (
             <Router>
                 <div>
@@ -159,8 +154,8 @@ class Payments extends Component {
                         <ul>
                             <li><Link to={`${match.url}/create`}>create</Link></li>
                             <li><Link to={`${match.url}/data`} data={data}>data</Link></li>
-                            {/*<li><Link to="/payments">Payments</Link></li>*/}
-                            {/*<li><Link to="/topics">Topics</Link></li>*/}
+                            {/*<li><Link to="/ptopicsayments">Payments</Link></li>*/}
+                            {/*<li><Link to="/">Topics</Link></li>*/}
                             {/*<li><Link to="/about">About</Link></li>*/}
                             {/*<li><Link to="/counter">Counter</Link></li>*/}
                             {/*<li><Link to="/counters">Counters</Link></li>*/}
