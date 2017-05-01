@@ -82,11 +82,6 @@ class PaymentsData extends Component {
         super(props);
     }
 
-    // static propTypes = {
-    //     actions: PropTypes.object.isRequired,
-    //     [Payments.selector]: PropTypes.object.isRequired,
-    // };
-
     componentDidMount() {
         // const {actions} = this.props;
         const {actions, location, match} = this.props;
@@ -97,7 +92,8 @@ class PaymentsData extends Component {
     }
 
     render() {
-        const {payments, match} = this.props;
+        const payments = this.props[PaymentsData.selector];
+        const {match} = this.props;
         const {data, count} = payments;
         return (
             <div> payments {
