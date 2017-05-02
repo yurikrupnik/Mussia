@@ -38,7 +38,6 @@ class Payments extends Component {
     //     // const {actions} = this.props;
     //     // actions.read({fields: 'name'}, {yalublu: false});
     // }
-
     // handleGet() {
     //     const {actions, location} = this.props;
     //     const {pathname, query, search} = location;
