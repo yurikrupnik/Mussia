@@ -8,9 +8,25 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+
+
+import request from 'superagent';
+function singout() {
+    return request.get('/auth/logout').then(function (data) {
+        console.log('data', data);
+        return data;
+    });
+}
+function singin(body) {
+    return request.post('/auth/local')
+        .send(body)
+        .then(function (data) {
+            console.log('data', data);
+            return data;
+        })
+}
 
 class Login extends Component {
     static muiName = 'FlatButton';
@@ -24,8 +40,9 @@ class Login extends Component {
 }
 
 const Logged = (props) => {
-    debugger
-    let {signout} = props;
+    function handleLogOut() {
+        singout();
+    }
     return (
        <div>
            <IconMenu
@@ -38,7 +55,7 @@ const Logged = (props) => {
            >
                <MenuItem primaryText="Refresh"/>
                <MenuItem primaryText="Help"/>
-               <MenuItem primaryText="Sign out" onClick={signout}/>
+               <MenuItem primaryText="Sign out" onClick={handleLogOut}/>
            </IconMenu>
        </div>
     );
@@ -46,37 +63,13 @@ const Logged = (props) => {
 
 Logged.muiName = 'IconMenu';
 
-/**
- * This example is taking advantage of the composability of the `AppBar`
- * to render different components depending on the application state.
- */
-
-import request from 'superagent';
-
-
-function singout() {
-    return request.get('/auth/logout').then(function (data) {
-        console.log('data', data);
-        return data;
-    })
-}
-
-function singin(body) {
-    return request.post('/auth/local')
-        .send(body)
-        .then(function (data) {
-            console.log('data', data);
-            return data;
-        })
-}
-
 
 class Nav extends Component {
     constructor(props) {
         // console.log('in contrcutro props', props);
 
         super(props);
-        this.handleLogOut = this.handleLogOut.bind(this);
+        // this.handleLogOut = this.handleLogOut.bind(this);
         this.state = {
             logged: true,
         };
@@ -89,32 +82,14 @@ class Nav extends Component {
         }
     }
 
-
-//     handleChange(event, logged) {
-//         // console.log('logged', logged);
-//         // console.log('event', event);
-// // debugger
-//         singout();
-//         // this.setState({logged: logged});
-//     }
-//
-    handleLogOut() {
-        // singout();
-    }
-
     render() {
         const {user} = this.props;
-        // console.log('user', user);
-        console.log('this.props', this.props);
-
-
-
         return (
             <div>
                 <AppBar
                     title="Title"
                     iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-                    iconElementRight={user ? <Logged /> : <Login />}
+                    iconElementRight={user ? <Logged/> : <Login />}
                 />
             </div>
         );
