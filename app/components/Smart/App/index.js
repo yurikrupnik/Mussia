@@ -51,31 +51,13 @@ const Topic = ({match}) => (
 
 
 import Payments from '../../../api/payments/component';
-// import Counter from '../../';
-// import Counters from '/../../Counters';
+import Counter from '../../Smart/Counter';
+import Counters from '../../Smart/Counters';
 import Register from '../../Smart/Register';
+import Settings from '../../Smart/Settings';
+import Dashboard from '../Dashboard';
+import Nav from '../Nav';
 
-const Dashboard = (props) => {
-    // console.log('props', props);
-
-    return (<div>Dashboard</div>)
-};
-
-const Nav = (props) => {
-    console.log('props', props);
-
-    return (
-        <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/settings">Settings</Link></li>
-            <li><Link to="/payments">Payments</Link></li>
-            <li><Link to="/topics">Topics</Link></li>
-            {/*<li><Link to="/counter">Counter</Link></li>*/}
-            {/*<li><Link to="/counters">Counters</Link></li>*/}
-            <li><Link to="/register">Register</Link></li>
-        </ul>
-    );
-};
 
 class PaymentsData extends Component {
     constructor(props) {
@@ -148,19 +130,19 @@ const routes = [
         exact: true
     },
     {
-        path: 'settings',
+        path: '/settings',
         component: Settings,
         exact: true
     },
-    // {
-    //     // path: '/counter',
-    //     // component: Counter,
-    //     // exact: true
-    // },
-    // {
-    //     // path: '/counters',
-    //     // component: Counters
-    // },
+    {
+        path: '/counter',
+        component: Counter,
+        exact: true
+    },
+    {
+        path: '/counters',
+        component: Counters
+    },
     {
         path: '/register',
         component: Register

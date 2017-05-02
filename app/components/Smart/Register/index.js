@@ -15,11 +15,8 @@ class Register extends Component {
             <div>
                 <h1> Node Authentication</h1>
                 <p>Login or Register with:</p>
-                <TimePicker
-                    hintText="12hr Format"
-                />
-                <div className="fb-login-button" data-max-rows="1" data-size="icon" data-show-faces="false" data-auto-logout-link="false"></div>
-                <hr/>
+                {/*<div className="fb-login-button" data-max-rows="1" data-size="icon" data-show-faces="false" data-auto-logout-link="false"></div>*/}
+                {/*<hr/>*/}
                 <div>
                     <a href="/auth/facebook">Facebook</a>
                 </div>

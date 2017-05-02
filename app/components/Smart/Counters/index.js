@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // import s from './Register.scss';
 import {connect} from 'react-redux';
-import {getCounters, dispatchActions} from '../../redux/selectors/counters';
+import {getCounters, dispatchActions} from '../../../redux/selectors/counters';
 
 class Counters extends Component {
     static propTypes = {
@@ -45,8 +45,5 @@ class Counters extends Component {
         );
     }
 }
-// Register.propTypes = {title: PropTypes.string.isRequired};
-
-// export default withStyles(Register, s);
 
 export default connect(getCounters, dispatchActions)(Counters);
