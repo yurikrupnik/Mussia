@@ -147,6 +147,11 @@ const routes = [
         component: Topics,
         exact: true
     },
+    {
+        path: 'settings',
+        component: Settings,
+        exact: true
+    },
     // {
     //     // path: '/counter',
     //     // component: Counter,

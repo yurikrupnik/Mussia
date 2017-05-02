@@ -27,12 +27,7 @@ class Register extends Component {
                     <a href="/auth/github">Github</a>
                 </div>
 
-                <AppBar
-                    title="Title"
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
-                />
-
-                <form name="inituser" >
+                <form name="inituser" ref="shit">
                     <div >
                         <TextField
                             hintText="Email Field"
