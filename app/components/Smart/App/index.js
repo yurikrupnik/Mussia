@@ -50,7 +50,7 @@ const Topic = ({match}) => (
 );
 
 
-import Payments from '../../../api/payments/component';
+import Payments from '../../../api/payments/requst';
 import Counter from '../../Smart/Counter';
 import Counters from '../../Smart/Counters';
 import Register from '../../Smart/Register';
@@ -141,15 +141,18 @@ const routes = [
     },
     {
         path: '/counters',
-        component: Counters
+        component: Counters,
+        exact: true
     },
     {
         path: '/register',
-        component: Register
+        component: Register,
+        exact: true
     },
     {
         path: '/payments',
         component: Payments,
+        exact: true,
         routes: [
             {
                 path: '/payments/create',
@@ -178,9 +181,11 @@ const Rou = (props) => {
             <Router>
                 <div>
                     <Nav/>
-                    {routes.map((route, i) => (
-                        <RouteWithSubRoutes key={i} {...route}/>
-                    ))}
+                    <div className="container">
+                        {routes.map((route, i) => (
+                            <RouteWithSubRoutes key={i} {...route}/>
+                        ))}
+                    </div>
                 </div>
             </Router>
         </div>

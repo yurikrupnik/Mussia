@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getStateBySelector, createDispatcherByResource} from '../../services/client/crud/util';
 
 export default (Resource, component) => {
-    let {resource, selector, url} = Resource;
+    let {selector} = Resource;
     component.selector = selector;
     component.propTypes = {
         actions: PropTypes.object.isRequired,
@@ -13,5 +13,5 @@ export default (Resource, component) => {
 
     return connect(
         getStateBySelector(selector),
-        createDispatcherByResource(resource))(component || Resource);
+        createDispatcherByResource(Resource))(component);
 }
