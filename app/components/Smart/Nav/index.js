@@ -29,7 +29,7 @@ function singin(body) {
 }
 
 class Login extends Component {
-    static muiName = 'FlatButton';
+    // static muiName = 'FlatButton';
 
     render() {
         return (
@@ -39,40 +39,95 @@ class Login extends Component {
     }
 }
 
-const Logged = (props) => {
-    function handleLogOut() {
+class Item extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <MenuItem primaryText="Refresh" onClick={this.handleClick} />
+        )
+    }
+}
+
+
+class MenuRight extends Component {
+    static muiName = 'IconButton';
+
+    constructor(props) {
+        super(props);
+    }
+    handleLogOut() {
         singout();
     }
-    return (
-       <div>
-           <IconMenu
-               {...props}
-               iconButtonElement={
-                   <IconButton><MoreVertIcon /></IconButton>
-               }
-               targetOrigin={{horizontal: 'right', vertical: 'top'}}
-               anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-           >
-               <MenuItem primaryText="Refresh"/>
-               <MenuItem primaryText="Help"/>
-               <MenuItem primaryText="Sign out" onClick={handleLogOut}/>
-           </IconMenu>
-       </div>
-    );
-};
 
-Logged.muiName = 'IconMenu';
+    handleClick(e) {
+        let {history} = this.props;
+        history.push('/' + e.target.textContent.toLowerCase());
+    }
+    render() {
+        return (
+            <div>
+                <IconMenu
+                    iconButtonElement={
+                        <IconButton><MoreVertIcon /></IconButton>
+                    }
+                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                >
+                    <MenuItem primaryText="Sign out" onClick={this.handleLogOut.bind(this)}/>
+                </IconMenu>
+            </div>
+        );
+    }
 
+}
+class MenuLeft extends Component {
+    static muiName = 'IconButton';
+
+    constructor(props) {
+        super(props);
+    }
+    handleLogOut() {
+        singout();
+    }
+
+    handleClick(e) {
+        let {history} = this.props;
+        history.push('/' + e.target.textContent.toLowerCase());
+    }
+    render() {
+        return (
+            <div>
+                <IconMenu
+                    iconButtonElement={
+                        <IconButton><MoreVertIcon /></IconButton>
+                    }
+                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                >
+                    <MenuItem primaryText="Counter" onClick={this.handleClick.bind(this)} />
+                    <MenuItem primaryText="Counters" onClick={this.handleClick.bind(this)} />
+                    <MenuItem primaryText="Payments" onClick={this.handleClick.bind(this)} />
+                    <MenuItem primaryText="Sign out" onClick={this.handleLogOut.bind(this)}/>
+                </IconMenu>
+            </div>
+        );
+    }
+
+}
+function handlePathname(str) {
+    return str.replace('/', '')
+}
+
+import _ from 'lodash'
 
 class Nav extends Component {
+    static muiName = 'IconMenu';
     constructor(props) {
-        // console.log('in contrcutro props', props);
-
         super(props);
-        // this.handleLogOut = this.handleLogOut.bind(this);
-        this.state = {
-            logged: true,
-        };
+
     }
 
     componentDidMount() {
@@ -83,34 +138,20 @@ class Nav extends Component {
     }
 
     render() {
-        const {user} = this.props;
+        const {user, location} = this.props;
+        const {pathname} = location;
+        const title = _.capitalize(handlePathname(pathname));
         return (
             <div>
                 <AppBar
-                    title="Title"
-                    iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-                    iconElementRight={user ? <Logged/> : <Login />}
+                    title={title}
+                    iconElementRight={<MenuRight {...this.props}/>}
+                    iconElementLeft={<MenuLeft {...this.props}/>}
                 />
             </div>
         );
     }
 }
 
-
-// const Nav = (props) => {
-//     console.log('props', props);
-//
-//     return (
-//         <ul>
-//             <li><Link to="/">Home</Link></li>
-//             <li><Link to="/settings">Settings</Link></li>
-//             <li><Link to="/payments">Payments</Link></li>
-//             <li><Link to="/topics">Topics</Link></li>
-//             <li><Link to="/counter">Counter</Link></li>
-//             <li><Link to="/counters">Counters</Link></li>
-//             <li><Link to="/register">Register</Link></li>
-//         </ul>
-//     );
-// };
 
 export default withRouter(connect(getStateBySelector('user'))(Nav));

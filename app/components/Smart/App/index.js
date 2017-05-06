@@ -50,7 +50,8 @@ const Topic = ({match}) => (
 );
 
 
-import Payments from '../../../api/payments/requst';
+import Payments from '../../../api/payments/request';
+import PaymentsC from '../../../api/payments/component';
 import Counter from '../../Smart/Counter';
 import Counters from '../../Smart/Counters';
 import Register from '../../Smart/Register';
@@ -151,7 +152,7 @@ const routes = [
     },
     {
         path: '/payments',
-        component: Payments,
+        component: PaymentsC,
         exact: true,
         routes: [
             {
