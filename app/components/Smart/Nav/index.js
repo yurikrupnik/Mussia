@@ -12,21 +12,6 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 
-import request from 'superagent';
-function singout() {
-    return request.get('/auth/logout').then(function (data) {
-        console.log('data', data);
-        return data;
-    });
-}
-function singin(body) {
-    return request.post('/auth/local')
-        .send(body)
-        .then(function (data) {
-            console.log('data', data);
-            return data;
-        })
-}
 
 class Login extends Component {
     // static muiName = 'FlatButton';
@@ -46,7 +31,7 @@ class Item extends Component {
 
     render() {
         return (
-            <MenuItem primaryText="Refresh" onClick={this.handleClick} />
+            <MenuItem primaryText="Refresh" onClick={this.handleClick}/>
         )
     }
 }
@@ -58,14 +43,16 @@ class MenuRight extends Component {
     constructor(props) {
         super(props);
     }
+
     handleLogOut() {
-        singout();
+        // singout().then(logout);
     }
 
     handleClick(e) {
         let {history} = this.props;
         history.push('/' + e.target.textContent.toLowerCase());
     }
+
     render() {
         return (
             <div>
@@ -89,14 +76,16 @@ class MenuLeft extends Component {
     constructor(props) {
         super(props);
     }
+
     handleLogOut() {
-        singout();
+        // singout();
     }
 
     handleClick(e) {
         let {history} = this.props;
         history.push('/' + e.target.textContent.toLowerCase());
     }
+
     render() {
         return (
             <div>
@@ -107,9 +96,9 @@ class MenuLeft extends Component {
                     targetOrigin={{horizontal: 'right', vertical: 'top'}}
                     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
-                    <MenuItem primaryText="Counter" onClick={this.handleClick.bind(this)} />
-                    <MenuItem primaryText="Counters" onClick={this.handleClick.bind(this)} />
-                    <MenuItem primaryText="Payments" onClick={this.handleClick.bind(this)} />
+                    <MenuItem primaryText="Counter" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Counters" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Payments" onClick={this.handleClick.bind(this)}/>
                     <MenuItem primaryText="Sign out" onClick={this.handleLogOut.bind(this)}/>
                 </IconMenu>
             </div>
@@ -125,6 +114,7 @@ import _ from 'lodash'
 
 class Nav extends Component {
     static muiName = 'IconMenu';
+
     constructor(props) {
         super(props);
 

@@ -22,63 +22,6 @@ class Payments extends Component {
         super(props);
     }
 
-    static get selector() {
-        return selector;
-    }
-
-    static get resource() {
-        return resource;
-    }
-
-    static get url() {
-        return url;
-    }
-
-    // componentDidMount() {
-    //     // const {actions} = this.props;
-    //     // actions.read({fields: 'name'}, {yalublu: false});
-    // }
-    // handleGet() {
-    //     const {actions, location} = this.props;
-    //     const {pathname, query, search} = location;
-    //     actions.read(query, {yalublu: true}, {
-    //         fields: ['name', 'info']
-    //     });
-    // }
-    //
-    // handleCreate() {
-    //     const {actions, location} = this.props;
-    //     const {pathname, query, search} = location;
-    //     return actions.create(query, {}, {name: 'yuri', info: 'love'});
-    // }
-    //
-    // handleUpdate() {
-    //     const {actions, location} = this.props;
-    //     const {pathname, query, search} = location;
-    //     // const {actions} = this.props;
-    //     return actions.update(query, {yalublu: true});
-    //
-    // }
-    //
-    // handleDelete(item) {
-    //     const {actions, location} = this.props;
-    //     const {pathname, query, search} = location;
-    //     // const {actions} = this.props;
-    //     const {selected} = this.state;
-    //     if (selected.length) { // anyway send array of ids to delete
-    //         const ids = selected.map(v => v._id);
-    //         this.setState({selected: []});
-    //         return actions.delete(query, {}, ids); // multi
-    //     } else {
-    //         return actions.delete(query, {}, [item._id]); // one
-    //     }
-    // }
-    //
-    // setSelected(item, event) {
-    //     let {selected} = this.state;
-    //     this.setState({selected: [...selected, item]})
-    // }
-
     render() {
         const {match, routes} = this.props;
         return (
