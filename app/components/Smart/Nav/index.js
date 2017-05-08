@@ -98,6 +98,7 @@ class MenuLeft extends Component {
                 >
                     <MenuItem primaryText="Counter" onClick={this.handleClick.bind(this)}/>
                     <MenuItem primaryText="Counters" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Topics" onClick={this.handleClick.bind(this)}/>
                     <MenuItem primaryText="Payments" onClick={this.handleClick.bind(this)}/>
                     <MenuItem primaryText="Sign out" onClick={this.handleLogOut.bind(this)}/>
                 </IconMenu>
