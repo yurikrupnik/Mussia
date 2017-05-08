@@ -4,7 +4,7 @@ import React from 'react'
 
 import {renderToString} from 'react-dom/server';
 import App from '../../../../components/Smart/App';
-import { StaticRouter } from 'react-router'
+import { StaticRouter } from 'react-router-dom'
 {/*let preRenderString = (props) => renderToString(<AppWrapper {...props}/>);*/}
 
 export default (req, res, next) => {

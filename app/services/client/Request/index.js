@@ -43,7 +43,7 @@ export default class Request {
     static callDelete(url, query, params, body) {
         let type = 'delete';
         return this.getResource(type, url)
-            .query(query)
+            // .query(query)
             .send(body)
             .then(returnBody)
             .catch(handleError);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import './counter.scss';
 export default class Counter extends Component {
