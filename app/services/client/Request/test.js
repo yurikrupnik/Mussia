@@ -7,13 +7,13 @@ import sinon from 'sinon';
 
 
 describe('returnBody function', () => {
-    it('expect to return body prop of an object', () => {
-        expect(returnBody({body: fakeData})).eql(fakeData);
-    });
-
-    it('expect to return body prop of an object', () => {
-        expect(returnBody({})).eql(undefined);
-    });
+    // it('expect to return body prop of an object', () => {
+    //     expect(returnBody({body: fakeData})).eql(fakeData);
+    // });
+    //
+    // it('expect to return body prop of an object', () => {
+    //     expect(returnBody({})).eql(undefined);
+    // });
 });
 
 // describe('handleError function', () => { // todo
@@ -34,15 +34,15 @@ describe('returnBody function', () => {
 
 
 describe('Request interface', () => {
-    it('expect to have serveStatics method create', () => {
-        expect(Request.create).to.be.a('function');
-    });
-
-    it('expect Request to be an interface', () => {
-        expect(new Request).to.be.instanceof(Request);
-        expect(Request).not.to.be.instanceof(Request); // test for interface
-        expect(Request).to.be.instanceof(Object);
-    });
+    // it('expect to have serveStatics method create', () => {
+    //     expect(Request.create).to.be.a('function');
+    // });
+    //
+    // it('expect Request to be an interface', () => {
+    //     expect(new Request).to.be.instanceof(Request);
+    //     expect(Request).not.to.be.instanceof(Request); // test for interface
+    //     expect(Request).to.be.instanceof(Object);
+    // });
 
 
 });

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import './counter.scss';
 export default class Counter extends Component {
@@ -24,13 +24,11 @@ export default class Counter extends Component {
                     <img src="download.jpeg" alt="gs"/>
                     <h1>{this.props.counter}</h1>
                     <RaisedButton label="Does nothing" />
-                    <Link to="/counter/example" >go to counter inside payments</Link>
                     <div>
                         <button onClick={this.props.plus}>+</button>
                         <button onClick={this.props.minus}>-</button>
                     </div>
                 </div>
-                {this.props.children}
             </div>
         );
     }

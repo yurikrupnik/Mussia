@@ -1,10 +1,11 @@
 import Request from '../../services/client/Request';
-import {url} from './config';
+import {url, selector} from './config';
 
 class Payments extends Request {
-    constructor(url) {
-        super(url); // Request is just an object to handle superagent
+    constructor() {
+        super(); // Request is just an object to handle superagent
         this.url = url;
+        this.selector = selector;
     }
 
     create(query, params, body) {
@@ -25,4 +26,4 @@ class Payments extends Request {
     }
 }
 
-export default new Payments(url);
+export default new Payments();

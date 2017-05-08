@@ -11,14 +11,14 @@ let handleError = err => {
     }
 };
 
-import httpMap from '../../../redux/http-methods-map';
+import {crudActionMap} from '../crud/config';
 
 
 export default class Request {
 
     static handleMethod(type) {
-        if (type in httpMap) {
-            return httpMap[type];
+        if (type in crudActionMap) {
+            return crudActionMap[type];
         } else {
             throw Error('wrong method')
         }
@@ -43,7 +43,7 @@ export default class Request {
     static callDelete(url, query, params, body) {
         let type = 'delete';
         return this.getResource(type, url)
-            .query(query)
+            // .query(query)
             .send(body)
             .then(returnBody)
             .catch(handleError);

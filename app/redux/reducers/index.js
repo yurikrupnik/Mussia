@@ -2,7 +2,7 @@ import counter from './counter';
 import counters from './counters';
 import payments from '../../api/payments/reducer';
 
-import sluts from './sluts';
+// import sluts from './sluts';
 import user from './user';
 import errors from './errors';
 import {combineReducers} from 'redux';
@@ -12,7 +12,7 @@ const reducers = {
     counters,
     counter,
     payments,
-    sluts,
+    // sluts,
     errors
 };
 

@@ -103,7 +103,7 @@ function handleLogout(req, res, next) {
 }
 
 function setSocialAuth(provider) {
-    return passport.authenticate(provider, {scope: ['email']});
+    return passport.authenticate(provider, {successRedirect: '/', scope: ['email']});
 }
 
 function createSocialNetworkRoutes(app) {

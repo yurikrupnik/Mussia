@@ -55,17 +55,6 @@ describe('api', () => {
         });
     });
 
-    describe(`GET ${countURL}`, function () {
-        it('respons with json ', (done) => {
-            let req = request(app).get('/api/payments/count');
-            req.cookies = Cookies;
-            req.set('Accept', /json/)
-                .expect('Content-Type', /json/)
-                .expect(200, done);
-
-        })
-    });
-
     describe(`basic test`, function () {
         it('50 = 50', (done) => {
             expect(50).to.equal(50);

@@ -1,7 +1,8 @@
-import User from '../../api/users/request';
+import {singout, singin} from '../../api/users/request';
 
 export const REQUEST_USER = 'REQUEST_USER';
 export const RECEIVED_USER = 'RECEIVED_USER';
+export const LOGOUT = 'LOGOUT';
 
 
 /*
@@ -17,6 +18,17 @@ export const got = (user) => {
     return {
         type: RECEIVED_USER,
         user: user
+    }
+};
+
+export const logout = () => {
+    return dispatch => {
+        singout().then(function () {
+            dispatch({
+                type: LOGOUT
+            });
+        })
+
     }
 };
 
