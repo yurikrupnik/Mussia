@@ -40,17 +40,8 @@ class Payments extends Component {
                             }
                             {/*<li><Link to={`${match.url}/create`}>create</Link></li>*/}
                             {/*<li><Link to={`${match.url}/data`}>data</Link></li>*/}
-                            {/*<li><Link to="/ptopicsayments">Payments</Link></li>*/}
-                            {/*<li><Link to="/">Topics</Link></li>*/}
-                            {/*<li><Link to="/about">About</Link></li>*/}
-                            {/*<li><Link to="/counter">Counter</Link></li>*/}
-                            {/*<li><Link to="/counters">Counters</Link></li>*/}
-                            {/*<li><Link to="/register">Register</Link></li>*/}
                         </ul>
 
-                        {/*<FlatButton onClick={this.handleGet.bind(this)} label="get"/>*/}
-                        {/*<FlatButton onClick={this.handleCreate.bind(this)} label="create"/>*/}
-                        {/*<FlatButton onClick={this.handleUpdate.bind(this)} label="update"/>*/}
                         {/*<FlatButton onClick={this.handleDelete.bind(this, selected)} label="delete many"/>*/}
                     </div>
                     {routes.map((route, i) => (
