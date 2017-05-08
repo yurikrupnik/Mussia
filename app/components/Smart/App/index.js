@@ -57,7 +57,7 @@ import Counters from '../../Smart/Counters';
 import Register from '../../Smart/Register';
 import Settings from '../../Smart/Settings';
 import Dashboard from '../Dashboard';
-import Nav from '../Nav';
+import Header from '../Header';
 
 
 class PaymentsData extends Component {
@@ -181,7 +181,7 @@ const Rou = (props) => {
         <div>
             <Router>
                 <div>
-                    <Nav/>
+                    <Header/>
                     <div className="container">
                         {routes.map((route, i) => (
                             <RouteWithSubRoutes key={i} {...route}/>
