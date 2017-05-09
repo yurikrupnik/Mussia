@@ -25,7 +25,6 @@ const filterHiddenRoutes = (routes) => {
     });
 };
 
-
 const renderActiveRoutes = (routes) => {
     const shownLinks = filterHiddenRoutes(routes);
     return _.map(shownLinks, (route, i) => {
@@ -46,10 +45,6 @@ class Header extends Component {
 
     componentWillReceiveProps(nextProps) {
         console.log('componentWillReceiveProps nextProps', nextProps);
-    }
-
-    filterHiddenRoutes() {
-
     }
 
     componentWillMount() {
@@ -78,7 +73,6 @@ class Header extends Component {
     render() {
         const {dispatch, history, location, match, user} = this.props;
         const {pathname} = location;
-
 
         return user ? (<Toolbar>
             <ToolbarGroup firstChild={true}>
