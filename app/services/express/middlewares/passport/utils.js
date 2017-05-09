@@ -98,8 +98,14 @@ function handleLogin(req, res, next) {
 }
 
 function handleLogout(req, res, next) {
-    req.logout();
-    next();
+    req.session.destroy(function (err) {
+        console.log('YOOOOOOO');
+
+        res.redirect('/'); //Inside a callback… bulletproof!
+    });
+    // req.logout();
+    // res.json([{name: 'shi'}])
+    // res.redirect('/');
 }
 
 function setSocialAuth(provider) {

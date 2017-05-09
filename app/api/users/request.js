@@ -3,7 +3,15 @@ import request from 'superagent';
 
 export function logout() {
     return request.get('/auth/logout')
-        .then(data => data.body);
+        .then(data => {
+            debugger
+            console.log('data', data);
+
+        })
+        .catch(err => {
+            console.log('err', err);
+
+        });
 }
 export function singin(body) {
     return request.post('/auth/local')
