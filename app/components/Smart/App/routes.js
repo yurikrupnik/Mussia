@@ -105,10 +105,12 @@ const routes = [
         title: 'Counters',
         exact: true
     },
+
     {
         path: '/register',
         component: Register,
         title: 'Register',
+        hidden: true,
         exact: true
     },
     {
@@ -116,6 +118,7 @@ const routes = [
         component: PaymentsC,
         title: 'Payments',
         exact: true,
+        hidden: false,
         routes: [
             {
                 path: '/payments/create',

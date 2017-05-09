@@ -19,6 +19,21 @@ import routes from '../App/routes';
 
 import {getUser, dispatchActions} from '../../../redux/selectors/user';
 
+const filterHiddenRoutes = (routes) => {
+    return _.filter(routes, (val, i) => {
+        return !(_.has(val, 'hidden') && val.hidden);
+    });
+};
+
+
+const renderActiveRoutes = (routes) => {
+    const shownLinks = filterHiddenRoutes(routes);
+    return _.map(shownLinks, (route, i) => {
+        return (
+            <MenuItem key={i} value={i} primaryText={route.title}/>
+        )
+    });
+};
 
 class Header extends Component {
 
@@ -30,43 +45,22 @@ class Header extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // const {location, history, user} = nextProps;
-        // if (!user) {
-        //     history.go('/register');
-        //
-        // }
-        // const {pathname} = location;
-        // let index = _.findIndex(routes, {path: pathname});
-        // // // console.log('user', user);
-        // //
-        // if (!user) {
-        //     history.push('/register');
-        //     index = _.findIndex(routes, {path: '/register'});
-        // }
-        // } else if (pathname === '/' || index < 0) {
-
-        //     history.push('/dashboard');
-        //     index = _.findIndex(routes, {path: '/dashboard'});
-        // }
-        //
-        // this.setState({value: index});
         console.log('componentWillReceiveProps nextProps', nextProps);
+    }
+
+    filterHiddenRoutes() {
 
     }
 
     componentWillMount() {
         const {location, history, user} = this.props;
         const {pathname} = location;
-        let index = _.findIndex(routes, {path: pathname});
-        // console.log('user', user);
-
+        let index = _.findIndex(filterHiddenRoutes(routes), {path: pathname});
         if (pathname === '/' || index < 0) {
             history.push('/dashboard');
-            index = _.findIndex(routes, {path: '/dashboard'});
+            index = _.findIndex(filterHiddenRoutes(routes), {path: '/dashboard'});
         }
-
         this.setState({value: index});
-
     }
 
 
@@ -78,28 +72,22 @@ class Header extends Component {
 
     logout() {
         const {actions} = this.props;
-        console.log('actions', actions);
         actions.logout();
     }
 
     render() {
         const {dispatch, history, location, match, user} = this.props;
         const {pathname} = location;
-        const {picture} = user || {};
-        const {data} = picture || {url: ''};
-        const A = ({data})=> (<Avatar onClick={this.logout.bind(this)} src={data.url}/>);
+
+
         return user ? (<Toolbar>
             <ToolbarGroup firstChild={true}>
                 <DropDownMenu value={this.state.value} onChange={this.handleChange.bind(this)}>
-                    {routes.map((route, i) => {
-                        return (
-                            <MenuItem key={i} value={i} primaryText={route.title}/>
-                        )
-                    })}
+                    {renderActiveRoutes(routes)}
                 </DropDownMenu>
             </ToolbarGroup>
             <ToolbarGroup>
-                {data ? <A data={data} /> : null}
+                <Avatar onClick={this.logout.bind(this)} src={user.picture.data.url}/>
             </ToolbarGroup>
         </Toolbar>) : (<Redirect to="/register"/>)
 
