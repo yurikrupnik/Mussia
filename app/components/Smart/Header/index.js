@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
+import Avatar from 'material-ui/Avatar';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -47,6 +48,10 @@ class Header extends Component {
     render() {
         const {dispatch, history, location, match, user} = this.props;
         const {pathname} = location;
+        const {picture} = user;
+        const {data} = picture;
+
+        const A = ({data})=> (<Avatar src={data.url}/>);
         return (
             <Toolbar>
                 <ToolbarGroup firstChild={true}>
@@ -63,16 +68,14 @@ class Header extends Component {
                     {/*<FontIcon className="muidocs-icon-custom-sort" />*/}
                     {/*<ToolbarSeparator />*/}
                     {/*<RaisedButton label="Create Broadcast" primary={true} />*/}
-                    <IconMenu
-                        iconButtonElement={
-                            <IconButton touch={true}>
-                                <NavigationExpandMoreIcon />
-                            </IconButton>
-                        }
-                    >
-                        <MenuItem primaryText="Download"/>
-                        <MenuItem primaryText="More Info"/>
-                    </IconMenu>
+                        <A data={data}/>
+                    {/*<IconMenu*/}
+                        {/*iconButtonElement={*/}
+                        {/*}*/}
+                    {/*>*/}
+                        {/*<MenuItem primaryText="Download"/>*/}
+                        {/*<MenuItem primaryText="More Info"/>*/}
+                    {/*</IconMenu>*/}
                 </ToolbarGroup>
             </Toolbar>
         );
