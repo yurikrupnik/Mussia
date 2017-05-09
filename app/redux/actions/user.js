@@ -22,8 +22,12 @@ export const got = (user) => {
 };
 
 export const logout = () => {
+    // debugger
     return dispatch => {
-        singout().then(function () {
+    //     console.log('dispatch', dispatch);
+        return singout().then(function (a) {
+            console.log('a', a);
+
             dispatch({
                 type: LOGOUT
             });
