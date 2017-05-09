@@ -30,16 +30,16 @@ class Payments extends Component {
                     <h5>Payments</h5>
                     <div>
                         <ul>
-                            {
-                                routes.map(function (route, i) {
-                                    let path = route.path;
-                                    return (
-                                        <li key={i}><Link to={`${path}`}>{path}</Link></li>
-                                    )
-                                })
-                            }
-                            {/*<li><Link to={`${match.url}/create`}>create</Link></li>*/}
-                            {/*<li><Link to={`${match.url}/data`}>data</Link></li>*/}
+                            {/*{*/}
+                                {/*routes.map(function (route, i) {*/}
+                                    {/*let path = route.path;*/}
+                                    {/*return (*/}
+                                        {/*<li key={i}><Link to={`${path}`}>{path}</Link></li>*/}
+                                    {/*)*/}
+                                {/*})*/}
+                            {/*}*/}
+                            <li><Link to={`${match.url}/create`}>create</Link></li>
+                            <li><Link to={`${match.url}/data`}>data</Link></li>
                         </ul>
 
                         {/*<FlatButton onClick={this.handleDelete.bind(this, selected)} label="delete many"/>*/}
