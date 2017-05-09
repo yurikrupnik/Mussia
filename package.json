@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app/index.js",
-    "build": "NODE_ENV='production'",
+    "start": "NODE_ENV='development' nodemon app/index.js",
+    "build": "NODE_ENV='production' nodemon app/index.js",
     "test": "NODE_ENV='test' mocha --opts .mocharc",
     "eslint": "eslint ./",
     "fulltest": "mocha --opts .mocharc ; eslint ./"

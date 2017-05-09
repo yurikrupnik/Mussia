@@ -5,9 +5,9 @@ import webpackConfig from '../../../../../webpack.config';
 import {env} from '../../../../config/env';
 import {initial} from 'lodash';
 
-if (env === 'test') {
-    webpackConfig.plugins = initial(webpackConfig.plugins); // last plugin is BrowserSyncPlugin - no reason to start it
-}
+// if (env === 'test') {
+//     webpackConfig.plugins = initial(webpackConfig.plugins); // last plugin is BrowserSyncPlugin - no reason to start it
+// }
 
 let compiler = webpack(webpackConfig);
 let middleware;

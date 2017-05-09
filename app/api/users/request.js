@@ -4,7 +4,6 @@ import request from 'superagent';
 export function logout() {
     return request.get('/auth/logout')
         .then(data => {
-            debugger
             console.log('data', data);
 
         })
