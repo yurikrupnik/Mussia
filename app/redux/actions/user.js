@@ -22,16 +22,18 @@ export const got = (user) => {
 };
 
 export const logout = () => {
-    // debugger
     return dispatch => {
-    //     console.log('dispatch', dispatch);
-        return singout().then(function (a) {
-            console.log('a', a);
+        return singout()
+            .then(() => {
+                dispatch({
+                    type: LOGOUT
+                })
 
-            dispatch({
-                type: LOGOUT
-            });
-        })
+            })
+            // .catch((err) => {
+            //     console.log('err', err);
+            //
+            // });
 
     }
 };
