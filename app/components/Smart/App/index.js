@@ -11,14 +11,7 @@ import {
     StaticRouter
 } from 'react-router-dom';
 
-import Topics from '../Topics';
 import Payments from '../../../api/payments/request';
-import PaymentsC from '../../../api/payments/component';
-import Counter from '../Counter';
-import Counters from '../Counters';
-import Register from '../Register';
-import Settings from '../Settings';
-import Dashboard from '../Dashboard';
 import Header from '../Header';
 
 
@@ -81,62 +74,7 @@ const Edit = ({match}) => {
     )
 };
 
-const routes = [
-    {
-        path: '/dashboard',
-        component: Dashboard,
-        title: 'Dashboard',
-        exact: true
-    },
-    {
-        path: '/topics',
-        component: Topics,
-        exact: true
-    },
-    {
-        path: '/settings',
-        component: Settings,
-        exact: true
-    },
-    {
-        path: '/counter',
-        component: Counter,
-        exact: true
-    },
-    {
-        path: '/counters',
-        component: Counters,
-        exact: true
-    },
-    {
-        path: '/register',
-        component: Register,
-        exact: true
-    },
-    {
-        path: '/payments',
-        component: PaymentsC,
-        exact: true,
-        routes: [
-            {
-                path: '/payments/create',
-                component: Create,
-                exact: true
-            },
-            {
-                path: '/payments/data',
-                component: conected,
-                exact: true,
-            },
-            {
-                path: '/payments/data/:id',
-                component: Edit,
-                exact: true
-            }
-        ]
-    }
-];
-
+import routes from '../App/routes';
 import RouteWithSubRoutes from '../../Utils/RouteWithRoutes';
 
 const Rou = (props) => {

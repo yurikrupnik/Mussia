@@ -12,86 +12,14 @@ import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getStateBySelector, createDispatcherByResource} from '../../../services/client/crud/util';
 
-
-// const routes = [
-//     'Dashboard', 'Counter', 'Counters', 'Topics', 'Payments'
-// ];
-
-import Payments from '../../../api/payments/request';
-import PaymentsC from '../../../api/payments/component';
-import Counter from '../Counter';
-import Counters from '../Counters';
-import Register from '../Register';
-import Settings from '../../Smart/Settings';
-import Dashboard from '../Dashboard';
-import Topics from '../Topics';
-
 import _ from 'lodash';
 
-const routes = [
-    {
-        path: '/dashboard',
-        component: Dashboard,
-        title: 'Dashboard',
-        exact: true
-    },
-    {
-        path: '/topics',
-        component: Topics,
-        title: 'Topics',
-        exact: true
-    },
-    {
-        path: '/counter',
-        component: Counter,
-        title: 'Counter',
-        exact: true
-    },
-    {
-        path: '/counters',
-        component: Counters,
-        title: 'Counters',
-        exact: true
-    },
-    {
-        path: '/register',
-        component: Register,
-        title: 'Register',
-        exact: true
-    },
-    {
-        path: '/payments',
-        component: PaymentsC,
-        title: 'Payments',
-        exact: true,
-        routes: [
-            // {
-            //     path: '/payments/create',
-            //     component: Create,
-            //     exact: true
-            // },
-            // {
-            //     path: '/payments/data',
-            //     component: conected,
-            //     exact: true,
-            // },
-            // {
-            //     path: '/payments/data/:id',
-            //     component: Edit,
-            //     exact: true
-            // }
-        ]
-    }
-];
+import routes from '../App/routes';
 
 class Header extends Component {
 
     constructor(props) {
         super(props);
-        // let {location} = props;
-        // let {pathname} = location;
-        // let index = _.findIndex(routes, {path: pathname});
-        // this.state = {value: 0};
     }
 
     componentWillMount() {
