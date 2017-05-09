@@ -13,36 +13,127 @@ import {connect} from 'react-redux';
 import {getStateBySelector, createDispatcherByResource} from '../../../services/client/crud/util';
 
 
+// const routes = [
+//     'Dashboard', 'Counter', 'Counters', 'Topics', 'Payments'
+// ];
+
+import Payments from '../../../api/payments/request';
+import PaymentsC from '../../../api/payments/component';
+import Counter from '../Counter';
+import Counters from '../Counters';
+import Register from '../Register';
+import Settings from '../../Smart/Settings';
+import Dashboard from '../Dashboard';
+import Topics from '../Topics';
+
+import _ from 'lodash';
+
+const routes = [
+    {
+        path: '/dashboard',
+        component: Dashboard,
+        title: 'Dashboard',
+        exact: true
+    },
+    {
+        path: '/topics',
+        component: Topics,
+        title: 'Topics',
+        exact: true
+    },
+    {
+        path: '/counter',
+        component: Counter,
+        title: 'Counter',
+        exact: true
+    },
+    {
+        path: '/counters',
+        component: Counters,
+        title: 'Counters',
+        exact: true
+    },
+    {
+        path: '/register',
+        component: Register,
+        title: 'Register',
+        exact: true
+    },
+    {
+        path: '/payments',
+        component: PaymentsC,
+        title: 'Payments',
+        exact: true,
+        routes: [
+            // {
+            //     path: '/payments/create',
+            //     component: Create,
+            //     exact: true
+            // },
+            // {
+            //     path: '/payments/data',
+            //     component: conected,
+            //     exact: true,
+            // },
+            // {
+            //     path: '/payments/data/:id',
+            //     component: Edit,
+            //     exact: true
+            // }
+        ]
+    }
+];
+
 class Header extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            value: 3,
-        };
+        let {location} = props;
+        let {pathname} = location;
+        let index = _.findIndex(routes, {path: pathname});
+        this.state = {value: index};
     }
 
-    handleChange = (event, index, value) => this.setState({value});
+    componentWillMount() {
+        let {location, history, user} = this.props;
+        let {pathname} = location;
+        let index = _.findIndex(routes, {path: pathname});
+        if (!user) {
+            history.push('/register');
+            let index = _.findIndex(routes, {path: '/register'});
+            this.setState({value: index});
+        } else if (pathname === '/') {
+            history.push('/dashboard');
+            let index = _.findIndex(routes, {path: '/dashboard'});
+            this.setState({value: index});
+        }
+    }
+
+    handleChange(e, index, value) {
+        const {history} = this.props;
+        this.setState({value: index});
+        history.push('/' + e.target.textContent.toLowerCase());
+    }
 
     render() {
+        const {dispatch, history, location, match, user} = this.props;
+        const {pathname} = location;
         return (
             <Toolbar>
                 <ToolbarGroup firstChild={true}>
-                    <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                        <MenuItem value={1} primaryText="All Broadcasts" />
-                        <MenuItem value={2} primaryText="All Voice" />
-                        <MenuItem value={3} primaryText="All Text" />
-                        <MenuItem value={4} primaryText="Complete Voice" />
-                        <MenuItem value={5} primaryText="Complete Text" />
-                        <MenuItem value={6} primaryText="Active Voice" />
-                        <MenuItem value={7} primaryText="Active Text" />
+                    <DropDownMenu value={this.state.value} onChange={this.handleChange.bind(this)}>
+                        {routes.map((route, i) => {
+                            return (
+                                <MenuItem key={i} value={i} primaryText={route.title}/>
+                            )
+                        })}
                     </DropDownMenu>
                 </ToolbarGroup>
                 <ToolbarGroup>
-                    <ToolbarTitle text="Options" />
-                    <FontIcon className="muidocs-icon-custom-sort" />
-                    <ToolbarSeparator />
-                    <RaisedButton label="Create Broadcast" primary={true} />
+                    {/*<ToolbarTitle text="Options" />*/}
+                    {/*<FontIcon className="muidocs-icon-custom-sort" />*/}
+                    {/*<ToolbarSeparator />*/}
+                    {/*<RaisedButton label="Create Broadcast" primary={true} />*/}
                     <IconMenu
                         iconButtonElement={
                             <IconButton touch={true}>
@@ -50,8 +141,8 @@ class Header extends Component {
                             </IconButton>
                         }
                     >
-                        <MenuItem primaryText="Download" />
-                        <MenuItem primaryText="More Info" />
+                        <MenuItem primaryText="Download"/>
+                        <MenuItem primaryText="More Info"/>
                     </IconMenu>
                 </ToolbarGroup>
             </Toolbar>

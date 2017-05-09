@@ -11,51 +11,13 @@ import {
     StaticRouter
 } from 'react-router-dom';
 
-const Topics = ({match}) => {
-    return (
-        <Router>
-            <div>
-                <h2>Topics</h2>
-                <ul>
-                    <li>
-                        <Link to={`${match.url}/rendering`}>
-                            Rendering with React
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`${match.url}/components`}>
-                            Components
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`${match.url}/props-v-state`}>
-                            Props v. State
-                        </Link>
-                    </li>
-                </ul>
-
-                <Route path={`${match.url}/:topicId`} component={Topic}/>
-                <Route exact path={match.url} render={() => (
-                    <h3>Please select a topic.</h3>
-                )}/>
-            </div>
-        </Router>
-    )
-};
-
-const Topic = ({match}) => (
-    <div>
-        <h3>{match.params.topicId}</h3>
-    </div>
-);
-
-
+import Topics from '../Topics';
 import Payments from '../../../api/payments/request';
 import PaymentsC from '../../../api/payments/component';
-import Counter from '../../Smart/Counter';
-import Counters from '../../Smart/Counters';
-import Register from '../../Smart/Register';
-import Settings from '../../Smart/Settings';
+import Counter from '../Counter';
+import Counters from '../Counters';
+import Register from '../Register';
+import Settings from '../Settings';
 import Dashboard from '../Dashboard';
 import Header from '../Header';
 
@@ -121,8 +83,9 @@ const Edit = ({match}) => {
 
 const routes = [
     {
-        path: '/',
+        path: '/dashboard',
         component: Dashboard,
+        title: 'Dashboard',
         exact: true
     },
     {
