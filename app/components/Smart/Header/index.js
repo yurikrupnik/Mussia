@@ -88,25 +88,26 @@ class Header extends Component {
 
     constructor(props) {
         super(props);
-        let {location} = props;
-        let {pathname} = location;
-        let index = _.findIndex(routes, {path: pathname});
-        this.state = {value: index};
+        // let {location} = props;
+        // let {pathname} = location;
+        // let index = _.findIndex(routes, {path: pathname});
+        // this.state = {value: 0};
     }
 
     componentWillMount() {
-        let {location, history, user} = this.props;
-        let {pathname} = location;
+        const {location, history, user} = this.props;
+        const {pathname} = location;
         let index = _.findIndex(routes, {path: pathname});
         if (!user) {
             history.push('/register');
-            let index = _.findIndex(routes, {path: '/register'});
-            this.setState({value: index});
-        } else if (pathname === '/') {
+            index = _.findIndex(routes, {path: '/register'});
+        } else if (pathname === '/' || index < 0) {
             history.push('/dashboard');
-            let index = _.findIndex(routes, {path: '/dashboard'});
-            this.setState({value: index});
+            index = _.findIndex(routes, {path: '/dashboard'});
         }
+
+        this.setState({value: index});
+
     }
 
     handleChange(e, index, value) {
