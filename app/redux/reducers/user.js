@@ -6,7 +6,7 @@ export default (state = null, action) => {
         case RECEIVED_USER:
             return Object.assign({}, state, action.user);
         case LOGOUT:
-            return Object.assign({}, state, {user: null});
+            return null;
         default:
             return state;
     }

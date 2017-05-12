@@ -1,4 +1,4 @@
 app/tests
 --compilers js:babel-register
 --recursive
---timeout 15000ms
+--timeout 20000ms

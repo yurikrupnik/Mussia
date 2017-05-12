@@ -1,4 +1,4 @@
-import {singout, singin} from '../../api/users/request';
+import {logout as Logout, singin} from '../../api/users/request';
 
 export const REQUEST_USER = 'REQUEST_USER';
 export const RECEIVED_USER = 'RECEIVED_USER';
@@ -23,11 +23,16 @@ export const got = (user) => {
 
 export const logout = () => {
     return dispatch => {
-        singout().then(function () {
-            dispatch({
-                type: LOGOUT
+        return Logout()
+            .then(() => {
+                dispatch({
+                    type: LOGOUT
+                });
             });
-        })
+            // .catch((err) => {
+            //     console.log('err', err);
+            //
+            // });
 
     }
 };

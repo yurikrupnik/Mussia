@@ -11,53 +11,8 @@ import {
     StaticRouter
 } from 'react-router-dom';
 
-const Topics = ({match}) => {
-    return (
-        <Router>
-            <div>
-                <h2>Topics</h2>
-                <ul>
-                    <li>
-                        <Link to={`${match.url}/rendering`}>
-                            Rendering with React
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`${match.url}/components`}>
-                            Components
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={`${match.url}/props-v-state`}>
-                            Props v. State
-                        </Link>
-                    </li>
-                </ul>
-
-                <Route path={`${match.url}/:topicId`} component={Topic}/>
-                <Route exact path={match.url} render={() => (
-                    <h3>Please select a topic.</h3>
-                )}/>
-            </div>
-        </Router>
-    )
-};
-
-const Topic = ({match}) => (
-    <div>
-        <h3>{match.params.topicId}</h3>
-    </div>
-);
-
-
 import Payments from '../../../api/payments/request';
-import PaymentsC from '../../../api/payments/component';
-import Counter from '../../Smart/Counter';
-import Counters from '../../Smart/Counters';
-import Register from '../../Smart/Register';
-import Settings from '../../Smart/Settings';
-import Dashboard from '../Dashboard';
-import Nav from '../Nav';
+import Header from '../Header';
 
 
 class PaymentsData extends Component {
@@ -119,61 +74,7 @@ const Edit = ({match}) => {
     )
 };
 
-const routes = [
-    {
-        path: '/',
-        component: Dashboard,
-        exact: true
-    },
-    {
-        path: '/topics',
-        component: Topics,
-        exact: true
-    },
-    {
-        path: '/settings',
-        component: Settings,
-        exact: true
-    },
-    {
-        path: '/counter',
-        component: Counter,
-        exact: true
-    },
-    {
-        path: '/counters',
-        component: Counters,
-        exact: true
-    },
-    {
-        path: '/register',
-        component: Register,
-        exact: true
-    },
-    {
-        path: '/payments',
-        component: PaymentsC,
-        exact: true,
-        routes: [
-            {
-                path: '/payments/create',
-                component: Create,
-                exact: true
-            },
-            {
-                path: '/payments/data',
-                component: conected,
-                exact: true,
-            },
-            {
-                path: '/payments/data/:id',
-                component: Edit,
-                exact: true
-            }
-        ]
-    }
-];
-
+import routes from '../App/routes';
 import RouteWithSubRoutes from '../../Utils/RouteWithRoutes';
 
 const Rou = (props) => {
@@ -181,7 +82,7 @@ const Rou = (props) => {
         <div>
             <Router>
                 <div>
-                    <Nav/>
+                    <Header/>
                     <div className="container">
                         {routes.map((route, i) => (
                             <RouteWithSubRoutes key={i} {...route}/>
