@@ -80,34 +80,6 @@ function localStrategyHandler(req, email, password, done) {
         .catch(done);
 }
 
-function handleLogin(req, res, next) {
-    passport.authenticate('local', function (err, user, info) {
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            return res.redirect('/login');
-        }
-        req.logIn(user, function (err) {
-            if (err) {
-                return next(err);
-            }
-            return res.redirect('/');
-        });
-    })(req, res, next);
-}
-
-function handleLogout(req, res, next) {
-    req.session.destroy(function (err) {
-        console.log('YOOOOOOO');
-
-        res.redirect('/'); //Inside a callback… bulletproof!
-    });
-    // req.logout();
-    // res.json([{name: 'shi'}])
-    // res.redirect('/');
-}
-
 function setSocialAuth(provider) {
     return passport.authenticate(provider, {successRedirect: '/', scope: ['email']});
 }
@@ -125,7 +97,5 @@ export {
     deserialize,
     socialNetworkStrategy,
     localStrategyHandler,
-    createSocialNetworkRoutes,
-    handleLogin,
-    handleLogout
+    createSocialNetworkRoutes
 }

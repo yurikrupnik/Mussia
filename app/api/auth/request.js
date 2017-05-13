@@ -12,8 +12,10 @@ export function logout() {
 
         });
 }
-export function singin(body) {
-    return request.post('/auth/local')
+export function login(body) {
+    console.log('body', body);
+
+    return request.post('/auth/login')
         .send(body)
         .then(function (data) {
             console.log('data', data);

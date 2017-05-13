@@ -1,8 +1,9 @@
-import {logout as Logout, singin} from '../../api/users/request';
+import {logout as Logout, login as Login} from '../../api/auth/request';
 
 export const REQUEST_USER = 'REQUEST_USER';
 export const RECEIVED_USER = 'RECEIVED_USER';
 export const LOGOUT = 'LOGOUT';
+export const LOGIN = 'LOGIN';
 
 
 /*
@@ -29,12 +30,21 @@ export const logout = () => {
                     type: LOGOUT
                 });
             });
-            // .catch((err) => {
-            //     console.log('err', err);
-            //
-            // });
+    };
+};
 
-    }
+export const login = (body) => {
+    console.log('body', body);
+    return dispatch => {
+        return Login(body).then(function (da) {
+            debugger;
+        })
+            // .then(() => {
+            //     dispatch({
+            //         type: LOGOUT
+            //     });
+            // });
+    };
 };
 
 export const fountUser = (user) => {

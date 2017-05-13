@@ -44,7 +44,7 @@ class Header extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps nextProps', nextProps);
+        // console.log('componentWillReceiveProps nextProps', nextProps);
     }
 
     componentWillMount() {
