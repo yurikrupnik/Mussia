@@ -37,8 +37,10 @@ export const login = (body) => {
     console.log('body', body);
     return dispatch => {
         return Login(body).then(function (da) {
-            debugger;
-        })
+            dispatch({
+                type: 'LOGIN'
+            });
+        });
             // .then(() => {
             //     dispatch({
             //         type: LOGOUT

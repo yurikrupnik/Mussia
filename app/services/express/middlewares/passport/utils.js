@@ -2,8 +2,10 @@ import passport from 'passport';
 import {validatePassword, generateHash} from '../../../node/pass-hash';
 import Users from '../../../../api/users/model';
 
-let serialize = (user, done) => done(null, user.id);
-let deserialize = (id, done) => Users.findOne({id}, done);
+import faker from 'faker';
+
+let serialize = (user, done) => done(null, user.email);
+let deserialize = (email, done) => Users.findOne({email}, done);
 
 function handleHash(user, done) {
     return function (hash) {
@@ -38,9 +40,12 @@ function checkUserByEmailAndPass(email, password, done) {
         if (!user) {
             let nuser = { // todo use here some User model constructor
                 email: email,
-                password: password, // delete this, not saving passwords
                 name: 'admin',
-                id: 12345
+                picture: {
+                    data: {
+                        url: faker.internet.avatar()
+                    }
+                }
             };
             generateHash(password)
                 .then(handleHash(nuser, done));
@@ -55,8 +60,8 @@ function checkUserByEmailAndPass(email, password, done) {
 function socialAppsRegisterCallback(profile, done) {
     // find the user in the database based on their provider id
     return function () {
-        let id = profile.id;
-        return Users.findOne({id})
+        let email = profile.email;
+        return Users.findOne({email})
             .then(function (user) {
                 // if the user is found, then log them in
                 if (user) {

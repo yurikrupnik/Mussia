@@ -16,7 +16,7 @@ class Register extends Component {
         super(props);
     }
 
-    handleSubmit(form, event) {
+    handleSubmit(event) {
         let {login} = this.props.actions;
         let email = this.refs['email'].input.value;
         let password = this.refs['password'].input.value;
@@ -49,9 +49,10 @@ class Register extends Component {
                                 />
                             </div>
 
+                            {/*<button type="submit">sub</button>*/}
                             <div className="row end-xs">
-                                <FlatButton fullWidth={true} label="Sign in" primary={true}
-                                            onClick={this.handleSubmit.bind(this, 'shit')}/>
+                                <FlatButton fullWidth={true} label="Sign in" primary={true} type="submit" onClick={this.handleSubmit.bind(this)}
+                                            />
                             </div>
                         </form>
 
