@@ -6,13 +6,13 @@ function handleLogin(req, res, next) {
             return next(err);
         }
         if (!user) {
-            return res.redirect('/register');
+            res.redirect('/register');
         }
         req.logIn(user, function (err) {
             if (err) {
-                return next(err);
+                next(err);
             }
-            return res.redirect('/');
+            res.redirect('/');
         });
     })(req, res, next);
 }

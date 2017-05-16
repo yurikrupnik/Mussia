@@ -33,25 +33,25 @@ class Register extends Component {
             <div className="row center-xs">
                 <div className="col-xs-6">
                     <div className="box">
-                        <form ref="shit"> {/*name="inituser" method="POST" action="/auth/login"*/}
+                        <form method="POST" action="/auth/login" ref="shit"> {/*todo why not redirect using action*/}
                             <div >
                                 <TextField fullWidth={true}
                                            hintText="Email Field"
                                            floatingLabelText="Email"
-                                           type={'email'} ref={'email'}
+                                           type={'email'} name={'email'}
                                 />
                             </div>
                             <div >
                                 <TextField fullWidth={true}
                                            hintText="Password Field"
                                            floatingLabelText="Password"
-                                           type={'password'} ref={'password'}
+                                           type={'password'} name={'password'}
                                 />
                             </div>
 
                             {/*<button type="submit">sub</button>*/}
                             <div className="row end-xs">
-                                <FlatButton fullWidth={true} label="Sign in" primary={true} type="submit" onClick={this.handleSubmit.bind(this)}
+                                <FlatButton fullWidth={true} label="Sign in" primary={true} type="submit"
                                             />
                             </div>
                         </form>
