@@ -84,7 +84,7 @@ const routes = [
     {
         path: '/dashboard',
         component: Dashboard,
-        title: 'Dashboard',
+        title: 'Dashboard', // title is for main dropdown - login is not shown
         exact: true
     },
     {
@@ -105,20 +105,11 @@ const routes = [
         title: 'Counters',
         exact: true
     },
-
-    {
-        path: '/register',
-        component: Register,
-        title: 'Register',
-        hidden: true,
-        exact: true
-    },
     {
         path: '/payments',
         component: PaymentsC,
         title: 'Payments',
         exact: true,
-        hidden: false,
         routes: [
             {
                 path: '/payments/create',
@@ -136,6 +127,12 @@ const routes = [
                 exact: true
             }
         ]
+    },
+    {
+        path: '/register',
+        component: Register,
+        hidden: true,
+        exact: true
     }
 ];
 

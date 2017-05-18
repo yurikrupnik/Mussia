@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import resource from './request';
-import {selector, url} from './config';
 import {
     BrowserRouter as Router,
     Route,
@@ -16,7 +15,7 @@ import {
 
 import RouteWithSubRoutes from '../../components/Utils/RouteWithRoutes';
 
-class Payments extends Component {
+export default class extends Component {
 
     constructor(props) {
         super(props);
@@ -43,5 +42,3 @@ class Payments extends Component {
         )
     }
 }
-
-export default Payments;

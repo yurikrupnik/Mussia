@@ -11,69 +11,69 @@ import {
     StaticRouter
 } from 'react-router-dom';
 
-import Payments from '../../../api/payments/request';
 import Header from '../Header';
-
-
-class PaymentsData extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        // const {actions} = this.props;
-        const {actions, location, match} = this.props;
-        const {pathname, query, search} = location;
-        actions.read(query, {yalublu: true}, {
-            fields: ['name', 'info']
-        });
-    }
-
-    render() {
-        const payments = this.props[PaymentsData.selector];
-        const {match} = this.props;
-        const {data, count} = payments;
-        return (
-            <div> payments {
-                data.map(function (v, i) {
-                    return <div key={i}>
-                        <Link to={`${match.url}/${v._id}`}>{v.name}</Link>
-                    </div>
-                })
-            }</div>
-        )
-    }
-}
-
-import smartComponent from '../index';
-
-let conected = smartComponent(Payments, PaymentsData);
-
-const Create = (props) => {
-    const schema = {
-        props: {
-            name: {
-                type: 'string',
-            },
-            info: {
-                type: 'string'
-            }
-        }
-    };
-    return (
-        <form name={'nir'}>
-            <input type="text"/>
-            <input type="text"/>
-        </form>
-    )
-};
-
-const Edit = ({match}) => {
-    return (
-        <h3>ID: {match.params.id}</h3>
-    )
-};
-
+// import Payments from '../../../api/payments/request';
+//
+//
+// class PaymentsData extends Component {
+//     constructor(props) {
+//         super(props);
+//     }
+//
+//     componentDidMount() {
+//         // const {actions} = this.props;
+//         const {actions, location, match} = this.props;
+//         const {pathname, query, search} = location;
+//         actions.read(query, {yalublu: true}, {
+//             fields: ['name', 'info']
+//         });
+//     }
+//
+//     render() {
+//         const payments = this.props[PaymentsData.selector];
+//         const {match} = this.props;
+//         const {data, count} = payments;
+//         return (
+//             <div> payments {
+//                 data.map(function (v, i) {
+//                     return <div key={i}>
+//                         <Link to={`${match.url}/${v._id}`}>{v.name}</Link>
+//                     </div>
+//                 })
+//             }</div>
+//         )
+//     }
+// }
+//
+// import smartComponent from '../index';
+//
+// let conected = smartComponent(Payments, PaymentsData);
+//
+// const Create = (props) => {
+//     const schema = {
+//         props: {
+//             name: {
+//                 type: 'string',
+//             },
+//             info: {
+//                 type: 'string'
+//             }
+//         }
+//     };
+//     return (
+//         <form name={'nir'}>
+//             <input type="text"/>
+//             <input type="text"/>
+//         </form>
+//     )
+// };
+//
+// const Edit = ({match}) => {
+//     return (
+//         <h3>ID: {match.params.id}</h3>
+//     )
+// };
+//
 import routes from '../App/routes';
 import RouteWithSubRoutes from '../../Utils/RouteWithRoutes';
 
