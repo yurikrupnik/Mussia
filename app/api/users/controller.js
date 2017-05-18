@@ -5,8 +5,14 @@ import {handleError, respondWithResult} from '../../services/node/nodeResponse/a
 
 
 // Gets a list Count
-export function getUser(req, res) {
+export function getUsers(req, res) {
     return Users.find({})
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+export function getUserById(req, res) {
+    return Users.find({_id: req.params.id})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
