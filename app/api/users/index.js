@@ -1,4 +1,5 @@
-import router from './../../services/express/Router';
+import express from 'express';
+let router =  express.Router();
 import {getUser, updateUser, saveUser, deleteUser} from './controller';
 let usersUrl = '/users';
 
