@@ -11,7 +11,10 @@ import api from './api';
 import router from './router';
 import errors from './errors';
 
+import helmet from 'helmet';
+
 export default (app) => {
+    app.use(helmet());
     logger(app);
     setters(app);
     webpack(app);
