@@ -1,6 +1,6 @@
 import React from 'react'
-// import {matchPath} from 'react-router';
-// import {routes} from '../../../../routes';
+import {matchPath} from 'react-router';
+import {routes} from '../../../../routes';
 
 import {renderToString} from 'react-dom/server';
 import App from '../../../../components/Smart/App';
@@ -23,7 +23,7 @@ export default (req, res, next) => {
         res.writeHead(301, {
             Location: context.url
         });
-        res.end()
+        res.end();
             // can use the `context.status` that
             // we added in RedirectWithStatus
         // req.redirect(context.status, context.url);
