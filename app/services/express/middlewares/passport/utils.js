@@ -3,9 +3,10 @@ import {validatePassword, generateHash} from '../../../node/pass-hash';
 import Users from '../../../../api/users/model';
 
 import faker from 'faker';
+import shortid from 'shortid';
 
-let serialize = (user, done) => done(null, user.email);
-let deserialize = (email, done) => Users.findOne({email}, done);
+let serialize = (user, done) => done(null, user.id);
+let deserialize = (id, done) => Users.findOne({id}, done);
 
 function handleHash(user, done) {
     return function (hash) {
@@ -45,7 +46,8 @@ function checkUserByEmailAndPass(email, password, done) {
                     data: {
                         url: faker.internet.avatar()
                     }
-                }
+                },
+                id: shortid.generate()
             };
             generateHash(password)
                 .then(handleHash(nuser, done));
@@ -57,17 +59,21 @@ function checkUserByEmailAndPass(email, password, done) {
     }
 }
 
-function socialAppsRegisterCallback(profile, done) {
+function socialAppsRegisterCallback(token, refreshTocken, profile, done) {
     // find the user in the database based on their provider id
     return function () {
+        profile._json.token = refreshTocken || token;
         let email = profile.email;
-        return Users.findOne({email})
+
+        return Users.findOne({id: profile.id})
             .then(function (user) {
                 // if the user is found, then log them in
+                console.log('user', user);
+
                 if (user) {
                     done(null, user); // user found, return that user
                 } else {
-                    return insertUser(profile._json, done);
+                    insertUser(profile._json, done);
                 }
 
             })
@@ -76,7 +82,7 @@ function socialAppsRegisterCallback(profile, done) {
 }
 
 function socialNetworkStrategy(token, refreshTocken, profile, done) {
-    process.nextTick(socialAppsRegisterCallback(profile, done));
+    process.nextTick(socialAppsRegisterCallback(token, refreshTocken, profile, done));
 }
 
 function localStrategyHandler(req, email, password, done) {

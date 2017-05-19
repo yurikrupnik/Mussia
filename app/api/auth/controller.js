@@ -1,12 +1,12 @@
 import passport from 'passport';
 
 function handleLogin(req, res, next) {
-    passport.authenticate('local', function (err, user) {
+    passport.authenticate('local', function (err, user, info) {
         if (err) {
             return next(err);
         }
         if (!user) {
-            res.redirect('/register');
+            res.json({Error: 'login fail', 'reason': 'wrong password'});
         }
         req.logIn(user, function (err) {
             if (err) {

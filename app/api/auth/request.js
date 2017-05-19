@@ -21,4 +21,5 @@ export function login(body) {
             console.log('data', data);
             return data;
         })
+        .catch(err => console.log('err', err));
 }

@@ -12,7 +12,7 @@ export function getUsers(req, res) {
 }
 
 export function getUserById(req, res) {
-    return Users.find({_id: req.params.id})
+    return Users.findOne({_id: req.params.id})
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
