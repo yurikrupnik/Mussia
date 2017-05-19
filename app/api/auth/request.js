@@ -4,11 +4,11 @@ import request from 'superagent';
 export function logout() {
     return request.get('/auth/logout')
         .then(data => {
-            console.log('data', data);
+            console.warn('data', data);
 
         })
         .catch(err => {
-            console.log('err', err);
+            console.warn('err', err);
 
         });
 }
@@ -21,5 +21,5 @@ export function login(body) {
             console.log('data', data);
             return data;
         })
-        .catch(err => console.log('err', err));
+        .catch(err => console.warn('err', err));
 }

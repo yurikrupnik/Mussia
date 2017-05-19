@@ -29,7 +29,8 @@ function passUser(done) {
 function checkValidUser(user, done) {
     return function (valid) {
         if (!valid) {
-            done(null, false);
+            // done(new Error('bad login'));
+            done(null, false, {message: 'invalid user', user: user});
         } else {
             done(null, user);
         }

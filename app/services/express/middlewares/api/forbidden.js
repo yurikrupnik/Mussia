@@ -10,3 +10,10 @@ export default (req, res, next) => {
         // todo error reducer with some actions that can pop an error modal
     }
 };
+
+
+let error = {
+    type: 'server',
+    cause: 'server local auth invalid user session',
+    file: ''
+};

@@ -6,7 +6,8 @@ function handleLogin(req, res, next) {
             return next(err);
         }
         if (!user) {
-            res.json({Error: 'login fail', 'reason': 'wrong password'});
+            // next({type: 'server', reaspn: ''})
+            return res.redirect(401, '/', { success : false, message : 'authentication failed', info});
         }
         req.logIn(user, function (err) {
             if (err) {
