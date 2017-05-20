@@ -6,7 +6,7 @@ function handleLogin(req, res, next) {
             return next(err);
         }
         if (!user) {
-            res.status(401).redirect('/register');
+            // res.status(600).redirect('/register');
         }
         req.logIn(user, function (err) {
             if (err) {
