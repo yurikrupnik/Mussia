@@ -42,7 +42,7 @@ class PaymentsData extends Component {
             <div> payments {
                 data.map(function (v, i) {
                     return <div key={i}>
-                        <Link to={`${match.url}/${v._id}`}>{v.name}</Link>
+                        <Link to={`${match.url}/${v._id}`}>{v.title}</Link>
                     </div>
                 })
             }</div>
