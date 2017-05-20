@@ -8,92 +8,64 @@ import shortid from 'shortid';
 let serialize = (user, done) => done(null, user.id);
 let deserialize = (id, done) => Users.findOne({id}, done);
 
-function handleHash(user, done) {
-    return function (hash) {
-        user.hashPassword = hash;
-        insertUser(user, done);
+const handleHash = (user, done) => hash => {
+    user.hashPassword = hash;
+    insertUser(user, done);
+};
+
+const insertUser = (user, done) => Users.insert(user).then(passUser(done));
+
+const passUser = done => user => done(null, user);
+
+const checkValidUser = (user, done) => valid => {
+    if (!valid) {
+        done(null, false, {message: 'invalid user', user: user});
+    } else {
+        done(null, user);
     }
-}
+};
 
-function insertUser(user, done) {
-    return Users.insert(user)
-        .then(passUser(done));
-}
-
-function passUser(done) {
-    return function (user) {
-        return done(null, user);
-    }
-}
-
-function checkValidUser(user, done) {
-    return function (valid) {
-        if (!valid) {
-            done(null, false, {message: 'invalid user', user: user});
-        } else {
-            done(null, user);
-        }
-    }
-}
-
-function checkUserByEmailAndPass(email, password, done) {
-    return function (user) {
-        if (!user) {
-            let nuser = { // todo use here some User model constructor
-                email: email,
-                name: 'admin',
-                picture: {
-                    data: {
-                        url: faker.internet.avatar()
-                    }
-                },
-                id: shortid.generate()
-            };
-            generateHash(password)
-                .then(handleHash(nuser, done));
-
-        } else {
-            validatePassword(password, user.hashPassword)
-                .then(checkValidUser(user, done));
-        }
-    }
-}
-
-function socialAppsRegisterCallback(token, refreshTocken, profile, done) {
-    // find the user in the database based on their provider id
-    return function () {
-        profile._json.token = refreshTocken || token;
-        let email = profile.email;
-
-        return Users.findOne({id: profile.id})
-            .then(function (user) {
-                // if the user is found, then log them in
-                console.log('user', user);
-
-                if (user) {
-                    done(null, user); // user found, return that user
-                } else {
-                    insertUser(profile._json, done);
+const checkUserByEmailAndPass = (email, password, done) => user => {
+    if (!user) {
+        let nuser = { // todo use here some User model constructor
+            email: email,
+            name: 'admin',
+            picture: {
+                data: {
+                    url: faker.internet.avatar()
                 }
+            },
+            id: shortid.generate()
+        };
+        generateHash(password)
+            .then(handleHash(nuser, done));
 
-            })
-            .catch(done);
+    } else {
+        validatePassword(password, user.hashPassword)
+            .then(checkValidUser(user, done));
     }
-}
+};
 
-function socialNetworkStrategy(token, refreshTocken, profile, done) {
-    process.nextTick(socialAppsRegisterCallback(token, refreshTocken, profile, done));
-}
+const socialAppsRegisterCallback = (profile, done) => () => {
+    Users.findOne({id: profile.id})
+        .then(function (user) {
+            if (user) {
+                done(null, user); // user found, return that user
+            } else {
+                insertUser(profile._json, done);
+            }
 
-function localStrategyHandler(req, email, password, done) {
+        })
+        .catch(done);
+};
+const socialNetworkStrategy = (token, refreshTocken, profile, done) => process.nextTick(socialAppsRegisterCallback(profile, done));
+const localStrategyHandler = (req, email, password, done) => {
     Users.findOne({email})
         .then(checkUserByEmailAndPass(email, password, done))
         .catch(done);
-}
+};
 
-function setSocialAuth(provider) {
-    return passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email']});
-}
+const setSocialAuth = (provider) => passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email']});
 
 function createSocialNetworkRoutes(app) {
     const socialNetworks = ['facebook'];
