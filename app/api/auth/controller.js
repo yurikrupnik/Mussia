@@ -6,8 +6,7 @@ function handleLogin(req, res, next) {
             return next(err);
         }
         if (!user) {
-            // next({type: 'server', reaspn: ''})
-            return res.redirect(401, '/', { success : false, message : 'authentication failed', info});
+            res.status(401).redirect('/register');
         }
         req.logIn(user, function (err) {
             if (err) {

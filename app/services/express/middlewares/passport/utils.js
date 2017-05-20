@@ -29,7 +29,6 @@ function passUser(done) {
 function checkValidUser(user, done) {
     return function (valid) {
         if (!valid) {
-            // done(new Error('bad login'));
             done(null, false, {message: 'invalid user', user: user});
         } else {
             done(null, user);
@@ -93,7 +92,7 @@ function localStrategyHandler(req, email, password, done) {
 }
 
 function setSocialAuth(provider) {
-    return passport.authenticate(provider, {successRedirect: '/', scope: ['email']});
+    return passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email']});
 }
 
 function createSocialNetworkRoutes(app) {
