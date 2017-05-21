@@ -3,12 +3,15 @@ import mongoose, {Schema} from 'mongoose';
 
 
 var PublisherSchema= Schema({
-    _id: String,
+    _id: {
+        type: String,
+    },
     name: String,
     founded: Number,
     location: String,
 });
 
+let PublisherModel = mongoose.model('Publisher', PublisherSchema);
 var PaymentSchema = Schema({
     title: String,
     author: String,
@@ -22,7 +25,6 @@ var PaymentSchema = Schema({
 });
 
 let Model = mongoose.model(model, PaymentSchema);
-let PublisherModel = mongoose.model('Publisher', PublisherSchema);
 
 
 let publish = new PublisherModel({
@@ -55,30 +57,64 @@ let payment2 = new Model({
 });
 
 
-// publish.save();
+// publish.save(function (err, res) {
+//     if (err) {
+//         console.log('err', err);
+//
+//     }
+//     console.log('res', res);
+//
+// });
 // publish2.save();
 // payment1.save(function (err, res) {
 //     if (err) {
 //         console.log('err', err);
 //     }
 //     console.log('res', res);
-//
-//
 // });
 // payment2.save(function (err, res) {
 //     if (err) {
 //         console.log('err', err);
 //     }
 //     console.log('res', res);
-//
-//
 // });
-// payment2.save();
-// payment.save(function (err, res) {
+// payment2
+// payment.save(func.save(function (err, res) {
+//     if (err) {
+//         console.log('err', err);
+//     }
+//     console.log('res', res);
+//
+//
+// });s
+// payment2.save();tion (err, res) {
 //     if (err) {
 //         console.warn('err', err);
 //     }
 //     console.log('res', res);
 // });
+
+// Model
+//     .findOne({author: 'Kristina Chodorow'})
+//     .populate('publisher_id') // <--
+// //     .then(function (err, res) {
+// //         if (err) console.log('err', err);
+// //
+// //
+// //         console.log('The creator is %s', res.publisher_id);
+// //         // prints "The creator is Aaron"
+// //
+// //         console.log('The creators age is %s', res.publisher_id);
+// //
+// //     });
+//
+//     .exec(function (err, story) {
+//         if (err) {
+//             console.warn('err', err);
+//         }
+//         console.log('The creator is %s', story);
+//         // prints "The creator is Aaron"
+//     })
+
 
 export default Model;
