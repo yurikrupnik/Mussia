@@ -81,7 +81,7 @@ class Header extends Component {
                 </DropDownMenu>
             </ToolbarGroup>
             <ToolbarGroup>
-                <div>logout {user.email}</div>
+                <div onClick={this.logout.bind(this)}>logout {user.email}</div>
                 {/*<Avatar onClick={this.logout.bind(this)} src={user.picture.data.url}/>*/}
             </ToolbarGroup>
         </Toolbar>) : (<Redirect to="/register"/>)

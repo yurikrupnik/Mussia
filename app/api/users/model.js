@@ -1,18 +1,35 @@
-import mongoose from 'mongoose';
-let Schema = mongoose.Schema;
-import db from '../../config/db';
-export default db.get('users');
+import mongoose, {Schema} from 'mongoose';
 
-var schema = new Schema({
-    email: String,
+var UserSchema = new Schema({
+    id: {
+        type: String,
+        index: true
+    },
+    email: {
+        type: String,
+    },
     name: String,
     hashPassword: String,
+    picture: {
+        data: {
+            url: String
+        }
+    }
     // hasToken: Boolean,
     // id: Schema.Types.ObjectId,
-    todos: []
+    // todos: [{
+    //     comepleted: {
+    //         type: Boolean,
+    //         default: false
+    //     },
+    //     title: String,
+    //     createdOn: {
+    //         type: Date,
+    //         default: Date.now
+    //     }
+    // }]
 
 });
-// var Model = db.model('User', schema);
 
-// export default mongoose.model('User', schema);
+export default mongoose.model('User', UserSchema);
 

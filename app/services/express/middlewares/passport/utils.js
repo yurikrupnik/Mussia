@@ -5,25 +5,26 @@ import Users from '../../../../api/users/model';
 import faker from 'faker';
 import shortid from 'shortid';
 
-let serialize = (user, done) => done(null, user.id);
-let deserialize = (id, done) => Users.findOne({id}, done);
-
-const handleHash = (user, done) => hash => {
-    user.hashPassword = hash;
-    insertUser(user, done);
+let serialize = (user, done) => {
+    done(null, user.id);
 };
-
-const insertUser = (user, done) => Users.insert(user).then(passUser(done));
-
-const passUser = done => user => done(null, user);
+let deserialize = (id, done) => {
+    Users.find({id}, done);
+};
 
 const checkValidUser = (user, done) => valid => {
     if (!valid) {
-        done(null, false, {message: 'invalid user', user: user});
+        return done(null, false, {message: 'invalid user', user: user});
     } else {
-        done(null, user);
+        return done(null, user);
     }
 };
+const handleHash = user => hash => {
+    user.hashPassword = hash;
+    return user;
+};
+
+const saveUser = done => user => user.save(done);
 
 const checkUserByEmailAndPass = (email, password, done) => user => {
     if (!user) {
@@ -37,33 +38,50 @@ const checkUserByEmailAndPass = (email, password, done) => user => {
             },
             id: shortid.generate()
         };
-        generateHash(password)
-            .then(handleHash(nuser, done));
+        let newUser = new Users(nuser);
+        return generateHash(password)
+            .then(handleHash(newUser))
+            .then(saveUser(done))
+            .catch(function (err) {
+                console.log('error saving user', err);
+            });
 
     } else {
-        validatePassword(password, user.hashPassword)
+        return validatePassword(password, user.hashPassword)
             .then(checkValidUser(user, done));
     }
 };
 
+const localStrategyHandler = (req, email, password, done) => {
+    Users.findOne({email})
+        .then(checkUserByEmailAndPass(email, password, done))
+        .catch(function (err) {
+            console.log('err in catch 1', err );
+
+            done(err)
+        });
+};
+
 const socialAppsRegisterCallback = (profile, done) => () => {
-    Users.findOne({id: profile.id})
+    return Users.findOne({id: profile.id})
         .then(function (user) {
             if (user) {
                 done(null, user); // user found, return that user
             } else {
-                insertUser(profile._json, done);
+                let newUser = new Users({
+                    id: profile._json.id,
+                    email: profile._json.email,
+                    name: profile._json.name,
+                    picture: profile._json.cover.source
+                });
+                newUser.save(done);
+                // insertUser(newUser, done);
             }
 
         })
         .catch(done);
 };
 const socialNetworkStrategy = (token, refreshTocken, profile, done) => process.nextTick(socialAppsRegisterCallback(profile, done));
-const localStrategyHandler = (req, email, password, done) => {
-    Users.findOne({email})
-        .then(checkUserByEmailAndPass(email, password, done))
-        .catch(done);
-};
 
 const setSocialAuth = (provider) => passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email']});
 

@@ -3,17 +3,20 @@ import passport from 'passport';
 function handleLogin(req, res, next) {
     passport.authenticate('local', function (err, user, info) {
         if (err) {
-            return next(err);
+            next(err);
         }
         if (!user) {
-            // res.status(600).redirect('/register');
+            // res.locals.error = [info];
+            res.status(500).json({ error: 'message' });
+
+        } else {
+            req.logIn(user, function (err) {
+                if (err) {
+                    next(err);
+                }
+                res.redirect('/');
+            });
         }
-        req.logIn(user, function (err) {
-            if (err) {
-                next(err);
-            }
-            res.redirect('/');
-        });
     })(req, res, next);
 }
 
