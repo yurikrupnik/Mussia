@@ -1,7 +1,5 @@
 import React from 'react'
 import {matchPath} from 'react-router';
-import {routes} from '../../../../routes';
-
 import {renderToString} from 'react-dom/server';
 import App from '../../../../components/Smart/App';
 import { StaticRouter } from 'react-router-dom'
