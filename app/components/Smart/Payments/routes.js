@@ -1,6 +1,4 @@
-/**
- * Created by yurikrupnik on 22/05/2017.
- */
+
 import {
     BrowserRouter as Router,
     Route,
@@ -11,89 +9,135 @@ import {
     StaticRouter
 } from 'react-router-dom';
 import React, {Component} from 'react';
-class PaymentsData extends Component {
+// class PaymentsData extends Component {
+//     constructor(props) {
+//         super(props);
+//     }
+//
+//     componentDidMount() {
+//         // const {actions} = this.props;
+//         const {actions, location, match} = this.props;
+//         const {pathname, query, search} = location;
+//         actions.read(query, {yalublu: true}, {
+//             fields: ['name', 'info']
+//         });
+//     }
+//
+//     handleDelete(e, id) {
+//         const {actions, location, match} = this.props;
+//         console.log('e', e);
+//         console.log('id', id);
+//
+//         actions.delete({}, {}, [])
+//     }
+//
+//     render() {
+//         const payments = this.props[PaymentsData.selector];
+//         const {match} = this.props;
+//         const {data, count} = payments;
+//         return (
+//             <div> payments {
+//                 data.map(function (v, i) {
+//                     return <div key={i}>
+//                         <Link to={`${match.url}/${v._id}`}>{v.title}</Link>
+//                     </div>
+//                 })
+//             }</div>
+//         )
+//     }
+// }
+import PaymentsList from './list';
+import smartComponent from '../index';
+import request from '../../../api/payments/request';
+// let conected = smartComponent(request, PaymentsData);
+
+class Create extends Component {
+    constructor(props) {
+        super(props);
+    }
+    handleSubmit(form ,e) {
+        e.preventDefault();
+        const {actions} = this.props;
+        actions.create(null, null, form);
+    }
+    render() {
+
+        let form = {
+            title: '',
+            company: '',
+            amount: 1
+        };
+
+        return (
+            <div>
+                <h4>Create New Payment</h4>
+                <form>
+                    <div>
+                        <h5>Title: </h5>
+                        <input type="text" defaultValue={form.title}/>
+                    </div>
+                    <div>
+                        <h5>Company: </h5>
+                        <input type="text" defaultValue={form.company}/>
+                    </div>
+                    <div>
+                        <h5>Amount: </h5>
+                        <input type="number" step={1} max={100} min={0} defaultValue={form.amount}/>
+                    </div>
+                    <button onClick={this.handleSubmit.bind(this, form)}>Submit</button>
+                </form>
+            </div>
+        )
+    }
+
+}
+let SmartCreate = smartComponent(request, Create);
+class Edit extends Component {
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-        // const {actions} = this.props;
+    handleSubmit(form, event) {
+        event.preventDefault();
         const {actions, location, match} = this.props;
-        const {pathname, query, search} = location;
-        actions.read(query, {yalublu: true}, {
-            fields: ['name', 'info']
-        });
-    }
-
-    handleDelete(e, id){
-        const {actions, location, match} = this.props;
-        console.log('e', e);
-        console.log('id', id);
-
-        actions.delete({}, {}, [])
+        actions.update({}, match.params, {title: 'wjat everer'});
     }
 
     render() {
-        const payments = this.props[PaymentsData.selector];
-        const {match} = this.props;
-        const {data, count} = payments;
+        const {actions, location, match} = this.props;
         return (
-            <div> payments {
-                data.map(function (v, i) {
-                    return <div key={i}>
-                        <Link to={`${match.url}/${v._id}`}>{v.title}</Link>
+            <div>
+                <h3>Edit for ID: {match.params.id}</h3>
+                <form ref="form1">
+                    <div>
+                        <h5>Title</h5>
+                        <input type="text" name="title"/>
                     </div>
-                })
-            }</div>
+                    <button onClick={this.handleSubmit.bind(this, 'form1')}>submit</button>
+                </form>
+            </div>
         )
     }
+
 }
 
-import smartComponent from '../index';
-import request from '../../../api/payments/request';
-let conected = smartComponent(request, PaymentsData);
+let SmartEdit = smartComponent(request, Edit);
 
-const Create = (props) => {
-    const schema = {
-        props: {
-            name: {
-                type: 'string',
-            },
-            info: {
-                type: 'string'
-            }
-        }
-    };
-    return (
-        <div>
-            <h4>Create New Payment</h4>
-            <form>
-                <input type="text" />
-                <input type="text"/>
-            </form>
-        </div>
-    )
-};
 
-const Edit = ({match}) => {
-    return (
-        <h3>ID: {match.params.id}</h3>
-    )
-};
 export default [
     {
         path: '/payments/create',
-        component: Create,
+        component: SmartCreate,
         exact: true
     },
     {
-        path: '/payments/data',
-        component: conected,
+        path: '/payments',
+        component: PaymentsList,
         exact: true,
     },
     {
-        path: '/payments/data/:id',
-        component: Edit,
+        path: '/payments/:id',
+        component: SmartEdit,
         exact: true
     }
 ]

@@ -3,6 +3,7 @@ import {apiPrefix} from '../../../config/env';
 
 let returnBody = res => res.body;
 let handleError = err => {
+    debugger;
     if (err.status === 403) {
         console.log('found 403 - do some shit if want', err);
     }
@@ -42,8 +43,7 @@ export default class Request {
 
     static callDelete(url, query, params, body) {
         let type = 'delete';
-        return this.getResource(type, url)
-            // .query(query)
+        return this.getResource(type, url) // delete by sending ids in body
             .send(body)
             .then(returnBody)
             .catch(handleError);
@@ -59,9 +59,10 @@ export default class Request {
 
     static callUpdate(url, query, params, body) {
         let type = 'update';
+        // console.log('body', body);
+        // console.log('body', params);
         return this.getResource(type, url)
-            .query(query)
-            .send(params)
+            .send(Object.assign({}, body, {_id: params.id}))
             .then(returnBody)
             .catch(handleError);
     }

@@ -10,7 +10,7 @@ export function count(req, res) {
 
 export function CREATE(req, res) {
     const {body} = req;
-    return Model.insert(body)
+    return Model.create(body)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
@@ -22,7 +22,7 @@ export function READ(req, res) {
     const {query, params, body} = req;
     // let query = {};
     let fields = '';
-
+    // res.status(500).end(new Error({Errr: 'dsa'}));
     return Model.find(query, fields)
         .then(respondWithResult(res))
         .catch(handleError(res));
@@ -30,13 +30,13 @@ export function READ(req, res) {
 
 export function UPDATE(req, res) {
     const {query, params, body} = req;
-    return Model.findOneAndUpdate({})
+    return Model.findOneAndUpdate({_id: params.id}, body)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
 
 export function DELETE(req, res) {
-    const {query, params, body} = req;
+    const {body} = req;
     const field = 'id'; // todo symbol it
     let ids = has(body, field) ? [body[field]] : body;
     res.ids = ids;

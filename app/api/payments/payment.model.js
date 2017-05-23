@@ -19,7 +19,8 @@ var PaymentSchema = Schema({
     },
     company: {
         type: String,
-        required: [true, 'must have company']
+        required: [true, 'must have company'],
+        default: 'google'
     },
     amount: {
         type: Number,
@@ -29,6 +30,7 @@ var PaymentSchema = Schema({
         default: 1,
         step: 1
     },
+
     payDate: {
         type: Date,
         default: Date.now
@@ -45,7 +47,7 @@ var PaymentSchema = Schema({
 
 let Model = mongoose.model(model, PaymentSchema);
 
-console.log('Model.schema', Model.schema);
+// console.log('Model.schema', Model.schema);
 
 let newPayment1 = new Model({
     title: 'Speakers',
@@ -88,8 +90,8 @@ let newPayment2= new Model({
 //     publisher_id: "pearson"
 // });
 
-// newPayment1.save()
 // newPayment2.save()
+// newPayment1.save()
 // publish.save(function (err, res) {
 //     if (err) {
 //         console.log('err', err);

@@ -11,6 +11,7 @@ export let respondWithResult = (res, statusCode) => {
 export let respondWithDelete = (res, statusCode) => {
     // send the ids back to the client to remove from the view without http request
     const {ids} = res;
-    statusCode = statusCode || 200;
+    statusCode = statusCode || 202;
     return entry => res.status(statusCode).json(ids);
+
 };

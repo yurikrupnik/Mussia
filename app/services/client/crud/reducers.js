@@ -2,7 +2,12 @@ import _ from 'lodash';
 
 export const reduceReadPending = (state, payload) => Object.assign({}, state, {active: true});
 export const reduceReadFulfilled = (state, payload) => Object.assign({}, state, {active: false, data: payload});
-export const reduceError = (state, payload) => Object.assign({}, state, {error: {fuck: true}});
+export const reduceError = (state, payload) =>{
+    debugger
+    console.log('error payload', payload);
+
+    return Object.assign({}, state, {error: {fuck: true}})
+};
 export const reduceDeletePending = (state, payload) => Object.assign({}, state, {active: true});
 export const reduceDeleteFulfilled = (state, payload) => {
     const data = state.data.filter(val => !_.includes(payload, val._id));

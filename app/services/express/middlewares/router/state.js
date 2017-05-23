@@ -4,8 +4,6 @@ import configureStore from '../../../../redux/store/store';
 import {fountUser} from '../../../../redux/actions/user';
 
 export default (req, res, next) => {
-    console.log('req.errors get', res.locals.errors);
-
     let store = configureStore();
     if (req.isAuthenticated()) { // todo client it
         store.dispatch(fountUser(req.user));
@@ -13,8 +11,7 @@ export default (req, res, next) => {
     // store.dispatch(fetchPayments()).then(() => {
     // console.log('req.authInfo', req.authInfo);
     // console.log('res.locals.error', res.locals.error);
-    let state = store.getState()
-    res.locals.state = state;
+    res.locals.state = store.getState();
     next();
     // });
 
