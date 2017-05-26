@@ -46,7 +46,7 @@ var PaymentSchema = Schema({
 });
 
 let Model = mongoose.model(model, PaymentSchema);
-
+Model.selector = 'payments';
 // console.log('Model.schema', Model.schema);
 
 let newPayment1 = new Model({

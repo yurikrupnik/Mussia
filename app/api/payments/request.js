@@ -1,6 +1,6 @@
 import Request from '../../services/client/Request';
 import {url, selector} from './config';
-
+// import Model from '../../api/payments/payment.model';
 class Payments extends Request {
     constructor() {
         super(); // Request is just an object to handle superagent
@@ -13,8 +13,12 @@ class Payments extends Request {
     }
 
     // todo make lots of wierd reqeusts tp play with db and Request
-    read(query, params, body) {
-        return Request.callRead(this.url, query, params, body);
+    read(readConfig) {
+        // console.log('Model', Model);
+        // console.log('readConfig in read pf Rwwwww', readConfig);
+
+
+        return Request.callRead(this.url, readConfig);
     }
 
     update(query, params, body) {

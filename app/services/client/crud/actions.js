@@ -1,11 +1,13 @@
 import {CREATE, READ, UPDATE, DELETE} from './config';
 
 const dispatchAsyncActionByResource = (resource, query, params, body, prefix) => {
+    console.log('resource', resource);
+
     const URL = resource.url.replace('/', '').toUpperCase();
     const method = prefix.toLowerCase();
     return {
         type: `${prefix}_${URL}`,
-        payload: resource[method](query, params, body) // always pass query params and body to the requests
+        payload: resource[method](query, params, body)
     };
 };
 

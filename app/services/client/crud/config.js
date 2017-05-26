@@ -10,8 +10,8 @@ import {
     reduceUpdateFulfilled
 } from './reducers';
 
-export const CREATE = 'CREATE';
 export const READ = 'READ';
+export const CREATE = 'CREATE';
 export const UPDATE = 'UPDATE';
 export const DELETE = 'DELETE';
 
@@ -32,7 +32,7 @@ export const initialState = {
     // error: null
 };
 
-const promiseActions = ['PENDING', 'FULFILLED', 'ERROR'];
+const promiseActions = ['PENDING', 'FULFILLED', 'REJECTED'];
 
 export const ACTIONS = [
     {
@@ -40,7 +40,7 @@ export const ACTIONS = [
         handlers: {
             PENDING: reduceReadPending,
             FULFILLED: reduceReadFulfilled,
-            ERROR: reduceError,
+            REJECTED: reduceError,
         }
     },
     {
@@ -48,7 +48,7 @@ export const ACTIONS = [
         handlers: {
             PENDING: reduceDeletePending,
             FULFILLED: reduceDeleteFulfilled,
-            ERROR: reduceError,
+            REJECTED: reduceError,
         }
     },
     {
@@ -56,7 +56,7 @@ export const ACTIONS = [
         handlers: {
             PENDING: reduceCreatePending,
             FULFILLED: reduceCreateFulfilled,
-            ERROR: reduceError,
+            REJECTED: reduceError,
         }
     },
     {
@@ -64,7 +64,7 @@ export const ACTIONS = [
         handlers: {
             PENDING: reduceUpdatePending,
             FULFILLED: reduceUpdateFulfilled,
-            ERROR: reduceError,
+            REJECTED: reduceError,
         }
     }
 ];

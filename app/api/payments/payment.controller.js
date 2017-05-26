@@ -19,13 +19,23 @@ export function CREATE(req, res) {
 export function READ(req, res) {
 
     // todo , req does not containts body in get methods
+
     const {query, params, body} = req;
     // let query = {};
-    let fields = '';
+    console.log('query', query);
+    console.log('params', params);
+    console.log('body', body);
+
+
+    let fields = query.fields || [];
     // res.status(500).end(new Error({Errr: 'dsa'}));
     return Model.find(query, fields)
         .then(respondWithResult(res))
         .catch(handleError(res));
+}
+
+export function READ_BY_ID(req, res) {
+
 }
 
 export function UPDATE(req, res) {

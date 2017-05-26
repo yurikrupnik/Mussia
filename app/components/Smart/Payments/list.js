@@ -17,25 +17,32 @@ class PaymentsList extends Component {
     }
 
     componentDidMount() {
-        // const {actions} = this.props;
+        debugger
         const {actions, location, match} = this.props;
         const {pathname, query, search} = location;
-        actions.read(query, {yalublu: true}, {
+
+        const readConfig = {
+            query: query,
+            params: {},
             fields: ['name', 'info']
-        });
+        };
+
+        actions.read(readConfig);
     }
 
-    handleDelete(e, id){
-        const {actions, location, match} = this.props;
-        console.log('e', e);
-        console.log('id', id);
-
-        actions.delete({}, {}, [])
-    }
+    // handleDelete(e, id){
+    //     const {actions, location, match} = this.props;
+    //     console.log('e', e);
+    //     console.log('id', id);
+    //
+    //     actions.delete({}, {}, [])
+    // }
 
     render() {
-        const payments = this.props[PaymentsList.selector];
+        const payments = this.props.payments;
         const {match} = this.props;
+        console.log('payments', payments);
+
         const {data, count} = payments;
         return (
             <div> payments {
@@ -48,7 +55,20 @@ class PaymentsList extends Component {
         )
     }
 }
+//getStateBySelector(selector), createDispatcherByResource(Resource)
+import {connect} from 'react-redux';
 
+import {getPayments, dispatchActions} from '../../../redux/selectors/payments';
+import {getUser} from '../../../redux/selectors/user';
+function gets(state, ownProps) {
+    return {
+        ...getUser(state, ownProps),
+        ...getPayments(state, ownProps)
+    }
+}
+export default connect(gets, dispatchActions)(PaymentsList);
 import smartComponent from '../index';
 import request from '../../../api/payments/request';
-export default smartComponent(request, PaymentsList);
+
+// export default smartComponent(request, PaymentsList);
+// export default PaymentsList;
