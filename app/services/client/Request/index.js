@@ -12,6 +12,7 @@ let handleError = err => {
     if (err.status === 404) {
         console.log('found 404 - do some shit if want', err);
     }
+    debugger
     // throw new Error(err);
     received_error(err);
     // return err;
@@ -40,11 +41,13 @@ export default class Request {
 
     static callRead(url, body) {
         let type = 'read';
-        let {query = ''} = body;
-        console.log('url', url);
-
+        let {query = {}} = body;
+        query.fields = ['title', 'shit'];
         return this.getResource(type, url)
-            .query(query)
+            // .query({vpopu: 'yes now bitch'})
+            // .query({fields: ['title', 'shit']})
+            // .query(query2)
+            // .query(query3)
             .then(returnBody)
             .catch(handleError);
     }

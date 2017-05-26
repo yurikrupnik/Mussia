@@ -2,8 +2,8 @@ export const RECEIVED_ERROR = 'RECEIVED_ERROR';
 export const CLEARED_ERROR = 'SEND_ERROR';
 
 // actions
-export const received_error = (err) => {
-    return dispatch => dispatch({
+export const received_error = (dispatch, err) => {
+    dispatch({
         type: RECEIVED_ERROR,
         error: err
     });

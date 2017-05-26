@@ -91,7 +91,8 @@ class Create extends Component {
     }
 
 }
-let SmartCreate = smartComponent(request, Create);
+
+// let SmartCreate = smartComponent(request, Create);
 class Edit extends Component {
     constructor(props) {
         super(props);
@@ -123,6 +124,17 @@ class Edit extends Component {
 
 let SmartEdit = smartComponent(request, Edit);
 
+import {connect} from 'react-redux';
+
+import {getPayments, dispatchActions} from '../../../redux/selectors/payments';
+import {getUser} from '../../../redux/selectors/user';
+function gets(state, ownProps) {
+    return {
+        ...getUser(state, ownProps),
+        ...getPayments(state, ownProps)
+    }
+}
+let SmartCreate = connect(gets, dispatchActions)(Create);
 
 export default [
     {

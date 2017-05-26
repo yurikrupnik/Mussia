@@ -14,10 +14,6 @@ class Payments extends Request {
 
     // todo make lots of wierd reqeusts tp play with db and Request
     read(readConfig) {
-        // console.log('Model', Model);
-        // console.log('readConfig in read pf Rwwwww', readConfig);
-
-
         return Request.callRead(this.url, readConfig);
     }
 

@@ -4,5 +4,5 @@ import promise from 'redux-promise-middleware';
 import logger from 'redux-logger';
 const composeEnhancers = global.window && global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // todo handle production
 export default composeEnhancers(
-    applyMiddleware(thunk, promise(), logger)
+    applyMiddleware(thunk, logger)
 );

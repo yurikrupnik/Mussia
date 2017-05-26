@@ -11,16 +11,30 @@ import {
     StaticRouter
 } from 'react-router-dom';
 import React, {Component} from 'react';
+const Pays = ({match, list}) => (<div><h2>payments</h2>
+    {
+        list.map((v, i) => {
+            return <div key={i}>
+                <Link to={`${match.url}/${v._id}`}>{v.title}</Link>
+                <div><button >delete</button></div>
+            </div>
+        })
+    }
+</div>);
 class PaymentsList extends Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        debugger
         const {actions, location, match} = this.props;
-        const {pathname, query, search} = location;
+        // console.log('', );
 
+        // console.log('location', location);
+        const {pathname, query, search} = location;
+        // console.log('query', query);
+        // console.log('search', search);
+        // console.log('pathname', pathname);
         const readConfig = {
             query: query,
             params: {},
@@ -30,29 +44,22 @@ class PaymentsList extends Component {
         actions.read(readConfig);
     }
 
-    // handleDelete(e, id){
-    //     const {actions, location, match} = this.props;
-    //     console.log('e', e);
-    //     console.log('id', id);
-    //
-    //     actions.delete({}, {}, [])
-    // }
+    handleDelete(id, e){
+        const {actions, location, match} = this.props;
+        actions.deleteById(id)
+    }
 
     render() {
         const payments = this.props.payments;
-        const {match} = this.props;
-        console.log('payments', payments);
+        const {match, actions} = this.props;
 
         const {data, count} = payments;
         return (
-            <div> payments {
-                data.map(function (v, i) {
-                    return <div key={i}>
-                        <Link to={`${match.url}/${v._id}`}>{v.title}</Link>
-                    </div>
-                })
-            }</div>
-        )
+            <div>pao</div>
+        );
+        // return (
+        //     {/*<Pays list={data}/>*/}
+        // )
     }
 }
 //getStateBySelector(selector), createDispatcherByResource(Resource)
