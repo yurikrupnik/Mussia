@@ -6,7 +6,7 @@ import Counter from '../Counter';
 import Counters from '../Counters';
 import Register from '../Register';
 import Payments from '../Payments';
-// import Settings from '../Settings';
+import Friends from '../Friends';
 import Dashboard from '../Dashboard';
 import Topics from '../Topics';
 
@@ -48,6 +48,12 @@ const routes = [
         component: Register,
         hidden: true,
         exact: true
+    },
+    {
+        path: '/friends',
+        component: Friends,
+        title: 'Friends',
+        exact: true,
     }
 ];
 

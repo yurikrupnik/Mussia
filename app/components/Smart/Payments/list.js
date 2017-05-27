@@ -1,6 +1,4 @@
-/**
- * Created by yurikrupnik on 22/05/2017.
- */
+
 import {
     BrowserRouter as Router,
     Route,
@@ -11,16 +9,12 @@ import {
     StaticRouter
 } from 'react-router-dom';
 import React, {Component} from 'react';
-const Pays = ({match, list}) => (<div><h2>payments</h2>
-    {
-        list.map((v, i) => {
-            return <div key={i}>
-                <Link to={`${match.url}/${v._id}`}>{v.title}</Link>
-                <div><button >delete</button></div>
-            </div>
-        })
-    }
-</div>);
+import FlatButton from 'material-ui/FlatButton';
+const Pays = ({match, list}) => (list.map((v, i) =>
+    <div key={i}>{v.name}</div>
+));
+const numbers = [1, 2, 3, 4, 5];
+
 class PaymentsList extends Component {
     constructor(props) {
         super(props);
@@ -28,17 +22,13 @@ class PaymentsList extends Component {
 
     componentDidMount() {
         const {actions, location, match} = this.props;
-        // console.log('', );
-
-        // console.log('location', location);
-        const {pathname, query, search} = location;
-        // console.log('query', query);
-        // console.log('search', search);
-        // console.log('pathname', pathname);
+        const {pathname, search} = location;
         const readConfig = {
-            query: query,
-            params: {},
-            fields: ['name', 'info']
+            // search: search,
+            // params: {},
+            // fields: [],
+            // limit: 100,
+            // order: 'desc'
         };
 
         actions.read(readConfig);
@@ -49,18 +39,45 @@ class PaymentsList extends Component {
         actions.deleteById(id)
     }
 
+    handleGoToEdit() {
+
+    }
+
     render() {
         const {payments} = this.props;
-        const {match, actions} = this.props;
-debugger
-        // const {data, count} = payments;
         return (
-            <div>pao</div>
-        );
-        // return (payments.map(v => {
-        //     return (<div>{v.title}</div>)
-        // }))
+            <div>
+                {payments.map((post, i) =>{
+                    return (<div key={i}>
+                        <div>
+                            <h5>{post.title}</h5>
+                            <FlatButton label={'Edit'} onClick={this.handleGoToEdit.bind(this)} />
+                            <FlatButton label={'Delete'} onClick={this.handleDelete.bind(this, i)} />
+                        </div>
+                    </div>)
+                    }
+                )}
+            </div>
+        )
     }
+    // render() {
+    //     const {payments} = this.props;
+    //     const {match, actions} = this.props;
+    //     // const {data, count} = payments;
+    //     // const listItems = payments.map((v, i) =>
+    //         {/*<div key={i}>{v.name}</div>*/}
+    //     // );
+    //     const listItems = () => {
+    //         return payments.map((val, index) => {
+    //             return (<div key={index}>{val.title}</div>)
+    //         });
+    //     };
+    //     return (<div>
+    //         payments
+    //         <div>length {payments.length}</div>
+    //         <listItems />
+    //     </div>);
+    // }
 }
 //getStateBySelector(selector), createDispatcherByResource(Resource)
 import {connect} from 'react-redux';

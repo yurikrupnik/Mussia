@@ -68,10 +68,10 @@ const read = (requestPayload) => {
         });
         return axios({
             method:'get',
-            url:'/api/payments'
+            url:'/api/payments',
+            params: requestPayload
         })
             .then(function(response) {
-                // throw new Error('propblem');
                 dispatch({
                     type: READ_PAYMENTS_FULFILLED,
                     payload: response.data
@@ -80,15 +80,7 @@ const read = (requestPayload) => {
 
                 // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
             })
-            .catch(err => {
-                received_error(dispatch, err);
-                // dispatch({
-                //     type: READ_PAYMENTS_REJECTED,
-                //     err
-                // });
-                // return err;
-
-            });
+            .catch(received_error);
     };
 };
 

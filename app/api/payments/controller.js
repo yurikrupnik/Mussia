@@ -1,6 +1,6 @@
 import Model from './payment.model';
 import {has} from 'lodash';
-import {handleError, respondWithResult, respondWithDelete} from '../../services/node/nodeResponse/apiResponses';
+import {handleError, respondWithIds, respondWithResult} from '../../services/node/nodeResponse/apiResponses';
 // Gets a list Count
 export function count(req, res) {
     return Model.count()
@@ -16,14 +16,22 @@ export function CREATE(req, res) {
 }
 
 // Gets a list of Payments
-export function READ(req, res) {
-
-    // todo , req does not containts body in get methods
+export function findListOfIndexes(req, res) {
     const {query, params, body} = req;
     // let query = {};
-    let fields = '';
+    let fields = '_id';
     // res.status(500).end(new Error({Errr: 'dsa'}));
+    console.log('Model', Model);
+
     return Model.find(query, fields)
+        .then(respondWithIds(res))
+        .catch(handleError(res));
+}
+
+export function findList(req, res) {
+    const {query} = req;
+    const {fields} = query;
+    return Model.find({}, fields)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }

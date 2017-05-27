@@ -3,9 +3,11 @@ export const CLEARED_ERROR = 'SEND_ERROR';
 
 // actions
 const received_error = (err) => {
-    return {
-        type: RECEIVED_ERROR,
-        error: err
+    return dispatch => {
+        dispatch({
+            type: RECEIVED_ERROR,
+            error: err
+        });
     }
 };
 

@@ -26,7 +26,7 @@ export default (state = [], action) => {
             // return [...state, action.payload];
             return [...state, ];
         case READ_PAYMENTS_FULFILLED:
-            return [...state, action.payload];
+            return [...action.payload];
         // case READ_PAYMENTS_REJECTED:
         //     return Object.assign({}, state, action);
         // delete
