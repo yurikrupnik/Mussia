@@ -91,7 +91,8 @@ class Create extends Component {
     }
 
 }
-let SmartCreate = smartComponent(request, Create);
+// let SmartCreate = smartComponent(request, Create);
+
 class Edit extends Component {
     constructor(props) {
         super(props);
@@ -121,13 +122,13 @@ class Edit extends Component {
 
 }
 
-let SmartEdit = smartComponent(request, Edit);
+// let SmartEdit = smartComponent(request, Edit);
 
 
 export default [
     {
         path: '/payments/create',
-        component: SmartCreate,
+        component: Create,
         exact: true
     },
     {
@@ -137,7 +138,7 @@ export default [
     },
     {
         path: '/payments/:id',
-        component: SmartEdit,
+        component: Edit,
         exact: true
     }
 ]
