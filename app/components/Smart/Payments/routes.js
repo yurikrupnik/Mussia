@@ -9,43 +9,8 @@ import {
     StaticRouter
 } from 'react-router-dom';
 import React, {Component} from 'react';
-// class PaymentsData extends Component {
-//     constructor(props) {
-//         super(props);
-//     }
-//
-//     componentDidMount() {
-//         // const {actions} = this.props;
-//         const {actions, location, match} = this.props;
-//         const {pathname, query, search} = location;
-//         actions.read(query, {yalublu: true}, {
-//             fields: ['name', 'info']
-//         });
-//     }
-//
-//     handleDelete(e, id) {
-//         const {actions, location, match} = this.props;
-//         console.log('e', e);
-//         console.log('id', id);
-//
-//         actions.delete({}, {}, [])
-//     }
-//
-//     render() {
-//         const payments = this.props[PaymentsData.selector];
-//         const {match} = this.props;
-//         const {data, count} = payments;
-//         return (
-//             <div> payments {
-//                 data.map(function (v, i) {
-//                     return <div key={i}>
-//                         <Link to={`${match.url}/${v._id}`}>{v.title}</Link>
-//                     </div>
-//                 })
-//             }</div>
-//         )
-//     }
-// }
+import {connect} from 'react-redux';
+import {getPayments, dispatchActions} from '../../../redux/data/payments/selectors';
 import PaymentsList from './list';
 import smartComponent from '../index';
 import request from '../../../api/payments/request';
@@ -128,17 +93,17 @@ class Edit extends Component {
 export default [
     {
         path: '/payments/create',
-        component: Create,
+        component: connect(getPayments, dispatchActions)(Create),
         exact: true
     },
     {
         path: '/payments',
-        component: PaymentsList,
+        component: connect(getPayments, dispatchActions)(PaymentsList),
         exact: true,
     },
     {
         path: '/payments/:id',
-        component: Edit,
+        component: connect(getPayments, dispatchActions)(Edit),
         exact: true
     }
 ]

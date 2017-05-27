@@ -30,17 +30,17 @@ export default (state = [], action) => {
         // case READ_PAYMENTS_REJECTED:
         //     return Object.assign({}, state, action);
         // delete
-        case DELETE_PAYMENTS_FULFILLED:
-            return Object.assign({}, state, {paylaod: action.payload});
-        case DELETE_PAYMENTS_PENDING:
-            return Object.assign({}, state, {paylaod: action.payload});
-        // case DELETE_PAYMENTS_REJECTED:
-        //     return Object.assign({}, state, action);
-        // create
+        // case DELETE_PAYMENTS_FULFILLED:
+        //     return Object.assign({}, state, {paylaod: action.payload});
+        // case DELETE_PAYMENTS_PENDING:
+        //     return Object.assign({}, state, {paylaod: action.payload});
+        // // case DELETE_PAYMENTS_REJECTED:
+        // //     return Object.assign({}, state, action);
+        // // create
         case CREATE_PAYMENTS_FULFILLED:
-            return Object.assign({}, state, {active: true, body: action.body});
+            return Object.assign({}, state);
         case CREATE_PAYMENTS_PENDING:
-            return Object.assign({}, state, {active: false, data: action.payload});
+            return Object.assign({}, state);
         // case CREATE_PAYMENTS_REJECTED:
         //     return Object.assign({}, state, action);
         default:

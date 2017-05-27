@@ -21,7 +21,14 @@ import request from 'superagent';
 let returnBody = res => res.body;
 
 import {received_error} from '../../actions/errors';
-
+// const received_error = dispatch => err => {
+//     return dispatch => {
+//         dispatch({
+//             type: 'RECEIVED_ERROR',
+//             error: err
+//         });
+//     }
+// };
 let handleError = err => {
     if (err.status === 403) {
         console.log('found 403 - do some shit if want', err);
@@ -60,30 +67,39 @@ function postPayment(body) {
 }
 // postPayment()
 
+const dispatchPending = (dispatch, payload) => dispatch => {
+    dispatch({
+        type: READ_PAYMENTS_PENDING,
+        payload: payload
+    });
+};
+
+const dispatchFulfilled = dispatch => res => {
+    dispatch({
+        type: READ_PAYMENTS_FULFILLED,
+        payload: res.data
+    });
+};
+
+
+
 const read = (requestPayload) => {
     return dispatch => {
-        dispatch({
-            type: READ_PENDING,
-            payload: requestPayload
-        });
+
+        dispatchPending(dispatch, requestPayload);
+
         return axios({
             method:'get',
             url:'/api/payments',
             params: requestPayload
         })
-            .then(function(response) {
-                dispatch({
-                    type: READ_PAYMENTS_FULFILLED,
-                    payload: response.data
-                });
-            })
-            .catch(received_error);
+        .then(dispatchFulfilled(dispatch))
+        .catch(received_error(dispatch));
     };
 };
 
 const create = (body) => {
     return dispatch => {
-        debugger
         dispatch({
             type: CREATE_PAYMENTS_PENDING,
             body
@@ -100,15 +116,7 @@ const create = (body) => {
                     payload: response.data
                 });
             })
-            .catch(err => {
-                received_error(dispatch, err);
-                // dispatch({
-                //     type: READ_PAYMENTS_REJECTED,
-                //     err
-                // });
-                // return err;
-
-            });
+            .catch(received_error(dispatch));
 
         // .then(returnBody)
         // .catch(handleError);
@@ -137,67 +145,67 @@ const create = (body) => {
     };
 };
 
-const update = (body) => {
-    return dispatch => {
-        dispatch({
-            type: CREATE_PAYMENTS_PENDING,
-            body
-        });
-        return Payments.read(body)
-            .then((res) => {
-                console.log('res', res);
-
-                dispatch({
-                    type: CREATE_PAYMENTS_FULFILLED,
-                    payload: res
-                });
-                return res;
-            }).then(res => {
-                // console.log('res', res);
-                return res;
-
-            }).catch(err => {
-                console.log('err', err);
-                dispatch({
-                    type: CREATE_PAYMENTS_FULFILLED,
-                    payload: err
-                });
-            });
-    };
-};
+// const update = (body) => {
+//     return dispatch => {
+//         dispatch({
+//             type: CREATE_PAYMENTS_PENDING,
+//             body
+//         });
+//         return Payments.read(body)
+//             .then((res) => {
+//                 console.log('res', res);
+//
+//                 dispatch({
+//                     type: CREATE_PAYMENTS_FULFILLED,
+//                     payload: res
+//                 });
+//                 return res;
+//             }).then(res => {
+//                 // console.log('res', res);
+//                 return res;
+//
+//             }).catch(err => {
+//                 console.log('err', err);
+//                 dispatch({
+//                     type: CREATE_PAYMENTS_FULFILLED,
+//                     payload: err
+//                 });
+//             });
+//     };
+// };
 
 const deleteById = _id => {
-    return dispatch => {
-        console.log('_id', _id);
-        dispatch({
-            type: DELETE_PAYMENTS_PENDING
-        });
-        return axios({
-            method: 'delete',
-            url:'/api/payments',
-            data: {_id}
-        })
-            .then((res) => {
-                dispatch({
-                    type: DELETE_PAYMENTS_FULFILLED,
-                    payload: res
-                });
-                return res;
-            })
-            .catch(err => {
-                console.log('err', err);
-                dispatch({
-                    type: CREATE_PAYMENTS_FULFILLED,
-                    payload: err
-                });
-            });
-    };
+    // return dispatch => {
+    //     console.log('_id', _id);
+    //     dispatch({
+    //         type: DELETE_PAYMENTS_PENDING
+    //     });
+    //     return axios({
+    //         method: 'delete',
+    //         url:'/api/payments',
+    //         data: {_id}
+    //     })
+    //         .then((res) => {
+    //             dispatch({
+    //                 type: DELETE_PAYMENTS_FULFILLED,
+    //                 payload: res
+    //             });
+    //             return res;
+    //         })
+    //         .catch(err => {
+    //             console.log('err', err);
+    //             dispatch({
+    //                 type: CREATE_PAYMENTS_FULFILLED,
+    //                 payload: err
+    //             });
+    //         });
+    // };
 };
 
 
 export {
     read,
     create,
-    update,
+    // update,
     deleteById
 }
