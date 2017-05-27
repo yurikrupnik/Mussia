@@ -63,7 +63,7 @@ function postPayment(body) {
 const read = (requestPayload) => {
     return dispatch => {
         dispatch({
-            type: READ_PAYMENTS_PENDING,
+            type: READ_PENDING,
             payload: requestPayload
         });
         return axios({
@@ -76,9 +76,6 @@ const read = (requestPayload) => {
                     type: READ_PAYMENTS_FULFILLED,
                     payload: response.data
                 });
-                // return response.data;
-
-                // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
             })
             .catch(received_error);
     };
