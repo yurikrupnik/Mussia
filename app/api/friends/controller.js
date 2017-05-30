@@ -1,6 +1,6 @@
 import Model from './model';
 import {has} from 'lodash';
-import {handleError, respondWithResult, respondWithDelete} from '../../services/node/nodeResponse/apiResponses';
+import {handleError, respondWithResult} from '../../services/node/nodeResponse/apiResponses';
 // Gets a list Count
 // export function count(req, res) {
 //     return Model.count()

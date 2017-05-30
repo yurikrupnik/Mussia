@@ -2,29 +2,30 @@ import {model} from './config';
 import mongoose, {Schema} from 'mongoose';
 
 
-var PublisherSchema= Schema({
-    _id: {
-        type: String,
-    },
-    name: String,
-    founded: Number,
-    location: String,
-});
-
-let PublisherModel = mongoose.model('Publisher', PublisherSchema);
+// var PublisherSchema= Schema({
+//     _id: {
+//         type: String,
+//     },
+//     name: String,
+//     founded: Number,
+//     location: String,
+// });
+//
+// let PublisherModel = mongoose.model('Publisher', PublisherSchema);
 var PaymentSchema = Schema({
     title: {
         type: String,
-        required: [true, 'must have title']
+        default: 'omg'
+        // required: [true, 'must have title']
     },
     company: {
         type: String,
-        required: [true, 'must have company'],
+        // required: [true, 'must have company'],
         default: 'google'
     },
     amount: {
         type: Number,
-        required: true,
+        // required: true,
         min: [1, 'No amount selected'],
         max: [100, 'Maximum amount is 100 for regular customer'],
         default: 1,

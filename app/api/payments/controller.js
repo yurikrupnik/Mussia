@@ -1,6 +1,6 @@
 import Model from './payment.model';
 import {has} from 'lodash';
-import {handleError, respondWithIds, respondWithResult} from '../../services/node/nodeResponse/apiResponses';
+import {handleError, respondWithIds, respondWithResult, respondWithDelete} from '../../services/node/nodeResponse/apiResponses';
 // Gets a list Count
 export function count(req, res) {
     return Model.count()
@@ -43,7 +43,18 @@ export function UPDATE(req, res) {
         .catch(handleError(res));
 }
 
-export function DELETE(req, res) {
+export function deleteById(req, res) {
+    const {body, params} = req;
+    const {id} = params;
+    const field = 'id'; // todo symbol it
+    // let ids = has(body, field) ? [body[field]] : body;
+    res.ids = id;
+    return Model.remove({_id: {$in: id}})
+        .then(respondWithDelete(res))
+        .catch(handleError(res));
+}
+
+export function deleteByIds(req, res) {
     const {body} = req;
     const field = 'id'; // todo symbol it
     let ids = has(body, field) ? [body[field]] : body;
@@ -52,8 +63,6 @@ export function DELETE(req, res) {
         .then(respondWithDelete(res))
         .catch(handleError(res));
 }
-
-
 
 
 

@@ -24,23 +24,26 @@ export default (state = [], action) => {
         // read
         case READ_PAYMENTS_PENDING:
             // return [...state, action.payload];
-            return [...state, ];
+            return [...state];
         case READ_PAYMENTS_FULFILLED:
             return [...action.payload];
         // case READ_PAYMENTS_REJECTED:
         //     return Object.assign({}, state, action);
         // delete
-        // case DELETE_PAYMENTS_FULFILLED:
-        //     return Object.assign({}, state, {paylaod: action.payload});
-        // case DELETE_PAYMENTS_PENDING:
-        //     return Object.assign({}, state, {paylaod: action.payload});
-        // // case DELETE_PAYMENTS_REJECTED:
-        // //     return Object.assign({}, state, action);
+        case DELETE_PAYMENTS_FULFILLED:
+            console.log('action', action);
+debugger
+            return state;
+            // return state.filter();
+        case DELETE_PAYMENTS_PENDING:
+            return [...state];
+        // case DELETE_PAYMENTS_REJECTED:
+        //     return Object.assign({}, state, action);
         // // create
         case CREATE_PAYMENTS_FULFILLED:
-            return Object.assign({}, state);
+            return [...state, action.payload];
         case CREATE_PAYMENTS_PENDING:
-            return Object.assign({}, state);
+            return [...state];
         // case CREATE_PAYMENTS_REJECTED:
         //     return Object.assign({}, state, action);
         default:

@@ -35,8 +35,9 @@ class PaymentsList extends Component {
     }
 
     handleDelete(id, e){
+        e.preventDefault();
         const {actions, location, match} = this.props;
-        actions.deleteById(id)
+        actions.deleteById(id, e)
     }
 
     handleGoToEdit() {
@@ -52,7 +53,7 @@ class PaymentsList extends Component {
                         <div>
                             <h5>{post.title}</h5>
                             <FlatButton label={'Edit'} onClick={this.handleGoToEdit.bind(this)} />
-                            <FlatButton label={'Delete'} onClick={this.handleDelete.bind(this, i)} />
+                            <FlatButton label={'Delete'} onClick={this.handleDelete.bind(this, post._id)} />
                         </div>
                     </div>)
                     }

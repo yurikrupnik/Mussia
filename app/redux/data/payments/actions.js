@@ -21,26 +21,6 @@ import request from 'superagent';
 let returnBody = res => res.body;
 
 import {received_error} from '../../actions/errors';
-// const received_error = dispatch => err => {
-//     return dispatch => {
-//         dispatch({
-//             type: 'RECEIVED_ERROR',
-//             error: err
-//         });
-//     }
-// };
-let handleError = err => {
-    if (err.status === 403) {
-        console.log('found 403 - do some shit if want', err);
-    }
-    if (err.status === 404) {
-        console.log('found 404 - do some shit if want', err);
-    }
-    debugger
-    // throw new Error(err);
-    received_error(err);
-    // return err;
-};
 
 import axios from 'axios';
 
@@ -85,9 +65,7 @@ const dispatchFulfilled = dispatch => res => {
 
 const read = (requestPayload) => {
     return dispatch => {
-
         dispatchPending(dispatch, requestPayload);
-
         return axios({
             method:'get',
             url:'/api/payments',
@@ -174,32 +152,28 @@ const create = (body) => {
 //     };
 // };
 
-const deleteById = _id => {
-    // return dispatch => {
-    //     console.log('_id', _id);
-    //     dispatch({
-    //         type: DELETE_PAYMENTS_PENDING
-    //     });
-    //     return axios({
-    //         method: 'delete',
-    //         url:'/api/payments',
-    //         data: {_id}
-    //     })
-    //         .then((res) => {
-    //             dispatch({
-    //                 type: DELETE_PAYMENTS_FULFILLED,
-    //                 payload: res
-    //             });
-    //             return res;
-    //         })
-    //         .catch(err => {
-    //             console.log('err', err);
-    //             dispatch({
-    //                 type: CREATE_PAYMENTS_FULFILLED,
-    //                 payload: err
-    //             });
-    //         });
-    // };
+const deleteById = id => {
+    return dispatch => {
+        dispatch({
+            type: DELETE_PAYMENTS_PENDING,
+            id
+        });
+        return axios({
+            method: 'delete',
+            url:'/api/payments/' + id,
+            // body: {id}
+        })
+            .then((res) => {
+                console.log('res', res);
+
+                dispatch({
+                    type: DELETE_PAYMENTS_FULFILLED,
+                    payload: res
+                });
+                return res;
+            })
+            .catch(received_error(dispatch));
+    };
 };
 
 
