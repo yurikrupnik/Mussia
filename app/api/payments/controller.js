@@ -44,22 +44,22 @@ export function UPDATE(req, res) {
 }
 
 export function deleteById(req, res) {
-    const {body, params} = req;
+    const {params} = req;
     const {id} = params;
-    const field = 'id'; // todo symbol it
+    // const field = 'id'; // todo symbol it
     // let ids = has(body, field) ? [body[field]] : body;
-    res.ids = id;
-    return Model.remove({_id: {$in: id}})
+    res.id = id;
+    return Model.remove({_id: id})
         .then(respondWithDelete(res))
         .catch(handleError(res));
 }
 
 export function deleteByIds(req, res) {
     const {body} = req;
-    const field = 'id'; // todo symbol it
-    let ids = has(body, field) ? [body[field]] : body;
-    res.ids = ids;
-    return Model.remove({_id: {$in: ids}})
+    // const field = 'id'; // todo symbol it
+    // let ids = has(body, field) ? [body[field]] : body;
+    res.ids = body;
+    return Model.remove({_id: {$in: body}})
         .then(respondWithDelete(res))
         .catch(handleError(res));
 }

@@ -9,6 +9,7 @@ import {
     DELETE_PAYMENTS_PENDING,
     DELETE_PAYMENTS_REJECTED
 } from './actions';
+import _ from 'lodash';
 // import {received_error
 // } from './actions';
 
@@ -31,10 +32,7 @@ export default (state = [], action) => {
         //     return Object.assign({}, state, action);
         // delete
         case DELETE_PAYMENTS_FULFILLED:
-            console.log('action', action);
-debugger
-            return state;
-            // return state.filter();
+            return _.filter(state, v => !_.includes(action.payload, v._id));
         case DELETE_PAYMENTS_PENDING:
             return [...state];
         // case DELETE_PAYMENTS_REJECTED:

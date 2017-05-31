@@ -12,7 +12,7 @@ import mongoose, {Schema} from 'mongoose';
 // });
 //
 // let PublisherModel = mongoose.model('Publisher', PublisherSchema);
-var PaymentSchema = Schema({
+let PaymentSchema = Schema({
     title: {
         type: String,
         default: 'omg'

@@ -161,14 +161,12 @@ const deleteById = id => {
         return axios({
             method: 'delete',
             url:'/api/payments/' + id,
-            // body: {id}
         })
             .then((res) => {
-                console.log('res', res);
-
+            debugger;
                 dispatch({
                     type: DELETE_PAYMENTS_FULFILLED,
-                    payload: res
+                    payload: res.data // deleted ids as array
                 });
                 return res;
             })
