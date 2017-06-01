@@ -32,7 +32,7 @@ export default (state = [], action) => {
         //     return Object.assign({}, state, action);
         // delete
         case DELETE_PAYMENTS_FULFILLED:
-            return _.filter(state, v => !_.includes(action.payload, v._id));
+            return _.filter(state, v => !_.includes(action.payload, v.id));
         case DELETE_PAYMENTS_PENDING:
             return [...state];
         // case DELETE_PAYMENTS_REJECTED:

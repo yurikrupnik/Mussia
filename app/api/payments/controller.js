@@ -1,6 +1,12 @@
-import Model from './payment.model';
+import Model from './model';
 import {has} from 'lodash';
-import {handleError, respondWithIds, respondWithResult, respondWithDelete} from '../../services/node/nodeResponse/apiResponses';
+import {
+    handleError,
+    respondWithIds,
+    respondWithResult,
+    respondWithDelete,
+    respondWithCreate
+} from '../../services/node/nodeResponse/apiResponses';
 // Gets a list Count
 export function count(req, res) {
     return Model.count()
@@ -11,7 +17,7 @@ export function count(req, res) {
 export function CREATE(req, res) {
     const {body} = req;
     return Model.create(body)
-        .then(respondWithResult(res))
+        .then(respondWithCreate(res))
         .catch(handleError(res));
 }
 
@@ -46,20 +52,16 @@ export function UPDATE(req, res) {
 export function deleteById(req, res) {
     const {params} = req;
     const {id} = params;
-    // const field = 'id'; // todo symbol it
-    // let ids = has(body, field) ? [body[field]] : body;
     res.id = id;
-    return Model.remove({_id: id})
+    return Model.remove({id: id})
         .then(respondWithDelete(res))
         .catch(handleError(res));
 }
 
 export function deleteByIds(req, res) {
     const {body} = req;
-    // const field = 'id'; // todo symbol it
-    // let ids = has(body, field) ? [body[field]] : body;
-    res.ids = body;
-    return Model.remove({_id: {$in: body}})
+    res.id = body;
+    return Model.remove({id: {$in: body}})
         .then(respondWithDelete(res))
         .catch(handleError(res));
 }

@@ -11,6 +11,11 @@ export let respondWithResult = (res, statusCode) => {
     return (entity) => res.status(statusCode).json(entity);
 };
 
+export let respondWithCreate = (res, statusCode) => {
+    statusCode = statusCode || 201;
+    return (entity) => res.status(statusCode).json(entity);
+};
+
 export let respondWithIds = (res, statusCode) => {
     statusCode = statusCode || 200;
     return (entity) => {

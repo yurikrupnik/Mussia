@@ -18,6 +18,9 @@ const numbers = [1, 2, 3, 4, 5];
 class PaymentsList extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            selected: []
+        }
     }
 
     componentDidMount() {
@@ -37,23 +40,34 @@ class PaymentsList extends Component {
     handleDelete(id, e){
         e.preventDefault();
         const {actions, location, match} = this.props;
-        actions.deleteById(id, e)
+        actions.deleteById(id, e);
     }
 
-    handleGoToEdit() {
+    handleDeletes(id, e){
+        e.preventDefault();
+        const {actions, location, match} = this.props;
+        actions.deleteByIds(id, e);
+        this.setState({selected: []});
+    }
 
+    setSelected(id, e) {
+        this.setState({
+            selected: this.state.selected.concat(id)
+        });
     }
 
     render() {
         const {payments} = this.props;
         return (
             <div>
+                <div>selected: {this.state.selected.length}</div>
+                <FlatButton label={'Delete'} onClick={this.handleDeletes.bind(this, this.state.selected)} />
                 {payments.map((post, i) =>{
-                    return (<div key={i}>
+                    return (<div key={i} onClick={this.setSelected.bind(this, post.id)}>
                         <div>
                             <h5>{post.title}</h5>
-                            <FlatButton label={'Edit'} onClick={this.handleGoToEdit.bind(this)} />
-                            <FlatButton label={'Delete'} onClick={this.handleDelete.bind(this, post._id)} />
+                            {/*<FlatButton label={'Edit'} onClick={this.handleGoToEdit.bind(this)} />*/}
+                            <FlatButton label={'Delete'} onClick={this.handleDelete.bind(this, post.id)} />
                         </div>
                     </div>)
                     }

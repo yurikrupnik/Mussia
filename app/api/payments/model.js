@@ -1,6 +1,6 @@
 import {model} from './config';
 import mongoose, {Schema} from 'mongoose';
-
+import shortid from 'shortid';
 
 // var PublisherSchema= Schema({
 //     _id: {
@@ -13,6 +13,11 @@ import mongoose, {Schema} from 'mongoose';
 //
 // let PublisherModel = mongoose.model('Publisher', PublisherSchema);
 let PaymentSchema = Schema({
+    id: {
+        type: String,
+        default: shortid.generate,
+        index: true
+    },
     title: {
         type: String,
         default: 'omg'
@@ -46,6 +51,8 @@ let PaymentSchema = Schema({
     // }
 });
 
+// let symbol = new Symbol('id');
+// PaymentSchema.index({id: 1 });
 let Model = mongoose.model(model, PaymentSchema);
 
 // console.log('Model.schema', Model.schema);
@@ -56,7 +63,7 @@ let newPayment1 = new Model({
     amount: 1,
     payDate: Date.now()
 });
-let newPayment2= new Model({
+let newPayment2 = new Model({
     title: 'Reciver',
     company: 'arcam',
     amount: 2,
@@ -91,7 +98,11 @@ let newPayment2= new Model({
 //     publisher_id: "pearson"
 // });
 
-// newPayment2.save()
+// newPayment2.save(function (err, res) {
+//     if (err) {
+//         console.warn('err', err);
+//     }
+// })
 // newPayment1.save()
 // publish.save(function (err, res) {
 //     if (err) {
