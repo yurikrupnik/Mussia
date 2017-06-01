@@ -24,28 +24,6 @@ import {received_error} from '../../actions/errors';
 
 import axios from 'axios';
 
-class Request {
-
-}
-
-function postPayment(body) {
-    // GET request for remote image
-    axios({
-        method:'post',
-        url:'/api/payments',
-        // url:'http://bit.ly/2mTM3nY',
-        // responseType:'stream'
-    }, body)
-        .then(function(response) {
-            console.log('response', response);
-
-            // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-        })
-        .catch(err => {
-            received_error(err);
-        });
-}
-
 const dispatchPending = (dispatch, payload) => dispatch => {
     dispatch({
         type: READ_PAYMENTS_PENDING,
@@ -138,10 +116,31 @@ const deleteByIds = id => {
             .catch(received_error(dispatch));
     };
 };
+
+const getSchema = () => {
+    return dispatch => {
+        dispatch({
+            type: 'GET_SCHEMA'
+        });
+        return axios({
+            method: 'get',
+            url:'/api/payments/schema'
+        })
+            .then((res) => {
+                dispatch({
+                    type: 'GOT_SCHEMA',
+                    payload: res.data // deleted ids as array
+                });
+                return res;
+            })
+            .catch(received_error(dispatch));
+    };
+};
 export {
     read,
     create,
     // update,
     deleteById,
-    deleteByIds
+    deleteByIds,
+    getSchema
 }

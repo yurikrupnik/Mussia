@@ -19,19 +19,38 @@ import request from '../../../api/payments/request';
 class Create extends Component {
     constructor(props) {
         super(props);
-    }
-    handleSubmit(form ,e) {
-        e.preventDefault();
-        const {actions} = this.props;
-        actions.create(null, null, form);
-    }
-    render() {
-
-        let form = {
+        this.state = {
             title: '',
             company: '',
             amount: 1
         };
+        props.actions.getSchema().then(function (res) {
+            console.log('res', res);
+
+        });
+    }
+    handleSubmit(form ,e) {
+        e.preventDefault();
+        const {actions} = this.props;
+
+        debugger
+        // let isFull = this.state.every(v => v);
+        // if (isFull) {
+            actions.create(this.state);
+        // }
+    }
+
+    handleChange(event) {
+        event.preventDefault();
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+    render() {
 
         return (
             <div>
@@ -39,17 +58,17 @@ class Create extends Component {
                 <form>
                     <div>
                         <h5>Title: </h5>
-                        <input type="text" defaultValue={form.title}/>
+                        <input type="text" onChange={this.handleChange.bind(this)} name={'title'}/>
                     </div>
                     <div>
                         <h5>Company: </h5>
-                        <input type="text" defaultValue={form.company}/>
+                        <input type="text" onChange={this.handleChange.bind(this)} name={'company'}/>
                     </div>
                     <div>
                         <h5>Amount: </h5>
-                        <input type="number" step={1} max={100} min={0} defaultValue={form.amount}/>
+                        <input type="number" step={1} max={100} min={0} onChange={this.handleChange.bind(this)} name={'amount'}/>
                     </div>
-                    <button onClick={this.handleSubmit.bind(this, form)}>Submit</button>
+                    <button onClick={this.handleSubmit.bind(this)}>Submit</button>
                 </form>
             </div>
         )
@@ -102,7 +121,7 @@ export default [
         exact: true,
     },
     {
-        path: '/payments/:id',
+        path: '/payments/edit/:id',
         component: connect(getPayments, dispatchActions)(Edit),
         exact: true
     }

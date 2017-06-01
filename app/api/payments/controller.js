@@ -65,6 +65,9 @@ export function deleteByIds(req, res) {
         .then(respondWithDelete(res))
         .catch(handleError(res));
 }
+export function getSchema(req, res) {
+    res.status(200).json(Model.schema.paths);
+}
 
 
 

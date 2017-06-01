@@ -20,17 +20,17 @@ let PaymentSchema = Schema({
     },
     title: {
         type: String,
-        default: 'omg'
-        // required: [true, 'must have title']
+        default: 'default title',
+        required: [true, 'must have title']
     },
     company: {
         type: String,
-        // required: [true, 'must have company'],
-        default: 'google'
+        required: [true, 'must have company'],
+        default: 'default comoany'
     },
     amount: {
         type: Number,
-        // required: true,
+        required: [true, 'must be in range of 1 and 100'],
         min: [1, 'No amount selected'],
         max: [100, 'Maximum amount is 100 for regular customer'],
         default: 1,
@@ -55,20 +55,18 @@ let PaymentSchema = Schema({
 // PaymentSchema.index({id: 1 });
 let Model = mongoose.model(model, PaymentSchema);
 
-// console.log('Model.schema', Model.schema);
-
-let newPayment1 = new Model({
-    title: 'Speakers',
-    company: 'focal',
-    amount: 1,
-    payDate: Date.now()
-});
-let newPayment2 = new Model({
-    title: 'Reciver',
-    company: 'arcam',
-    amount: 2,
-    payDate: Date.now()
-});
+// let newPayment1 = new Model({
+//     title: 'Speakers',
+//     company: 'focal',
+//     amount: 1,
+//     payDate: Date.now()
+// });
+// let newPayment2 = new Model({
+//     title: 'Reciver',
+//     company: 'arcam',
+//     amount: 2,
+//     payDate: Date.now()
+// });
 // let publish = new PublisherModel({
 //     _id: "oreilly",
 //     name: "O'Reilly Media",
