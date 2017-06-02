@@ -11,6 +11,7 @@ import {url} from './config';
 router.get(url + '/schema', getSchema);
 router.get(url, findList);
 router.post(url, CREATE);
+router.put(url, UPDATE);
 router.delete(url, deleteByIds);
 router.delete(url + '/:id', deleteById);
 

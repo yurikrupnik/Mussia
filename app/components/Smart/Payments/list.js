@@ -56,6 +56,11 @@ class PaymentsList extends Component {
         });
     }
 
+    handleGoToEdit(id, e) {
+        e.preventDefault();
+        this.props.history.push('/payments/edit/' + id);
+    }
+
     render() {
         const {payments} = this.props;
         return (
@@ -66,7 +71,7 @@ class PaymentsList extends Component {
                     return (<div key={i} onClick={this.setSelected.bind(this, post.id)}>
                         <div>
                             <h5>{post.title}</h5>
-                            {/*<FlatButton label={'Edit'} onClick={this.handleGoToEdit.bind(this)} />*/}
+                            <FlatButton label={'Edit'} onClick={this.handleGoToEdit.bind(this, post.id)} />
                             <FlatButton label={'Delete'} onClick={this.handleDelete.bind(this, post.id)} />
                         </div>
                     </div>)

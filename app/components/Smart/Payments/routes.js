@@ -8,6 +8,7 @@ import {
     Switch,
     StaticRouter
 } from 'react-router-dom';
+import TextField from 'material-ui/TextField';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getPayments, dispatchActions} from '../../../redux/data/payments/selectors';
@@ -32,18 +33,23 @@ class Create extends Component {
     handleSubmit(form ,e) {
         e.preventDefault();
         const {actions} = this.props;
-
-        debugger
-        // let isFull = this.state.every(v => v);
-        // if (isFull) {
-            actions.create(this.state);
-        // }
+        actions.create(this.state);
     }
 
     handleChange(event) {
         event.preventDefault();
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleNumberChange() {
+        const target = event.target;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
@@ -66,7 +72,13 @@ class Create extends Component {
                     </div>
                     <div>
                         <h5>Amount: </h5>
-                        <input type="number" step={1} max={100} min={0} onChange={this.handleChange.bind(this)} name={'amount'}/>
+                        <TextField
+                            type="number"
+                            max="12"
+                            min="1"
+                            name="amount"
+                        />
+                        <input type="number" step={1} max={100} min={0} onChange={this.handleNumberChange.bind(this)} name={'amount'}/>
                     </div>
                     <button onClick={this.handleSubmit.bind(this)}>Submit</button>
                 </form>
@@ -85,7 +97,12 @@ class Edit extends Component {
     handleSubmit(form, event) {
         event.preventDefault();
         const {actions, location, match} = this.props;
-        actions.update({}, match.params, {title: 'wjat everer'});
+        actions.update({
+            title: 'updated title',
+            company: 'updated title',
+            amount: 1222,
+            id: 'BkKj8gRbW'
+        });
     }
 
     render() {

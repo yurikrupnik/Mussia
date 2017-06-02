@@ -44,7 +44,8 @@ export function findList(req, res) {
 
 export function UPDATE(req, res) {
     const {query, params, body} = req;
-    return Model.findOneAndUpdate({_id: params.id}, body)
+    console.log('body', body);
+    return Model.findOneAndUpdate({id: body.id}, body)
         .then(respondWithResult(res))
         .catch(handleError(res));
 }
@@ -65,8 +66,11 @@ export function deleteByIds(req, res) {
         .then(respondWithDelete(res))
         .catch(handleError(res));
 }
+
+import _ from 'lodash';
 export function getSchema(req, res) {
-    res.status(200).json(Model.schema.paths);
+    let requiredFields = _.filter(Model.schema.paths, 'isRequired');
+    res.status(200).json(requiredFields);
 }
 
 

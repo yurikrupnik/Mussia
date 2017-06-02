@@ -136,10 +136,33 @@ const getSchema = () => {
             .catch(received_error(dispatch));
     };
 };
+
+const update = (body) => {
+    return dispatch => {
+        dispatch({
+            type: UPDATE_PAYMENTS_PENDING,
+            body
+        });
+        return axios({
+            method: 'put',
+            url: '/api/payments',
+            data: body
+        })
+            .then((res) => {
+                dispatch({
+                    type: UPDATE_PAYMENTS_FULFILLED,
+                    payload: res.data // deleted ids as array
+                });
+                return res;
+            })
+            .catch(received_error(dispatch));
+    }
+};
+
 export {
     read,
     create,
-    // update,
+    update,
     deleteById,
     deleteByIds,
     getSchema
