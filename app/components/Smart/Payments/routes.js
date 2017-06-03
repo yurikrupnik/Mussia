@@ -1,4 +1,3 @@
-
 import {
     BrowserRouter as Router,
     Route,
@@ -8,85 +7,18 @@ import {
     Switch,
     StaticRouter
 } from 'react-router-dom';
-import TextField from 'material-ui/TextField';
+
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getPayments, dispatchActions} from '../../../redux/data/payments/selectors';
 import PaymentsList from './list';
+import Create from './create';
 import smartComponent from '../index';
 import request from '../../../api/payments/request';
 // let conected = smartComponent(request, PaymentsData);
 
-class Create extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: '',
-            company: '',
-            amount: 1
-        };
-        props.actions.getSchema().then(function (res) {
-            console.log('res', res);
+import _ from 'lodash'
 
-        });
-    }
-    handleSubmit(form ,e) {
-        e.preventDefault();
-        const {actions} = this.props;
-        actions.create(this.state);
-    }
-
-    handleChange(event) {
-        event.preventDefault();
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleNumberChange() {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-    render() {
-
-        return (
-            <div>
-                <h4>Create New Payment</h4>
-                <form>
-                    <div>
-                        <h5>Title: </h5>
-                        <input type="text" onChange={this.handleChange.bind(this)} name={'title'}/>
-                    </div>
-                    <div>
-                        <h5>Company: </h5>
-                        <input type="text" onChange={this.handleChange.bind(this)} name={'company'}/>
-                    </div>
-                    <div>
-                        <h5>Amount: </h5>
-                        <TextField
-                            type="number"
-                            max="12"
-                            min="1"
-                            name="amount"
-                        />
-                        <input type="number" step={1} max={100} min={0} onChange={this.handleNumberChange.bind(this)} name={'amount'}/>
-                    </div>
-                    <button onClick={this.handleSubmit.bind(this)}>Submit</button>
-                </form>
-            </div>
-        )
-    }
-
-}
 // let SmartCreate = smartComponent(request, Create);
 
 class Edit extends Component {

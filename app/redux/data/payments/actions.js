@@ -131,7 +131,7 @@ const getSchema = () => {
                     type: 'GOT_SCHEMA',
                     payload: res.data // deleted ids as array
                 });
-                return res;
+                return res.data;
             })
             .catch(received_error(dispatch));
     };
