@@ -1,14 +1,21 @@
 
 import request from 'superagent';
-
+import axios from 'axios';
 export function logout() {
-    return request.get('/auth/logout');
+    return axios({
+        method:'get',
+        url:'/auth/logout'
+    });
+    // return request.get('/auth/logout');
 }
 export function login(body) {
-    console.log('body', body);
-
-    return request.post('/auth/login')
-        .send(body);
+    return axios({
+        method:'post',
+        url:'/auth/login',
+        data: body,
+    });
+    // request.post('/auth/login')
+    //     .send(body);
         // .then(function (data) {
         //     console.log('data', data);
         //     return data;

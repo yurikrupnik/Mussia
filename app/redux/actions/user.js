@@ -33,24 +33,16 @@ export const logout = () => {
     };
 };
 
-export const login = (body) => {
-    console.log('body', body);
-    return dispatch => {
-        return Login(body).then(function (da) {
-            dispatch({
-                type: 'LOGIN'
-            });
-        });
-            // .then(() => {
-            //     dispatch({
-            //         type: LOGOUT
-            //     });
-            // });
-    };
-};
-
 export const fountUser = (user) => {
     return dispatch => {
         dispatch(got(user));
     }
+};
+
+export const login = (body, dispatch, props) => {
+    let {history} = props;
+    return Login(body).then(function (da) {
+        dispatch(got(da.data));
+        history.push('/');
+    });
 };

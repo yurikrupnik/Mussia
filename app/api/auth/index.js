@@ -13,7 +13,11 @@ router.post('/auth/login', passport.authenticate('local', { failWithError: true 
         // let store = configureStore();
         // if (req.isAuthenticated()) { // todo client it
         //     store.dispatch(fountUser(req.user));
-        res.redirect('/');
+        // console.log('req.user', req.user);
+// /        console.log('res.user', res.user);
+        let user = req.user;
+        res.json(user);
+        // res.redirect('/');
         // }
         // if (req.xhr) { return res.json({ id: req.user.id }); }
     },
