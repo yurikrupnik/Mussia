@@ -4,7 +4,7 @@ import counters from './counters';
 import payments from '../data/payments/reducer';
 import friends from '../data/friends/reducer';
 
-// import sluts from './sluts';
+import form from '../control/form/reducer';
 import user from './user';
 import errors from './errors';
 import {combineReducers} from 'redux';
@@ -15,7 +15,7 @@ const reducers = {
     counter,
     payments,
     friends,
-    // sluts,
+    form,
     errors
 };
 
