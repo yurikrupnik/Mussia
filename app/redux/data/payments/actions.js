@@ -53,25 +53,23 @@ const read = (requestPayload) => {
     };
 };
 
-const create = (body) => {
-    return dispatch => {
-        dispatch({
-            type: CREATE_PAYMENTS_PENDING,
-            body
-        });
-        return axios({
-            method:'post',
-            url:'/api/payments',
-            data: body,
+const create = (body, dispatch) => {
+    dispatch({
+        type: CREATE_PAYMENTS_PENDING,
+        body
+    });
+    return axios({
+        method:'post',
+        url:'/api/payments',
+        data: body,
+    })
+        .then(function(response) {
+            dispatch({
+                type: CREATE_PAYMENTS_FULFILLED,
+                payload: response.data
+            });
         })
-            .then(function(response) {
-                dispatch({
-                    type: CREATE_PAYMENTS_FULFILLED,
-                    payload: response.data
-                });
-            })
-            .catch(received_error(dispatch));
-    };
+        .catch(received_error(dispatch));
 };
 
 const deleteById = id => {
