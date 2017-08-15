@@ -1,9 +1,19 @@
 // render view template html - check views middleware
 export default (req, res) => {
-    if (req.url.match(/\//gi).length > 1) { // handle second slash in url error to load main.js todo-fix with webpack
-        res.redirect(`/${req.url.split('/')[1]}`);
+    const match = routes.reduce((acc, route) => {
+        return matchPath(req.url, route, { exact: true }) || acc;
+    }, null);
+    if (!match) {
+        res.status(404).send(serverRender(<div>Sorry, no match</div>));
         return;
     }
-    res.status(200);
-    res.render('index');
+
+    res.status(200).send(serverRender(
+        (
+            <Router context={{}} location={req.url}>
+                <App />
+            </Router>
+        ),
+        res.locals.state
+    ));
 }

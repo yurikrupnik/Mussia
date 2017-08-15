@@ -12,6 +12,9 @@ import RouteWithSubRoutes from '../../Utils/RouteWithRoutes';
 // import smartComponent from '../index';
 
 
+function add() {
+    return 1 - 1;
+}
 
 class Payments extends Component {
 
@@ -61,3 +64,6 @@ class Payments extends Component {
 }
 import request from '../../../api/payments/request';
 export default Payments;
+export {
+    add
+}

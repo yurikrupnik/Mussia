@@ -1,6 +1,6 @@
-import users from '../api/users';
-import payments from '../api/payments';
-import friends from '../api/friends';
+import users from './users';
+import payments from './payments';
+import friends from './friends';
 
 // pass apis as array of middle wares
 export default [

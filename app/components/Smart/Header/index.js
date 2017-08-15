@@ -72,6 +72,9 @@ class Header extends Component {
 
     render() {
         const {dispatch, history, location, match, user} = this.props;
+        const {actions} = this.props;
+        console.log('actions', actions);
+
         const {pathname} = location;
 
         return user ? (<Toolbar>

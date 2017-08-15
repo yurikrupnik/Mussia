@@ -10,7 +10,9 @@ import {
 // import routes from './routes';
 // import RouteWithSubRoutes from '../../Utils/RouteWithRoutes';
 // import smartComponent from '../index';
+import {connect} from 'react-redux';
 
+import {getFriends, dispatchActions} from '../../../redux/data/friends/selectors';
 
 
 class Friends extends Component {
@@ -44,7 +46,7 @@ class Friends extends Component {
 
 
     render() {
-        const {match, friends} = this.props;
+        const {match, friends, counter} = this.props;
         const listItems = friends.map((v, i) =>
             <div key={i}>{v.name}</div>
         );
@@ -56,6 +58,7 @@ class Friends extends Component {
             <Router>
                 <div>
                     <h5>Friends</h5>
+                    <h4>{counter}</h4>
                     <ul>{listItems}</ul>
                 </div>
             </Router>
@@ -63,7 +66,4 @@ class Friends extends Component {
         )
     }
 }
-import {connect} from 'react-redux';
-
-import {getFriends, dispatchActions} from '../../../redux/data/friends/selectors';
 export default connect(getFriends, dispatchActions)(Friends);
