@@ -1,11 +1,10 @@
 import React from 'react';
 import state from './state';
-import render from './render';
-import matchRouter from './matchRouter';
 import { StaticRouter as Router, matchPath } from 'react-router';
 
 import { renderToString } from 'react-dom/server';
-const serverRender = (renderMe, state) => `<!DOCTYPE html>
+// import render from './render';
+const render = (renderMe, state) => `<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -28,12 +27,14 @@ export default (app) => {
         }, null);
 
         if (!match) {
-            res.status(404).send(serverRender(<div>Sorry, no match</div>));
+            res.status(404).send(render(<div>Sorry, no match</div>));
         } else {
-            res.status(200).send(serverRender(
+            console.log('res.locals.state', res.locals.state);
+
+            res.status(200).send(render(
                 (
                     <Router context={{}} location={req.url}>
-                        <App />
+                        <App initialState={res.locals.state}/>
                     </Router>
                 ),
                 res.locals.state

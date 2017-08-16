@@ -6,15 +6,22 @@ import faker from 'faker';
 import shortid from 'shortid';
 
 let serialize = (user, done) => {
-    done(null, user.id);
+    console.log('serialize user', user);
+
+    return done(null, user.id);
 };
 let deserialize = (id, done) => {
-    Users.find({id}, done);
+    return Users.find({id}, function (err, doc) {
+        console.log('err', err);
+        console.log('doc', doc);
+
+        return done(err, doc);
+    });
 };
 
 const checkValidUser = (user, done) => valid => {
     if (!valid) {
-        return done(null, false, {message: 'invalid user', user: user});
+        return done(null, false, {message: 'invalid user', user: user}); // todo check it
     } else {
         return done(null, user);
     }
@@ -28,19 +35,8 @@ const saveUser = done => user => user.save(done);
 
 const checkUserByEmailAndPass = (email, password, done) => user => {
     if (!user) {
-        let nuser = { // todo use here some User model constructor
-            email: email,
-            name: 'admin',
-            picture: {
-                data: {
-                    url: faker.internet.avatar()
-                }
-            },
-            id: shortid.generate()
-        };
-        let newUser = new Users(nuser);
         return generateHash(password)
-            .then(handleHash(newUser))
+            .then(handleHash(new Users({ email: email, name: faker.name.findName(), id: shortid.generate() })))
             .then(saveUser(done))
             .catch(function (err) {
                 console.log('error saving user', err);
@@ -55,11 +51,7 @@ const checkUserByEmailAndPass = (email, password, done) => user => {
 const localStrategyHandler = (req, email, password, done) => {
     Users.findOne({email})
         .then(checkUserByEmailAndPass(email, password, done))
-        .catch(function (err) {
-            console.log('err in catch 1', err );
-
-            done(err)
-        });
+        .catch(done);
 };
 
 const socialAppsRegisterCallback = (profile, done) => () => {
@@ -68,14 +60,13 @@ const socialAppsRegisterCallback = (profile, done) => () => {
             if (user) {
                 done(null, user); // user found, return that user
             } else {
-                let newUser = new Users({
-                    id: profile._json.id,
-                    email: profile._json.email,
-                    name: profile._json.name,
-                    picture: profile._json.cover.source
+                const {provider} = profile;
+                const newUser = new Users({
+                    id: profile.id,
+                    email: profile.email || '',
+                    name: provider === 'facebook' ? `${profile.name.first_name} ${profile.name.last_name}` : profile.fullName ,
                 });
                 newUser.save(done);
-                // insertUser(newUser, done);
             }
 
         })
@@ -83,13 +74,13 @@ const socialAppsRegisterCallback = (profile, done) => () => {
 };
 const socialNetworkStrategy = (token, refreshTocken, profile, done) => process.nextTick(socialAppsRegisterCallback(profile, done));
 
-const setSocialAuth = (provider) => passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email']});
+const setSocialAuth = (provider) => passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email', 'name']});
 
 function createSocialNetworkRoutes(app) {
-    const socialNetworks = ['facebook'];
-    socialNetworks.forEach(function (network) {
-        app.get(`/auth/${network}`, setSocialAuth(network));
-        app.get(`/auth/${network}/callback`, setSocialAuth(network));
+    const socialNetworks = ['facebook', 'flickr'];
+    socialNetworks.forEach(function (provider) { // register middlewares
+        app.get(`/auth/${provider}`, setSocialAuth(provider));
+        app.get(`/auth/${provider}/callback`, setSocialAuth(provider));
     });
 }
 

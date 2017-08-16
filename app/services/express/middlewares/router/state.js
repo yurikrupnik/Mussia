@@ -1,18 +1,13 @@
 import configureStore from '../../../../redux/store/store';
+import {fountUser} from '../../../../redux/actions/user';
 // config redux store and save in locals - template will use it to render initialized app with server side state
 
-import {fountUser} from '../../../../redux/actions/user';
 
 export default (req, res, next) => {
     let store = configureStore();
-    // if (req.isAuthenticated()) { // todo client it
-    //     store.dispatch(fountUser(req.user));
-    // }
-    // store.dispatch(fetchPayments()).then(() => {
-    // console.log('req.authInfo', req.authInfo);
-    // console.log('res.locals.error', res.locals.error);
+    if (req.isAuthenticated()) { // todo client it
+        store.dispatch(fountUser(req.user))
+    }
     res.locals.state = store.getState();
     next();
-    // });
-
 }

@@ -48,14 +48,14 @@ class Header extends Component {
     }
 
     componentWillMount() {
-        const {location, history, user} = this.props;
-        const {pathname} = location;
-        let index = _.findIndex(filterHiddenRoutes(routes), {path: pathname});
-        if (pathname === '/' || index < 0) {
-            history.push('/dashboard');
-            index = _.findIndex(filterHiddenRoutes(routes), {path: '/dashboard'});
-        }
-        this.setState({value: index});
+        // const {location, history, user} = this.props;
+        // const {pathname} = location;
+        // let index = _.findIndex(filterHiddenRoutes(routes), {path: pathname});
+        // if (pathname === '/' || index < 0) {
+        //     history.push('/dashboard');
+        //     index = _.findIndex(filterHiddenRoutes(routes), {path: '/dashboard'});
+        // }
+        // this.setState({value: index});
     }
 
 

@@ -13,11 +13,11 @@ router.post('/auth/login', passport.authenticate('local', { failWithError: true 
         // let store = configureStore();
         // if (req.isAuthenticated()) { // todo client it
         //     store.dispatch(fountUser(req.user));
-        // console.log('req.user', req.user);
-// /        console.log('res.user', res.user);
-        let user = req.user;
-        res.json(user);
-        // res.redirect('/');
+            // console.log('req.user', req.user);
+            // console.log('res.user', res.user);
+            // let user = req.user;
+            // res.json(user);
+            res.redirect('/');
         // }
         // if (req.xhr) { return res.json({ id: req.user.id }); }
     },
@@ -30,9 +30,11 @@ router.post('/auth/login', passport.authenticate('local', { failWithError: true 
         //         error: err
         //     });
         // }
-        res.locals.errors = err; // todo send error on fail login
-        console.log('res.locals.errors set', res.locals.errors);
+        // console.log('err', err);
 
+        // res.locals.errors = err; // todo send error on fail login
+        // console.log('res.locals.errors set', res.locals.errors);
+        //
         res.redirect('/register');
     });
 

@@ -1,17 +1,16 @@
+import helmet from 'helmet';
 import logger from './logger';
 import setters from './setters';
 import webpack from './webpack';
 import serveStatics from './serveStatics';
 import bodyParser from './bodyParser';
 import session from './session';
-// import views from './views';
 import validator from './validator';
 import passport from './passport';
 import api from './api';
 import router from './router';
 import errors from './errors';
 
-import helmet from 'helmet';
 
 export default (app) => {
     app.use(helmet());
@@ -21,7 +20,6 @@ export default (app) => {
     serveStatics(app);
     bodyParser(app);
     session(app);
-    // views(app);
     validator(app);
     passport(app);
     api(app);
