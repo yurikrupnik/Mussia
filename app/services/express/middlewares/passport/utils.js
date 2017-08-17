@@ -1,22 +1,15 @@
 import passport from 'passport';
+import faker from 'faker';
+import shortid from 'shortid';
 import {validatePassword, generateHash} from '../../../node/pass-hash';
 import Users from '../../../../api/users/model';
 
-import faker from 'faker';
-import shortid from 'shortid';
-
 let serialize = (user, done) => {
-    console.log('serialize user', user);
-
     return done(null, user.id);
 };
-let deserialize = (id, done) => {
-    return Users.find({id}, function (err, doc) {
-        console.log('err', err);
-        console.log('doc', doc);
 
-        return done(err, doc);
-    });
+let deserialize = (id, done) => {
+    return Users.find({id}, done);
 };
 
 const checkValidUser = (user, done) => valid => {
@@ -58,13 +51,13 @@ const socialAppsRegisterCallback = (profile, done) => () => {
     return Users.findOne({id: profile.id})
         .then(function (user) {
             if (user) {
-                done(null, user); // user found, return that user
+                done(null, user);
             } else {
                 const {provider} = profile;
                 const newUser = new Users({
                     id: profile.id,
                     email: profile.email || '',
-                    name: provider === 'facebook' ? `${profile.name.first_name} ${profile.name.last_name}` : profile.fullName ,
+                    name: provider === 'facebook' ? profile.displayName : profile.fullName ,
                 });
                 newUser.save(done);
             }
@@ -74,15 +67,15 @@ const socialAppsRegisterCallback = (profile, done) => () => {
 };
 const socialNetworkStrategy = (token, refreshTocken, profile, done) => process.nextTick(socialAppsRegisterCallback(profile, done));
 
-const setSocialAuth = (provider) => passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email', 'name']});
+const setSocialAuth = (provider) => passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email']}); // handling fail with router
 
-function createSocialNetworkRoutes(app) {
+const createSocialNetworkRoutes = app => {
     const socialNetworks = ['facebook', 'flickr'];
     socialNetworks.forEach(function (provider) { // register middlewares
         app.get(`/auth/${provider}`, setSocialAuth(provider));
         app.get(`/auth/${provider}/callback`, setSocialAuth(provider));
     });
-}
+};
 
 export {
     serialize,

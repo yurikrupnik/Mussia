@@ -29,11 +29,7 @@ class Header extends Component {
 
     componentWillMount() {
         const {location, history, user} = this.props;
-        console.log('user in app', user);
-
         if (!user) {
-            console.log('nouser');
-
             history.push('/register');
         }
     }
