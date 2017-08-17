@@ -8,11 +8,11 @@ const render = (component, state) => `<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Universal React Router 4 Demo</title>
+        <title>Engine</title>
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <div id="app">${renderToString(component)}</div>
+        <div id="root">${renderToString(component)}</div>
         <script>window.__PRELOADED_STATE__ = ${JSON.stringify(state)};</script>
         <script src="main.js"></script>
     </body>
