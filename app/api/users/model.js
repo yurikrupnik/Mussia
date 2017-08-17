@@ -1,6 +1,6 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
     id: {
         type: String,
         index: true
@@ -14,21 +14,8 @@ var UserSchema = new Schema({
         data: {
             url: String
         }
-    }
-    // hasToken: Boolean,
-    // id: Schema.Types.ObjectId,
-    // todos: [{
-    //     comepleted: {
-    //         type: Boolean,
-    //         default: false
-    //     },
-    //     title: String,
-    //     createdOn: {
-    //         type: Date,
-    //         default: Date.now
-    //     }
-    // }]
-
+    },
+    searches: Schema.Types.ObjectId
 });
 
 export default mongoose.model('User', UserSchema);
