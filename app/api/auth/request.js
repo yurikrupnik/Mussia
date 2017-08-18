@@ -1,5 +1,5 @@
 
-import request from 'superagent';
+// import request from 'superagent';
 import axios from 'axios';
 export function logout() {
     return axios({

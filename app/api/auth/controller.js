@@ -21,14 +21,16 @@ function handleLogin(req, res, next) {
 }
 
 function handleLogout(req, res, next) {
-    req.session.destroy(function (err) {
+    req.session.destroy((err) => {
         if (err) {
             next(err);
-        } else res.redirect('/');
+        } else {
+            res.redirect('/register');
+        }
     });
 }
 
 export {
-    handleLogin,
+    // handleLogin,
     handleLogout
 }

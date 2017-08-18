@@ -13,8 +13,8 @@ let style = {
 export default () => (
     <div className="row center-xs">
         <div className="col-xs-6">
-            <div className="title margin-top-10">Register</div>
             <form className="box" method="POST" action="/auth/login">
+                <div className="title margin-top-10">Register</div>
                 <TextField fullWidth={true}
                            hintText="Email Field"
                            floatingLabelText="Email"
@@ -30,7 +30,7 @@ export default () => (
 
                 <Divider style={style}/>
 
-                <a href="/auth/facebook"><RaisedButton label="Continue with Facebook" fullWidth={true}/></a>
+                <a href="/auth/facebook"><RaisedButton  label="Continue with Facebook" fullWidth={true}/></a>
                 <a href="/auth/flickr"><RaisedButton label="Continue with Flickr" fullWidth={true}/></a>
             </form>
         </div>
