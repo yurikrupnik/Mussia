@@ -1,10 +1,7 @@
 import users from './users';
-import payments from './payments';
-import friends from './friends';
+import searches from './photos';
 
-// pass apis as array of middle wares
 export default [
     users,
-    payments,
-    friends
+    searches
 ];

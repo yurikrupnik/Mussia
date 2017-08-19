@@ -30,7 +30,7 @@ export default () => (
 
                 <Divider style={style}/>
 
-                <a href="/auth/facebook"><RaisedButton  label="Continue with Facebook" fullWidth={true}/></a>
+                <a href="/auth/facebook"><RaisedButton label="Continue with Facebook" fullWidth={true}/></a>
                 <a href="/auth/flickr"><RaisedButton label="Continue with Flickr" fullWidth={true}/></a>
             </form>
         </div>

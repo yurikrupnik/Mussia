@@ -4,7 +4,7 @@ import MaterialWrapper from '../../Utils/Material';
 import ProviderWrapper from '../../Utils/Provider';
 import routes from '../App/routes';
 
-const Layout = ({routes}) => {
+const Layout = () => {
     return (
         <div>
             {routes.map(route => {
@@ -16,6 +16,6 @@ const Layout = ({routes}) => {
 
 export default ({initialState}) => {
     return (
-        <ProviderWrapper component={<MaterialWrapper component={<Layout routes={routes} />}/>} initialState={initialState} />
+        <ProviderWrapper component={<MaterialWrapper component={<Layout />}/>} initialState={initialState} />
     );
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCounter, dispatchActions} from '../../../redux/selectors/counter';
+// import {getCounter, dispatchActions} from '../../../redux/selectors/counter';
 import Count from '../../counter/counter';
 
 class CounterWrapper extends Component {

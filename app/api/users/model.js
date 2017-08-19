@@ -5,17 +5,9 @@ const UserSchema = new Schema({
         type: String,
         index: true
     },
-    email: {
-        type: String,
-    },
+    email: String,
     name: String,
     hashPassword: String,
-    picture: {
-        data: {
-            url: String
-        }
-    },
-    searches: Schema.Types.ObjectId
 });
 
 export default mongoose.model('User', UserSchema);
