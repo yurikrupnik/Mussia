@@ -1,3 +1,16 @@
-/**
- * Created by yurikrupnik on 19/08/2017.
- */
+import {bindActionCreators} from 'redux';
+import * as actions from './actions';
+
+const mapToProps = (state, ownProps) => {
+    return state.galleries;
+};
+
+const dispatchActions = (dispatch) => {
+    return bindActionCreators(actions, dispatch);
+};
+
+export {
+    mapToProps,
+    dispatchActions,
+    actions
+}

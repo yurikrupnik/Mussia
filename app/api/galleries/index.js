@@ -1,9 +1,9 @@
 import express from 'express';
 import { url } from './config';
-import Model from './model';
+// import Model from './model';
 import { findGalleriesByUserId } from './controller';
 let router = express.Router();
 
-router.post('/galleries', findGalleriesByUserId);
+router.post(url, findGalleriesByUserId);
 
 export default router;

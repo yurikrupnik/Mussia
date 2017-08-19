@@ -17,11 +17,13 @@ Flickr.tokenOnly(flickrOptions, function (error, flickr) {
     // we can now use "flickr" as our API object,
     // but we can only call public methods and access public data
     router.post(url, (req, res, next) => {
-        flickr.photos.search({ tags: req.body.tag }, (_err, response) => {
-            if (_err) return next(_err);
+        return flickr.photos.search({ tags: req.body.tag }, (_err, response) => {
+            if (_err) {
+                return next(_err);
+            }
             let data = response.photos;
             if (!req.isAuthenticated()) {
-                res.status(200).json(data);
+                return res.status(200).json(data);
             } else {
                 data.tag = req.body.tag;
                 data.user_id = req.user.length ? req.user[0].id : '';
@@ -35,7 +37,7 @@ Flickr.tokenOnly(flickrOptions, function (error, flickr) {
                         let newSearch = new Model(data);
                         newSearch.save(function (er, doc) {
                             if (er) next(er);
-                            res.status(200).json(doc);
+                            return res.status(200).json(doc);
                         });
                     }
                 })

@@ -13,6 +13,8 @@ const dispatchPending = (dispatch, payload) => {
 };
 
 const dispatchFulfilled = dispatch => res => {
+    console.log('res', res);
+
     dispatch({
         type: GET_GALLERIES_FULFILLED,
         payload: res.data
@@ -20,12 +22,10 @@ const dispatchFulfilled = dispatch => res => {
 };
 
 const getGalleries = requestBody => dispatch => {
-    console.log('requestBody', requestBody);
-
     dispatchPending(dispatch, requestBody);
     return axios({
             method: 'post',
-            url: '/galleries',
+            url: '/api/galleries',
             data: requestBody,
         })
         .then(dispatchFulfilled(dispatch))

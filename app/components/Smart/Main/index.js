@@ -22,7 +22,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { mapToProps as userMapToProps, actions as userActions} from '../../../redux/user/selectors';
 import { mapToProps as searchersMapToProps, actions as searchersActions} from '../../../redux/searchers/selectors';
-// import { mapToProps as galleriesMapToProps, actions as galleriesActions} from '../../../redux/galleries/selectors';
+import { mapToProps as galleriesMapToProps, actions as galleriesActions} from '../../../redux/galleries/selectors';
 
 class Main extends Component {
 
@@ -33,6 +33,12 @@ class Main extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
         this.handleNextPage = this.handleNextPage.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.props.user) {
+            this.props.actions.getGalleries({user_id: this.props.user.id});
+        }
     }
 
     goToRegister() {
@@ -57,8 +63,9 @@ class Main extends Component {
     }
 
     render() {
-        const { user, searchers } = this.props;
+        const { user, searchers, galleries} = this.props;
         const { actions } = this.props;
+        console.log('galleries', galleries);
 
         // todo break it to smaller components that get handlers/data by props
         return (
@@ -105,11 +112,11 @@ class Main extends Component {
 const combinedMapTpProps = state => ({
     user: userMapToProps(state),
     searchers: searchersMapToProps(state),
-    // galleries: galleriesMapToProps(state)
+    galleries: galleriesMapToProps(state)
 });
 
 const combinedDispatchActions = dispatch => ({
-    actions: bindActionCreators(Object.assign({}, userActions, searchersActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, userActions, searchersActions, galleriesActions), dispatch)
 });
 
 export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Main));
