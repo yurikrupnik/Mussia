@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { received_error } from '../errors/actions';
+import {url} from '../../api/galleries/config'
 
 export const GET_GALLERIES = 'GET_GALLERIES';
 export const GET_GALLERIES_FULFILLED = 'GET_GALLERIES_FULFILLED';
@@ -13,8 +14,6 @@ const dispatchPending = (dispatch, payload) => {
 };
 
 const dispatchFulfilled = dispatch => res => {
-    console.log('res', res);
-
     dispatch({
         type: GET_GALLERIES_FULFILLED,
         payload: res.data
@@ -24,20 +23,23 @@ const dispatchFulfilled = dispatch => res => {
 const getGalleries = requestBody => dispatch => {
     dispatchPending(dispatch, requestBody);
     return axios({
-            method: 'post',
-            url: '/api/galleries',
-            data: requestBody,
-        })
+        method: 'post',
+        url: `/api${url}`,
+        data: requestBody,
+    })
         .then(dispatchFulfilled(dispatch))
         .catch(received_error(dispatch));
 };
 
+const removeGalleries = requestBody => dispatch => {
+    return axios({
+        method: 'delete',
+        url: `/api${url}`,
+        data: requestBody,
+    });
+};
 
 export {
     getGalleries,
-    // searchByPage,
-    // getSearches,
-    // deleteById,
-    // deleteByIds,
-    // getSchema
+    removeGalleries
 }

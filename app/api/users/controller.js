@@ -23,7 +23,6 @@ export function updateUser(req, res) {
         .catch(handleError(res));
 }
 
-
 export function saveUser(req, res) {
     return Users.find({}) // todo
         .then(respondWithResult(res))

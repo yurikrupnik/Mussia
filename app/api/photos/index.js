@@ -1,10 +1,9 @@
 import express from 'express';
 import Flickr from 'flickrapi';
-// import {} from './controller';
-
 import { url } from './config';
 import Model from '../galleries/model';
 import secret from '../../services/express/middlewares/passport/secrets.json';
+// import {} from './controller';
 
 let router = express.Router();
 
@@ -45,7 +44,7 @@ Flickr.tokenOnly(flickrOptions, function (error, flickr) {
         });
     }); // todo move handler to controller
 
-    router.post(`${url}/:page`, function (req, res, next) {
+    router.post(`${url}/:page`, (req, res, next) => {
         flickr.photos.search({ tags: req.body.tag, page: req.params.page }, (err, response) => {
             if (err) return next(err);
             let data = response.photos;

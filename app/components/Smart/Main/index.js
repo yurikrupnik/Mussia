@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import {bindActionCreators} from 'redux';
-import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
-import Avatar from 'material-ui/Avatar';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import { connect } from 'react-redux';
 import MenuItem from 'material-ui/MenuItem';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
-
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import AutoComplete from 'material-ui/AutoComplete';
-
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import Drawer from 'material-ui/Drawer';
 import { mapToProps as userMapToProps, actions as userActions} from '../../../redux/user/selectors';
 import { mapToProps as searchersMapToProps, actions as searchersActions} from '../../../redux/searchers/selectors';
 import { mapToProps as galleriesMapToProps, actions as galleriesActions} from '../../../redux/galleries/selectors';
@@ -28,17 +15,12 @@ class Main extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { currentTag: '' };
+        this.state = { currentTag: '', open: false };
         this.goToRegister = this.goToRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
         this.handleNextPage = this.handleNextPage.bind(this);
-    }
-
-    componentDidMount() {
-        if (this.props.user) {
-            this.props.actions.getGalleries({user_id: this.props.user.id});
-        }
+        this.openDrawer = this.openDrawer.bind(this);
     }
 
     goToRegister() {
@@ -62,17 +44,41 @@ class Main extends Component {
         actions.searchByPage({tag: currentTag, page: searchers.data.page + 1});
     }
 
+    openDrawer() {
+        const {actions, user} = this.props;
+        this.setState({open: !this.state.open});
+        if (user) {
+            actions.getGalleries({user_id: user.id});
+        } else {
+            console.warn('no auth user'); // solve by saving galleries on local storage
+        }
+    }
+
+    handleClear() {
+        const {user, actions} = this.props;
+        actions.removeGalleries({user_id: user.id});
+        this.setState({open: !this.state.open});
+    }
+
+    getGallery(gallery) {
+        const {actions} = this.props;
+        // console.log('this.state.currentTag', this.state.currentTag); // todo does not update currentTag
+        // console.log('gallery.tag', gallery.tag);
+        actions.updateWithData(gallery);
+        this.setState({open: !this.state.open, currentTag: gallery.tag});
+    }
+
     render() {
         const { user, searchers, galleries} = this.props;
         const { actions } = this.props;
-        console.log('galleries', galleries);
 
-        // todo break it to smaller components that get handlers/data by props
+        // todo break it to smaller components that get handlers/data by props - route base component is the only smart component: connect redux, router, pre load data
         return (
             <div>
                 <AppBar
                     iconElementRight={<FlatButton onClick={user ? actions.logout : this.goToRegister}
                                                   label={user ? 'Logout' : 'Login'}/>}
+                    onLeftIconButtonTouchTap={this.openDrawer}
                 />
 
                 <div className="row">
@@ -91,7 +97,7 @@ class Main extends Component {
                     </div>
                 </div>
 
-                {Array.isArray(searchers.data.photo) ? <div>
+                {Array.isArray(searchers.data.photo) && <div>
                     <div className="row">
                         {searchers.data.photo.map(p => {
                             return (
@@ -103,7 +109,31 @@ class Main extends Component {
                         })}
                     </div>
                     <FlatButton disabled={searchers.active} label="Next page" onClick={this.handleNextPage}/>
-                </div>: null}
+                </div>}
+
+                <Drawer
+                    docked={false}
+                    width={350}
+                    open={this.state.open}
+                    onRequestChange={(open) => this.setState({open})}
+                >
+                    <MenuItem onClick={this.handleClear.bind(this)}>
+                        Clear Searches
+                    </MenuItem>
+
+                    {Array.isArray(galleries.data) && galleries.data.map((v, i) => {
+                        return (
+                            <MenuItem key={i} onClick={this.getGallery.bind(this, v)}>
+                                <div className="row">
+                                    <div className="col-xs-3">{v.tag}</div>
+                                    <div className="col-xs-3">{v.service}</div>
+                                    <div className="col-xs-3">{new Date(v.time).toLocaleDateString()}</div>
+                                    <div className="col-xs-3">{v.total}</div>
+                                </div>
+                            </MenuItem>
+                        )
+                    })}
+                </Drawer>
             </div>
         );
     }
