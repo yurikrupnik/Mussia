@@ -1,48 +1,25 @@
 import {
-    // CREATE_PAYMENTS_FULFILLED,
-    // CREATE_PAYMENTS_PENDING,
-    // CREATE_PAYMENTS_REJECTED,
-    // READ_PAYMENTS_FULFILLED,
-    // READ_PAYMENTS_PENDING,
-    // READ_PAYMENTS_REJECTED,
-    // DELETE_PAYMENTS_FULFILLED,
-    // DELETE_PAYMENTS_PENDING,
-    // DELETE_PAYMENTS_REJECTED
+    SERVICE_SEARCH,
+    DISPATCH_SEARCH_FULFILLED,
+    DISPATCH_SEARCH_BY_PAGE_FULFILLED,
 } from './actions';
-import _ from 'lodash';
-// import {received_error
-// } from './actions';
 
-// {
-//     data: [],
-//     active: false,
-//     error: null
-// };
-export default (state = [], action) => {
 
+export default (state = { data: [], active: false }, action) => {
     switch (action.type) {
-        // read
-        // case READ_PAYMENTS_PENDING:
-        //     // return [...state, action.payload];
-        //     return [...state];
-        // case READ_PAYMENTS_FULFILLED:
-        //     return [...action.payload];
-        // // case READ_PAYMENTS_REJECTED:
-        // //     return Object.assign({}, state, action);
-        // // delete
-        // case DELETE_PAYMENTS_FULFILLED:
-        //     return _.filter(state, v => !_.includes(action.payload, v.id));
-        // case DELETE_PAYMENTS_PENDING:
-        //     return [...state];
-        // // case DELETE_PAYMENTS_REJECTED:
-        // //     return Object.assign({}, state, action);
-        // // // create
-        // case CREATE_PAYMENTS_FULFILLED:
-        //     return [...state, action.payload];
-        // case CREATE_PAYMENTS_PENDING:
-        //     return [...state];
-        // // case CREATE_PAYMENTS_REJECTED:
-        //     return Object.assign({}, state, action);
+        case SERVICE_SEARCH:
+            return Object.assign({}, state, { active: !state.active });
+        case DISPATCH_SEARCH_FULFILLED:
+            return Object.assign({}, state, { active: !state.active, data: action.payload });
+        case DISPATCH_SEARCH_BY_PAGE_FULFILLED:
+            return Object.assign({}, state, {
+                    active: !state.active,
+                    data: {
+                        ...action.payload,
+                        photo: state.data.photo.concat(action.payload.photo)
+                    }
+                }
+            );
         default:
             return state;
     }

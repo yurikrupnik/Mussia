@@ -2,20 +2,17 @@
 
 export const SERVICE_SEARCH = 'SERVICE_SEARCH';
 export const DISPATCH_SEARCH_FULFILLED = 'DISPATCH_SEARCH_FULFILLED';
+export const DISPATCH_SEARCH_BY_PAGE_FULFILLED = 'DISPATCH_SEARCH_BY_PAGE_FULFILLED';
 
-
-import request from 'superagent';
-
-let returnBody = res => res.body;
 
 import {received_error} from '../errors/actions';
 
 import axios from 'axios';
 
-const dispatchSearchPending = (dispatch, payload) => dispatch => {
+const dispatchSearchPending = (dispatch, payload) => {
     dispatch({
         type: SERVICE_SEARCH,
-        payload: payload // tag
+        payload: payload // body of the request
     });
 };
 
@@ -26,20 +23,44 @@ const dispatchSearchFulfilled = dispatch => res => {
     });
 };
 
+const dispatchSearchByPageFulfilled = dispatch => res => {
+    dispatch({
+        type: DISPATCH_SEARCH_BY_PAGE_FULFILLED,
+        payload: res.data
+    });
+};
 
-
-const search = (requestBody) => {
-    return dispatch => {
-        dispatchSearchPending(dispatch, requestBody);
-        console.log('requestBody', requestBody);
-        return axios({
+const search = requestBody => dispatch => {
+    dispatchSearchPending(dispatch, requestBody);
+    return axios({
             method: 'post',
-            url:'/api/service/photos',
+            url: '/api/service/photos',
             data: requestBody,
         })
         .then(dispatchSearchFulfilled(dispatch))
         .catch(received_error(dispatch));
-    };
+};
+
+const searchByPage = requestBody => dispatch => {
+    dispatchSearchPending(dispatch, requestBody);
+    return axios({
+            method: 'post',
+            url: `/api/service/photos/${requestBody.page}`,
+            data: requestBody,
+        })
+        .then(dispatchSearchByPageFulfilled(dispatch))
+        .catch(received_error(dispatch));
+};
+
+const getSearches = requestBody => dispatch => {
+    dispatchSearchPending(dispatch, requestBody);
+    return axios({
+        method: 'post',
+        url: `/api/galleries`,
+        data: requestBody,
+    })
+        .then(dispatchSearchByPageFulfilled(dispatch))
+        .catch(received_error(dispatch));
 };
 
 const create = (body, dispatch) => {
@@ -148,8 +169,8 @@ const update = (body) => {
 
 export {
     search,
-    // create,
-    // update,
+    searchByPage,
+    getSearches,
     // deleteById,
     // deleteByIds,
     // getSchema

@@ -5,12 +5,12 @@ const mapToProps = (state, ownProps) => {
     return state.searchers;
 };
 
-
 const dispatchActions = (dispatch) => {
     return bindActionCreators(actions, dispatch);
 };
 
 export {
     mapToProps,
-    dispatchActions
+    dispatchActions,
+    actions
 }

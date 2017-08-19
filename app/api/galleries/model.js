@@ -9,8 +9,7 @@ let PhotosSchema = Schema({
     },
     tag: {
         type: String,
-        required: [true, 'must have tag'],
-        index: true
+        required: [true, 'must have tag']
     },
     service: {
         type: String,
@@ -40,4 +39,4 @@ let PhotosSchema = Schema({
     photo: []
 });
 
-export default mongoose.model('Photos', PhotosSchema);
+export default mongoose.model(model, PhotosSchema);
