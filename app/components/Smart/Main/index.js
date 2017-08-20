@@ -16,11 +16,16 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = { currentTag: '', open: false };
+        if (!props.user) {
+            const { history } = props;
+            history.push('/register'); // push does the job but with error
+        }
         this.goToRegister = this.goToRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
         this.handleNextPage = this.handleNextPage.bind(this);
         this.openDrawer = this.openDrawer.bind(this);
+        this.handleClear = this.handleClear.bind(this);
     }
 
     goToRegister() {
@@ -117,7 +122,7 @@ class Main extends Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}
                 >
-                    <MenuItem onClick={this.handleClear.bind(this)}>
+                    <MenuItem onClick={this.handleClear}>
                         Clear Searches
                     </MenuItem>
 

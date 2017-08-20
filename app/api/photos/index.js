@@ -44,7 +44,7 @@ Flickr.tokenOnly(flickrOptions, function (error, flickr) {
         });
     }); // todo move handler to controller
 
-    router.post(`${url}/:page`, (req, res, next) => {
+    router.post(`${url}/:page`, function (req, res, next) {
         flickr.photos.search({ tags: req.body.tag, page: req.params.page }, (err, response) => {
             if (err) return next(err);
             let data = response.photos;

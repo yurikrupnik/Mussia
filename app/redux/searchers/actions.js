@@ -21,14 +21,10 @@ const dispatchSearchFulfilled = dispatch => res => {
 };
 
 const updateWithData = body => dispatch => {
-    new Promise(function (resolve, reject){
-        resolve(
-            dispatch({
-                type: DISPATCH_CACHE_DATA,
-                payload: body
-            })
-        );
-    });
+    dispatch({
+        type: DISPATCH_CACHE_DATA,
+        payload: body
+    })
 
 };
 
