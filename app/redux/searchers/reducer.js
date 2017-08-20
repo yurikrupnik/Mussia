@@ -16,7 +16,14 @@ export default (state = { data: [], active: false }, action) => {
                 data: action.payload
             });
         case DISPATCH_SEARCH_BY_PAGE_FULFILLED:
-            return Object.assign({}, state, { data: action.payload });
+            return Object.assign({}, state, {
+                    active: !state.active,
+                    data: {
+                        ...action.payload,
+                        photo: state.data.photo.concat(action.payload.photo)
+                    }
+                }
+            );
         case DISPATCH_CACHE_DATA:
             return Object.assign({}, state, { data: action.payload });
         default:
