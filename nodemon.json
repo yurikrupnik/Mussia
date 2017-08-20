@@ -2,12 +2,10 @@
   "ignore": [
     ".git",
     "./node_modules",
-    "./app/components",
-    "./app/styles",
     "./app/tests",
     "./app/public",
     "./app/routes",
-    "./app/Wrappers/"
+    "./data"
   ],
   "verbose": true,
   "exec": ["babel-node"]

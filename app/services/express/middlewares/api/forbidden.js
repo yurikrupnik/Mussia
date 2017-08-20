@@ -1,5 +1,5 @@
 export default (req, res, next) => {
-    if (req.user && req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
         next();
     } else {
         res.status(403).send({type: 'error', 'problem': 'bad request - not authenticated'});

@@ -1,131 +1,86 @@
 import passport from 'passport';
+import faker from 'faker';
+import shortid from 'shortid';
 import {validatePassword, generateHash} from '../../../node/pass-hash';
 import Users from '../../../../api/users/model';
 
-let serialize = (user, done) => done(null, user.id);
-let deserialize = (id, done) => Users.findOne({id}, done);
+let serialize = (user, done) => {
+    return done(null, user.id);
+};
 
-function handleHash(user, done) {
-    return function (hash) {
-        user.hashPassword = hash;
-        insertUser(user, done);
-    }
-}
+let deserialize = (id, done) => {
+    return Users.find({id}, done);
+};
 
-function insertUser(user, done) {
-    return Users.insert(user)
-        .then(passUser(done));
-}
-
-function passUser(done) {
-    return function (user) {
+const checkValidUser = (user, done) => valid => {
+    if (!valid) {
+        return done(null, false, {message: 'invalid user', user: user}); // todo check it
+    } else {
         return done(null, user);
     }
-}
+};
+const handleHash = user => hash => {
+    user.hashPassword = hash;
+    return user;
+};
 
-function checkValidUser(user, done) {
-    return function (valid) {
-        if (!valid) {
-            done(null, false);
-        } else {
-            done(null, user);
-        }
+const saveUser = done => user => user.save(done);
+
+const checkUserByEmailAndPass = (email, password, done) => user => {
+    if (!user) {
+        return generateHash(password)
+            .then(handleHash(new Users({ email: email, name: faker.name.findName(), id: shortid.generate() })))
+            .then(saveUser(done))
+            .catch(function (err) {
+                console.log('error saving user', err);
+            });
+
+    } else {
+        return validatePassword(password, user.hashPassword)
+            .then(checkValidUser(user, done));
     }
-}
+};
 
-function checkUserByEmailAndPass(email, password, done) {
-    return function (user) {
-        if (!user) {
-            let nuser = { // todo use here some User model constructor
-                email: email,
-                password: password, // delete this, not saving passwords
-                name: 'admin',
-                id: 12345
-            };
-            generateHash(password)
-                .then(handleHash(nuser, done));
-
-        } else {
-            validatePassword(password, user.hashPassword)
-                .then(checkValidUser(user, done));
-        }
-    }
-}
-
-function socialAppsRegisterCallback(profile, done) {
-    // find the user in the database based on their provider id
-    return function () {
-        let id = profile.id;
-        return Users.findOne({id})
-            .then(function (user) {
-                // if the user is found, then log them in
-                if (user) {
-                    done(null, user); // user found, return that user
-                } else {
-                    return insertUser(profile._json, done);
-                }
-
-            })
-            .catch(done);
-    }
-}
-
-function socialNetworkStrategy(token, refreshTocken, profile, done) {
-    process.nextTick(socialAppsRegisterCallback(profile, done));
-}
-
-function localStrategyHandler(req, email, password, done) {
+const localStrategyHandler = (req, email, password, done) => {
     Users.findOne({email})
         .then(checkUserByEmailAndPass(email, password, done))
         .catch(done);
-}
+};
 
-function handleLogin(req, res, next) {
-    passport.authenticate('local', function (err, user, info) {
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            return res.redirect('/login');
-        }
-        req.logIn(user, function (err) {
-            if (err) {
-                return next(err);
+const socialAppsRegisterCallback = (profile, done) => () => {
+    return Users.findOne({id: profile.id})
+        .then(function (user) {
+            if (user) {
+                done(null, user);
+            } else {
+                const {provider} = profile;
+                const newUser = new Users({
+                    id: profile.id,
+                    email: profile.email || '',
+                    name: provider === 'facebook' ? profile.displayName : profile.fullName ,
+                });
+                newUser.save(done);
             }
-            return res.redirect('/');
-        });
-    })(req, res, next);
-}
 
-function handleLogout(req, res, next) {
-    req.session.destroy(function (err) {
-        console.log('YOOOOOOO');
+        })
+        .catch(done);
+};
+const socialNetworkStrategy = (token, refreshTocken, profile, done) => process.nextTick(socialAppsRegisterCallback(profile, done));
 
-        res.redirect('/'); //Inside a callback… bulletproof!
+const setSocialAuth = (provider) => passport.authenticate(provider, {successRedirect: '/', failureRedirect: '/', scope: ['email']}); // handling fail with router
+
+const createSocialNetworkRoutes = app => {
+    const socialNetworks = ['facebook', 'flickr'];
+    socialNetworks.forEach(function (provider) { // register middlewares
+        app.get(`/auth/${provider}`, setSocialAuth(provider));
+        app.get(`/auth/${provider}/callback`, setSocialAuth(provider));
     });
-    // req.logout();
-    // res.json([{name: 'shi'}])
-    // res.redirect('/');
-}
-
-function setSocialAuth(provider) {
-    return passport.authenticate(provider, {successRedirect: '/', scope: ['email']});
-}
-
-function createSocialNetworkRoutes(app) {
-    const socialNetworks = ['facebook'];
-    socialNetworks.forEach(function (network) {
-        app.get(`/auth/${network}`, setSocialAuth(network));
-        app.get(`/auth/${network}/callback`, setSocialAuth(network));
-    });
-}
+};
 
 export {
     serialize,
     deserialize,
     socialNetworkStrategy,
     localStrategyHandler,
-    createSocialNetworkRoutes,
-    handleLogin,
-    handleLogout
+    createSocialNetworkRoutes
 }

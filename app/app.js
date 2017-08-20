@@ -1,7 +1,7 @@
 import express from 'express';
-const app = express();
 import loadExpressMiddlewares from './services/express/middlewares/load';
 
+const app = express();
 loadExpressMiddlewares(app);
 
 export default app;

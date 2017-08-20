@@ -9,7 +9,7 @@ let Cookies;
 describe('Functional Test <Sessions>:', function () {
     it('should create user session for valid user', function (done) {
         request(app)
-            .post('/auth/local')
+            .post('/auth/login')
             .send({email: 'example@example.com', password: '1q2w3e', 'id': 1})
             .end(function (err, res) {
                 // Save the cookie to use it later to retrieve the session

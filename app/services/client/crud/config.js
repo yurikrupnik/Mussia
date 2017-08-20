@@ -29,7 +29,7 @@ const crudOperations = [
 export const initialState = {
     data: [],
     active: false,
-    error: null
+    // error: null
 };
 
 const promiseActions = ['PENDING', 'FULFILLED', 'ERROR'];

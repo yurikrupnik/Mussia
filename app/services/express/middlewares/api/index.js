@@ -1,6 +1,8 @@
 import apiMiddleware from '../../../../api'; // array api middleware
-import forbidden from './forbidden';
+import auth from '../../../../api/auth';
+// import forbidden from './forbidden';
 import {apiPrefix} from '../../../../config/env';
 export default (app) => {
-    app.use(apiPrefix, forbidden, apiMiddleware);
+    app.use(auth);
+    app.use(apiPrefix, apiMiddleware);
 }

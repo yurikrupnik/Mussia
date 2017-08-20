@@ -1,50 +1,38 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TextField from 'material-ui/TextField';
-import AppBar from 'material-ui/AppBar';
-import TimePicker from 'material-ui/TimePicker';
+import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
 
-class Register extends Component {
-    constructor(props) {
-        super(props);
-    }
-    handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-    render() {
-        return (
-            <div>
-                <h1> Node Authentication</h1>
-                <p>Login or Register with:</p>
-                {/*<div className="fb-login-button" data-max-rows="1" data-size="icon" data-show-faces="false" data-auto-logout-link="false"></div>*/}
-                {/*<hr/>*/}
-                <div>
-                    <a href="/auth/facebook">Facebook</a>
-                </div>
-                <div>
-                    <a href="/auth/github">Github</a>
-                </div>
+let style = {
+    marginTop: '15px',
+    marginBottom: '15px',
+    marginLeft: '0',
+    marginRight: '0',
+};
 
-                <form name="inituser" ref="shit">
-                    <div >
-                        <TextField
-                            hintText="Email Field"
-                            floatingLabelText="Email"
-                            type={'email'} name={'email'}
-                        />
-                    </div>
-                    <div >
-                        <TextField
-                            hintText="Password Field"
-                            floatingLabelText="Password"
-                            type={'password'} name={'password'}
-                        />
-                    </div>
+export default () => (
+    <div className="row center-xs">
+        <div className="col-xs-6">
+            <form className="box" method="POST" action="/auth/login">
+                <div className="title margin-top-10">Register</div>
+                <TextField fullWidth={true}
+                           hintText="Email Field"
+                           floatingLabelText="Email"
+                           type={'email'} name={'email'}
+                />
+                <TextField fullWidth={true}
+                           hintText="Password Field"
+                           floatingLabelText="Password"
+                           type={'password'} name={'password'}
+                />
 
-                    <button type="submit">Login</button>
-                </form>
-            </div>
-        )
-    }
-}
+                <RaisedButton fullWidth={true} label="Join now" primary={true} type="submit"/>
 
-export default Register;
+                <Divider style={style}/>
+
+                <a href="/auth/facebook"><RaisedButton label="Continue with Facebook" fullWidth={true}/></a>
+                <a href="/auth/flickr"><RaisedButton label="Continue with Flickr" fullWidth={true}/></a>
+            </form>
+        </div>
+    </div>
+);

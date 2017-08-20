@@ -1,4 +1,6 @@
+import helmet from 'helmet';
 export default (app) => {
-    app.set('x-powered-by', false);
-    app.set('view cache', true);
+    app.use(helmet());
+    // app.set('x-powered-by', false);
+    // app.set('view cache', true);
 }
