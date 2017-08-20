@@ -16,10 +16,6 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = { currentTag: '', open: false };
-        if (!props.user) {
-            const { history } = props;
-            history.push('/register'); // push does the job but with error
-        }
         this.goToRegister = this.goToRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
@@ -28,6 +24,12 @@ class Main extends Component {
         this.handleClear = this.handleClear.bind(this);
     }
 
+    componentWillMount() {
+        const { user, history } = this.props;
+        if (!user) {
+            history.push('/register'); // push does the job but with error
+        }
+    }
     goToRegister() {
         const { history } = this.props;
         history.push('/register');
