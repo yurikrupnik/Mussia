@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { received_error } from '../../redux/errors/actions';
-import {url} from './config'
+import { url } from './config';
+import { apiPrefix } from '../../config/env';
 
 export const GET_GALLERIES = 'GET_GALLERIES';
 export const GET_GALLERIES_FULFILLED = 'GET_GALLERIES_FULFILLED';
@@ -24,7 +25,7 @@ const getGalleries = requestBody => dispatch => {
     dispatchPending(dispatch, requestBody);
     return axios({
         method: 'post',
-        url: `/api${url}`,
+        url: `${apiPrefix}${url}`,
         data: requestBody,
     })
         .then(dispatchFulfilled(dispatch))
@@ -34,7 +35,7 @@ const getGalleries = requestBody => dispatch => {
 const removeGalleries = requestBody => dispatch => {
     return axios({
         method: 'delete',
-        url: `/api${url}`,
+        url: `${apiPrefix}${url}`,
         data: requestBody,
     });
 };

@@ -2,31 +2,25 @@
 import Model from '../galleries/model';
 
 const search = flickr => (req, res, next) => {
-    return flickr.photos.search({ tags: req.body.tag }, (_err, response) => {
-        if (_err) {
-            return next(_err);
-        }
+    flickr.photos.search({ tags: req.body.tag }, (err, response) => {
+        if (err) return next(err);
         let data = response.photos;
-        if (!req.isAuthenticated()) {
-            return res.status(200).json(data);
-        } else {
-            data.tag = req.body.tag;
-            data.user_id = req.user.length ? req.user[0].id : '';
-            let criteria = { user_id: data.user_id, tag: data.tag };
+        if (!req.isAuthenticated()) return res.status(200).json(data);
 
-            // todo promise it
-            Model.findOne(criteria, (err, item) => {
-                if (err) next(err);
+        data.tag = req.body.tag;
+        data.user_id = req.user.length ? req.user[0].id : '';
+        let criteria = { user_id: data.user_id, tag: data.tag };
+
+        Model.findOne(criteria)
+            .then(item => {
                 if (item) res.status(200).json(item);
                 else {
-                    let newSearch = new Model(data);
-                    newSearch.save(function (er, doc) {
-                        if (er) next(er);
-                        return res.status(200).json(doc);
-                    });
+                    new Model(data).save()
+                        .then(doc => res.status(200).json(doc))
+                        .catch(next);
                 }
             })
-        }
+            .catch(next);
     });
 };
 

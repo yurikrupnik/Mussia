@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {received_error} from '../../redux/errors/actions';
+import {url} from './config';
+import { apiPrefix } from '../../config/env';
 
 export const SERVICE_SEARCH = 'SERVICE_SEARCH';
 export const DISPATCH_SEARCH_FULFILLED = 'DISPATCH_SEARCH_FULFILLED';
@@ -28,14 +30,14 @@ const updateWithData = body => dispatch => {
 
 };
 
-const dispatchSearchByPageFulfilled = dispatch => res => (dispatch({ type: DISPATCH_SEARCH_BY_PAGE_FULFILLED, payload: res.data }));
+const dispatchSearchByPageFulfilled = dispatch => res => dispatch({ type: DISPATCH_SEARCH_BY_PAGE_FULFILLED, payload: res.data });
 
 
 const search = requestBody => dispatch => {
     dispatchSearchPending(dispatch, requestBody);
     return axios({
             method: 'post',
-            url: '/api/service/photos',
+            url: `${apiPrefix}${url}`,
             data: requestBody,
         })
         .then(dispatchSearchFulfilled(dispatch))
@@ -46,7 +48,7 @@ const searchByPage = requestBody => dispatch => {
     dispatchSearchPending(dispatch, requestBody);
     return axios({
             method: 'post',
-            url: `/api/service/photos/${requestBody.page}`,
+            url: `${apiPrefix}${url}/${requestBody.page}`,
             data: requestBody,
         })
         .then(dispatchSearchByPageFulfilled(dispatch))
