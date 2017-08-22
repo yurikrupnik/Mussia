@@ -24,7 +24,7 @@ const dispatchFulfilled = dispatch => res => {
 const getGalleries = requestBody => dispatch => {
     dispatchPending(dispatch, requestBody);
     return axios({
-        method: 'post',
+        method: 'post', // todo change to get
         url: `${apiPrefix}${url}`,
         data: requestBody,
     })
