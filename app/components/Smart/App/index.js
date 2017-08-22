@@ -4,6 +4,11 @@ import MaterialWrapper from '../../Utils/Material';
 import ProviderWrapper from '../../Utils/Provider';
 import routes from '../App/routes';
 
+import 'flexboxgrid'; // load flexbox for grid system
+// import 'font-awesome/scss/font-awesome.scss' // load font awesome
+import '../../../styles/vars.scss';
+import '../../../styles/custom-styles.scss';
+
 const Layout = () => {
     return (
         <div>

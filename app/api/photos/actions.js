@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {received_error} from '../errors/actions';
+import {received_error} from '../../redux/errors/actions';
 
 export const SERVICE_SEARCH = 'SERVICE_SEARCH';
 export const DISPATCH_SEARCH_FULFILLED = 'DISPATCH_SEARCH_FULFILLED';

@@ -8,8 +8,8 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
 import { mapToProps as userMapToProps, actions as userActions} from '../../../redux/user/selectors';
-import { mapToProps as searchersMapToProps, actions as searchersActions} from '../../../redux/searchers/selectors';
-import { mapToProps as galleriesMapToProps, actions as galleriesActions} from '../../../redux/galleries/selectors';
+import { mapToProps as photosMapToProps, actions as photosActions} from '../../../api/photos/selectors';
+import { mapToProps as galleriesMapToProps, actions as galleriesActions} from '../../../api/galleries/selectors';
 
 class Main extends Component {
 
@@ -47,8 +47,8 @@ class Main extends Component {
 
     handleNextPage() {
         const {currentTag} = this.state;
-        const {actions, searchers} = this.props;
-        actions.searchByPage({tag: currentTag, page: searchers.data.page + 1});
+        const {actions, photos} = this.props;
+        actions.searchByPage({tag: currentTag, page: photos.data.page + 1});
     }
 
     openDrawer() {
@@ -76,9 +76,8 @@ class Main extends Component {
     }
 
     render() {
-        const { user, searchers, galleries} = this.props;
+        const { user, photos, galleries} = this.props;
         const { actions } = this.props;
-
         // todo break it to smaller components that get handlers/data by props - route base component is the only smart component: connect redux, router, pre load data
         return (
             <div>
@@ -97,16 +96,16 @@ class Main extends Component {
                     </div>
                     <div className="col-xs-1">
                         <FlatButton
-                            disabled={searchers.active}
+                            disabled={photos.active}
                             onClick={this.submit}
                             label={'Search'}
                         />
                     </div>
                 </div>
 
-                {Array.isArray(searchers.data.photo) && <div>
+                {Array.isArray(photos.data.photo) && <div>
                     <div className="row">
-                        {searchers.data.photo.map(p => {
+                        {photos.data.photo.map(p => {
                             return (
                                 <div key={p.id} className="col-xs-3">
                                     <img height={'100%'} width={'100%'} src={`https://farm${p.farm}.staticflickr.com/${p.server}/${p.id}_${p.secret}.jpg`}
@@ -115,7 +114,7 @@ class Main extends Component {
                             )
                         })}
                     </div>
-                    <FlatButton disabled={searchers.active} label="Next page" onClick={this.handleNextPage}/>
+                    <FlatButton disabled={photos.active} label="Next page" onClick={this.handleNextPage}/>
                 </div>}
 
                 <Drawer
@@ -148,12 +147,12 @@ class Main extends Component {
 
 const combinedMapTpProps = state => ({
     user: userMapToProps(state),
-    searchers: searchersMapToProps(state),
+    photos: photosMapToProps(state),
     galleries: galleriesMapToProps(state)
 });
 
 const combinedDispatchActions = dispatch => ({
-    actions: bindActionCreators(Object.assign({}, userActions, searchersActions, galleriesActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, userActions, photosActions, galleriesActions), dispatch)
 });
 
 export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Main));

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { received_error } from '../errors/actions';
-import {url} from '../../api/galleries/config'
+import { received_error } from '../../redux/errors/actions';
+import {url} from './config'
 
 export const GET_GALLERIES = 'GET_GALLERIES';
 export const GET_GALLERIES_FULFILLED = 'GET_GALLERIES_FULFILLED';
