@@ -3,12 +3,10 @@ import setters from './setters';
 import webpack from './webpack';
 import serveStatics from './serveStatics';
 import bodyParser from './bodyParser';
-import session from './session';
 import passport from './passport';
 import api from './api';
 import router from './router';
 import errors from './errors';
-
 
 export default (app) => {
     logger(app);
@@ -16,7 +14,6 @@ export default (app) => {
     webpack(app);
     serveStatics(app);
     bodyParser(app);
-    session(app);
     passport(app);
     api(app);
     router(app);
