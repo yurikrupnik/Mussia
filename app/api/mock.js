@@ -69,7 +69,7 @@ const votes = [
         ]
     },
     {
-        quizId: 1,
+        quizId: 2,
         meta: [
             {
                 answerId: 4,
