@@ -1,102 +1,66 @@
-const answers = [
-    {
-        answerId: 1,
-        text: '8:00 AM'
-    },
-    {
-        answerId: 2,
-        text: '8:30 AM'
-    },
-    {
-        answerId: 3,
-        text: '9:00 AM'
-    },
-    {
-        answerId: 4,
-        text: 'Alexa Wave'
-    },
-    {
-        answerId: 5,
-        text: 'John Sweet Tooth'
-    },
-    {
-        answerId: 6,
-        text: 'Marry Poppins'
-    },
-    {
-        answerId: 7,
-        text: 'Britney Spears'
-    },
-    {
-        answerId: 8,
-        text: 'Jay Z'
-    }
-];
+import shortid from 'shortid';
+
+const user = {
+    email: 'test@test.com',
+    password: '123',
+    id: shortid.generate()
+};
 
 const quizzes = [
     {
-        quizId: 1,
-        question: 'When should school start each day',
-        answersIds: [
-            1, 2, 3
+        // quiz_id: 1,
+        label: 'When should school start each day',
+        answers: [
+            {
+                label: '8:00 AM'
+            },
+            {
+                label: '9:30 AM'
+            },
+            {
+                label: '9:00'
+            }
         ]
     },
     {
-        quizId: 2,
-        question: 'Who should be selected for the student body president',
-        answersIds: [
-            4, 5, 6, 7, 8
+        // quiz_id: 2,
+        label: 'Who should be selected for the student body president',
+        answers: [
+            {
+                label: 'Alexa Wave'
+            },
+            {
+                label: 'John Sweet Tooth'
+            },
+            {
+                label: 'Marry Poppins'
+            },
+            {
+                label: 'Britney Spears'
+            },
+            {
+                label: 'Jay Z'
+            }
         ]
     }
 ];
 
-const votes = [
+const results = [
     {
-        quizId: 1,
-        meta: [
-            {
-                answerId: 1,
-                votes: ['153701624@N07']
-            },
-            {
-                answerId: 2,
-                votes: []
-            },
-            {
-                answerId: 3,
-                votes: []
-            }
-        ]
+        quiz_id: 1,
+        user_id: '153701624@N07',
+        answer_id: 'some Object id',
+        answer_label: '8:00 AM'
     },
     {
-        quizId: 2,
-        meta: [
-            {
-                answerId: 4,
-                votes: ['153701624@N07']
-            },
-            {
-                answerId: 5,
-                votes: []
-            },
-            {
-                answerId: 6,
-                votes: []
-            },
-            {
-                answerId: 7,
-                votes: []
-            },
-            {
-                answerId: 8,
-                votes: []
-            }
-        ]
+        quiz_id: 2,
+        user_id: '153701624@N07',
+        answer_id: 'some Object id',
+        answer_label: 'Alexa Wave'
     }
 ];
 
 export {
-    answers,
-    quizzes,
-    votes
+    user,
+    quizzes
 }

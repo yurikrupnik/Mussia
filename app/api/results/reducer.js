@@ -1,11 +1,11 @@
-import {GET_VOTES, GOT_VOTES} from './actions';
+import {GET_RESULTS, GOT_RESULTS} from './actions';
 
 // To Be Added - finish reducer
 export default (state = { data: [], active: false }, action) => {
     switch (action.type) {
-        case GET_VOTES:
+        case GET_RESULTS:
             return Object.assign({}, state, { active: !state.active });
-        case GOT_VOTES:
+        case GOT_RESULTS:
             return Object.assign({}, state, {
                 active: !state.active,
                 data: action.payload

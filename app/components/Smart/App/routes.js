@@ -6,7 +6,7 @@ import Main from '../Main';
 const routes = [
     {
         path: '/',
-        component: Main, // used as votes view
+        component: Main, // used as results view
         exact: true
     },
     {

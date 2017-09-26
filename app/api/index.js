@@ -1,11 +1,12 @@
 import users from './users';
 import quizzes from './quizzes';
-import answers from './answers';
-import votes from './votes';
+import results from './results';
+
+import './createDBMock';
 
 export default [
     users,
     quizzes,
-    votes,
-    answers
+    results
 ];
+
