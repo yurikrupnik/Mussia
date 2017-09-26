@@ -7,8 +7,9 @@ let router = express.Router();
 
 // To Be Added - finish api
 
-router.get(url, function (req, res) {
-
+router.get(url, (req, res) => {
+    // get votes
+    Model.find().then(response => res.json(response));
 });
 
 export default router;

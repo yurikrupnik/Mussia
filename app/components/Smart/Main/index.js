@@ -24,16 +24,19 @@ class Main extends Component {
         if (!user) {
             history.push('/register'); // push does the job but with error
         } else {
-            actions.getQuizzes();
+            actions.getVotes();
         }
     }
 
     render() {
-        let {quizzes} = this.props;
-        console.log('quizzes', quizzes);
+        let {votes} = this.props;
+        console.log('votes', votes);
 
         return (
-            <div>main view is for results - see in log the </div>
+            <div>
+                <h2>Votes</h2>
+
+            </div>
         )
     }
 }
