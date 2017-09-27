@@ -18,7 +18,7 @@ function handleResults(res) {
                     user_id: res.userId,
                     quiz_id: quiz._id,
                     answer_id: quiz.answers[0]._id,
-                    answer_label: quiz.answers[0].label
+                    // answer_label: quiz.answers[0].label
                 });
                 newQ.save(function (err, doc) {
                     if (err) {

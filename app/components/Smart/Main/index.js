@@ -16,6 +16,7 @@ class Main extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {selectedQuiz: null};
     }
 
     componentWillMount() {
@@ -24,11 +25,14 @@ class Main extends Component {
             history.push('/register'); // push does the job but with error
         } else {
             actions.getResults();
+            actions.getQuizzes();
         }
     }
 
     render() {
-        let {results} = this.props;
+        let {results, quizzes} = this.props;
+        console.log('quizzes', quizzes);
+
         console.log('results', results);
         // todo create bigger db
         // todo create statistic from results
