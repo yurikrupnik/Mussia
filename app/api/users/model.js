@@ -3,10 +3,9 @@ import { model } from './config';
 const UserSchema = new Schema({
     id: {
         type: String,
-        index: true,
-        required: [true, 'must give user id']
+        index: true
     },
-    email: {type: String, required: [true, 'must give user email']},
+    email: {type: String},
     name: String,
     hashPassword: String,
 });

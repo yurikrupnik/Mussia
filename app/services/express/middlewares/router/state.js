@@ -1,5 +1,5 @@
 import configureStore from '../../../../redux/store/store';
-import {fountUser} from '../../../../redux/user/actions';
+import {fountUser} from '../../../../api/users/actions';
 // config redux store and save in locals - template will use it to render initialized app with server side state
 
 

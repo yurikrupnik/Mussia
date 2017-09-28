@@ -17,8 +17,7 @@ function handleResults(res) {
                 let newQ = new ResultModel({
                     user_id: res.userId,
                     quiz_id: quiz._id,
-                    answer_id: quiz.answers[0]._id,
-                    // answer_label: quiz.answers[0].label
+                    answer_id: quiz.answers[0]._id
                 });
                 newQ.save(function (err, doc) {
                     if (err) {
@@ -45,15 +44,11 @@ function handleQuizzes(userId) {
     });
 }
 
-function handleUsers(users) {
+function handleUsers(users, user = user) {
     if (!users.length) {
-        return saveUser(createMockUser());
+        return saveUser(new UserModel(user));
     }
     return users[0].id;
-}
-
-function createMockUser() {
-    return new UserModel(user);
 }
 
 function saveManyByModel(model, arr) {

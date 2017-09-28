@@ -9,22 +9,17 @@ import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
-import {mapToProps as userMapToProps, actions as userActions} from '../../../api/users/selectors';
-import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../../api/quizzes/selectors';
-import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../../api/results/selectors';
+// import {mapToProps as userMapToProps, actions as userActions} from '../../../redux/user/selectors';
 
+import {mapToProps as userMapToProps, actions as userActions} from '../../api/users/selectors';
+import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
+import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../api/results/selectors';
 
 const style = {
-    width: '80%',
+    width: '90%',
     margin: '0 auto'
 
 };
-
-
-const Shit = () => {
-    return <div>hello</div>
-};
-
 
 class Main extends Component {
 
@@ -34,33 +29,28 @@ class Main extends Component {
     }
 
     componentWillMount() {
-        const {user, history, actions} = this.props;
-        actions.getQuizzes()
-            .then(res => {
-                actions.getResults(res);
-                this.setState({selectedId: res[0]._id}); // set first to be selected at page mount
-            });
-    }
-
-
-    handleChange(event, index, value) {
-console.log('value', value);
         const {actions} = this.props;
-
-        actions.getResults();
-        this.setState({selectedId: value});
+        actions.getQuizzes()
+            .then(res =>
+                this.setState( // async - second param is callback
+                    {
+                        selectedId: res[0]._id
+                    },
+                    () => actions.getResults(res.map(val => val.answer_id))
+                )
+            );
     }
 
     handleClick() {
-        const {user, history, actions} = this.props;
-        actions.getQuizzes();
+        const {actions} = this.props;
+        actions.getQuizzes(['asd', 'sadsd']);
     }
 
     render() {
         let {results, quizzes} = this.props;
         const {selectedId} = this.state;
         const quizzesData = quizzes.data;
-        const options = quizzesData.map(quiz => <MenuItem key={quiz._id} value={quiz._id} primaryText={quiz.label} />);
+        const options = quizzesData.map(quiz => <MenuItem key={quiz._id} value={quiz._id} primaryText={quiz.label}/>);
         return (
             <div style={style}>
                 <h5>Select Quiz</h5>

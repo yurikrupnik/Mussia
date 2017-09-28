@@ -16,6 +16,7 @@ let router = express.Router();
 // same for redux actions
 router.get(url, (req, res) => { // todo add query
     // get results
+console.log('req.params', req.params);
 
     Model.find({}).then(response => res.json(response));
 });

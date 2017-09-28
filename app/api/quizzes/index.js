@@ -13,8 +13,6 @@ let router = express.Router();
 // todo add to the get api by query string of specific quizz
 // same for redux actions
 router.get(url, function (request, response) {
-    // get quizzes
-    // console.log('request.params', request.params);
     Model.find({})
         .then(res => response.json(res));
 });

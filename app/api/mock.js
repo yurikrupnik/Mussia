@@ -49,8 +49,7 @@ const results = [
     {
         quiz_id: 1,
         user_id: '153701624@N07',
-        answer_id: 'some Object id',
-        answer_label: '8:00 AM'
+        answer_id: 'some Object id'
     },
     {
         quiz_id: 2,

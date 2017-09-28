@@ -1,6 +1,7 @@
 import React from 'react';
 import Register from '../Register';
 import Main from '../Main';
+// import Main from '../Main';
 
 // To Be Added - write client routes for the views
 const routes = [

@@ -18,7 +18,8 @@ const getQuizzes = params => dispatch => {
             params
         })
         .then(res => {
-            dispatch({ type: GOT_QUIZZES, payload: res.data })
+            dispatch({ type: GOT_QUIZZES, payload: res.data });
+            return res.data;
         })
         .catch(received_error(dispatch));
 };
