@@ -3,7 +3,8 @@ import {url} from './config';
 import Model from './model';
 import {} from './controller'; // To Be Added
 let router = express.Router();
-// To Be Added - finish api
+
+// todo - make it get and add more stuff for aggregate analytics
 
 router.post(url, (req, res) => { // todo add query
     const {ids} = req.body;
@@ -15,7 +16,6 @@ router.post(url, (req, res) => { // todo add query
         }));
     });
     Promise.all(promises).then(data => res.json(data));
-
 });
 
 export default router;

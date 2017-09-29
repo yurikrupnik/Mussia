@@ -5,11 +5,6 @@ import {connect} from 'react-redux';
 import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
 import Quiz from '../../components/Quiz';
 
-const style = {
-    width: '80%',
-    margin: '0 auto'
-};
-
 class Container extends Component {
 
     constructor(props) {
@@ -26,7 +21,7 @@ class Container extends Component {
         const {quizzes} = this.props;
         const {selected} = quizzes;
         return (
-            <div style={style}>
+            <div className="container">
                 <Quiz data={selected} />
             </div>
         )
