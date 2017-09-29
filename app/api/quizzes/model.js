@@ -14,11 +14,6 @@ const QuizzesSchema = Schema({
 
 const Model = mongoose.model(model, QuizzesSchema);
 
-Model.find({_id: '59cae9a6f984b64732115ca3'}).then(res => {
-    console.log('res', res);
-
-})
-
 export {
     QuizzesSchema,
     AnswerSchema

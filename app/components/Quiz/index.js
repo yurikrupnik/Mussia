@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Quiz = (props) => {
-    const {data } = props;
+    const {data} = props;
     return (
         <div>
              <div>{data.label}</div>
