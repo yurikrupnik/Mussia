@@ -24,9 +24,10 @@ class Container extends Component {
 
     render() {
         const {quizzes} = this.props;
+        const {selected} = quizzes;
         return (
             <div style={style}>
-                <Quiz data={quizzes.selected} />
+                <Quiz data={selected} />
             </div>
         )
     }

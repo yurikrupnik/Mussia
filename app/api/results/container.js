@@ -41,17 +41,6 @@ class Container extends Component {
     render() {
         const {results, quizzes} = this.props;
         const {value} = this.state;
-        const {data} = quizzes;
-        // const options = data.map((val, i) => <MenuItem key={i} value={val._id} primaryText={val.label}/>);
-        // const votes = results.data.map((val, index) => {
-        //     return (
-        //         <div className="row" key={index}>
-        //             <div className="col-xs-6">{val.label}</div>
-        //             <div className="col-xs-6">{val.count}</div>
-        //         </div>
-        //     )
-        // });
-
         return (
             <div style={style}>
                 <Votes handleChange={this.handleChange.bind(this)}

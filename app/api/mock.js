@@ -1,59 +1,50 @@
 import shortid from 'shortid';
-
+import faker from 'faker';
+import _ from 'lodash';
 const user = {
     email: 'test@test.com',
     password: '123',
     id: shortid.generate()
 };
 
-const quizzes = [
-    {
-        label: 'When should school start each day',
-        answers: [
-            {
-                label: '8:00 AM'
-            },
-            {
-                label: '9:30 AM'
-            },
-            {
-                label: '9:00 AM'
-            }
-        ]
-    },
-    {
-        label: 'Who should be selected for the student body president',
-        answers: [
-            {
-                label: 'Alexa Wave'
-            },
-            {
-                label: 'John Sweet Tooth'
-            },
-            {
-                label: 'Marry Poppins'
-            },
-            {
-                label: 'Britney Spears'
-            },
-            {
-                label: 'Jay Z'
-            }
-        ]
+const users = _.times(5).map(val => {
+    return {
+        email: faker.internet.email(),
+        id: shortid.generate()
     }
-];
+});
 
+
+
+const quizzes = _.times(5).map(val => {
+    return {
+        label: faker.lorem.words(),
+        answers: _.times(_.random(3, 5)).map(() => {
+            return {
+                label: faker.lorem.words()
+            }
+        })
+    }
+});
+
+
+// const results = _.times(100).map(i => {
+//     return {
+//         // quiz_id: quizzes[i]._id,
+//         user_id: null,
+//         answer_id: quizzes[i].answers[_.random(0, i)]
+//     }
+// });
 const results = [ // db mock of results
     {
-        quiz_id: 1,
+        // quiz_id: 1,
         user_id: '153701624@N07',
         answer_id: 'some Object id'
     },
     {
-        quiz_id: 2,
+        // quiz_id: 2,
         user_id: '153701624@N07',
-        answer_id: 'some Object id',
-        answer_label: 'Alexa Wave'
+        answer_id: 'some Object id'
     }
 ];
 
@@ -67,5 +58,7 @@ const clientResults = [{
 
 export {
     user,
-    quizzes
+    users,
+    quizzes,
+    results
 }

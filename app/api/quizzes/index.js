@@ -1,7 +1,8 @@
+import mongoose, {Schema} from 'mongoose';
 import express from 'express';
-import { url } from './config';
+import {url} from './config';
 import Model from './model';
-import {  } from './controller'; // To Be Added
+import {} from './controller'; // To Be Added
 
 let router = express.Router();
 
@@ -15,13 +16,17 @@ let router = express.Router();
 
 const list = (request, response) => {
     Model.find()
-        .then(res => response.json(res));
+        .then(res => response.json(res))
+        .catch(err => response.json(err));
 };
 
 const getById = (request, response) => {
-        // console.log('request.params', request.params);
-        Model.findOne(request.params)
-            .then(res => response.json(res));
+    Model.findOne(request.params)
+        .then(res => response.json(res))
+        .catch(err => {
+            // console.log('err', err);
+            response.json(err);
+        });
 };
 
 

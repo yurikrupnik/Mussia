@@ -8,7 +8,6 @@ export const GET_SELECTED_QUIZ = 'GET_SELECTED_QUIZ';
 export const GET_QUIZZES = 'GET_QUIZZES';
 export const GOT_QUIZZES = 'GOT_QUIZZES';
 
-// To Be Added - write actions to expose to the client
 
 const getQuizzes = (query = '')  => dispatch => {
     dispatch({ type: GET_QUIZZES });
@@ -24,8 +23,6 @@ const getQuizzes = (query = '')  => dispatch => {
 };
 
 const getQuizById = (id = '')  => dispatch => {
-    console.log('id', id);
-    debugger;
     dispatch({ type: SET_SELECTED_QUIZ, id});
     return axios({
         method: 'get',
@@ -33,7 +30,6 @@ const getQuizById = (id = '')  => dispatch => {
     })
         .then(res => {
             dispatch({ type: GET_SELECTED_QUIZ, payload: res.data });
-            return res.data;
         })
         .catch(received_error(dispatch));
 };
