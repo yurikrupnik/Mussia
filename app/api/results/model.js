@@ -4,10 +4,9 @@ import { QuizzesSchema, AnswerSchema } from '../quizzes/model';
 import { UserSchema } from '../users/model';
 
 let ResultsSchema = Schema({
-    quiz_id: {type: Schema.Types.ObjectId, ref: QuizzesSchema, index: true},
+    quiz_id: {type: Schema.Types.ObjectId, ref: QuizzesSchema},
     user_id: {type: Schema.Types.String, ref: UserSchema},
-    answer_id: {type: Schema.Types.ObjectId, ref: AnswerSchema},
-    // answer_label: {type: Schema.Types.String, ref: AnswerSchema}
+    answer_id: {type: Schema.Types.ObjectId, ref: AnswerSchema, index: true}
 });
 
 let Model = mongoose.model(model, ResultsSchema);

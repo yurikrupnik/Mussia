@@ -12,9 +12,20 @@ let router = express.Router();
 // todo edit/update quiz
 // todo add to the get api by query string of specific quizz
 // same for redux actions
-router.get(url, function (request, response) {
-    Model.find({})
+
+const list = (request, response) => {
+    Model.find()
         .then(res => response.json(res));
-});
+};
+
+const getById = (request, response) => {
+        // console.log('request.params', request.params);
+        Model.findOne(request.params)
+            .then(res => response.json(res));
+};
+
+
+router.get(url, list);
+router.get(url + '/:_id', getById);
 
 export default router;

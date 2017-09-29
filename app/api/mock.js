@@ -8,7 +8,6 @@ const user = {
 
 const quizzes = [
     {
-        // quiz_id: 1,
         label: 'When should school start each day',
         answers: [
             {
@@ -18,12 +17,11 @@ const quizzes = [
                 label: '9:30 AM'
             },
             {
-                label: '9:00'
+                label: '9:00 AM'
             }
         ]
     },
     {
-        // quiz_id: 2,
         label: 'Who should be selected for the student body president',
         answers: [
             {
@@ -45,7 +43,7 @@ const quizzes = [
     }
 ];
 
-const results = [
+const results = [ // db mock of results
     {
         quiz_id: 1,
         user_id: '153701624@N07',
@@ -58,6 +56,14 @@ const results = [
         answer_label: 'Alexa Wave'
     }
 ];
+
+// in client
+
+const clientResults = [{
+    answer_id: 'some Object id',
+    count: 4,
+    label: 'some answer string'
+}];
 
 export {
     user,

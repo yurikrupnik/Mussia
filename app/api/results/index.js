@@ -1,24 +1,21 @@
 import express from 'express';
-import { url } from './config';
-
+import {url} from './config';
 import Model from './model';
-import {  } from './controller'; // To Be Added
+import {} from './controller'; // To Be Added
 let router = express.Router();
-
 // To Be Added - finish api
-// this api provides me clean api in the client - without joins
-// mongoose populate fails
-// can join in node but not worth it and lose the benefit of noSQL
-// todo get specific results for quiz - select the correct answer user had
-// todo update/edit results
-// todo create result
-// todo delete result
-// same for redux actions
-router.get(url, (req, res) => { // todo add query
-    // get results
-console.log('req.params', req.params);
 
-    Model.find({}).then(response => res.json(response));
+router.post(url, (req, res) => { // todo add query
+    const {ids} = req.body;
+    let promises = ids.map(answer_id => {
+        // todo use aggregate from mongo api
+        return Model.find({answer_id}).count().then(count => ({
+            count,
+            answer_id
+        }));
+    });
+    Promise.all(promises).then(data => res.json(data));
+
 });
 
 export default router;

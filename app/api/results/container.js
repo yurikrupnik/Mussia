@@ -21,44 +21,70 @@ const style = {
 
 };
 
-class Main extends Component {
+import Votes from '../../components/Votes';
+// import Quiz from '../../Quiz/index';
+
+
+// const style = {
+//     width: '80%',
+//     margin: '0 auto'
+// };
+
+
+const Shit = () => {
+    return <div>hello</div>
+};
+
+
+class Results extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {selectedId: ''};
+        this.state = {value: ''}; // can move to redux to handle the state updates - currently no need
+        // can call it also selected_quiz
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const {actions} = this.props;
         actions.getQuizzes()
-            .then(res =>
-                this.setState( // async - second param is callback
-                    {
-                        selectedId: res[0]._id
-                    },
-                    () => actions.getResults(res.map(val => val.answer_id))
-                )
-            );
+            .then(res => {
+                actions.getResults(res[0].answers);
+                this.setState({value: res[0]._id});
+            });
     }
 
-    handleClick() {
-        const {actions} = this.props;
-        actions.getQuizzes(['asd', 'sadsd']);
+
+    handleChange(event, index, value) {
+        const {actions, quizzes} = this.props;
+        const {data} = quizzes;
+        const selected = data[index].answers ? data[index].answers : [];
+        actions.getResults(selected);
+        this.setState({value});
     }
 
     render() {
-        let {results, quizzes} = this.props;
-        const {selectedId} = this.state;
-        const quizzesData = quizzes.data;
-        const options = quizzesData.map(quiz => <MenuItem key={quiz._id} value={quiz._id} primaryText={quiz.label}/>);
+        const {results, quizzes, location} = this.props;
+
+        const {value} = this.state;
+        const {selected, data} = quizzes;
+        // console.log('quizzes', quizzes);
+
+        const options = data.map((val, i) => <MenuItem key={i} value={val._id} primaryText={val.label}/>);
+
+        const votes = results.data.map((val, index) => {
+            return (
+                <div className="row" key={index}>
+                    <div className="col-xs-6">{val.label}</div>
+                    <div className="col-xs-6">{val.count}</div>
+                </div>
+            )
+        });
+
         return (
             <div style={style}>
-                <h5>Select Quiz</h5>
-                <DropDownMenu onChange={this.handleChange.bind(this)} value={selectedId}>
-                    {options}
-                </DropDownMenu>
-                <h4>Results</h4>
-                <button onClick={this.handleClick.bind(this)}>Click me</button>
+                <Votes handleChange={this.handleChange.bind(this)}
+                        options={options} votes={votes} value={value}
+                         />
             </div>
         )
     }
@@ -74,4 +100,4 @@ const combinedDispatchActions = dispatch => ({
     actions: bindActionCreators(Object.assign({}, userActions, quizzesActions, resultsActions), dispatch)
 });
 
-export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Main));
+export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Results));
