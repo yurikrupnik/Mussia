@@ -11,9 +11,6 @@ export const GOT_QUIZZES = 'GOT_QUIZZES';
 // To Be Added - write actions to expose to the client
 
 const getQuizzes = (query = '')  => dispatch => {
-    // console.log('params', params);
-    // console.log('query', query);
-
     dispatch({ type: GET_QUIZZES });
     return axios({
             method: 'get',

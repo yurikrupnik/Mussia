@@ -7,26 +7,19 @@ import {
 
 // To Be Added - finish reducer
 
-export default (state = { data: [], active: false, selected: {} }, action) => {
+export default (state = { data: [], active: false, selected: {}}, action) => {
     switch (action.type) {
         case GET_QUIZZES:
             return Object.assign({}, state, { active: !state.active});
         case GOT_QUIZZES:
-            debugger
             return Object.assign({}, state, {
                 active: !state.active,
-                data: action.payload,
-                selected: action.payload[0]
+                data: action.payload
             });
         case SET_SELECTED_QUIZ:
-            debugger
-            return Object.assign({}, state, { active: !state.active, selected: action.payload });
+            return Object.assign({}, state, { active: !state.active });
         case GET_SELECTED_QUIZ:
-            debugger
-            return Object.assign({}, state, {
-                active: !state.active,
-                selected: action.payload
-            });
+            return Object.assign({}, state, { active: !state.active, selected: action.payload});
         default:
             return state;
     }

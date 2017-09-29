@@ -91,7 +91,7 @@ class Results extends Component {
 }
 
 const combinedMapTpProps = state => ({
-    user: userMapToProps(state),
+    // user: userMapToProps(state),
     quizzes: quizzesMapToProps(state),
     results: resultsMapToProps(state),
 });

@@ -1,7 +1,7 @@
 import {GET_RESULTS, GOT_RESULTS} from './actions';
 
 // To Be Added - finish reducer
-export default (state = { data: [], active: false, selected: {} }, action) => {
+export default (state = { data: [], active: false }, action) => {
     switch (action.type) {
         case GET_RESULTS:
             return Object.assign({}, state, {
@@ -10,7 +10,7 @@ export default (state = { data: [], active: false, selected: {} }, action) => {
         case GOT_RESULTS:
             return Object.assign({}, state, {
                 active: !state.active,
-                selected: action.payload
+                data: action.payload
             });
         default:
             return state;

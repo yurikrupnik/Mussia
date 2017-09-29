@@ -1,16 +1,13 @@
 import React from 'react';
 
 const Quiz = (props) => {
-    console.log('props', props);
     const {data } = props;
-    console.log('data.answers', data.answers);
-
     return (
         <div>
              <div>{data.label}</div>
-            {data.answers.map(answer => {
-                return <div>{answer.label}</div>
-            })}
+            {data.answers &&
+            data.answers.length &&
+            data.answers.map((answer, i) => <div key={i}>{answer.label}</div>)}
         </div>
     )
 };
