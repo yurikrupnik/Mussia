@@ -1,11 +1,10 @@
 import {
     GET_QUIZZES,
     GOT_QUIZZES,
-    SET_SELECTED_QUIZ,
-    GET_SELECTED_QUIZ
+    GET_SELECTED_QUIZ,
+    GOT_SELECTED_QUIZ,
+    SET_SELECTED
 } from './actions';
-
-// To Be Added - finish reducer
 
 export default (state = { data: [], active: false, selected: {}}, action) => {
     switch (action.type) {
@@ -16,10 +15,12 @@ export default (state = { data: [], active: false, selected: {}}, action) => {
                 active: !state.active,
                 data: action.payload
             });
-        case SET_SELECTED_QUIZ:
-            return Object.assign({}, state, { active: !state.active });
         case GET_SELECTED_QUIZ:
+            return Object.assign({}, state, { active: !state.active });
+        case GOT_SELECTED_QUIZ:
             return Object.assign({}, state, { active: !state.active, selected: action.payload});
+        case SET_SELECTED:
+            return Object.assign({}, state, { selected: action.payload});
         default:
             return state;
     }

@@ -1,11 +1,8 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import MaterialWrapper from './Utils/Material';
-import ProviderWrapper from './Utils/Provider';
-import routes from './routes';
-import '../styles/vars.scss';
-import '../styles/custom-styles.scss';
-import 'flexboxgrid'; // load flexbox for grid system
+import MaterialWrapper from '../Utils/Material/index';
+import ProviderWrapper from '../Utils/Provider/index';
+import routes from '../../routes';
 
 const Layout = () => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 // import Register from './Smart/Register/index';
-import Results from '../api/results/container';
-import Quiz from '../api/quizzes/container';
+import Results from './api/results/container';
+import Quiz from './api/quizzes/container';
 
 const routes = [
     {

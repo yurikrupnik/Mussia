@@ -1,11 +1,6 @@
 import shortid from 'shortid';
 import faker from 'faker';
 import _ from 'lodash';
-const user = {
-    email: 'test@test.com',
-    password: '123',
-    id: shortid.generate()
-};
 
 const users = _.times(5).map(val => {
     return {
@@ -13,8 +8,6 @@ const users = _.times(5).map(val => {
         id: shortid.generate()
     }
 });
-
-
 
 const quizzes = _.times(5).map(val => {
     return {
@@ -57,7 +50,6 @@ const clientResults = [{
 }];
 
 export {
-    user,
     users,
     quizzes,
     results

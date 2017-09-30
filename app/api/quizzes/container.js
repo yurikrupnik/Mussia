@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
 import Quiz from '../../components/Quiz';
+import {isEmpty} from 'lodash';
 
 class Container extends Component {
 
@@ -12,9 +13,12 @@ class Container extends Component {
     }
 
     componentDidMount() {
-        const {actions, location} = this.props;
-        const answer_id = location.pathname.length > 1 && location.pathname.replace('/', '') || null;
-        actions.getQuizById(answer_id);
+        const {actions, location, quizzes} = this.props;
+        const {selected} = quizzes;
+        if (isEmpty(selected)) {
+            const answer_id = location.pathname.length > 1 && location.pathname.replace('/', '') || null;
+            actions.getQuizById(answer_id);
+        }
     }
 
     render() {
@@ -22,7 +26,7 @@ class Container extends Component {
         const {selected} = quizzes;
         return (
             <div className="container">
-                <Quiz data={selected} />
+                <Quiz data={selected}/>
             </div>
         )
     }

@@ -16,6 +16,7 @@ export default (props) => {
     return (
         <div>
             <h5>Select Quiz</h5>
+            <button onClick={props.handleClick}>goTo selected </button>
             <DropDownMenu style={{display: 'block'}}
                           onChange={props.handleChange}
                           value={props.value}
