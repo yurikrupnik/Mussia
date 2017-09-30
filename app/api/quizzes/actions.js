@@ -26,7 +26,7 @@ const getQuizById = (id = '') => dispatch => {
     dispatch({ type: GET_SELECTED_QUIZ, payload: id});
     return axios({
         method: 'get',
-        url: `${apiPrefix}${url}/${id}`,
+        url: `${apiPrefix}${url}/${id}`
     })
         .then(res => dispatch({ type: GOT_SELECTED_QUIZ, payload: res.data }))
         .catch(received_error(dispatch));

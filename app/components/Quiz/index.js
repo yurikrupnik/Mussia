@@ -1,15 +1,17 @@
 import React from 'react';
 
 const Quiz = (props) => {
-    const {data} = props;
+    const {quizzes} = props;
+    const {selected} = quizzes;
     return (
         <div>
-             <div>Label: {data.label}</div>
-            {data.answers &&
-            data.answers.length &&
-            data.answers.map((answer, i) => <div key={i}>{answer.label}</div>)}
+            <div>Label: {selected.label}</div>
+            {selected.answers &&
+            selected.answers.length &&
+            selected.answers.map((answer, i) => <div key={i}>{answer.label}</div>)}
         </div>
     )
 };
+
 
 export default Quiz;

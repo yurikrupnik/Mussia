@@ -41,7 +41,7 @@ class Container extends Component {
                 <Votes handleChange={this.handleChange.bind(this)}
                        handleClick={this.handleClick.bind(this)}
                         options={quizzes.data} votes={results.data} value={selected._id}
-                         />
+                />
             </div>
         )
     }

@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
-import Quiz from '../../components/Quiz';
 import {isEmpty} from 'lodash';
+import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
 
 class Container extends Component {
 
@@ -13,24 +12,28 @@ class Container extends Component {
     }
 
     componentDidMount() {
-        const {actions, location, quizzes} = this.props;
+        const {actions, quizzes, match} = this.props;
         const {selected} = quizzes;
         if (isEmpty(selected)) {
-            const answer_id = location.pathname.length > 1 && location.pathname.replace('/', '') || null;
-            actions.getQuizById(answer_id);
+            actions.getQuizById(match.params.quiz_id);
         }
     }
 
     render() {
-        const {quizzes} = this.props;
-        const {selected} = quizzes;
+        const {children} = this.props;
+        const childrenWithProps = React.Children.map(children,
+            (child) => React.cloneElement(child, {
+                ...this.props // pass all for all children - here can just pass selected
+            })
+        );
         return (
             <div className="container">
-                <Quiz data={selected}/>
+                {childrenWithProps}
             </div>
         )
     }
 }
+
 
 const combinedMapTpProps = state => ({
     quizzes: quizzesMapToProps(state),

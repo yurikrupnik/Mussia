@@ -1,7 +1,8 @@
 import React from 'react';
-// import Register from './Smart/Register/index';
 import Results from './api/results/container';
-import Quiz from './api/quizzes/container';
+import QuizzesContainer from './api/quizzes/container';
+import Quiz from './components/Quiz';
+import Hello from './components/Hello';
 
 const routes = [
     {
@@ -11,7 +12,9 @@ const routes = [
     },
     {
         path: '/:quiz_id',
-        component: Quiz, // used as results view
+        component: (props, a, b) => {
+            return <QuizzesContainer><Quiz/><Hello/></QuizzesContainer>;
+        },
         exact: true
     },
     // {

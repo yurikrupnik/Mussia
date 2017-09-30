@@ -1,8 +1,6 @@
 import configureStore from '../../../../redux/store/store';
+// import store from '../../../../redux/store';
 import {fountUser} from '../../../../api/users/actions';
-// config redux store and save in locals - template will use it to render initialized app with server side state
-
-
 export default (req, res, next) => {
     let store = configureStore();
     if (req.isAuthenticated()) { // todo client it
@@ -10,4 +8,8 @@ export default (req, res, next) => {
     }
     res.locals.state = store.getState();
     next();
+}
+
+export {
+    // configureStore
 }

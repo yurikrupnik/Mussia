@@ -1,6 +1,7 @@
 import React from 'react';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
 
 export default (props) => {
     const options = props.options
@@ -16,7 +17,6 @@ export default (props) => {
     return (
         <div>
             <h5>Select Quiz</h5>
-            <button onClick={props.handleClick}>goTo selected </button>
             <DropDownMenu style={{display: 'block'}}
                           onChange={props.handleChange}
                           value={props.value}
@@ -25,6 +25,7 @@ export default (props) => {
             </DropDownMenu>
             <h4>Results</h4>
             {votes}
+            <FlatButton onClick={props.handleClick} label={'go to selected quiz'}/>
         </div>
     )
 }

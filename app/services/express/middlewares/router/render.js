@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router, matchPath } from 'react-router';
 import React from 'react';
-import App from '../../../../components/App/index'
+import App from '../../../../components/App'
 import routes from '../../../../routes';
 
 const render = (component, state) => `<!DOCTYPE html>
