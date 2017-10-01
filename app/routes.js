@@ -1,5 +1,5 @@
 import React from 'react';
-import Results from './api/results/container';
+import ResultsContainer from './api/results/container';
 import QuizzesContainer from './api/quizzes/container';
 import Quiz from './components/Quiz';
 import Hello from './components/Hello';
@@ -7,7 +7,7 @@ import Hello from './components/Hello';
 const routes = [
     {
         path: '/',
-        component: Results, // used as results view
+        component: ResultsContainer, // used as results view
         exact: true
     },
     {
