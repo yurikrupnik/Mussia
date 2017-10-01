@@ -15,9 +15,9 @@ Api:
  - Results: used to retrieve the count of answer_id's - currently post method
     
 Redux State:
-    - user: Not interesting 
-    - quizzes: {data: array, active: boolean, selected: object}
-    - results: {data: array, active: boolean}
+ - user: Not interesting 
+ - quizzes: {data: array, active: boolean, selected: object}
+ - results: {data: array, active: boolean}
     
 Containers: react components that connected to redux and retrieve the state needed for the route. Inner components are pure dumb components that render by props
 
@@ -29,6 +29,17 @@ Routes:
 - '/' > ResultsContainer
 - '/:quiz_id' > QuizzesContainer
 
-Components: All components in components folder are dumb (simple functions) - using props, not connected to anything.
+API Folder explanation by file bane
+-----------------------------------
+ - actions: async actions used in the client side for api operations - can be used in server pre render state with host prefix for server to call it self method.
+ - config: config object with url for api, selected used by the container (not using it currently) and mongoose model string for the collection
+ - container: react component connected to redux
+ - controller: server api callbacks
+ - index: express api crud methods
+ - model: mongoose collection model
+ - reducer: reducer to handle current api and data
+ - selectors: mapToProps and actions folder's actions and data 
+
+All components in components folder are dumb (simple functions) - using props, not connected to anything.
 
 The logic is done by redux and containers, containers pass data to inner components.
