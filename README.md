@@ -1,6 +1,6 @@
 # Mussia Docs
 
-Minimal Universal App Boilerplate - express, mongod, react, redux, react-router, babel and webpack  
+Minimal Universal App Boilerplate - node, express, mongodb, react, redux, react-router, babel and webpack  
 
 # DB Structure and data fetching: 
 

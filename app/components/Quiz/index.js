@@ -5,7 +5,7 @@ const Quiz = (props) => {
     const {selected} = quizzes;
     return (
         <div>
-            <div>Label: {selected.label}</div>
+            <div className="title">Label: {selected.label}</div>
             {selected.answers &&
             selected.answers.length &&
             selected.answers.map((answer, i) => <div key={i}>{answer.label}</div>)}

@@ -1,10 +1,8 @@
 import React from 'react';
 
 const Hello = (props) => {
-    // console.log('props', props);
-
     return (
-        <div>hello</div>
+        <div>hello from second container child - has access to all props from container</div>
     )
 };
 
