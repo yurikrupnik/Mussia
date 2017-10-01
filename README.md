@@ -29,7 +29,7 @@ Routes:
 - '/' > ResultsContainer
 - '/:quiz_id' > QuizzesContainer
 
-API Folder explanation by file bane
+API Folder explanation by file nane
 -----------------------------------
  - actions: async actions used in the client side for api operations - can be used in server pre render state with host prefix for server to call it self method.
  - config: config object with url for api, selected used by the container (not using it currently) and mongoose model string for the collection
@@ -40,6 +40,9 @@ API Folder explanation by file bane
  - reducer: reducer to handle current api and data
  - selectors: mapToProps and actions folder's actions and data 
 
+Folders worth watching: api/quizzes, api/results and components folder 
+
 All components in components folder are dumb (simple functions) - using props, not connected to anything.
 
 The logic is done by redux and containers, containers pass data to inner components.
+
