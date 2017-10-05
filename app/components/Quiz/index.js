@@ -1,18 +1,8 @@
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import Checkbox from 'material-ui/Checkbox';
-import SelectField from 'material-ui/SelectField';
-import TextField from 'material-ui/TextField';
-import MenuItem from 'material-ui/MenuItem';
-
-import {isBoolean} from 'lodash';
-
-
-const isDisabled = (form) => !form.every(v => isBoolean(v.value) ? true : v.value);
-
-const handleErrorText = (field) => {
-    return field.value === '' ? 'field is required': '';
-};
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
 class Quiz extends Component {
     constructor(props) {
@@ -92,42 +82,19 @@ class Quiz extends Component {
         const {quizzes} = this.props;
         const {form} = this.state;
         const {selected} = quizzes;
-        const answers = selected.answers && selected.answers.length &&
-            selected.answers.map((answer, i) => <div key={i}>{answer.label}</div>);
-
-        const inputs = form.map((item, index) => {
-            if (item.type === 'checkbox') {
-                return <Checkbox key={index} value={item.value} name={item.name}
-                                 onCheck={this.handleChange.bind(this, index)}/>
-            } else if (item.type === 'multi') {
-
-                return <SelectField key={index} value={item.value} name={item.name} ref={item.name}
-                                    onChange={this.handleSelectField.bind(this)}>
-                    { item.enum.map((val, i) => {
-                        return <MenuItem key={i} value={val.value} primaryText={val.label}/>
-                    }) }
-                </SelectField>
-
-            } else {
-                return <TextField key={index}
-                                  value={item.value}
-                                  type={item.type}
-                                  onChange={this.handleChange.bind(this, index)}
-                                  min={item.min}
-                                  max={item.max}
-                                  name={item.name}
-                                  step={item.step}
-                                  errorText={handleErrorText(item)} />
-            }
-        });
 
         return (
             <div>
                 <div className="title">Label: {selected.label}</div>
-                {answers}
-                {inputs}
+                <RadioButtonGroup name="answer_id">
+                    {selected.answers && selected.answers.length &&
+                    selected.answers.map((answer, i) => <RadioButton
+                        value={answer._id}
+                        label={answer.label}
+                    />)}
+                </RadioButtonGroup>
 
-                <RaisedButton disabled={isDisabled(form)} label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
+                <RaisedButton label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
             </div>
         )
     }
