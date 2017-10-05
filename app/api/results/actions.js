@@ -9,9 +9,9 @@ export const GOT_RESULTS = 'GOT_RESULTS';
 const getResults = (selected = []) => dispatch => {
     dispatch({type: GET_RESULTS});
     return axios({
-        method: 'post',
+        method: 'get',
         url: `${apiPrefix}${url}`,
-        data: {
+        params: {
             ids: selected.map(v => v._id)
         }
     })
