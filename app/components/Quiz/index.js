@@ -10,6 +10,9 @@ import {isBoolean} from 'lodash';
 
 const isDisabled = (form) => !form.every(v => isBoolean(v.value) ? true : v.value);
 
+const handleErrorText = (field) => {
+    return field.value === '' ? 'field is required': '';
+};
 
 class Quiz extends Component {
     constructor(props) {
@@ -113,7 +116,8 @@ class Quiz extends Component {
                                   min={item.min}
                                   max={item.max}
                                   name={item.name}
-                                  step={item.step}/>
+                                  step={item.step}
+                                  errorText={handleErrorText(item)} />
             }
         });
 
