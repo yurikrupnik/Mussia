@@ -88,7 +88,7 @@ class Quiz extends Component {
                 <div className="title">Label: {selected.label}</div>
                 <RadioButtonGroup name="answer_id">
                     {selected.answers && selected.answers.length &&
-                    selected.answers.map((answer, i) => <RadioButton
+                    selected.answers.map((answer, i) => <RadioButton key={i}
                         value={answer._id}
                         label={answer.label}
                     />)}

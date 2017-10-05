@@ -14,7 +14,7 @@ const handleResults = (res) => ResultModel.find().then(response => {
         quizzes.forEach((quiz, i) => {
             let newQ = new ResultModel({
                 quiz_id: quiz._id,
-                user_id: res.userIds[i],
+                user_id: res.userIds[i].id,
                 answer_id: quiz.answers[i]._id
             });
             newQ.save(function (err, doc) {

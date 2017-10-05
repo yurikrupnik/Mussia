@@ -17,11 +17,11 @@ router.get(url, (req, res) => {
 });
 
 // todo get if user id exists with quiz id - retrive the answer_id
-// router.get(url, (req, res) => {
-//
-// });
+router.get(url, (req, res) => {
+
+});
 
 // todo update/create result
-// router.post(url, (req, res) => { });
+router.post(url, (req, res) => { });
 
 export default router;

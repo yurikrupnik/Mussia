@@ -23,7 +23,7 @@ Containers: react components that connected to redux and retrieve the state need
 
 - ResultsContainer: connected to quizzes state, on mount gets quiz by id if quizzes.selected is empty. if not empty uses cache from quizzes.selected. renders all children with current props. 
 
-- QuizzesContainer: connected to quizzes and results states. on mount getQuizzes and getResults by answers ids for the first quiz and set quizzes.selected. 2 extra methods: handleChange called upon dropdown change or any other change system to work on current quiz, gets answers ids and asks for results and setting quizzes.selected to current quiz. handleClick currently redirects to '/:quiz_id'.
+- QuizzesContainer: connected to quizzes and results states. on mount getQuizzes and getCount by answers ids for the first quiz and set quizzes.selected. 2 extra methods: handleChange called upon dropdown change or any other change system to work on current quiz, gets answers ids and asks for results and setting quizzes.selected to current quiz. handleClick currently redirects to '/:quiz_id'.
 
 Routes:
 - '/' > ResultsContainer

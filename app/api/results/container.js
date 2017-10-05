@@ -16,7 +16,7 @@ class Container extends Component {
     componentDidMount() {
         const {actions} = this.props;
         actions.getQuizzes()
-            .then(res => actions.getResults(res[0].answers)
+            .then(res => actions.getCount(res[0].answers)
                     .then(() => actions.setSelectedQuiz(res[0])));
     }
 
@@ -25,7 +25,7 @@ class Container extends Component {
         const {data} = quizzes;
         const selected = data[index];
         const answers = selected.answers ? selected.answers : [];
-        actions.getResults(answers).then(() => actions.setSelectedQuiz(selected));
+        actions.getCount(answers).then(() => actions.setSelectedQuiz(selected));
     }
 
     handleClick() {
