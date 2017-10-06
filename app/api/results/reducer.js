@@ -1,4 +1,4 @@
-import {GET_COUNT, GOT_COUNT} from './actions';
+import {GET_COUNT, GOT_COUNT, GET_ANSWER, GOT_ANSWER} from './actions';
 
 // To Be Added - finish reducer
 export default (state = { data: [], active: false }, action) => {
@@ -12,6 +12,11 @@ export default (state = { data: [], active: false }, action) => {
                 active: !state.active,
                 data: action.payload
             });
+
+        case GET_ANSWER:
+            return state;
+        case GOT_ANSWER:
+            return state;
         default:
             return state;
     }

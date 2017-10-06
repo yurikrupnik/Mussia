@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {isEmpty} from 'lodash';
 import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
+import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../api/results/selectors';
 
 class Container extends Component {
 
@@ -37,10 +38,11 @@ class Container extends Component {
 
 const combinedMapTpProps = state => ({
     quizzes: quizzesMapToProps(state),
+    results: resultsMapToProps(state)
 });
 
 const combinedDispatchActions = dispatch => ({
-    actions: bindActionCreators(Object.assign({}, quizzesActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
 });
 
 export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Container));

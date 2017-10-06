@@ -51,7 +51,11 @@ class Quiz extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('this.state.form', this.state.form);
+        const {quizzes} = this.props;
+        const {form} = this.state;
+        const {selected} = quizzes;
+        this.props.actions.getAnswerId({quiz_id: selected._id, user_id: 'SJlcrw_Q3W'});
+        // console.log('this.state.form', this.state.form);
 
     }
 
