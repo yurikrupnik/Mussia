@@ -64,10 +64,6 @@ export default {
                 })
             },
             {
-                test: /\.ts$/,
-                use: 'awesome-typescript-loader'
-            },
-            {
                 test: /\.(png|jpeg|woff|woff2|eot|ttf|svg)$/,
                 use: 'file-loader'
             }

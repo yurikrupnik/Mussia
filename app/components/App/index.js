@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import MaterialWrapper from '../Utils/Material/index';
-import ProviderWrapper from '../Utils/Provider/index';
+import withMaterial from '../Utils/Material';
+import withProvider from '../Utils/Provider';
 import routes from '../../routes';
 
 const Layout = () => {
@@ -14,8 +14,20 @@ const Layout = () => {
     );
 };
 
-export default ({initialState}) => {
-    return (
-        <ProviderWrapper component={<MaterialWrapper component={<Layout />}/>} initialState={initialState}/>
-    );
+const App1 = () => {
+    return (<div>
+        <div>hello from ap 1</div>
+    </div>);
+};
+
+class App extends Component {
+    render() {
+        const {initialState} = this.props;
+        const Elem = withMaterial(withProvider(App1, initialState));
+        return <Elem />
+    }
 }
+
+
+
+export default App;
