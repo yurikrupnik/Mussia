@@ -5,9 +5,8 @@ import configureStore from '../../../redux/store/store';
 function withProvider(WrappedComponent, initialState) {
     return class extends Component {
         render() {
-            let store = configureStore(initialState);
             return (
-                <Provider store={store}>
+                <Provider store={configureStore(initialState)}>
                     <WrappedComponent />
                 </Provider>
             )

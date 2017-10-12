@@ -5,12 +5,10 @@ import withMaterial from '../Utils/Material';
 import withProvider from '../Utils/Provider';
 import routes from '../../routes';
 
-const NotFound = () => (
-    <Status code={404}>
-        <div>
-            <h1>Sorry, can’t find that.</h1>
-        </div>
-    </Status>
+const NoMatch = ({ location }) => (
+    <div>
+        <h3>No match for <code>{location.pathname}</code></h3>
+    </div>
 );
 
 // somewhere else
@@ -25,7 +23,7 @@ const Layout = () => {
                 {routes.map((route, i) => {
                     return (<Route key={i} path={route.path} exact={route.exact} component={route.component}/>);
                 })}
-                <Route component={NotFound}/>
+                <Route component={NoMatch}/>
             </Switch>
         </div>
     );

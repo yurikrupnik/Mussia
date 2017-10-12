@@ -31,7 +31,7 @@ class Container extends Component {
     handleClick() {
         const {history, quizzes} = this.props;
         const {selected} = quizzes;
-        history.push('/' + selected._id, selected);
+        history.push('/quiz/' + selected._id, selected);
     }
 
     render() {
