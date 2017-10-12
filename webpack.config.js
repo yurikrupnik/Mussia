@@ -16,7 +16,14 @@ import _ from 'lodash';
 let plugins = [
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({filename: '[name].css', disable: false, allChunks: false}),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+        process: {
+            env: {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
+        }
+    })
 ];
 
 if (env === 'production') {
@@ -49,6 +56,7 @@ export default {
         chunkFilename: '[chunkhash].chunk.js',
         publicPath: '/',
     },
+
     module: {
         rules: [
             {

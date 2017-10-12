@@ -17,7 +17,7 @@ export default (req, res) => {
                     location={req.url}
                     context={context}
                 >
-                    <App/>
+                    <App userAgent={req.headers['user-agent']} />
                 </StaticRouter>
             ),
             res.locals.state

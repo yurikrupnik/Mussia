@@ -4,10 +4,10 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import tabEvent from 'react-tap-event-plugin';
 
-const muiTheme = getMuiTheme(lightBaseTheme, {userAgent: 'all'});
 tabEvent();
 
-function withMaterial(WrappedComponent) {
+function withMaterial(WrappedComponent, userAgent) {
+    const muiTheme = getMuiTheme(lightBaseTheme, {userAgent});
     return class extends Component {
         render() {
             return (
