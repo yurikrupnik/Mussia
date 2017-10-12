@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { StaticRouter as Router, matchPath } from 'react-router';
+import { StaticRouter, matchPath } from 'react-router';
 import React from 'react';
 import App from '../../../../components/App'
 import routes from '../../../../routes';
@@ -24,13 +24,23 @@ export default (req, res) => {
     if (!match) {
         res.status(404).send(render(<div>Sorry, no match</div>));
     } else {
-        res.status(200).send(render(
-            (
-                <Router context={{}} location={req.url}>
-                    <App />
-                </Router>
-            ),
-            res.locals.state
-        ));
+        const context = {};
+        if (context.url) {
+            // Somewhere a `<Redirect>` was rendered
+            res.redirect(301, context.url)
+        } else {
+            // we're good, send the response
+            res.status(200).send(render(
+                (
+                    <StaticRouter
+                        location={req.url}
+                        context={context}
+                    >
+                        <App/>
+                    </StaticRouter>
+                ),
+                res.locals.state
+            ));
+        }
     }
 }
