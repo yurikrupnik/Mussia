@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Route, Switch} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 import withMaterial from '../Utils/Material';
 import withProvider from '../Utils/Provider';
+import RouteWithSubRoutes from '../Utils/RouteWithRoutes';
 import Nav from '../Nav';
 import routes from '../../routes';
 
@@ -11,9 +12,9 @@ const Layout = () => {
         <div>
             <Nav />
             <Switch>
-                {routes.map((route, i) => {
-                    return (<Route key={i} path={route.path} exact={route.exact} component={route.component}/>);
-                })}
+                {routes.map((route, i) => (
+                    <RouteWithSubRoutes key={i} {...route}/>
+                ))}
             </Switch>
         </div>
     );

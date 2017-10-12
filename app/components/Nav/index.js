@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
+
 class Login extends Component {
     // static muiName = 'FlatButton';
 
@@ -91,10 +92,11 @@ class MenuLeft extends Component {
                     targetOrigin={{horizontal: 'right', vertical: 'top'}}
                     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
-                    <MenuItem primaryText="Counter" onClick={this.handleClick.bind(this)}/>
-                    <MenuItem primaryText="Counters" onClick={this.handleClick.bind(this)}/>
-                    <MenuItem primaryText="Topics" onClick={this.handleClick.bind(this)}/>
-                    <MenuItem primaryText="Payments" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Dashboard" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Map" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Settings" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Reports" onClick={this.handleClick.bind(this)}/>
+                    <MenuItem primaryText="Register" onClick={this.handleClick.bind(this)}/>
                     <MenuItem primaryText="Sign out" onClick={this.handleLogOut.bind(this)}/>
                 </IconMenu>
             </div>

@@ -7,9 +7,9 @@ import tabEvent from 'react-tap-event-plugin';
 tabEvent();
 
 function withMaterial(WrappedComponent, userAgent) {
-    const muiTheme = getMuiTheme(lightBaseTheme, {userAgent});
     return class extends Component {
         render() {
+            const muiTheme = getMuiTheme(lightBaseTheme, {userAgent});
             return (
                 <MuiThemeProvider muiTheme={muiTheme}>
                     <WrappedComponent />
