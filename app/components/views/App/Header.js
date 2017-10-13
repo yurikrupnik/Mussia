@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -110,7 +111,7 @@ function handlePathname(str) {
 
 import _ from 'lodash'
 
-class Nav extends Component {
+class Header extends Component {
 
     constructor(props, context) {
         super(props);
@@ -146,4 +147,4 @@ class Nav extends Component {
 }
 
 
-export default withRouter(connect()(Nav));
+export default withRouter(connect()(Header));

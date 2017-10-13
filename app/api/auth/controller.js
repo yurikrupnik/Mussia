@@ -31,6 +31,6 @@ function handleLogout(req, res, next) {
 }
 
 export {
-    // handleLogin,
+    handleLogin,
     handleLogout
 }

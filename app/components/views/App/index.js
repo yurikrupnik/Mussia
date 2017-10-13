@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withMaterial from '../../HOC/Material';
 import withProvider from '../../HOC/Provider';
 import withLayout from '../../HOC/Layout';
-import Nav from '../../Nav';
+import Header from './Header';
 import routes from './routes';
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
 
     render() {
         const {initialState, userAgent} = this.props;
-        const Root = withMaterial(withProvider(withLayout(Nav, routes), initialState), userAgent);
+        const Root = withMaterial(withProvider(withLayout(Header, routes), initialState), userAgent);
         return <Root />
     }
 }

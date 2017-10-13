@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 // import {withRouter} from 'react-router-dom';
@@ -6,11 +7,11 @@ import {connect} from 'react-redux';
 import routes from './routes';
 import withLayout from '../../HOC/Layout'
 
-class Settings extends Component {
+class Quizzes extends Component {
     render() {
         return (
             <div>
-                <h2>Settings</h2>
+                <h2>Quizzes</h2>
                 <ul>
                     <li>
                         <Link to="/settings/profiles">
@@ -32,4 +33,4 @@ class Settings extends Component {
 
 export default withLayout(connect(function (state) {
     return {user : state.users};
-})(Settings), routes);
+})(Quizzes), routes);

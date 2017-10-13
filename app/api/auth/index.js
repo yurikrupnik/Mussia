@@ -8,6 +8,8 @@ import configureStore from '../../redux/store/store';
 router.post('/auth/login', passport.authenticate('local', { failWithError: true }),
     (req, res, next) => res.redirect('/'),
     (err, req, res, next) => {
+        console.log('err', err);
+
         // handle error
         // let store = configureStore();
         // if (err) {

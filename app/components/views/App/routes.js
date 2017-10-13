@@ -3,11 +3,12 @@ import {Route, Switch, Link} from 'react-router-dom';
 import ResultsContainer from '../../../api/results/container';
 import QuizzesContainer from '../../../api/quizzes/container';
 import AuthContainer from '../../../api/auth/container';
-import Quiz from '../../Quiz';
-import NoMatch from '../../NoMatch';
+// import Quiz from '../../Quiz';
 import Votes from '../../Votes';
 import Hello from '../../Hello';
 import Settings from '../Settings';
+import Quizzes from '../quizzes';
+import NoMatch from '../NoMatch';
 
 const routes = [
     {
@@ -22,12 +23,13 @@ const routes = [
             return <ResultsContainer><Votes/><Hello/></ResultsContainer>
         },
     },
-    // {
-    //     path: '/quiz/:quiz_id',
-    //     component: (props) => {
-    //         return <QuizzesContainer><Quiz/></QuizzesContainer>;
-    //     },
-    // },
+    {
+        path: '/quizzes',
+        component: Quizzes
+        // component: (props) => {
+        //     return <QuizzesContainer><Quiz/></QuizzesContainer>;
+        // },
+    },
     {
         path: '/register',
         component: (props) => {
