@@ -1,8 +1,16 @@
 import React, {Component} from 'react'
-import {Switch} from 'react-router-dom';
-import RouteWithSubRoutes from '../../Utils/RouteWithRoutes/index';
+import {Route, Switch} from 'react-router-dom';
 
-function withLayout(WrappedComponent, routes) {
+const RouteWithSubRoutes = (route) => {
+    return (
+        <Route path={route.path} exact={route.exact} render={props => (
+            // pass the sub-routes down to keep nesting
+            <route.component {...props} routes={route.routes}/>
+        )}/>
+    );
+};
+
+const withLayout = (WrappedComponent, routes = []) => {
     return class extends Component {
         render() {
             return (
@@ -17,6 +25,6 @@ function withLayout(WrappedComponent, routes) {
             )
         }
     }
-}
+};
 
 export default withLayout;

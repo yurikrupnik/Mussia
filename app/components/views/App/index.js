@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import withMaterial from '../../HOC/Material/index';
-import withProvider from '../../HOC/Provider/index';
-import withLayout from '../../HOC/Layout/index';
-import Nav from '../../Nav/index';
+import withMaterial from '../../HOC/Material';
+import withProvider from '../../HOC/Provider';
+import withLayout from '../../HOC/Layout';
+import Nav from '../../Nav';
 import routes from './routes';
 
 class App extends Component {
