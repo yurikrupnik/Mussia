@@ -1,6 +1,6 @@
 import React from 'react';
 import {StaticRouter, matchPath} from 'react-router';
-import App from '../../../../components/App'
+import App from '../../../../components/views/App'
 
 import html from './html';
 
@@ -17,7 +17,7 @@ export default (req, res) => {
                     location={req.url}
                     context={context}
                 >
-                    <App userAgent={req.headers['user-agent']} />
+                    <App initialState={{}} userAgent={req.headers['user-agent']} />
                 </StaticRouter>
             ),
             res.locals.state

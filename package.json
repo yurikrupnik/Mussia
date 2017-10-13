@@ -23,7 +23,6 @@
     "helmet": "^3.6.0",
     "material-ui": "^0.19.4",
     "mongoose": "^4.10.0",
-    "monk": "^4.0.0",
     "passport-flickr": "^0.2.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",

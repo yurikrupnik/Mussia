@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
@@ -67,7 +67,7 @@ class MenuRight extends Component {
 
 }
 class MenuLeft extends Component {
-    static muiName = 'IconButton';
+    // static muiName = 'IconButton';
 
     constructor(props) {
         super(props);
@@ -111,24 +111,28 @@ function handlePathname(str) {
 import _ from 'lodash'
 
 class Nav extends Component {
-    static muiName = 'IconMenu';
 
-    constructor(props) {
+    constructor(props, context) {
         super(props);
-
+        this.state = {
+            redirect: !!props.user
+        }
     }
 
-    componentDidMount() {
-        // let {user, history} = this.props;
-        // if (!user) {
-        //     history.push('/register');
-        // }
+    goto() {
+        let {user, history} = this.props;
+        history.push('/register');
     }
 
     render() {
-        const {user, location} = this.props;
+        const {user, location, history} = this.props;
         const {pathname} = location;
         const title = _.capitalize(handlePathname(pathname));
+        const { redirect } = this.state;
+
+        // if (!redirect && pathname !== '/register') {
+        //     return <Redirect to='/register'/>;
+        // }
         return (
             <div>
                 <AppBar

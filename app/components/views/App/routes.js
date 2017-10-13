@@ -1,28 +1,13 @@
 import React from 'react';
 import {Route, Switch, Link} from 'react-router-dom';
-import ResultsContainer from './api/results/container';
-import QuizzesContainer from './api/quizzes/container';
-import AuthContainer from './api/auth/container';
-import Quiz from './components/Quiz';
-import NoMatch from './components/NoMatch';
-import Votes from './components/Votes';
-import Hello from './components/Hello';
-import RouteWithSubRoutes from './components/Utils/RouteWithRoutes';
-const Settings = ({routes}) => {
-    return (
-        <div>
-            <h2>Settings</h2>
-            <ul>
-                <li><Link to="/settings/profiles">Profiles</Link></li>
-                <li><Link to="/settings/attachment">Attachment</Link></li>
-            </ul>
-
-            {routes.map((route, i) => (
-                <RouteWithSubRoutes key={i} {...route}/>
-            ))}
-        </div>
-    );
-};
+import ResultsContainer from '../../../api/results/container';
+import QuizzesContainer from '../../../api/quizzes/container';
+import AuthContainer from '../../../api/auth/container';
+import Quiz from '../../Quiz/index';
+import NoMatch from '../../NoMatch/index';
+import Votes from '../../Votes/index';
+import Hello from '../../Hello/index';
+import withLayout from '../../HOC/Layout/index';
 
 const settingsRoutes = [
     {
@@ -38,6 +23,18 @@ const settingsRoutes = [
         }
     }
 ];
+
+const settingsNav = () => {
+    return (
+        <div>
+            <h2>Settings</h2>
+            <ul>
+                <li><Link to="/settings/profiles">Profiles</Link></li>
+                <li><Link to="/settings/attachment">Attachment</Link></li>
+            </ul>
+        </div>
+    )
+};
 
 const routes = [
     {
@@ -80,7 +77,8 @@ const routes = [
     {
         path: '/settings',
         component: (props) => {
-            return <Settings routes={props.routes}/>
+            const Elem = withLayout(settingsNav, props.routes);
+            return <Elem />
         },
         routes: settingsRoutes
     },
