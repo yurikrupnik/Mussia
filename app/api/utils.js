@@ -1,6 +1,6 @@
 import {apiPrefix, host} from './../config/env';
 
-const checkStatus = (response) => {
+const checkStatus = response => {
     if (response.status >= 200 && response.status < 300) {
         return response
     } else {
@@ -10,7 +10,7 @@ const checkStatus = (response) => {
     }
 };
 
-const parseJSON = (response) => response.json();
+const parseJSON = response => response.json();
 
 const handleHost = () => global.window ? '' : host;
 

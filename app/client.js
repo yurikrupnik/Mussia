@@ -7,11 +7,6 @@ import './styles/vars.scss';
 import './styles/custom-styles.scss';
 import 'flexboxgrid'; // load flexbox for grid system
 
-
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
-
-
 const root = document.getElementById('root');
 
 hydrate(<BrowserRouter>

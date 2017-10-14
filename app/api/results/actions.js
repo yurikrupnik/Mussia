@@ -1,7 +1,9 @@
 import axios from 'axios';
-import {received_error} from '../../redux/errors/actions';
 import {url, countUrl, answerUrl} from './config';
-import {apiPrefix} from '../../config/env';
+import { received_error } from '../../redux/errors/actions';
+import {checkStatus, parseJSON, handleHostAndPrefix} from '../utils';
+import { normalize, schema } from 'normalizr';
+
 
 export const GET_COUNT = 'GET_COUNT';
 export const GOT_COUNT = 'GOT_COUNT';
@@ -12,7 +14,7 @@ const getCount = (selected = []) => dispatch => {
     dispatch({type: GET_COUNT});
     return axios({
         method: 'get',
-        url: `${apiPrefix}${countUrl}`,
+        url: `${handleHostAndPrefix()}${countUrl}`,
         params: {
             ids: selected.map(v => v._id)
         }
@@ -34,7 +36,7 @@ const getAnswerId = (params) => dispatch => {
     dispatch({type: GET_ANSWER, params: params});
     return axios({
         method: 'get',
-        url: `${apiPrefix}${answerUrl}`,
+        url: `${handleHostAndPrefix()}${answerUrl}`,
         params: params
     })
         .then(res => {

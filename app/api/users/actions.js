@@ -1,6 +1,9 @@
 import {received_error} from '../../redux/errors/actions';
 import {checkStatus, parseJSON, handleHostAndPrefix} from '../utils';
 import {url} from './config';
+import axios from 'axios';
+import {normalize, schema} from 'normalizr';
+const USERS = 'USERS';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const FETCH_USERS_PENDING = 'FETCH_USERS_PENDING';
@@ -12,31 +15,25 @@ const setCurrentUser = (user) => dispatch => {
 
 const fetchUsers = params => dispatch => {
     dispatch({type: FETCH_USERS_PENDING, payload: params});
-    return fetch(`${handleHostAndPrefix()}${url}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+    return axios({
+        method: 'get',
+        url: `${handleHostAndPrefix()}${url}`
     })
-        .then(checkStatus)
-        .then(parseJSON)
         .then(res => {
+            const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
+            const userListSchema = new schema.Array(userSchema);
+            const normalizedData = normalize(res.data, userListSchema);
+            console.log('normalizedData', normalizedData);
             dispatch({
-                type: FETCH_USERS_SUCCESS, payload: res
+                type: FETCH_USERS_SUCCESS, payload: normalizedData
             });
-            return res;
+            return res.data;
         })
-        .catch(err => {
-            console.log('err', err);
-
-        });
+        .catch(received_error);
 };
 
 
 export {
     setCurrentUser,
     fetchUsers
-    // getQuizzes,
-    // getQuizById,
-    // setSelectedQuiz
 }
