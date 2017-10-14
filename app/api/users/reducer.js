@@ -1,11 +1,12 @@
-import {LOGOUT, RECEIVED_USER} from './actions';
+import {SET_CURRENT_USER_ID} from './actions';
 
-export default (state = [], action) => {
+export default (state = {users: [], currentUser: {}}, action) => {
     switch (action.type) {
-        case RECEIVED_USER:
-            return Object.assign({}, state, action.user);
-        case LOGOUT:
-            return {};
+        case SET_CURRENT_USER_ID:
+            return Object.assign({}, state, {currentUser: action.payload});
+            // return action.payload || '';
+        // case LOGOUT:
+        //     return {};
         default:
             return state;
     }

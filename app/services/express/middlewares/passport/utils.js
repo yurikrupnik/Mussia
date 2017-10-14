@@ -38,14 +38,11 @@ const checkUserByEmailAndPass = (email, password, done) => user => {
     }
 };
 
-const localStrategyHandler = (req, email, password, done) => {
-    Users.findOne({email})
+const localStrategyHandler = (req, email, password, done) => Users.findOne({email})
         .then(checkUserByEmailAndPass(email, password, done))
         .catch(done);
-};
 
-const socialAppsRegisterCallback = (profile, done) => () => {
-    return Users.findOne({id: profile.id})
+const socialAppsRegisterCallback = (profile, done) => () => Users.findOne({id: profile.id})
         .then(function (user) {
             if (user) {
                 done(null, user);
@@ -61,7 +58,7 @@ const socialAppsRegisterCallback = (profile, done) => () => {
 
         })
         .catch(done);
-};
+
 const socialNetworkStrategy = (token, refreshTocken, profile, done) => process.nextTick(socialAppsRegisterCallback(profile, done));
 
 const setSocialAuth = (provider) => passport.authenticate(provider, {

@@ -1,36 +1,50 @@
-
-import React, {Component} from 'react';
-import {Link, withRouter, Redirect} from 'react-router-dom';
-// import {withRouter} from 'react-router-dom';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
+import { mapToProps as quizzesMapToProps, actions as quizzesActions } from './../../../api/quizzes/selectors';
+import { mapToProps as resultsMapToProps, actions as resultsActions } from './../../../api/results/selectors';
+import withLayout from '../../HOC/Layout';
 import routes from './routes';
-import withLayout from '../../HOC/Layout'
 
-class Quizzes extends Component {
+class Container extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        const { actions, quizzes, match } = this.props;
+        const { selected } = quizzes;
+        if (isEmpty(selected)) {
+            actions.getQuizById(match.params.quiz_id);
+        }
+    }
+
     render() {
+        const { children } = this.props;
+        const childrenWithProps = React.Children.map(children,
+            (child) => React.cloneElement(child, {
+                ...this.props // pass all for all children - here can just pass selected
+            })
+        );
         return (
-            <div>
-                <h2>Quizzes</h2>
-                <ul>
-                    <li>
-                        <Link to="/settings/profiles">
-                            Profiles
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/settings/attachment">
-                            Attachment
-                        </Link>
-                    </li>
-                </ul>
+            <div className="container">
+                {childrenWithProps}
             </div>
         )
     }
 }
 
 
+const combinedMapTpProps = state => ({
+    quizzes: quizzesMapToProps(state),
+    results: resultsMapToProps(state)
+});
 
-export default withLayout(connect(function (state) {
-    return {user : state.users};
-})(Quizzes), routes);
+const combinedDispatchActions = dispatch => ({
+    actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
+});
+
+export default withLayout(connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Container)), routes);

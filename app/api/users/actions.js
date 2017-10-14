@@ -1,15 +1,19 @@
-import {logout as Logout, login as Login} from '../../api/auth/request';
+export const SET_CURRENT_USER_ID = 'SET_CURRENT_USER_ID';
 
-export const RECEIVED_USER = 'RECEIVED_USER';
-export const LOGOUT = 'LOGOUT';
+export const REMOVE_SESSION_USER_ID = 'REMOVE_SESSION_USER_ID';
 
-/*
- * action creators
- */
+const setSessionUser = (id) => dispatch => {
+    dispatch({ type: SET_CURRENT_USER_ID, payload: id})
+};
 
-export const got = user => ({ type: RECEIVED_USER, user });
+const removeSessionUser = (user) => dispatch => {
+    dispatch({ type: REMOVE_SESSION_USER_ID})
+};
 
-export const logout = () => dispatch => Logout().then(() => dispatch({ type: LOGOUT }));
-
-export const fountUser = user => dispatch => dispatch(got(user));
-
+export {
+    setSessionUser,
+    removeSessionUser
+    // getQuizzes,
+    // getQuizById,
+    // setSelectedQuiz
+}

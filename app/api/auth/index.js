@@ -1,11 +1,12 @@
 import express from 'express';
 import passport from 'passport';
-import {handleLogout} from './controller';
-let router =  express.Router();
+import { handleLogout } from './controller';
+import {loginUrl, logoutUrl} from './config';
+let router = express.Router();
 
 import configureStore from '../../redux/store/store';
 
-router.post('/auth/login', passport.authenticate('local', { failWithError: true }),
+router.post(loginUrl, passport.authenticate('local', { failWithError: true }),
     (req, res, next) => res.redirect('/'),
     (err, req, res, next) => {
         console.log('err', err);
@@ -26,6 +27,6 @@ router.post('/auth/login', passport.authenticate('local', { failWithError: true 
         res.redirect('/register');
     });
 
-router.get('/auth/logout', handleLogout);
+router.get(logoutUrl, handleLogout);
 
 export default router;

@@ -1,8 +1,7 @@
 import React from 'react';
 import {StaticRouter, matchPath} from 'react-router';
-import App from '../../../../components/views/App'
-
 import html from './html';
+import App from '../../../../components/views/App';
 
 export default (req, res) => {
     const context = {};
