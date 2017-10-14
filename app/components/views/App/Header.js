@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -84,6 +83,7 @@ class MenuLeft extends Component {
     }
 
     render() {
+        let menuOption = routes.filter(route => !route.path.includes('/*'));
         return (
             <div>
                 <IconMenu
@@ -93,11 +93,12 @@ class MenuLeft extends Component {
                     targetOrigin={{horizontal: 'right', vertical: 'top'}}
                     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                 >
-                    <MenuItem primaryText="Dashboard" onClick={this.handleClick.bind(this)}/>
-                    <MenuItem primaryText="Map" onClick={this.handleClick.bind(this)}/>
-                    <MenuItem primaryText="Settings" onClick={this.handleClick.bind(this)}/>
-                    <MenuItem primaryText="Reports" onClick={this.handleClick.bind(this)}/>
-                    <MenuItem primaryText="Register" onClick={this.handleClick.bind(this)}/>
+                    {menuOption.map((route, index) => {
+                        return <MenuItem
+                            key={index}
+                            primaryText={`${route.path.slice(1, 2).toUpperCase()}${route.path.slice(2)}`}
+                            onClick={this.handleClick.bind(this)}/>
+                    })}
                     <MenuItem primaryText="Sign out" onClick={this.handleLogOut.bind(this)}/>
                 </IconMenu>
             </div>
@@ -110,6 +111,8 @@ function handlePathname(str) {
 }
 
 import _ from 'lodash'
+
+import routes from './routes';
 
 class Header extends Component {
 
@@ -128,12 +131,14 @@ class Header extends Component {
     render() {
         const {user, location, history} = this.props;
         const {pathname} = location;
-        const title = _.capitalize(handlePathname(pathname));
-        const { redirect } = this.state;
+        const title = `${pathname.slice(1, 2).toUpperCase()}${pathname.slice(2)}`;
+        const {redirect} = this.state;
 
-        // if (!redirect && pathname !== '/register') {
+        // todo put it back
+        // if (!redirect && title !== 'register') {
         //     return <Redirect to='/register'/>;
         // }
+
         return (
             <div>
                 <AppBar

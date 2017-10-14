@@ -19,15 +19,16 @@ const fetchUsers = params => dispatch => {
         method: 'get',
         url: `${handleHostAndPrefix()}${url}`
     })
-        .then(res => {
+        .then(res => { // handle normalize
             const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
             const userListSchema = new schema.Array(userSchema);
-            const normalizedData = normalize(res.data, userListSchema);
-            console.log('normalizedData', normalizedData);
+            return normalize(res.data, userListSchema);
+        })
+        .then(res => {
             dispatch({
-                type: FETCH_USERS_SUCCESS, payload: normalizedData
+                type: FETCH_USERS_SUCCESS, payload: res
             });
-            return res.data;
+            return res;
         })
         .catch(received_error);
 };
