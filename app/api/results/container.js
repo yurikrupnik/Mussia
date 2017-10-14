@@ -16,13 +16,13 @@ class Container extends Component {
 
     componentDidMount() {
         const {actions} = this.props;
-        actions.fetchUsers().then(function (res) {
-            console.log('res', res);
+        // actions.fetchUsers().then(function (res) {
+        //     console.log('res', res);
 
             actions.getQuizzes()
                 .then(res => actions.getCount(res[0].answers)
                     .then(() => actions.setSelectedQuiz(res[0])));
-        });
+        // });
     }
 
     handleChange(event, index, value) {
@@ -34,9 +34,13 @@ class Container extends Component {
     }
 
     handleClick() {
-        const {history, quizzes} = this.props;
+        const {history, quizzes, actions} = this.props;
         const {selected} = quizzes;
-        history.push('/quiz/' + selected._id, selected);
+        // history.push('/quiz/' + selected._id, selected);
+        actions.fetchUsers().then(res => {
+            console.log('users', res);
+
+        })
     }
 
     render() {
