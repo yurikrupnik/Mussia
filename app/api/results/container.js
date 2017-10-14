@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
 import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../api/results/selectors';
+import {mapToProps as usersMapToProps, actions as usersActions} from '../../api/users/selectors';
 
 class Container extends Component {
 
@@ -15,9 +16,13 @@ class Container extends Component {
 
     componentDidMount() {
         const {actions} = this.props;
-        actions.getQuizzes()
-            .then(res => actions.getCount(res[0].answers)
+        actions.fetchUsers().then(function (res) {
+            console.log('res', res);
+
+            actions.getQuizzes()
+                .then(res => actions.getCount(res[0].answers)
                     .then(() => actions.setSelectedQuiz(res[0])));
+        });
     }
 
     handleChange(event, index, value) {
@@ -54,10 +59,11 @@ class Container extends Component {
 const combinedMapTpProps = state => ({
     quizzes: quizzesMapToProps(state),
     results: resultsMapToProps(state),
+    users: usersMapToProps(state)
 });
 
 const combinedDispatchActions = dispatch => ({
-    actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions, usersActions), dispatch)
 });
 
 export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Container));
