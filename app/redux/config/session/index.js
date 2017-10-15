@@ -21,10 +21,12 @@ const createSessionReducer = (actionsArr = []) => {
     const actions = createActions(actionsArr);
     return (state = '', action) => {
         if (actions.hasOwnProperty(action.type)) {
+
             return actions[action.type](state, action)
         } else {
             return state
         }
     }
 };
+
 export default createSessionReducer;

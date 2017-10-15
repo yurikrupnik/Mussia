@@ -31,7 +31,7 @@ const fetchUsers = params => dispatch => {
             });
             return res;
         })
-        .catch(received_error);
+        .catch(received_error(dispatch));
 };
 
 

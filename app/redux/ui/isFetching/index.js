@@ -1,4 +1,4 @@
-const TOGGLE_BOOL = TOGGLE_BOOL;
+const TOGGLE_BOOL = 'TOGGLE_BOOL';
 
 const handler = (state, action) => !state;
 
