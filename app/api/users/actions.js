@@ -4,23 +4,15 @@ import {handleHostAndPrefix} from '../utils';
 import {url} from './config';
 import axios from 'axios';
 import {normalize, schema} from 'normalizr';
+
 const USERS = 'USERS';
 
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const FETCH_USERS_PENDING = 'FETCH_USERS_PENDING';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 
 // async action
-const setCurrentUser = (user) => dispatch => {
-    dispatch({type: SET_CURRENT_USER, payload: user});
-
-    // dispatch({type: 'SET_SESSION', payload: user.id});
-};
-
-// async action
 const fetchUsers = params => dispatch => {
     dispatch({type: FETCH_USERS_PENDING, payload: params});
-    // dispatch({type: 'TOGGLE_BOOL'});
     dispatch(toggleIsFetching());
     return axios({
         method: 'get',
@@ -42,8 +34,7 @@ const fetchUsers = params => dispatch => {
         .catch(received_error(dispatch));
 };
 
-
 export {
-    setCurrentUser,
+    // setCurrentUser,
     fetchUsers
 }

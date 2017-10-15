@@ -1,19 +1,16 @@
 import {combineReducers} from 'redux';
 import isFetching from '../../redux/ui/isFetching/reducer';
+import current from '../../redux/ui/current/reducer';
 
 import {
-    SET_CURRENT_USER,
     FETCH_USERS_PENDING,
-    FETCH_USERS_SUCCESS
+    FETCH_USERS_SUCCESS,
 } from './actions';
 
-const users = (state = {result: {}, entities: {}, currentUser: {}}, action) => {
+const data = (state = {result: {}, entities: {}}, action) => {
     switch (action.type) {
-        case SET_CURRENT_USER:
-            return Object.assign({}, state, {currentUser: action.payload});
         case FETCH_USERS_SUCCESS:
             return Object.assign({}, state, {
-                active: !state.active,
                 result: action.payload.result,
                 entities: action.payload.entities
             });
@@ -23,7 +20,9 @@ const users = (state = {result: {}, entities: {}, currentUser: {}}, action) => {
     }
 };
 
+
 export default combineReducers({
     isFetching,
-    users,
+    current,
+    data,
 })
