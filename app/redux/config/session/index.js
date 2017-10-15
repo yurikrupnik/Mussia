@@ -15,10 +15,10 @@ const actionsInitialState = {
     [RESET_SESSION]: resetHandler
 };
 
-const createActions = (_actions = []) => _actions.reduce(setActionToHandler, actionsInitialState);
+const createActions = (actions = []) => actions.reduce(setActionToHandler, actionsInitialState);
 
-const createSessionReducer = (_actions = []) => {
-    const actions = createActions(_actions);
+const createSessionReducer = (actionsArr = []) => {
+    const actions = createActions(actionsArr);
     return (state = '', action) => {
         if (actions.hasOwnProperty(action.type)) {
             return actions[action.type](state, action)

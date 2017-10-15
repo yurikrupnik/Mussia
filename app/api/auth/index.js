@@ -4,7 +4,7 @@ import { handleLogout } from './controller';
 import {loginUrl, logoutUrl} from './config';
 let router = express.Router();
 
-import configureStore from '../../redux/store/store';
+import configureStore from '../../redux/store';
 
 router.post(loginUrl, passport.authenticate('local', { failWithError: true }),
     (req, res, next) => res.redirect('/'),

@@ -1,4 +1,4 @@
-import configureStore from '../../../../redux/store/store';
+import configureStore from '../../../../redux/store';
 import {setCurrentUser, fetchUsers} from '../../../../api/users/actions';
 
 export default (req, res, next) => {
