@@ -1,4 +1,4 @@
-const TOGGLE_BOOL = 'TOGGLE_BOOL';
+import {TOGGLE_BOOL} from './actions';
 
 const handler = (state, action) => !state;
 
@@ -21,4 +21,14 @@ const createIsFetchingReducer = (_actions = []) => {
         }
     }
 };
+
 export default createIsFetchingReducer;
+
+// export default (state = false, action) => {
+//     switch (action.type) {
+//         case TOGGLE_BOOL:
+//             return !state;
+//         default:
+//             return state;
+//     }
+// };

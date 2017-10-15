@@ -26,6 +26,7 @@ const users = (state = {result: {}, entities: {}, currentUser: {}}, action) => {
 
 export default combineReducers({
     isFetching: createIsFetchingReducer([FETCH_USERS_PENDING, FETCH_USERS_SUCCESS]),
+    // isFetching: createIsFetchingReducer,
     session: createSessionReducer([SET_CURRENT_USER]),
     users,
 })
