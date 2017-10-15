@@ -1,10 +1,4 @@
+export const TOGGLE_IS_FETCHING = 'TOGGLE_BOOL';
 
-export const TOGGLE_BOOL = 'TOGGLE_BOOL';
-
-export const toggleIsFetching = () => dispatch => dispatch({type: TOGGLE_BOOL});
-
-// export {
-//     TOGGLE_BOOL,
-//
-//     toggleIsFetching
-// }
+// sync action
+export const toggleIsFetching = () => ({type: TOGGLE_IS_FETCHING});
