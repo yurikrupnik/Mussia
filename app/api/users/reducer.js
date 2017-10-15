@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import createIsFetchingReducer from '../../redux/ui/isfetching';
+import createSessionReducer from '../../redux/config/session';
 
 import {
     SET_CURRENT_USER,
@@ -25,5 +26,6 @@ const users = (state = {result: {}, entities: {}, currentUser: {}}, action) => {
 
 export default combineReducers({
     isFetching: createIsFetchingReducer([FETCH_USERS_PENDING, FETCH_USERS_SUCCESS]),
-    users
+    session: createSessionReducer([SET_CURRENT_USER]),
+    users,
 })

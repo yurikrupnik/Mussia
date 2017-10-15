@@ -10,7 +10,8 @@ export const FETCH_USERS_PENDING = 'FETCH_USERS_PENDING';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 
 const setCurrentUser = (user) => dispatch => {
-    dispatch({type: SET_CURRENT_USER, payload: user})
+    dispatch({type: SET_CURRENT_USER, payload: user});
+    // dispatch({type: 'SET_SESSION', payload: user.id});
 };
 
 const fetchUsers = params => dispatch => {
