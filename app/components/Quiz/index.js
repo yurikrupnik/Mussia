@@ -7,6 +7,8 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 class Quiz extends Component {
     constructor(props) {
         super(props);
+        console.log('props', props);
+
         this.handleChange = this.handleChange.bind(this);
         this.state = {
             form: [
