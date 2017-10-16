@@ -27,7 +27,6 @@ const fetchUsers = params => dispatch => {
             dispatch({
                 type: FETCH_USERS_SUCCESS, payload: res
             });
-            // dispatch({type: 'TOGGLE_BOOL'});
             dispatch(toggleIsFetching());
             return res;
         })
