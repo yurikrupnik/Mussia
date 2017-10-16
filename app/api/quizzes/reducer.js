@@ -1,3 +1,7 @@
+import {combineReducers} from 'redux';
+import isFetching from '../../redux/ui/isFetching/reducer';
+import current from '../../redux/ui/current/reducer';
+
 import {
     GET_QUIZZES,
     GOT_QUIZZES,
@@ -6,22 +10,27 @@ import {
     SET_SELECTED
 } from './actions';
 
-export default (state = { data: [], active: false, selected: {}}, action) => {
+const data = (state = {data: [], selected: {}}, action) => {
     switch (action.type) {
         case GET_QUIZZES:
-            return Object.assign({}, state, { active: !state.active});
+            return state;
         case GOT_QUIZZES:
             return Object.assign({}, state, {
-                active: !state.active,
                 data: action.payload
             });
         case GET_SELECTED_QUIZ:
-            return Object.assign({}, state, { active: !state.active });
+            return Object.assign({}, state, {active: !state.active});
         case GOT_SELECTED_QUIZ:
-            return Object.assign({}, state, { active: !state.active, selected: action.payload});
+            return Object.assign({}, state, {selected: action.payload});
         case SET_SELECTED:
-            return Object.assign({}, state, { selected: action.payload});
+            return Object.assign({}, state, {selected: action.payload});
         default:
             return state;
     }
 };
+
+export default combineReducers({
+    isFetching,
+    current,
+    data,
+})

@@ -9,8 +9,8 @@ import errors from './errors/reducer';
 
 const apiReducer = combineReducers({
     users,
-    results,
     quizzes,
+    results,
 });
 
 const reducers = {
