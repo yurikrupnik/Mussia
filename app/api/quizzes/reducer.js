@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import isFetching from '../../redux/ui/isFetching/reducer';
+import createIsFetchingReducer from '../../redux/ui/isFetching/reducer';
 import current from '../../redux/ui/current/reducer';
 
 import {
@@ -30,7 +30,7 @@ const data = (state = {data: [], selected: {}}, action) => {
 };
 
 export default combineReducers({
-    isFetching,
+    isFetching: createIsFetchingReducer([GET_QUIZZES, GOT_QUIZZES, GET_SELECTED_QUIZ, GOT_SELECTED_QUIZ]),
     current,
     data,
 })

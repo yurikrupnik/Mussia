@@ -8,10 +8,10 @@ export default (req, res, next) => {
     if (req.isAuthenticated()) {
         store.dispatch(setCurrent(req.user));
         store.dispatch(setSession(req.user.id));
-        store.dispatch(fetchUsers()).then(() => {
+        // store.dispatch(fetchUsers()).then(() => {
             res.locals.state = store.getState();
             next();
-        })
+        // })
 
     } else {
         res.locals.state = store.getState();

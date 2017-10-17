@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import isFetching from '../../redux/ui/isFetching/reducer';
+import createIsFetchingReducer from '../../redux/ui/isFetching/reducer';
 import current from '../../redux/ui/current/reducer';
 
 import {
@@ -22,7 +22,7 @@ const data = (state = {result: {}, entities: {}}, action) => {
 
 
 export default combineReducers({
-    isFetching,
+    isFetching: createIsFetchingReducer([FETCH_USERS_PENDING, FETCH_USERS_SUCCESS]),
     current,
     data,
 })

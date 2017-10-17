@@ -1,5 +1,4 @@
 import {received_error} from '../../redux/errors/actions';
-import {toggleIsFetching} from '../../redux/ui/isFetching/actions';
 import {handleHostAndPrefix} from '../utils';
 import {url} from './config';
 import axios from 'axios';
@@ -13,7 +12,6 @@ export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 // async action
 const fetchUsers = params => dispatch => {
     dispatch({type: FETCH_USERS_PENDING, payload: params});
-    dispatch(toggleIsFetching());
     return axios({
         method: 'get',
         url: `${handleHostAndPrefix()}${url}`
@@ -27,7 +25,6 @@ const fetchUsers = params => dispatch => {
             dispatch({
                 type: FETCH_USERS_SUCCESS, payload: res
             });
-            dispatch(toggleIsFetching());
             return res;
         })
         .catch(received_error(dispatch));
