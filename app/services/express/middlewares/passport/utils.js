@@ -68,7 +68,7 @@ const setSocialAuth = (provider) => passport.authenticate(provider, {
 }); // handling fail with router
 
 const createSocialNetworkRoutes = app => {
-    const socialNetworks = ['facebook', 'flickr'];
+    const socialNetworks = ['facebook'];
     socialNetworks.forEach(function (provider) { // register middlewares
         app.get(`/auth/${provider}`, setSocialAuth(provider));
         app.get(`/auth/${provider}/callback`, setSocialAuth(provider));
