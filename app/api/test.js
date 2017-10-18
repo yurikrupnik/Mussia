@@ -1,7 +1,6 @@
-import {mainURL, countURL} from './payments'; // todo client test func and see if the data we send is correct to the client response
+// To Be Added - test requests
 
 import request from 'supertest';
-import Payments from './payments/request';
 import app from '../app';
 // let agent = request(app);
 let Cookies;

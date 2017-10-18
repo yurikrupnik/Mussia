@@ -1,34 +1,23 @@
-import { renderToString } from 'react-dom/server';
-import { StaticRouter as Router, matchPath } from 'react-router';
 import React from 'react';
-import App from '../../../../components/Containers/App'
-import routes from '../../../../components/Containers/App/routes';
-
-const render = (component, state) => `<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Engine</title>
-        <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-        <div id="root">${renderToString(component)}</div>
-        <script>window.__PRELOADED_STATE__ = ${JSON.stringify(state)};</script>
-        <script src="main.js"></script>
-    </body>
-</html>`;
+import {StaticRouter, matchPath} from 'react-router';
+import html from './html';
+import App from '../../../../components/views/App';
 
 export default (req, res) => {
-    const match = routes.reduce((acc, route) => matchPath(req.url, route, { exact: true }) || acc, null);
-
-    if (!match) {
-        res.status(404).send(render(<div>Sorry, no match</div>));
+    const context = {};
+    if (context.url) {
+        // Somewhere a `<Redirect>` was rendered
+        res.redirect(301, context.url)
     } else {
-        res.status(200).send(render(
+        // we're good, send the response
+        res.status(200).send(html(
             (
-                <Router context={{}} location={req.url}>
-                    <App />
-                </Router>
+                <StaticRouter
+                    location={req.url}
+                    context={context}
+                >
+                    <App initialState={{}} userAgent={req.headers['user-agent']} />
+                </StaticRouter>
             ),
             res.locals.state
         ));

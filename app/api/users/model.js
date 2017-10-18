@@ -1,24 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
-import shortid from 'shortid';
-
+import { dbModel } from './config';
 const UserSchema = new Schema({
     id: {
         type: String,
         index: true
     },
-    email: String,
+    email: {type: String},
     name: String,
     hashPassword: String,
 });
 
+const Model = mongoose.model(dbModel, UserSchema);
 
-
-const Model = mongoose.model('User', UserSchema);
+export {
+    UserSchema
+}
 export default Model;
-
-// let testUser = new Model({id: 'test', email: 'test@test.com', name: 'test'});
-// Model.findOne({id: 'test'}, function (err, doc) {
-//     if (!doc) {
-//         testUser.save();
-//     }
-// });
