@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
-import createIsFetchingReducer from '../../redux/ui/isFetching/reducer';
-import current from '../../redux/ui/current/reducer';
+// import current from '../../redux/ui/current/reducer';
+import createLoadingWithNamedType from '../../redux/api/Loader/reducer';
+import {clientModel} from './config';
 
 import {
     FETCH_USERS_PENDING,
@@ -22,7 +23,7 @@ const data = (state = {result: {}, entities: {}}, action) => {
 
 
 export default combineReducers({
-    isFetching: createIsFetchingReducer([FETCH_USERS_PENDING, FETCH_USERS_SUCCESS]),
-    current,
+    loading: createLoadingWithNamedType(clientModel),
+    // current,
     data,
-})
+});

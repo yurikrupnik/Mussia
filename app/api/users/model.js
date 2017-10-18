@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { model } from './config';
+import { dbModel } from './config';
 const UserSchema = new Schema({
     id: {
         type: String,
@@ -10,7 +10,7 @@ const UserSchema = new Schema({
     hashPassword: String,
 });
 
-const Model = mongoose.model(model, UserSchema);
+const Model = mongoose.model(dbModel, UserSchema);
 
 export {
     UserSchema

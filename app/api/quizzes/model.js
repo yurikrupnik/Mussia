@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { model } from './config';
+import { dbModel } from './config';
 
 const AnswerSchema = Schema({
     label: String
@@ -12,7 +12,7 @@ const QuizzesSchema = Schema({
     // expired: Date, // To Be Added
 });
 
-const Model = mongoose.model(model, QuizzesSchema);
+const Model = mongoose.model(dbModel, QuizzesSchema);
 
 export {
     QuizzesSchema,

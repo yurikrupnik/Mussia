@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { model } from './config';
+import { dbModel } from './config';
 import { QuizzesSchema, AnswerSchema } from '../quizzes/model';
 import { UserSchema } from '../users/model';
 
@@ -9,7 +9,7 @@ let ResultsSchema = Schema({
     answer_id: {type: Schema.Types.ObjectId, ref: AnswerSchema, index: true}
 });
 
-let Model = mongoose.model(model, ResultsSchema);
+let Model = mongoose.model(dbModel, ResultsSchema);
 
 export {
     ResultsSchema

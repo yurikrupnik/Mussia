@@ -1,5 +1,6 @@
 
 export default {
     url: '/users',
-    model: 'User'
+    dbModel: 'User',
+    clientModel: 'USERS'
 }

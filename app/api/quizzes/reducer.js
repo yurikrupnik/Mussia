@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
-import createIsFetchingReducer from '../../redux/ui/isFetching/reducer';
-import current from '../../redux/ui/current/reducer';
-
+// import createIsFetchingReducer from '../../redux/ui/isFetching/reducer';
+// import current from '../../redux/ui/current/reducer';
+import createLoadingWithNamedType from '../../redux/api/Loader/reducer';
+import {clientModel} from './config';
 import {
     GET_QUIZZES,
     GOT_QUIZZES,
@@ -28,9 +29,9 @@ const data = (state = {data: [], selected: {}}, action) => {
             return state;
     }
 };
-
+//
 export default combineReducers({
-    isFetching: createIsFetchingReducer([GET_QUIZZES, GOT_QUIZZES, GET_SELECTED_QUIZ, GOT_SELECTED_QUIZ]),
-    current,
+//     // current,
+    loading: createLoadingWithNamedType(clientModel),
     data,
 })
