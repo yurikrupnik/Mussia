@@ -10,12 +10,12 @@ import {
 
 const data = (state = {result: [], entities: {}}, action) => {
     switch (action.type) {
-        case FETCH_USERS_PENDING:
+        case FETCH_USERS_SUCCESS:
             return Object.assign({}, state, {
                 result: action.payload.result,
                 entities: action.payload.entities
             });
-        case FETCH_USERS_SUCCESS:
+        case FETCH_USERS_PENDING:
         default:
             return state;
     }
