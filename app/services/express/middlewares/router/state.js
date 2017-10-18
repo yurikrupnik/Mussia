@@ -12,10 +12,13 @@ const setStateOnLocals = (req, res, next, store) => () => {
 export default (req, res, next) => {
     let store = configureStore();
     if (req.isAuthenticated()) {
-        store.dispatch(setCurrent(req.user));
         store.dispatch(setSession(req.user.id));
+        store.dispatch(setCurrent(req.user));
         store.dispatch(fetchUsers())
-            .then(setStateOnLocals(req, res, next, store));
+            .then(setStateOnLocals(req, res, next, store))
+            .catch(err => {
+                console.log('err', err);
+            });
 
     } else {
         setStateOnLocals(req, res, next, store)();

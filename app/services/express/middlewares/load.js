@@ -1,5 +1,6 @@
 import logger from './logger';
 import setters from './setters';
+import session from './session';
 import webpack from './webpack';
 import serveStatics from './serveStatics';
 import bodyParser from './bodyParser';
@@ -10,6 +11,7 @@ import errors from './errors';
 
 export default (app) => {
     logger(app);
+    session(app);
     setters(app);
     webpack(app);
     serveStatics(app);

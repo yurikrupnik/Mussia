@@ -3,6 +3,6 @@ export default {
     countUrl: '/results/count',
     answerUrl: '/results/answer',
     selector: 'results', // reducer state to take from to put on smart components
-    dbModel: 'Result', // mongoose model name
+    dbModel: 'Results', // mongoose model name
     clientModel: 'RESULTS'
 }
