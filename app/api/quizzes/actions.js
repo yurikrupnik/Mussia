@@ -3,12 +3,11 @@ import {url, clientModel} from './config';
 import {handleHostAndPrefix} from '../utils';
 import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/api/Loader/actions';
+
 const loading = createLoading(clientModel);
 
 export const GOT_SELECTED_QUIZ = 'GOT_SELECTED_QUIZ';
 export const GET_SELECTED_QUIZ = 'GET_SELECTED_QUIZ';
-// export const GET_QUIZZES = 'GET_QUIZZES';
-// export const GOT_QUIZZES = 'GOT_QUIZZES';
 export const SET_SELECTED = 'SET_SELECTED';
 
 
@@ -27,17 +26,28 @@ const FAIL = 'FAIL';
 export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
 export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
 export const READ_QUIZZES_FAIL = `${READ}_${clientModel}_${FAIL}`;
-const read = (query = '') => dispatch => {
-    dispatch({type: READ_QUIZZES_PENDING});
+const read = (params = {}) => dispatch => {
+    dispatch({type: READ_QUIZZES_PENDING, params});
     dispatch(loading.toggle());
     return axios({
         method: 'get',
         url: `${handleHostAndPrefix()}${url}`,
     })
-        .then(res => {
-            dispatch({type: READ_QUIZZES_SUCCESS, payload: res.data});
+        .then(res => { // handle normalize
+            const _id = '_id';
+            const {data} = res;
+            return {
+                result: data.map(val => val[_id]),
+                entities: data.reduce((acc, next) => {
+                    acc[next[_id]] = next;
+                    return acc;
+                }, {})
+            };
+        })
+        .then(payload => {
+            dispatch({type: READ_QUIZZES_SUCCESS, payload});
             dispatch(loading.toggle());
-            return res.data;
+            return payload;
         })
         .catch(error => {
             dispatch({type: READ_QUIZZES_FAIL, error});
@@ -51,7 +61,7 @@ const read = (query = '') => dispatch => {
 export const DELETE_QUIZZES_PENDING = `${DELETE}_${clientModel}_${PENDING}`;
 export const DELETE_QUIZZES_SUCCESS = `${DELETE}_${clientModel}_${SUCCESS}`;
 export const DELETE_QUIZZES_FAIL = `${DELETE}_${clientModel}_${FAIL}`;
-const deleteQuiz = params => dispatch => {
+const remove = params => dispatch => {
     dispatch({type: DELETE_QUIZZES_PENDING, payload: params});
     dispatch(loading.toggle());
     return axios({
@@ -147,7 +157,7 @@ const update = params => dispatch => {
 
 export {
     read,
-    deleteQuiz,
+    remove,
     create,
     update,
     // setSelectedQuiz

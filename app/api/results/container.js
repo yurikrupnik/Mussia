@@ -26,21 +26,18 @@ class Container extends Component {
     }
 
     handleChange(event, index, value) {
-        const {actions, quizzes} = this.props;
-        const {data} = quizzes;
-        const selected = data[index];
-        const answers = selected.answers ? selected.answers : [];
-        actions.getCount(answers).then(() => actions.setSelectedQuiz(selected));
+        // const {actions, quizzes} = this.props;
+        // const {data} = quizzes;
+        // const selected = data[index];
+        // const answers = selected.answers ? selected.answers : [];
+        // actions.getCount(answers).then(() => actions.setSelectedQuiz(selected));
     }
 
     handleClick() {
         const {history, quizzes, actions} = this.props;
         const {selected} = quizzes;
         // history.push('/quiz/' + selected._id, selected);
-        actions.fetchUsers().then(res => {
-            console.log('users', res);
-
-        })
+        actions.fetchUsers();
     }
 
     render() {

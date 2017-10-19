@@ -2,8 +2,6 @@ import {bindActionCreators} from 'redux';
 import * as actions from './actions';
 
 const mapToProps = (state, ownProps) => {
-    console.log('ownProps', ownProps);
-    console.log('state', state);
     return state.api.quizzes.data;
 };
 

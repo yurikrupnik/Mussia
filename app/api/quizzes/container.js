@@ -13,14 +13,8 @@ class Container extends Component {
     }
 
     componentDidMount() {
-        const {actions, quizzes, match} = this.props;
-        console.log('this.props', this.props);
-
-        // actions.read();
-        // const {selected} = quizzes;
-        // if (isEmpty(selected)) {
-        //     actions.getQuizById(match.params.quiz_id);
-        // }
+        const {actions} = this.props;
+        actions.read();
     }
 
     render() {
@@ -48,4 +42,4 @@ const combinedDispatchActions = dispatch => ({
     actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
 });
 
-export default connect(combinedMapTpProps, dispatchActions)(withRouter(Container));
+export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Container));

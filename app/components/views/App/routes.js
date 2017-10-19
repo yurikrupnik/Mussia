@@ -9,8 +9,14 @@ import Settings from '../Settings';
 import NoMatch from '../NoMatch';
 import Admin from '../admin';
 
-import Quiz from '../../Quiz';
+// import Quiz from '../../Quiz';
 import Quizzes from '../quizzes';
+
+import withLayout from '../../HOC/Layout';
+
+// export default withLayout(connect(function (state) {
+//     return {user : state.users};
+// })(Settings), routes);
 
 const routes = [
     {
@@ -26,14 +32,17 @@ const routes = [
     {
         path: '/results',
         component: (props) => {
-            return <ResultsContainer><Votes/><Hello/></ResultsContainer>
+            return <div>results will be here</div>
+            // return <ResultsContainer><Votes/><Hello/></ResultsContainer>
         },
     },
     {
         path: '/quizzes',
         // component: Quizzes
         component: (props) => {
-            return <QuizzesContainer><Quiz/></QuizzesContainer>;
+            console.log('route quizzes props', props);
+
+            return <QuizzesContainer><Quizzes/></QuizzesContainer>;
         },
     },
     {
