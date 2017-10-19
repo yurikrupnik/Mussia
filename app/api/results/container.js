@@ -19,9 +19,9 @@ class Container extends Component {
         // actions.fetchUsers().then(function (res) {
         //     console.log('res', res);
 
-            actions.getQuizzes()
-                .then(res => actions.getCount(res[0].answers)
-                    .then(() => actions.setSelectedQuiz(res[0])));
+            // actions.read()
+                // .then(res => actions.getCount(res[0].answers)
+                //     .then(() => actions.setSelectedQuiz(res[0])));
         // });
     }
 

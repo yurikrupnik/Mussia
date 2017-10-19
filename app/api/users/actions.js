@@ -3,6 +3,7 @@ import {handleHostAndPrefix} from '../utils';
 import {url, clientModel} from './config';
 import axios from 'axios';
 import {normalize, schema} from 'normalizr';
+import _ from 'lodash';
 
 import createLoading from '../../redux/api/Loader/actions';
 const loading = createLoading(clientModel);
@@ -66,8 +67,11 @@ const fetchUsers = params => dispatch => {
         url: `${handleHostAndPrefix()}${url}`
     })
         .then(res => { // handle normalize
-            const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
-            const userListSchema = new schema.Entity('users', userSchema);
+            const userSchema = new schema.Entity(clientModel.toLowerCase(), {}, {
+                idAttribute: 'id'
+            });
+            // const userListSchema = [userSchema];
+            const userListSchema =  [userSchema];
             return normalize(res.data, userListSchema);
         })
         .then(payload => {

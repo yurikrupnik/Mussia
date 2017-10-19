@@ -3,54 +3,152 @@ import {url, clientModel} from './config';
 import {handleHostAndPrefix} from '../utils';
 import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/api/Loader/actions';
-
 const loading = createLoading(clientModel);
 
 export const GOT_SELECTED_QUIZ = 'GOT_SELECTED_QUIZ';
 export const GET_SELECTED_QUIZ = 'GET_SELECTED_QUIZ';
-export const GET_QUIZZES = 'GET_QUIZZES';
-export const GOT_QUIZZES = 'GOT_QUIZZES';
+// export const GET_QUIZZES = 'GET_QUIZZES';
+// export const GOT_QUIZZES = 'GOT_QUIZZES';
 export const SET_SELECTED = 'SET_SELECTED';
 
-const getQuizzes = (query = '') => dispatch => {
-    dispatch({type: GET_QUIZZES});
+
+
+const READ = 'READ';
+const DELETE = 'DELETE';
+const UPDATE = 'UPDATE';
+const CREATE = 'CREATE';
+
+// did not like redux-promise, building my own with fast creating api actions
+const PENDING = 'PENDING';
+const SUCCESS = 'SUCCESS';
+const FAIL = 'FAIL';
+
+// ===================== READ
+export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
+export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
+export const READ_QUIZZES_FAIL = `${READ}_${clientModel}_${FAIL}`;
+const read = (query = '') => dispatch => {
+    dispatch({type: READ_QUIZZES_PENDING});
     dispatch(loading.toggle());
     return axios({
         method: 'get',
         url: `${handleHostAndPrefix()}${url}`,
     })
         .then(res => {
-            dispatch({type: GOT_QUIZZES, payload: res.data});
+            dispatch({type: READ_QUIZZES_SUCCESS, payload: res.data});
             dispatch(loading.toggle());
             return res.data;
         })
         .catch(error => {
-            // dispatch({type: FETCH_USERS_FAIL, error});
+            dispatch({type: READ_QUIZZES_FAIL, error});
             dispatch(loading.toggle());
             dispatch(errorReceived(error));
             return error;
         });
 };
 
-const getQuizById = (id = '') => dispatch => {
-    dispatch({type: GET_SELECTED_QUIZ, payload: id});
+// ============ delete
+export const DELETE_QUIZZES_PENDING = `${DELETE}_${clientModel}_${PENDING}`;
+export const DELETE_QUIZZES_SUCCESS = `${DELETE}_${clientModel}_${SUCCESS}`;
+export const DELETE_QUIZZES_FAIL = `${DELETE}_${clientModel}_${FAIL}`;
+const deleteQuiz = params => dispatch => {
+    dispatch({type: DELETE_QUIZZES_PENDING, payload: params});
+    dispatch(loading.toggle());
     return axios({
         method: 'get',
-        url: `${handleHostAndPrefix()}${url}/${id}`
+        url: `${handleHostAndPrefix()}${url}`
     })
-        .then(res => dispatch({type: GOT_SELECTED_QUIZ, payload: res.data}))
+        .then(res => { // handle normalize
+            // const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
+            // const userListSchema = new schema.Array(userSchema);
+            // return normalize(res.data, userListSchema);
+            return res;
+        })
+        .then(res => {
+            dispatch({
+                type: DELETE_QUIZZES_SUCCESS, payload: res
+            });
+            dispatch(loading.toggle());
+            return res;
+        })
         .catch(error => {
-            // dispatch({type: FETCH_USERS_FAIL, error});
+            dispatch({type: DELETE_QUIZZES_FAIL, error});
             dispatch(loading.toggle());
             dispatch(errorReceived(error));
             return error;
         });
 };
 
-const setSelectedQuiz = (selected) => dispatch => dispatch({type: SET_SELECTED, payload: selected});
+export const CREATE_QUIZZES_PENDING = `${CREATE}_${clientModel}_${PENDING}`;
+export const CREATE_QUIZZES_SUCCESS = `${CREATE}_${clientModel}_${SUCCESS}`;
+export const CREATE_QUIZZES_FAIL = `${CREATE}_${clientModel}_${FAIL}`;
+const create = params => dispatch => {
+    dispatch({type: CREATE_QUIZZES_PENDING, payload: params});
+    dispatch(loading.toggle());
+    return axios({
+        method: 'get',
+        url: `${handleHostAndPrefix()}${url}`
+    })
+        .then(res => { // handle normalize
+            // const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
+            // const userListSchema = new schema.Array(userSchema);
+            // return normalize(res.data, userListSchema);
+            return res;
+        })
+        .then(res => {
+            dispatch({
+                type: CREATE_QUIZZES_SUCCESS, payload: res
+            });
+            dispatch(loading.toggle());
+            return res;
+        })
+        .catch(error => {
+            dispatch({type: CREATE_QUIZZES_FAIL, error});
+            dispatch(loading.toggle());
+            dispatch(errorReceived(error));
+            return error;
+        });
+};
+
+export const UPDATE_QUIZZES_PENDING = `${UPDATE}_${clientModel}_${PENDING}`;
+export const UPDATE_QUIZZES_SUCCESS = `${UPDATE}_${clientModel}_${SUCCESS}`;
+export const UPDATE_QUIZZES_FAIL = `${UPDATE}_${clientModel}_${FAIL}`;
+const update = params => dispatch => {
+    dispatch({type: UPDATE_QUIZZES_PENDING, payload: params});
+    dispatch(loading.toggle());
+    return axios({
+        method: 'get',
+        url: `${handleHostAndPrefix()}${url}`
+    })
+        .then(res => { // handle normalize
+            // const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
+            // const userListSchema = new schema.Array(userSchema);
+            // return normalize(res.data, userListSchema);
+            return res;
+        })
+        .then(res => {
+            dispatch({
+                type: UPDATE_QUIZZES_SUCCESS, payload: res
+            });
+            dispatch(loading.toggle());
+            return res;
+        })
+        .catch(error => {
+            dispatch({type: UPDATE_QUIZZES_FAIL, error});
+            dispatch(loading.toggle());
+            dispatch(errorReceived(error));
+            return error;
+        });
+};
+
+// current = id
+
+// selected = [id]
 
 export {
-    getQuizzes,
-    getQuizById,
-    setSelectedQuiz
+    read,
+    deleteQuiz,
+    create,
+    update,
+    // setSelectedQuiz
 }

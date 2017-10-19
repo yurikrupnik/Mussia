@@ -15,11 +15,14 @@ class Container extends Component {
     }
 
     componentDidMount() {
-        const { actions, quizzes, match } = this.props;
-        const { selected } = quizzes;
-        if (isEmpty(selected)) {
-            actions.getQuizById(match.params.quiz_id);
-        }
+        actions.read();
+        // const { actions, quizzes, match } = this.props;
+        // const { selected } = quizzes;
+        // if (isEmpty(selected)) {
+        // }
+        // else {
+        //     return <Redirect to='/register'/>;
+        // }
     }
 
     render() {
@@ -40,11 +43,12 @@ class Container extends Component {
 
 const combinedMapTpProps = state => ({
     quizzes: quizzesMapToProps(state),
-    results: resultsMapToProps(state)
+    // results: resultsMapToProps(state)
 });
 
 const combinedDispatchActions = dispatch => ({
-    actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, quizzesActions), dispatch)
 });
 
+// passing routes to the view container which is made out of dumb components
 export default withLayout(connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Container)), routes);
