@@ -1,5 +1,5 @@
 // import {LOADING} from './actions';
-
+//
 function createLoadingWithNamedType(name = '') {
     return function loading(state = false, action) {
         switch (action.type) {

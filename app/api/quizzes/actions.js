@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {received_error} from '../../redux/errors/actions';
 import {url, clientModel} from './config';
 import {handleHostAndPrefix} from '../utils';
-
+import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/api/Loader/actions';
+
 const loading = createLoading(clientModel);
 
 export const GOT_SELECTED_QUIZ = 'GOT_SELECTED_QUIZ';
@@ -24,7 +24,12 @@ const getQuizzes = (query = '') => dispatch => {
             dispatch(loading.toggle());
             return res.data;
         })
-        .catch(received_error(dispatch));
+        .catch(error => {
+            // dispatch({type: FETCH_USERS_FAIL, error});
+            dispatch(loading.toggle());
+            dispatch(errorReceived(error));
+            return error;
+        });
 };
 
 const getQuizById = (id = '') => dispatch => {
@@ -34,7 +39,12 @@ const getQuizById = (id = '') => dispatch => {
         url: `${handleHostAndPrefix()}${url}/${id}`
     })
         .then(res => dispatch({type: GOT_SELECTED_QUIZ, payload: res.data}))
-        .catch(received_error(dispatch));
+        .catch(error => {
+            // dispatch({type: FETCH_USERS_FAIL, error});
+            dispatch(loading.toggle());
+            dispatch(errorReceived(error));
+            return error;
+        });
 };
 
 const setSelectedQuiz = (selected) => dispatch => dispatch({type: SET_SELECTED, payload: selected});

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {url, countUrl, answerUrl, clientModel} from './config';
-import { received_error } from '../../redux/errors/actions';
 import {checkStatus, parseJSON, handleHostAndPrefix} from '../utils';
 import { normalize, schema } from 'normalizr';
 import createLoading from '../../redux/api/Loader/actions';
+import {errorReceived} from '../../redux/errors/actions';
 const loading = createLoading(clientModel);
 
 export const GET_COUNT = 'GET_COUNT';
@@ -32,7 +32,11 @@ const getCount = (selected = [], callback) => dispatch => {
             });
             dispatch(loading.toggle());
         })
-        .catch(received_error(dispatch));
+        .catch(error => {
+            // dispatch({type: FETCH_USERS_FAIL, error});
+            dispatch(loading.toggle());
+            dispatch(errorReceived(error));
+        });
 };
 
 const getAnswerId = (params) => dispatch => {
@@ -47,7 +51,11 @@ const getAnswerId = (params) => dispatch => {
             dispatch({type: GOT_ANSWER, payload: res});
             dispatch(loading.toggle());
         })
-        .catch(received_error(dispatch));
+        .catch(error => {
+            // dispatch({type: FETCH_USERS_FAIL, error});
+            dispatch(loading.toggle());
+            dispatch(errorReceived(error));
+        });
 };
 
 export {
