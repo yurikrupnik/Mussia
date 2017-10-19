@@ -4,7 +4,7 @@ import {Link, withRouter, Redirect} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import routes from './routes';
-import withLayout from '../../HOC/Layout'
+import withRoutes from '../../HOC/withRoutes';
 
 class Admin extends Component {
     render() {
@@ -24,7 +24,6 @@ class Admin extends Component {
 }
 
 
-
-export default withLayout(connect(function (state) {
-    return {user : state.users};
+export default withRoutes(connect(function (state) {
+    return {user: state.users};
 })(Admin), routes);

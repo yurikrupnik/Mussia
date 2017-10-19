@@ -1,10 +1,11 @@
+// React component - responsible for init data fetch and
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {isEmpty} from 'lodash';
-import {dispatchActions, mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
-import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../api/results/selectors';
+import {dispatchActions, mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../../api/quizzes/selectors';
+import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../../api/results/selectors';
 
 class Container extends Component {
 
@@ -42,4 +43,4 @@ const combinedDispatchActions = dispatch => ({
     actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
 });
 
-export default connect(combinedMapTpProps, combinedDispatchActions)(withRouter(Container));
+export default connect(combinedMapTpProps, combinedDispatchActions)(Container);

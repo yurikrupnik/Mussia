@@ -1,10 +1,22 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import withLayout from '../../HOC/Layout';
+import withRoutes from '../../HOC/withRoutes';
 import routes from './routes';
+import {connect} from 'react-redux';
+// import Container from './container';
+import List from './list';
+
+import {
+    dispatchActions,
+    mapToProps as quizzesMapToProps,
+    actions as quizzesActions
+} from '../../../api/quizzes/selectors';
+import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../../api/results/selectors';
+// import {mapToProps, dispatchActions} from '../../../api/quizzes/selectors';
 
 
 class Quiz extends Component {
@@ -90,7 +102,7 @@ class Quiz extends Component {
     }
 
     render() {
-        // const {quizzes} = this.props;
+        const {quizzes} = this.props;
         // const {form} = this.state;
         // const {selected} = quizzes;
 
@@ -103,4 +115,44 @@ class Quiz extends Component {
     }
 }
 
-export default withLayout(Quiz, routes);
+
+const combinedMapTpProps = state => ({
+    quizzes: quizzesMapToProps(state),
+    results: resultsMapToProps(state)
+});
+
+const combinedDispatchActions = dispatch => ({
+    actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
+});
+
+class Container extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        const {actions} = this.props;
+        actions.read();
+    }
+
+    render() {
+        const {children} = this.props;
+        const childrenWithProps = React.Children.map(children,
+            (child) => React.cloneElement(child, {
+                ...this.props // pass all for all children - here can just pass selected
+            })
+        );
+        return (
+            <div className="container">
+                {childrenWithProps}
+            </div>
+        );
+    }
+}
+
+Container = connect(combinedMapTpProps, combinedDispatchActions)(Container);
+
+// const WithRoutes = connect(mapToProps, dispatchActions)(Quiz);
+// const WithRoutes = <Con>{Quiz}</Con>;
+export default withRoutes(Container, routes);
+// export default WithRoutes;

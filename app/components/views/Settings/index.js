@@ -4,7 +4,7 @@ import {Link, withRouter, Redirect} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import routes from './routes';
-import withLayout from '../../HOC/Layout';
+import withRoutes from '../../HOC/withRoutes';
 
 class Settings extends Component {
     render() {
@@ -31,4 +31,4 @@ class Settings extends Component {
 }
 
 
-export default withLayout(connect(function (state) {return {users : state.api.users}})(Settings), routes);
+export default withRoutes(connect(function (state) {return {users : state.api.users}})(Settings), routes);
