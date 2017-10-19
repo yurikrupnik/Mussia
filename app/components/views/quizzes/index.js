@@ -26,8 +26,6 @@ import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../
 class Quiz extends Component {
     constructor(props) {
         super(props);
-        console.log('Quiz props', props);
-
         this.handleChange = this.handleChange.bind(this);
         this.state = {
             form: [

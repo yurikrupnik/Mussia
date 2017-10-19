@@ -11,7 +11,7 @@ const routes = [
         }
     },
     {
-        path: '/quizzes/edit/:quiz_id',
+        path: '/quizzes/:quiz_id',
         component: (props) => {
             return <div>Edit</div>
         }

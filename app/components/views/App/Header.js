@@ -1,41 +1,16 @@
 import React, {Component} from 'react';
-import {Link, withRouter, Redirect} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-
-
-class Login extends Component {
-    // static muiName = 'FlatButton';
-
-    render() {
-        return (
-
-            <FlatButton children={<Link to="/register">Login</Link>} label="Login"/>
-        );
-    }
-}
-
-class Item extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <MenuItem primaryText="Refresh" onClick={this.handleClick}/>
-        )
-    }
-}
-
+import {mapToProps as sessionMapToProps} from '../../../redux/config/session/selectors';
+import routes from './routes';
 
 class MenuRight extends Component {
-    static muiName = 'IconButton';
-
     constructor(props) {
         super(props);
     }
@@ -106,38 +81,31 @@ class MenuLeft extends Component {
     }
 
 }
-function handlePathname(str) {
-    return str.replace('/', '')
-}
-
-import _ from 'lodash'
-
-import routes from './routes';
 
 class Header extends Component {
 
+    static propTypes = {
+        session: PropTypes.string.isRequired,
+        history: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+    };
+
     constructor(props, context) {
-        super(props);
-        this.state = {
-            redirect: !!props.user
+        super(props, context);
+    }
+
+    componentDidMount() {
+        const {session, history, location} = this.props;
+        const {pathname} = location;
+        if (!session && pathname !== '/register') {
+            history.push('/register');
         }
     }
 
-    goto() {
-        let {user, history} = this.props;
-        history.push('/register');
-    }
-
     render() {
-        const {user, location, history} = this.props;
+        const {location} = this.props;
         const {pathname} = location;
         const title = `${pathname.slice(1, 2).toUpperCase()}${pathname.slice(2)}`;
-        const {redirect} = this.state;
-
-        // todo put it back
-        // if (!redirect && title !== 'register') {
-        //     return <Redirect to='/register'/>;
-        // }
 
         return (
             <div>
@@ -152,4 +120,10 @@ class Header extends Component {
 }
 
 
-export default withRouter(connect()(Header));
+function composedMapToProps(state) {
+    return {
+        session: sessionMapToProps(state)
+    }
+}
+
+export default withRouter(connect(composedMapToProps)(Header));

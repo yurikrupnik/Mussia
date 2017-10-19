@@ -1,10 +1,5 @@
 import React from 'react';
-import {Route, Switch, Link} from 'react-router-dom';
-import ResultsContainer from '../../../api/results/container';
-import QuizzesContainer from '../quizzes/container';
 import AuthContainer from '../../../api/auth/container';
-import Votes from '../../Votes';
-import Hello from '../../Hello';
 import Settings from '../Settings';
 import NoMatch from '../NoMatch';
 import Admin from '../admin';
