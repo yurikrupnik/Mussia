@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import withMaterial from '../../HOC/Material';
-import withProvider from '../../HOC/Provider';
-import withRoutes from '../../HOC/withRoutes';
-import Header from './Header';
+import withMaterial from './../HOC/Material';
+import withProvider from './../HOC/Provider';
+import withRoutes from './../HOC/withRoutes';
+import Header from './header';
 import routes from './routes';
 
 class App extends Component {
@@ -19,6 +19,5 @@ class App extends Component {
         return <Root />
     }
 }
-
 
 export default App;

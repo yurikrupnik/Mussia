@@ -1,9 +1,9 @@
 import React from 'react';
-import AuthContainer from '../../../api/auth/container';
-import Settings from '../Settings';
-import NoMatch from '../NoMatch';
-import Admin from '../admin';
-import Quizzes from '../quizzes';
+import AuthContainer from './../../api/auth/container';
+import Settings from './Settings';
+import NoMatch from './NoMatch';
+import Admin from './admin';
+import Quizzes from './quizzes';
 
 const routes = [
     {
