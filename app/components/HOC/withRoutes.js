@@ -18,11 +18,11 @@ export default (WrappedComponent, routes = []) => {
                     <WrappedComponent />
                     <Switch>
                         {routes.map((route, i) => (
-                            <RouteWithSubRoutes key={i} {...route}/>
+                            <RouteWithSubRoutes key={i} {...route} {...this.props}/>
                         ))}
                     </Switch>
                 </div>
-            )
-        }
-    }
-};;
+            );
+        };
+    };
+};

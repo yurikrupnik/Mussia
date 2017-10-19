@@ -3,6 +3,14 @@ import React from 'react';
 
 const routes = [
     {
+        path: '/quizzes/create',
+        component: (props) => {
+            console.log('create props', props);
+
+            return <div>Create</div>
+        }
+    },
+    {
         path: '/quizzes/edit/:quiz_id',
         component: (props) => {
             return <div>Edit</div>

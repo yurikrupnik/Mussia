@@ -5,10 +5,13 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import withRoutes from '../../HOC/withRoutes';
+import withContainer from '../../HOC/withContainer';
 import routes from './routes';
 import {connect} from 'react-redux';
 // import Container from './container';
 import List from './list';
+import {Link, withRouter, Redirect} from 'react-router-dom';
+import Spinner from '../../Spinner';
 
 import {
     dispatchActions,
@@ -17,6 +20,7 @@ import {
 } from '../../../api/quizzes/selectors';
 import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../../api/results/selectors';
 // import {mapToProps, dispatchActions} from '../../../api/quizzes/selectors';
+
 
 
 class Quiz extends Component {
@@ -66,12 +70,17 @@ class Quiz extends Component {
         }
     }
 
+    componentDidMount() {
+        const {actions} = this.props;
+        actions.read();
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         // const {quizzes} = this.props;
         // const {form} = this.state;
         // const {selected} = quizzes;
-        console.log('this.props', this.props);
+        // console.log('this.props', this.props);
         this.props.actions.read();
         // this.props.actions.getAnswerId({quiz_id: selected._id, user_id: 'SJlcrw_Q3W'});
         // console.log('this.state.form', this.state.form);
@@ -105,10 +114,30 @@ class Quiz extends Component {
         const {quizzes} = this.props;
         // const {form} = this.state;
         // const {selected} = quizzes;
+        // console.log('quizzes', quizzes);
+
+        // if (quizzes.loading) {
+        //     return <Spinner/>;
+            // or - simple function - can add logic and styles
+            // return Spinner();
+        // }
+
 
         return (
             <div>
                 <h2>hello from quizzes</h2>
+                <ul>
+                    <li>
+                        <Link to="/quizzes/create">
+                            Create Quiz
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/settings/edit/:id">
+                            Edit
+                        </Link>
+                    </li>
+                </ul>
                 <RaisedButton label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
             </div>
         )
@@ -125,34 +154,4 @@ const combinedDispatchActions = dispatch => ({
     actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
 });
 
-class Container extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        const {actions} = this.props;
-        actions.read();
-    }
-
-    render() {
-        const {children} = this.props;
-        const childrenWithProps = React.Children.map(children,
-            (child) => React.cloneElement(child, {
-                ...this.props // pass all for all children - here can just pass selected
-            })
-        );
-        return (
-            <div className="container">
-                {childrenWithProps}
-            </div>
-        );
-    }
-}
-
-Container = connect(combinedMapTpProps, combinedDispatchActions)(Container);
-
-// const WithRoutes = connect(mapToProps, dispatchActions)(Quiz);
-// const WithRoutes = <Con>{Quiz}</Con>;
-export default withRoutes(Container, routes);
-// export default WithRoutes;
+export default withRoutes(connect(combinedMapTpProps, combinedDispatchActions)(Quiz), routes);
