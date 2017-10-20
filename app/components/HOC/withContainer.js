@@ -1,24 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, isValidElement} from 'react';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import withRoutes from './withRoutes';
 
-export default (WrappedComponent) => {
-    return class extends Component {
-        constructor(props) {
-            super(props);
-            console.log('withContainer props', props);
-
-        }
-
-        componentDidMount() {
-            const {actions} = this.props;
-            actions.read();
-        }
-
-        render() {
-            return (
-                <div>
-                    <WrappedComponent {...this.props}/>
-                </div>
-            )
-        }
+const withContainerAndLayout = (Wrapper, combinedMapTpProps = {}, combinedDispatchActions = {}, routes = []) => {
+    if (!Array.isArray(routes)) {
+        throw new Error('routes must be an Array')
     }
-};;
+
+    if (isValidElement(Wrapper)) { // if was called as a component via <Wrapper />
+        throw new Error('must pass functions to withContainerAndLayout')
+    }
+    return withRoutes(withRouter(connect(combinedMapTpProps, combinedDispatchActions)(Wrapper)), routes);
+};
+
+export default withContainerAndLayout;

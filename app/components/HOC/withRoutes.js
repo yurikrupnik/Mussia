@@ -15,10 +15,10 @@ export default (WrappedComponent, routes = []) => {
         render() {
             return (
                 <div>
-                    <WrappedComponent />
+                    <WrappedComponent routes={routes}/>
                     <Switch>
                         {routes.map((route, i) => (
-                            <RouteWithSubRoutes key={i} {...route} {...this.props}/>
+                            <RouteWithSubRoutes key={i} {...route} />
                         ))}
                     </Switch>
                 </div>

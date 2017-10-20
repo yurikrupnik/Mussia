@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, isValidElement} from 'react';
+import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
@@ -7,12 +8,10 @@ import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import withRoutes from '../../HOC/withRoutes';
 import withContainer from '../../HOC/withContainer';
 import routes from './routes';
-import {connect} from 'react-redux';
+
 // import Container from './container';
-import List from './list';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import Spinner from '../../Spinner';
-
 import {
     dispatchActions,
     mapToProps as quizzesMapToProps,
@@ -21,9 +20,28 @@ import {
 import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../../api/results/selectors';
 // import {mapToProps, dispatchActions} from '../../../api/quizzes/selectors';
 
-
+import List from './list';
 
 class Quiz extends Component {
+
+    static propTypes = {
+        quizzes: PropTypes.shape({
+            loading: PropTypes.bool.isRequired,
+            data: PropTypes.shape({
+                entities: PropTypes.object.isRequired,
+                result: PropTypes.array.isRequired,
+                params: PropTypes.object.isRequired
+            })
+        }),
+        actions: PropTypes.objectOf(PropTypes.func),
+        history: PropTypes.object.isRequired,
+        location: PropTypes.shape({
+            pathname: PropTypes.string.isRequired
+        }),
+        match: PropTypes.object.isRequired,
+
+    };
+
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -69,8 +87,12 @@ class Quiz extends Component {
     }
 
     componentDidMount() {
-        const {actions} = this.props;
-        actions.read();
+        const {actions, quizzes} = this.props;
+        const {loading, data} = quizzes;
+        const {entities, result} = data;
+        // if (!result.length) {
+        actions.read({love: true});
+        // }
     }
 
     handleSubmit(e) {
@@ -109,19 +131,17 @@ class Quiz extends Component {
     }
 
     render() {
-        const {quizzes} = this.props;
-        // const {form} = this.state;
-        // const {selected} = quizzes;
-        // console.log('quizzes', quizzes);
+        const {quizzes, location} = this.props;
+        const {pathname} = location;
+        const {loading, data} = quizzes;
+        const {entities, result} = data;
+        console.log('this.props', this.props);
 
-        // if (quizzes.loading) {
-        //     return <Spinner/>;
-            // or - simple function - can add logic and styles
-            // return Spinner();
-        // }
+        if (loading) {
+            return <Spinner/>;
+        }
 
-
-        return (
+        const Header = (
             <div>
                 <h2>hello from quizzes</h2>
                 <ul>
@@ -130,13 +150,18 @@ class Quiz extends Component {
                             Create Quiz
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/settings/edit/:id">
-                            Edit
-                        </Link>
-                    </li>
                 </ul>
                 <RaisedButton label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
+                {result.map((id) => {
+                    return <div key={id}>{entities[id].label}</div>
+                })}
+            </div>
+        );
+
+        return (
+            <div>
+                {pathname.indexOf('/', 1) > -1 ? null : Header}
+                {this.props.children}
             </div>
         )
     }
@@ -145,11 +170,12 @@ class Quiz extends Component {
 
 const combinedMapTpProps = state => ({
     quizzes: quizzesMapToProps(state),
-    results: resultsMapToProps(state)
 });
 
 const combinedDispatchActions = dispatch => ({
-    actions: bindActionCreators(Object.assign({}, quizzesActions, resultsActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, {
+        read: quizzesActions.read
+    }), dispatch)
 });
 
-export default withRoutes(connect(combinedMapTpProps, combinedDispatchActions)(Quiz), routes);
+export default withContainer(Quiz, combinedMapTpProps, combinedDispatchActions, routes);

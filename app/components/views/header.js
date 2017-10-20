@@ -42,7 +42,6 @@ class MenuRight extends Component {
 
 }
 class MenuLeft extends Component {
-    // static muiName = 'IconButton';
 
     constructor(props) {
         super(props);
