@@ -163,7 +163,7 @@ class Quiz extends Component {
                 }}/>
                 {result.map((id) => {
                     return <div key={id} className="row">
-                        <div className="col-lg-9">{entities[id].label}</div>
+                        <div className="col-lg-10">{entities[id].label}</div>
                         <div className="col-lg-1">
                             <RaisedButton onClick={(e) => {
 
@@ -172,10 +172,12 @@ class Quiz extends Component {
                             } label={'Delete'} fullWidth={true} />
                         </div>
                         <div className="col-lg-1">
-                            <RaisedButton label={'Copy'} fullWidth={true} />
-                        </div>
-                        <div className="col-lg-1">
-                            <RaisedButton label={'Update'} fullWidth={true} />
+                            <RaisedButton onClick={e => {
+                                let item = Object.assign({}, entities[result[0]]);
+                                item.label = 'nirr';
+                                actions.update(item);
+                            }
+                            } label={'Update first'} fullWidth={true} />
                         </div>
                     </div>
                 })}

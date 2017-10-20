@@ -52,17 +52,6 @@ const read = (params = {}) => dispatch => {
         method: 'get',
         url: `${handleHostAndPrefix()}${url}`,
     })
-        // .then(res => { // handle normalize
-        //     const _id = '_id';
-        //     const {data} = res;
-        //     return {
-        //         result: data.map(val => val[_id]),
-        //         entities: data.reduce((acc, next) => {
-        //             acc[next[_id]] = next;
-        //             return acc;
-        //         }, {})
-        //     };
-        // })
         .then(res => {
             dispatch({type: READ_QUIZZES_SUCCESS, payload: res.data});
             dispatch(loading.toggle());
@@ -138,17 +127,12 @@ const update = params => dispatch => {
     dispatch(loading.toggle());
     return axios({
         method: 'put',
-        url: `${handleHostAndPrefix()}${url}`
+        url: `${handleHostAndPrefix()}${url}/${params._id}`,
+        data: params
     })
-        .then(res => { // handle normalize
-            // const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
-            // const userListSchema = new schema.Array(userSchema);
-            // return normalize(res.data, userListSchema);
-            return res;
-        })
         .then(res => {
             dispatch({
-                type: UPDATE_QUIZZES_SUCCESS, payload: res
+                type: UPDATE_QUIZZES_SUCCESS, payload: res.data
             });
             dispatch(loading.toggle());
             return res;

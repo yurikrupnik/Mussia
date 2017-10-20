@@ -26,15 +26,19 @@ import {
     READ_QUIZZES_SCHEMA_FAIL
 } from './actions';
 
-// export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
-// export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
-// export const READ_QUIZZES_FAIL = `${READ}_${clientModel}_${FAIL}`;
 
 const data = (state = {result: [], entities: {}, schema: {}}, action) => {
     switch (action.type) {
         case CREATE_QUIZZES_SUCCESS:
             return Object.assign({}, state, {
                 result: state.result.concat(action.payload._id),
+                entities: {
+                    ...state.entities,
+                    [action.payload._id]: action.payload
+                }
+            });
+        case UPDATE_QUIZZES_SUCCESS:
+            return Object.assign({}, state, {
                 entities: {
                     ...state.entities,
                     [action.payload._id]: action.payload
@@ -50,8 +54,6 @@ const data = (state = {result: [], entities: {}, schema: {}}, action) => {
             });
         case READ_QUIZZES_SCHEMA_SUCCESS:
             return Object.assign({}, state, {schema: action.payload});
-        case UPDATE_QUIZZES_SUCCESS:
-            return state;
         case READ_QUIZZES_FAIL:
         case READ_QUIZZES_PENDING:
         case DELETE_QUIZZES_FAIL:
