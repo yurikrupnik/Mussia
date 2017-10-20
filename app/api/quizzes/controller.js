@@ -1,5 +1,7 @@
 import Model from './model';
 
+const getSchema = (request, response) => response.json(Model.schema);
+
 const list = (request, response) => {
     Model.find()
         .then(res => response.json(res))
@@ -26,6 +28,15 @@ const create = (request, response) => {
 
 const update = (request, response) => {
     console.log('request.params', request.params);
+    // Tank.findById(id, function (err, tank) {
+    //     if (err) return handleError(err);
+    //
+    //     tank.size = 'large';
+    //     tank.save(function (err, updatedTank) {
+    //         if (err) return handleError(err);
+    //         res.send(updatedTank);
+    //     });
+    // });
     Model.findById(request.params, function (err, doc) {
         if (err) {
             return response.json(err);
@@ -52,6 +63,7 @@ const removeByIds = (request, response) => {
 };
 
 export {
+    getSchema,
     list,
     get,
     create,

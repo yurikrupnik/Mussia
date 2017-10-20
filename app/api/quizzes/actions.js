@@ -3,24 +3,43 @@ import {url, clientModel} from './config';
 import {handleHostAndPrefix} from '../utils';
 import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/api/Loader/actions';
-
 const loading = createLoading(clientModel);
-
-export const GOT_SELECTED_QUIZ = 'GOT_SELECTED_QUIZ';
-export const GET_SELECTED_QUIZ = 'GET_SELECTED_QUIZ';
-export const SET_SELECTED = 'SET_SELECTED';
-
 
 const READ = 'READ';
 const DELETE = 'DELETE';
 const UPDATE = 'UPDATE';
 const CREATE = 'CREATE';
 
+const SCHEMA = 'SCHEMA';
+
 // did not like redux-promise, building my own with fast creating api actions
 const PENDING = 'PENDING';
 const SUCCESS = 'SUCCESS';
 const FAIL = 'FAIL';
 
+// config url - pre load app
+export const READ_QUIZZES_SCHEMA_PENDING = `${READ}_${clientModel}_${SCHEMA}_${PENDING}`;
+export const READ_QUIZZES_SCHEMA_SUCCESS = `${READ}_${clientModel}_${SCHEMA}_${SUCCESS}`;
+export const READ_QUIZZES_SCHEMA_FAIL = `${READ}_${clientModel}_${SCHEMA}_${FAIL}`;
+const getSchema = (params = {}) => dispatch => {
+    dispatch({type: READ_QUIZZES_SCHEMA_PENDING, params});
+    dispatch(loading.toggle());
+    return axios({
+        method: 'get',
+        url: `${handleHostAndPrefix()}${url}/schema`,
+    })
+        .then(response => {
+            dispatch({type: READ_QUIZZES_SCHEMA_SUCCESS, payload: response.data});
+            dispatch(loading.toggle());
+            return response;
+        })
+        .catch(error => {
+            dispatch({type: READ_QUIZZES_SCHEMA_FAIL, error});
+            dispatch(loading.toggle());
+            dispatch(errorReceived(error));
+            return error;
+        });
+};
 // ===================== READ
 export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
 export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
@@ -65,12 +84,11 @@ const remove = payload => dispatch => {
     const ids = Array.isArray(payload) ? payload : [payload];
     dispatch({type: DELETE_QUIZZES_PENDING, payload});
     dispatch(loading.toggle());
-    debugger;
-    return axios({
-            method: 'delete',
-            url: `${handleHostAndPrefix()}${url}${param ? '/' + param : ''}`,
-            data: param ? {} : {ids}
-        })
+    return axios({ // calls delete on 1 id or array of ids - 2 api in server
+        method: 'delete',
+        url: `${handleHostAndPrefix()}${url}${param ? '/' + param : ''}`,
+        data: param ? {} : {ids}
+    })
         .then(res => {
             dispatch({
                 type: DELETE_QUIZZES_SUCCESS, payload: Array.isArray(payload) ? payload : [payload]
@@ -89,18 +107,22 @@ const remove = payload => dispatch => {
 export const CREATE_QUIZZES_PENDING = `${CREATE}_${clientModel}_${PENDING}`;
 export const CREATE_QUIZZES_SUCCESS = `${CREATE}_${clientModel}_${SUCCESS}`;
 export const CREATE_QUIZZES_FAIL = `${CREATE}_${clientModel}_${FAIL}`;
-const create = params => dispatch => {
-    dispatch({type: CREATE_QUIZZES_PENDING, payload: params});
+const create = payload => dispatch => {
+    dispatch({type: CREATE_QUIZZES_PENDING, payload});
     dispatch(loading.toggle());
     return axios({
-        method: 'get',
-        url: `${handleHostAndPrefix()}${url}`
+        method: 'post',
+        url: `${handleHostAndPrefix()}${url}`,
+        data: {payload}
     })
         .then(res => { // handle normalize
             // const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
             // const userListSchema = new schema.Array(userSchema);
             // return normalize(res.data, userListSchema);
+            console.log('res after create', res);
+
             return res;
+
         })
         .then(res => {
             dispatch({
@@ -124,7 +146,7 @@ const update = params => dispatch => {
     dispatch({type: UPDATE_QUIZZES_PENDING, payload: params});
     dispatch(loading.toggle());
     return axios({
-        method: 'get',
+        method: 'put',
         url: `${handleHostAndPrefix()}${url}`
     })
         .then(res => { // handle normalize
@@ -157,5 +179,6 @@ export {
     remove,
     create,
     update,
+    getSchema
     // setSelectedQuiz
 }

@@ -12,7 +12,6 @@ import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import {env} from './app/config/env';
 import _ from 'lodash';
-
 let plugins = [
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({filename: '[name].css', disable: false, allChunks: false}),
@@ -44,7 +43,7 @@ if (env === 'production') {
 
 export default {
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.jsx', '.js']
     },
     devtool: 'source-map',
     entry: [

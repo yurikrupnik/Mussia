@@ -2,11 +2,17 @@ import mongoose, { Schema } from 'mongoose';
 import { dbModel } from './config';
 
 const AnswerSchema = Schema({
-    label: String
+    label: {
+        type: String,
+        required: [true, 'Must have label inner']
+    }
 });
 
 const QuizzesSchema = Schema({
-    label: String,
+    label: {
+        type: String,
+        required: [true, 'Must have label']
+    },
     answers: [AnswerSchema]
     // created: Date, // To Be Added
     // expired: Date, // To Be Added

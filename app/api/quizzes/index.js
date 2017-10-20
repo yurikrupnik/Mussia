@@ -1,9 +1,10 @@
 import express from 'express';
-import {url} from './config';
-import {list, get, create, update, remove, removeByIds} from './controller';
+import {url, schemaUrl} from './config';
+import {list, get, create, update, remove, removeByIds, getSchema} from './controller';
 
 let router = express.Router();
 
+router.get(schemaUrl, getSchema);
 router.get(url, list);
 router.get(url + '/:_id', get);
 router.post(url, create);

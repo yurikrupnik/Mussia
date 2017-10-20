@@ -2,14 +2,9 @@ import React, {Component, isValidElement} from 'react';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import withRoutes from '../../HOC/withSubRoutes';
 import withContainer from '../../HOC/withContainer';
 import routes from './routes';
 
-// import Container from './container';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import Spinner from '../../Spinner';
 import {
@@ -17,15 +12,6 @@ import {
     mapToProps as quizzesMapToProps,
     actions as quizzesActions
 } from '../../../api/quizzes/selectors';
-import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../../api/results/selectors';
-// import {mapToProps, dispatchActions} from '../../../api/quizzes/selectors';
-
-import List from './list';
-
-import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
-import {fullWhite} from 'material-ui/styles/colors';
 
 class Quiz extends Component {
 
@@ -34,8 +20,7 @@ class Quiz extends Component {
             loading: PropTypes.bool.isRequired,
             data: PropTypes.shape({
                 entities: PropTypes.object.isRequired,
-                result: PropTypes.array.isRequired,
-                params: PropTypes.object.isRequired
+                result: PropTypes.array.isRequired
             })
         }),
         actions: PropTypes.objectOf(PropTypes.func),
@@ -96,7 +81,6 @@ class Quiz extends Component {
         const {data} = quizzes;
         const {search} = location; // client url query
         actions.read({love: true});
-        // }
     }
 
     handleSubmit(e) {
@@ -162,8 +146,10 @@ class Quiz extends Component {
                     </li>
                 </ul>
                 <RaisedButton label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
-                <RaisedButton label="Delete first 2" onClick={(e) => {
-                    actions.remove([result[0], result[1]]);
+                <RaisedButton label="Get Schema" onClick={(e) => {
+                    // actions.remove([result[0], result[1]]);
+                    actions.getSchema();
+
                 }}/>
                 {result.map((id) => {
                     return <div key={id} className="row">

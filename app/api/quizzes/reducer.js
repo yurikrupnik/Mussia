@@ -15,36 +15,43 @@ import {
     UPDATE_QUIZZES_SUCCESS,
     UPDATE_QUIZZES_FAIL,
 
+
     CREATE_QUIZZES_PENDING,
     CREATE_QUIZZES_SUCCESS,
     CREATE_QUIZZES_FAIL,
 
-
-    GET_SELECTED_QUIZ,
-    GOT_SELECTED_QUIZ,
-    SET_SELECTED
+    READ_QUIZZES_SCHEMA_SUCCESS,
+    READ_QUIZZES_SCHEMA_PENDING,
+    READ_QUIZZES_SCHEMA_FAIL
 } from './actions';
 
 // export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
 // export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
 // export const READ_QUIZZES_FAIL = `${READ}_${clientModel}_${FAIL}`;
 
-const data = (state = {result: [], entities: {}, params: {}}, action) => {
-    console.log('action.payload', action.payload);
+const data = (state = {result: [], entities: {}, schema: {}}, action) => {
     switch (action.type) {
-        case READ_QUIZZES_PENDING:
-            return Object.assign({}, state, {params: action.params});
         case READ_QUIZZES_SUCCESS:
             return Object.assign({}, state, {
                 result: action.payload.result,
                 entities: action.payload.entities
             });
+        case READ_QUIZZES_SCHEMA_SUCCESS:
+            return Object.assign({}, state, {schema: action.payload});
+        case UPDATE_QUIZZES_SUCCESS:
+            return state;
         case READ_QUIZZES_FAIL:
+        case READ_QUIZZES_PENDING:
         case DELETE_QUIZZES_FAIL:
         case CREATE_QUIZZES_FAIL:
         case UPDATE_QUIZZES_FAIL:
+        case READ_QUIZZES_SCHEMA_FAIL:
+        case UPDATE_QUIZZES_PENDING:
+        case CREATE_QUIZZES_PENDING:
         case DELETE_QUIZZES_PENDING:
         case DELETE_QUIZZES_SUCCESS:
+        case CREATE_QUIZZES_SUCCESS:
+        case READ_QUIZZES_SCHEMA_PENDING:
         default:
             return state;
     }
