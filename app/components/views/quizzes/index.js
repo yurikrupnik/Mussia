@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import withRoutes from '../../HOC/withRoutes';
+import withRoutes from '../../HOC/withSubRoutes';
 import withContainer from '../../HOC/withContainer';
 import routes from './routes';
 

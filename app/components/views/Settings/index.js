@@ -4,7 +4,7 @@ import {Link, withRouter, Redirect} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import routes from './routes';
-import withRoutes from '../../HOC/withRoutes';
+import withRoutes from '../../HOC/withSubRoutes';
 
 class Settings extends Component {
     render() {

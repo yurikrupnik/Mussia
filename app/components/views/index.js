@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import withMaterial from './../HOC/withMaterial';
-import withProvider from '../HOC/withReduxStore';
-import withRoutes from './../HOC/withRoutes';
+import withMaterialUi from '../HOC/withMaterialUi';
+import withReduxStore from '../HOC/withReduxStore';
+import withSubRoutes from '../HOC/withSubRoutes';
+import configureStore from '../../redux/store';
 import Header from './header';
 import routes from './routes';
-import configureStore from '../../redux/store';
 
 class App extends Component {
 
@@ -17,7 +17,7 @@ class App extends Component {
     render() {
         const {initialState, userAgent} = this.props;
         const store = configureStore(initialState);
-        const Root = withMaterial(withProvider(withRoutes(Header, routes), store), userAgent);
+        const Root = withMaterialUi(withReduxStore(withSubRoutes(Header, routes), store), userAgent);
         return <Root />
     }
 }

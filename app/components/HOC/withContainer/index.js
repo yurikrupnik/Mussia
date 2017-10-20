@@ -1,9 +1,9 @@
 import React, {Component, isValidElement} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import withRoutes from './withRoutes';
+import withRoutes from '../withSubRoutes';
 
-const withContainerAndLayout = (Wrapper, combinedMapTpProps = {}, combinedDispatchActions = {}, routes = []) => {
+export default (Wrapper, combinedMapTpProps = {}, combinedDispatchActions = {}, routes = []) => {
     if (!Array.isArray(routes)) {
         throw new Error('routes must be an Array')
     }
@@ -11,7 +11,6 @@ const withContainerAndLayout = (Wrapper, combinedMapTpProps = {}, combinedDispat
     if (isValidElement(Wrapper)) { // if was called as a component via <Wrapper />
         throw new Error('must pass functions to withContainerAndLayout')
     }
+
     return withRoutes(withRouter(connect(combinedMapTpProps, combinedDispatchActions)(Wrapper)), routes);
 };
-
-export default withContainerAndLayout;
