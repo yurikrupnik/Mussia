@@ -65,10 +65,11 @@ const remove = payload => dispatch => {
     const ids = Array.isArray(payload) ? payload : [payload];
     dispatch({type: DELETE_QUIZZES_PENDING, payload});
     dispatch(loading.toggle());
+    debugger;
     return axios({
             method: 'delete',
-            url: `${handleHostAndPrefix()}${url}/${param}`,
-            body: param || ids
+            url: `${handleHostAndPrefix()}${url}${param ? '/' + param : ''}`,
+            data: param ? {} : {ids}
         })
         .then(res => {
             dispatch({

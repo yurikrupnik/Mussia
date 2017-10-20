@@ -40,27 +40,22 @@ const update = (request, response) => {
 };
 
 const remove = (request, response) => {
-
-    // console.log('request.params', request.params);
-    // console.log('request.params', request.url);
-    // console.log('request.body', request.body);
-    // if (request.params._id) {
-        Model.deleteOne(request.params)
-            .then(res => response.json(res))
-            .catch(err => response.json(err));
-    // } else {
-    //     Model.remove({_id: {$id: request.body}})
-    //         .then(res => response.json(res))
-    //         .catch(err => response.json(err));
-    // }
-
+    Model.deleteOne(request.params)
+        .then(res => response.json(res))
+        .catch(err => response.json(err));
 };
 
+const removeByIds = (request, response) => {
+    Model.remove({_id: {$in: request.body.ids}})
+        .then(res => response.json(res))
+        .catch(err => response.json(err));
+};
 
 export {
     list,
     get,
     create,
     update,
-    remove
+    remove,
+    removeByIds
 }

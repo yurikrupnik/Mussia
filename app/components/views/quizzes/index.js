@@ -134,7 +134,6 @@ class Quiz extends Component {
         });
     }
 
-
     handleDeleteMulti() {
         const {quizzes, actions} = this.props;
         const {data} = quizzes;
@@ -143,7 +142,7 @@ class Quiz extends Component {
     };
 
     render() {
-        const {quizzes, location} = this.props;
+        const {quizzes, location, actions} = this.props;
         const {pathname} = location;
         const {loading, data} = quizzes;
         const {entities, result} = data;
@@ -163,14 +162,16 @@ class Quiz extends Component {
                     </li>
                 </ul>
                 <RaisedButton label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
-                <RaisedButton label="Delete first 2" onClick={this.handleDeleteMulti.bind(this)}/>
+                <RaisedButton label="Delete first 2" onClick={(e) => {
+                    actions.remove([result[0], result[1]]);
+                }}/>
                 {result.map((id) => {
                     return <div key={id} className="row">
                         <div className="col-lg-9">{entities[id].label}</div>
                         <div className="col-lg-1">
                             <RaisedButton onClick={(e) => {
 
-                                this.props.actions.remove(id);
+                                actions.remove(id);
                             }
                             } label={'Delete'} fullWidth={true} />
                         </div>
