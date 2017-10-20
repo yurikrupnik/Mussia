@@ -7,6 +7,7 @@ import {
     READ_QUIZZES_PENDING,
     READ_QUIZZES_SUCCESS,
     READ_QUIZZES_FAIL,
+
     DELETE_QUIZZES_PENDING,
     DELETE_QUIZZES_SUCCESS,
     DELETE_QUIZZES_FAIL,
@@ -31,10 +32,21 @@ import {
 
 const data = (state = {result: [], entities: {}, schema: {}}, action) => {
     switch (action.type) {
+        case CREATE_QUIZZES_SUCCESS:
+            return Object.assign({}, state, {
+                result: state.result.concat(action.payload._id),
+                entities: {
+                    ...state.entities,
+                    [action.payload._id]: action.payload
+                }
+            });
         case READ_QUIZZES_SUCCESS:
             return Object.assign({}, state, {
-                result: action.payload.result,
-                entities: action.payload.entities
+                result: action.payload.map(val => val['_id']),
+                entities: action.payload.reduce((acc, next)=> {
+                    acc[next['_id']] = next;
+                    return acc;
+                }, {})
             });
         case READ_QUIZZES_SCHEMA_SUCCESS:
             return Object.assign({}, state, {schema: action.payload});
@@ -50,7 +62,6 @@ const data = (state = {result: [], entities: {}, schema: {}}, action) => {
         case CREATE_QUIZZES_PENDING:
         case DELETE_QUIZZES_PENDING:
         case DELETE_QUIZZES_SUCCESS:
-        case CREATE_QUIZZES_SUCCESS:
         case READ_QUIZZES_SCHEMA_PENDING:
         default:
             return state;

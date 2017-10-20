@@ -118,15 +118,15 @@ class Quiz extends Component {
         });
     }
 
-    handleDeleteMulti() {
-        const {quizzes, actions} = this.props;
-        const {data} = quizzes;
-        const {result} = data;
-        actions.remove([result[0], result[1]]);
-    };
+    // handleDeleteMulti() {
+    //     const {quizzes, actions} = this.props;
+    //     const {data} = quizzes;
+    //     const {result} = data;
+    //     actions.remove([result[0], result[1]]);
+    // };
 
     render() {
-        const {quizzes, location, actions} = this.props;
+        const {quizzes, location, actions, schema} = this.props;
         const {pathname} = location;
         const {loading, data} = quizzes;
         const {entities, result} = data;
@@ -146,9 +146,19 @@ class Quiz extends Component {
                     </li>
                 </ul>
                 <RaisedButton label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
-                <RaisedButton label="Get Schema" onClick={(e) => {
+                <RaisedButton label="Create" onClick={(e) => {
                     // actions.remove([result[0], result[1]]);
-                    actions.getSchema();
+                    actions.create({
+                        label: 'Yeebuu',
+                        answers: [
+                            {
+                                label: 'Da'
+                            },
+                            {
+                                label: 'OMG Da Da'
+                            }
+                        ]
+                    });
 
                 }}/>
                 {result.map((id) => {

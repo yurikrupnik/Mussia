@@ -17,8 +17,7 @@ const get = (request, response) => {
 };
 
 const create = (request, response) => {
-    new Model(request.body)
-        .save()
+    Model.create(request.body)
         .then(res => response.json(res))
         .catch(err => {
             console.log('db error', err);

@@ -17,6 +17,7 @@ const PENDING = 'PENDING';
 const SUCCESS = 'SUCCESS';
 const FAIL = 'FAIL';
 
+// Dispatch the action
 // config url - pre load app
 export const READ_QUIZZES_SCHEMA_PENDING = `${READ}_${clientModel}_${SCHEMA}_${PENDING}`;
 export const READ_QUIZZES_SCHEMA_SUCCESS = `${READ}_${clientModel}_${SCHEMA}_${SUCCESS}`;
@@ -51,21 +52,21 @@ const read = (params = {}) => dispatch => {
         method: 'get',
         url: `${handleHostAndPrefix()}${url}`,
     })
-        .then(res => { // handle normalize
-            const _id = '_id';
-            const {data} = res;
-            return {
-                result: data.map(val => val[_id]),
-                entities: data.reduce((acc, next) => {
-                    acc[next[_id]] = next;
-                    return acc;
-                }, {})
-            };
-        })
-        .then(payload => {
-            dispatch({type: READ_QUIZZES_SUCCESS, payload});
+        // .then(res => { // handle normalize
+        //     const _id = '_id';
+        //     const {data} = res;
+        //     return {
+        //         result: data.map(val => val[_id]),
+        //         entities: data.reduce((acc, next) => {
+        //             acc[next[_id]] = next;
+        //             return acc;
+        //         }, {})
+        //     };
+        // })
+        .then(res => {
+            dispatch({type: READ_QUIZZES_SUCCESS, payload: res.data});
             dispatch(loading.toggle());
-            return payload;
+            // return payload;
         })
         .catch(error => {
             dispatch({type: READ_QUIZZES_FAIL, error});
@@ -113,23 +114,13 @@ const create = payload => dispatch => {
     return axios({
         method: 'post',
         url: `${handleHostAndPrefix()}${url}`,
-        data: {payload}
+        data: payload
     })
-        .then(res => { // handle normalize
-            // const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
-            // const userListSchema = new schema.Array(userSchema);
-            // return normalize(res.data, userListSchema);
-            console.log('res after create', res);
-
-            return res;
-
-        })
         .then(res => {
             dispatch({
-                type: CREATE_QUIZZES_SUCCESS, payload: res
+                type: CREATE_QUIZZES_SUCCESS, payload: res.data
             });
             dispatch(loading.toggle());
-            return res;
         })
         .catch(error => {
             dispatch({type: CREATE_QUIZZES_FAIL, error});
