@@ -25,7 +25,7 @@ const routes = [
     },
     {
         path: '/quizzes',
-        component: () => <Quizzes/>
+        component: () => <Quizzes />
     },
     {
         path: '/register',

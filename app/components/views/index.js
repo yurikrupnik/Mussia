@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import withMaterial from './../HOC/Material';
-import withProvider from './../HOC/Provider';
+import withMaterial from './../HOC/withMaterial';
+import withProvider from '../HOC/withReduxStore';
 import withRoutes from './../HOC/withRoutes';
 import Header from './header';
 import routes from './routes';
+import configureStore from '../../redux/store';
 
 class App extends Component {
 
@@ -15,7 +16,8 @@ class App extends Component {
 
     render() {
         const {initialState, userAgent} = this.props;
-        const Root = withMaterial(withProvider(withRoutes(Header, routes), initialState), userAgent);
+        const store = configureStore(initialState);
+        const Root = withMaterial(withProvider(withRoutes(Header, routes), store), userAgent);
         return <Root />
     }
 }
