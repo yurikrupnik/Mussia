@@ -11,7 +11,6 @@ export const GET_SELECTED_QUIZ = 'GET_SELECTED_QUIZ';
 export const SET_SELECTED = 'SET_SELECTED';
 
 
-
 const READ = 'READ';
 const DELETE = 'DELETE';
 const UPDATE = 'UPDATE';
@@ -61,25 +60,22 @@ const read = (params = {}) => dispatch => {
 export const DELETE_QUIZZES_PENDING = `${DELETE}_${clientModel}_${PENDING}`;
 export const DELETE_QUIZZES_SUCCESS = `${DELETE}_${clientModel}_${SUCCESS}`;
 export const DELETE_QUIZZES_FAIL = `${DELETE}_${clientModel}_${FAIL}`;
-const remove = params => dispatch => {
-    dispatch({type: DELETE_QUIZZES_PENDING, payload: params});
+const remove = payload => dispatch => {
+    const param = typeof payload === 'string' ? payload : '';
+    const ids = Array.isArray(payload) ? payload : [payload];
+    dispatch({type: DELETE_QUIZZES_PENDING, payload});
     dispatch(loading.toggle());
     return axios({
-        method: 'get',
-        url: `${handleHostAndPrefix()}${url}`
-    })
-        .then(res => { // handle normalize
-            // const userSchema = new schema.Entity('users', {}, {idAttribute: 'id'});
-            // const userListSchema = new schema.Array(userSchema);
-            // return normalize(res.data, userListSchema);
-            return res;
+            method: 'delete',
+            url: `${handleHostAndPrefix()}${url}/${param}`,
+            body: param || ids
         })
         .then(res => {
             dispatch({
-                type: DELETE_QUIZZES_SUCCESS, payload: res
+                type: DELETE_QUIZZES_SUCCESS, payload: Array.isArray(payload) ? payload : [payload]
             });
             dispatch(loading.toggle());
-            return res;
+            return dispatch(read());
         })
         .catch(error => {
             dispatch({type: DELETE_QUIZZES_FAIL, error});

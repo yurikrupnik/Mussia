@@ -5,12 +5,7 @@ const mapToProps = (state, ownProps) => {
     return state.api.quizzes;
 };
 
-const dispatchActions = (dispatch) => {
-    return bindActionCreators(actions, dispatch);
-    //  return {
-    //      getLol: (dispatch) => actions.get,
-    //  }
-};
+const dispatchActions = (dispatch) => bindActionCreators(actions, dispatch);
 
 export {
     mapToProps,

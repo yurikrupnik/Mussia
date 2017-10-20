@@ -22,6 +22,11 @@ import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../
 
 import List from './list';
 
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+import {fullWhite} from 'material-ui/styles/colors';
+
 class Quiz extends Component {
 
     static propTypes = {
@@ -87,10 +92,9 @@ class Quiz extends Component {
     }
 
     componentDidMount() {
-        const {actions, quizzes} = this.props;
-        const {loading, data} = quizzes;
-        const {entities, result} = data;
-        // if (!result.length) {
+        const {actions, quizzes, location} = this.props;
+        const {data} = quizzes;
+        const {search} = location; // client url query
         actions.read({love: true});
         // }
     }
@@ -130,12 +134,19 @@ class Quiz extends Component {
         });
     }
 
+
+    handleDeleteMulti() {
+        const {quizzes, actions} = this.props;
+        const {data} = quizzes;
+        const {result} = data;
+        actions.remove([result[0], result[1]]);
+    };
+
     render() {
         const {quizzes, location} = this.props;
         const {pathname} = location;
         const {loading, data} = quizzes;
         const {entities, result} = data;
-        console.log('this.props', this.props);
 
         if (loading) {
             return <Spinner/>;
@@ -143,17 +154,33 @@ class Quiz extends Component {
 
         const Header = (
             <div>
-                <h2>hello from quizzes</h2>
+                <h2>Quizzes</h2>
                 <ul>
                     <li>
                         <Link to="/quizzes/create">
-                            Create Quiz
+                            Create New
                         </Link>
                     </li>
                 </ul>
                 <RaisedButton label="Call somethng" onClick={this.handleSubmit.bind(this)}/>
+                <RaisedButton label="Delete first 2" onClick={this.handleDeleteMulti.bind(this)}/>
                 {result.map((id) => {
-                    return <div key={id}>{entities[id].label}</div>
+                    return <div key={id} className="row">
+                        <div className="col-lg-9">{entities[id].label}</div>
+                        <div className="col-lg-1">
+                            <RaisedButton onClick={(e) => {
+
+                                this.props.actions.remove(id);
+                            }
+                            } label={'Delete'} fullWidth={true} />
+                        </div>
+                        <div className="col-lg-1">
+                            <RaisedButton label={'Copy'} fullWidth={true} />
+                        </div>
+                        <div className="col-lg-1">
+                            <RaisedButton label={'Update'} fullWidth={true} />
+                        </div>
+                    </div>
                 })}
             </div>
         );
@@ -174,7 +201,10 @@ const combinedMapTpProps = state => ({
 
 const combinedDispatchActions = dispatch => ({
     actions: bindActionCreators(Object.assign({}, {
-        read: quizzesActions.read
+        read: quizzesActions.read,
+        remove: quizzesActions.remove,
+        create: quizzesActions.create,
+        update: quizzesActions.update
     }), dispatch)
 });
 
