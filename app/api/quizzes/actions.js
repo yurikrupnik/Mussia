@@ -3,7 +3,7 @@ import {url, clientModel} from './config';
 import {handleHostAndPrefix} from '../utils';
 import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/api/Loader/actions';
-const loading = createLoading(clientModel);
+import createSchemaActions from '../../redux/api/schema/actions';
 
 const READ = 'READ';
 const DELETE = 'DELETE';
@@ -17,31 +17,13 @@ const PENDING = 'PENDING';
 const SUCCESS = 'SUCCESS';
 const FAIL = 'FAIL';
 
+// console.log('schema', schema);
+
 // Dispatch the action
 // config url - pre load app
-export const READ_QUIZZES_SCHEMA_PENDING = `${READ}_${clientModel}_${SCHEMA}_${PENDING}`;
-export const READ_QUIZZES_SCHEMA_SUCCESS = `${READ}_${clientModel}_${SCHEMA}_${SUCCESS}`;
-export const READ_QUIZZES_SCHEMA_FAIL = `${READ}_${clientModel}_${SCHEMA}_${FAIL}`;
-const getSchema = (params = {}) => dispatch => {
-    dispatch({type: READ_QUIZZES_SCHEMA_PENDING, params});
-    dispatch(loading.toggle());
-    return axios({
-        method: 'get',
-        url: `${handleHostAndPrefix()}${url}/schema`,
-    })
-        .then(response => {
-            dispatch({type: READ_QUIZZES_SCHEMA_SUCCESS, payload: response.data});
-            dispatch(loading.toggle());
-            return response;
-        })
-        .catch(error => {
-            dispatch({type: READ_QUIZZES_SCHEMA_FAIL, error});
-            dispatch(loading.toggle());
-            dispatch(errorReceived(error));
-            return error;
-        });
-};
-// ===================== READ
+const loading = createLoading(clientModel);
+const getSchema = createSchemaActions(clientModel, loading, url);
+
 export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
 export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
 export const READ_QUIZZES_FAIL = `${READ}_${clientModel}_${FAIL}`;

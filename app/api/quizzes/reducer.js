@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 // import current from '../../redux/ui/current/reducer';
 import createLoadingWithNamedType from '../../redux/api/Loader/reducer';
+import createSchemaWithNamedType from '../../redux/api/schema/reducer';
 import {clientModel} from './config';
 import _, {filter, merge, has} from 'lodash';
 import {
@@ -21,13 +22,14 @@ import {
     CREATE_QUIZZES_SUCCESS,
     CREATE_QUIZZES_FAIL,
 
-    READ_QUIZZES_SCHEMA_SUCCESS,
-    READ_QUIZZES_SCHEMA_PENDING,
-    READ_QUIZZES_SCHEMA_FAIL
+    // READ_QUIZZES_SCHEMA_SUCCESS,
+    // READ_QUIZZES_SCHEMA_PENDING,
+    // READ_QUIZZES_SCHEMA_FAIL
 } from './actions';
 
 
-const data = (state = {result: [], entities: {}, schema: {}}, action) => {
+const data = (state = {result: [], entities: {}}, action) => {
+    debugger
     switch (action.type) {
         case CREATE_QUIZZES_SUCCESS:
             return Object.assign({}, state, {
@@ -52,19 +54,23 @@ const data = (state = {result: [], entities: {}, schema: {}}, action) => {
                     return acc;
                 }, {})
             });
-        case READ_QUIZZES_SCHEMA_SUCCESS:
-            return Object.assign({}, state, {schema: action.payload});
+        // case READ_QUIZZES_SCHEMA_SUCCESS:
+        //     return Object.assign({}, state, {schema: action.payload});
+        // case READ_QUIZZES_SCHEMA_FAIL:
+        // case READ_QUIZZES_SCHEMA_PENDING:
         case READ_QUIZZES_FAIL:
         case READ_QUIZZES_PENDING:
         case DELETE_QUIZZES_FAIL:
         case CREATE_QUIZZES_FAIL:
         case UPDATE_QUIZZES_FAIL:
-        case READ_QUIZZES_SCHEMA_FAIL:
         case UPDATE_QUIZZES_PENDING:
         case CREATE_QUIZZES_PENDING:
         case DELETE_QUIZZES_PENDING:
         case DELETE_QUIZZES_SUCCESS:
-        case READ_QUIZZES_SCHEMA_PENDING:
+
+        // case READ_QUIZZES_SCHEMA_SUCCESS:
+        // case READ_QUIZZES_SCHEMA_PENDING:
+        // case READ_QUIZZES_SCHEMA_FAIL:
         default:
             return state;
     }
@@ -72,6 +78,7 @@ const data = (state = {result: [], entities: {}, schema: {}}, action) => {
 //
 export default combineReducers({
 //     // current,
+    schema: createSchemaWithNamedType(clientModel),
     loading: createLoadingWithNamedType(clientModel),
     data,
 })

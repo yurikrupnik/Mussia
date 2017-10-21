@@ -11,8 +11,8 @@ const setStateOnLocals = (req, res, next, store) => () => {
 
 export default (req, res, next) => {
     let store = configureStore();
-    store.dispatch(getSchema())
-        .then(() => {
+    // store.dispatch(getSchema())
+    //     .then(() => {
             if (req.isAuthenticated()) {
                 store.dispatch(setSession(req.user.id));
                 store.dispatch(setCurrent(req.user));
@@ -25,5 +25,5 @@ export default (req, res, next) => {
             } else {
                 setStateOnLocals(req, res, next, store)();
             }
-        });
+        // });
 }

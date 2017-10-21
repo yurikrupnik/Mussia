@@ -89,7 +89,7 @@ class Quiz extends Component {
         // const {form} = this.state;
         // const {selected} = quizzes;
         // console.log('this.props', this.props);
-        this.props.actions.read();
+        this.props.actions.getSchema();
         // this.props.actions.getAnswerId({quiz_id: selected._id, user_id: 'SJlcrw_Q3W'});
         // console.log('this.state.form', this.state.form);
 
@@ -203,7 +203,8 @@ const combinedDispatchActions = dispatch => ({
         read: quizzesActions.read,
         remove: quizzesActions.remove,
         create: quizzesActions.create,
-        update: quizzesActions.update
+        update: quizzesActions.update,
+        getSchema: quizzesActions.getSchema
     }), dispatch)
 });
 
