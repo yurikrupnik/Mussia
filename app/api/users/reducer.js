@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 // import current from '../../redux/ui/current/reducer';
-import createLoadingWithNamedType from '../../redux/api/Loader/reducer';
+import createLoadingWithNamedType from '../../redux/crud/loader/reducer';
 import {clientModel} from './config';
 
 import {

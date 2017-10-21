@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {GET_COUNT, GOT_COUNT, GET_ANSWER, GOT_ANSWER} from './actions';
-import createLoadingWithNamedType from '../../redux/api/Loader/reducer';
+import createLoadingWithNamedType from '../../redux/crud/loader/reducer';
 import {clientModel} from './config';
 // To Be Added - finish reducer
 const data =  (state = { data: [] }, action) => {

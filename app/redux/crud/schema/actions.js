@@ -9,7 +9,6 @@ function createStatusActions(name) {
         return acc;
     }, {});
 }
-
 function createGetSchema(name, loading, url) {
     const statusActions = createStatusActions(name);
     return () => dispatch => {

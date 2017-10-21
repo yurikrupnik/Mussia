@@ -16,8 +16,8 @@ router.get(countUrl, (req, res) => {
     Promise.all(promises).then(data => res.json(data));
 });
 
-// todo get if user id exists with quiz id - retrive the answer_id
-router.get(answerUrl, (req, res) => { // get answer by user id and quiz id
+// todo read if user id exists with quiz id - retrive the answer_id
+router.get(answerUrl, (req, res) => { // read answer by user id and quiz id
     const {quiz_id, user_id} = req.query;
     Model.findOne({quiz_id, user_id}).then(response => {
         res.json(response ? {answer_id: response.answer_id} : null);

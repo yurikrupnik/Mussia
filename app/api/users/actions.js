@@ -5,7 +5,7 @@ import axios from 'axios';
 import {normalize, schema} from 'normalizr';
 import _ from 'lodash';
 
-import createLoading from '../../redux/api/Loader/actions';
+import createLoading from '../../redux/crud/loader/actions';
 const loading = createLoading(clientModel);
 
 const FETCH = 'FETCH';

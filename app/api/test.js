@@ -20,9 +20,9 @@ describe('Functional Test <Sessions>:', function () {
                 done();
             });
     });
-    it('should get user session for current user', function (done) {
+    it('should read user session for current user', function (done) {
         let req = request(app).get('/');
-        // Set cookie to get saved user session
+        // Set cookie to read saved user session
         req.cookies = Cookies;
         req.set('Accept', 'application/json')
         req.expect('Content-Type', /json/)

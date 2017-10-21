@@ -2,7 +2,7 @@ import axios from 'axios';
 import {url, countUrl, answerUrl, clientModel} from './config';
 import {checkStatus, parseJSON, handleHostAndPrefix} from '../utils';
 import { normalize, schema } from 'normalizr';
-import createLoading from '../../redux/api/Loader/actions';
+import createLoading from '../../redux/crud/loader/actions';
 import {errorReceived} from '../../redux/errors/actions';
 const loading = createLoading(clientModel);
 

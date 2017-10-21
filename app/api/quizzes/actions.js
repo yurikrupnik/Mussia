@@ -2,25 +2,10 @@ import axios from 'axios';
 import {url, clientModel} from './config';
 import {handleHostAndPrefix} from '../utils';
 import {errorReceived} from '../../redux/errors/actions';
-import createLoading from '../../redux/api/Loader/actions';
-import createSchemaActions from '../../redux/api/schema/actions';
+import createLoading from '../../redux/crud/loader/actions';
+import createSchemaActions from '../../redux/crud/schema/actions';
+import {SUCCESS, READ, DELETE,UPDATE,FAIL, SCHEMA, CREATE, PENDING, PROMISE_TYPES_CHAIN} from '../../redux/constants';
 
-const READ = 'READ';
-const DELETE = 'DELETE';
-const UPDATE = 'UPDATE';
-const CREATE = 'CREATE';
-
-const SCHEMA = 'SCHEMA';
-
-// did not like redux-promise, building my own with fast creating api actions
-const PENDING = 'PENDING';
-const SUCCESS = 'SUCCESS';
-const FAIL = 'FAIL';
-
-// console.log('schema', schema);
-
-// Dispatch the action
-// config url - pre load app
 const loading = createLoading(clientModel);
 const getSchema = createSchemaActions(clientModel, loading, url);
 
@@ -130,6 +115,8 @@ const update = params => dispatch => {
 // current = id
 
 // selected = [id]
+
+//
 
 export {
     read,
