@@ -10,7 +10,10 @@ import {mapToProps} from './selectors';
 
 const loading = createLoading(clientModel);
 const getSchema = createSchemaActions(clientModel, loading, url, mapToProps);
-// const remove = createDeleteActions(clientModel, loading, url);
+const remove = createDeleteActions(clientModel, loading, url, mapToProps);
+// const read = createReadActions(clientModel, loading, url, mapToProps);
+// const update = createUpdateActions(clientModel, loading, url, mapToProps);
+// const create = createCreateActions(clientModel, loading, url, mapToProps);
 
 export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
 export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
@@ -39,30 +42,30 @@ const read = (params = {}) => dispatch => {
 export const DELETE_QUIZZES_PENDING = `${DELETE}_${clientModel}_${PENDING}`;
 export const DELETE_QUIZZES_SUCCESS = `${DELETE}_${clientModel}_${SUCCESS}`;
 export const DELETE_QUIZZES_FAIL = `${DELETE}_${clientModel}_${FAIL}`;
-const remove = payload => dispatch => {
-    const param = typeof payload === 'string' ? payload : '';
-    const ids = Array.isArray(payload) ? payload : [payload];
-    dispatch({type: DELETE_QUIZZES_PENDING, payload});
-    dispatch(loading.toggle());
-    return axios({ // calls delete on 1 id or array of ids - 2 api in server
-        method: 'delete',
-        url: `${handleHostAndPrefix()}${url}${param ? '/' + param : ''}`,
-        data: param ? {} : {ids}
-    })
-        .then(res => {
-            dispatch({
-                type: DELETE_QUIZZES_SUCCESS, payload: ids
-            });
-            dispatch(loading.toggle());
-            return dispatch(read());
-        })
-        .catch(error => {
-            dispatch({type: DELETE_QUIZZES_FAIL, error});
-            dispatch(loading.toggle());
-            dispatch(errorReceived(error));
-            return error;
-        });
-};
+// const remove = payload => dispatch => {
+//     const param = typeof payload === 'string' ? payload : '';
+//     const ids = Array.isArray(payload) ? payload : [payload];
+//     dispatch({type: DELETE_QUIZZES_PENDING, payload});
+//     dispatch(loading.toggle());
+//     return axios({ // calls delete on 1 id or array of ids - 2 api in server
+//         method: 'delete',
+//         url: `${handleHostAndPrefix()}${url}${param ? '/' + param : ''}`,
+//         data: param ? {} : {ids}
+//     })
+//         .then(res => {
+//             dispatch({
+//                 type: DELETE_QUIZZES_SUCCESS, payload: ids
+//             });
+//             dispatch(loading.toggle());
+//             return dispatch(read());
+//         })
+//         .catch(error => {
+//             dispatch({type: DELETE_QUIZZES_FAIL, error});
+//             dispatch(loading.toggle());
+//             dispatch(errorReceived(error));
+//             return error;
+//         });
+// };
 
 export const CREATE_QUIZZES_PENDING = `${CREATE}_${clientModel}_${PENDING}`;
 export const CREATE_QUIZZES_SUCCESS = `${CREATE}_${clientModel}_${SUCCESS}`;

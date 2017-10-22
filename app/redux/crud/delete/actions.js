@@ -1,32 +1,34 @@
 import axios from 'axios';
 import {handleHostAndPrefix} from '../../../api/utils';
-import {READ, PROMISE_TYPES_CHAIN} from '../../constants';
-
+import {DELETE, PROMISE_TYPES_CHAIN} from '../../constants';
+import {isEmpty} from 'lodash';
+import {read} from '../../../api/quizzes/actions';
+// import {mapToProps} from './selectors';
+import {errorReceived} from './../../errors/actions';
 function createStatusActions(name) {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {
         // map to actions with lowercase - via pending, success, fail
-        acc[next.toLowerCase()] = (payload) => ({type: `${name}_${next}`, payload});
+        acc[next.toLowerCase()] = (payload) => ({type: `${DELETE}_${name}_${next}`, payload});
         return acc;
     }, {});
 }
-function createGetSchema(name, loading, url) {
+function createDeleteSchema(name, loading, url, dataMapToProps) {
     const statusActions = createStatusActions(name);
     return (payload) => (dispatch, getState) => {
-        console.log('getState', getState);
-        console.log('dispatch', dispatch);
-
         const param = typeof payload === 'string' ? payload : '';
         const ids = Array.isArray(payload) ? payload : [payload];
         dispatch(statusActions.pending());
         dispatch(loading.toggle());
-        return axios({
+        return axios({ // calls delete on 1 id or array of ids - 2 api in server
             method: 'delete',
             url: `${handleHostAndPrefix()}${url}${param ? '/' + param : ''}`,
             data: param ? {} : {ids}
         })
-            .then(response => {
-                dispatch(statusActions.success(response.data));
+            .then(res => {
+                dispatch(statusActions.success(ids));
                 dispatch(loading.toggle());
+                return dispatch(read());
+                // return res;
             })
             .catch(error => {
                 dispatch(statusActions.fail());
@@ -36,4 +38,5 @@ function createGetSchema(name, loading, url) {
             });
     };
 }
-export default createGetSchema;
+
+export default createDeleteSchema;
