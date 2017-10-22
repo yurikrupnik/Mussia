@@ -4,10 +4,12 @@ import {handleHostAndPrefix} from '../utils';
 import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/crud/loader/actions';
 import createSchemaActions from '../../redux/crud/schema/actions';
-import {SUCCESS, READ, DELETE,UPDATE,FAIL, SCHEMA, CREATE, PENDING, PROMISE_TYPES_CHAIN} from '../../redux/constants';
+import createDeleteActions from '../../redux/crud/delete/actions';
+import {SUCCESS, READ, DELETE,UPDATE,FAIL, CREATE, PENDING} from '../../redux/constants';
 
 const loading = createLoading(clientModel);
 const getSchema = createSchemaActions(clientModel, loading, url);
+// const remove = createDeleteActions(clientModel, loading, url);
 
 export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
 export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
