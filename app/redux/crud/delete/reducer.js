@@ -5,7 +5,7 @@ import {SUCCESS, DELETE, PROMISE_TYPES_CHAIN} from '../../constants';
 const createReducerActionsByName = (name) => {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {
         if (next === SUCCESS) {
-            acc[`${DELETE}_${name}__${next}`] = (state, action) => action.payload;
+            acc[`${DELETE}_${name}_${next}`] = (state, action) => action.payload;
         } else {
             acc[`${DELETE}_${name}_${next}`] = (state, action) => state;
         }

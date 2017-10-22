@@ -1,16 +1,16 @@
 
 import {createActionsType} from './actions';
-import {SUCCESS, READ, PROMISE_TYPES_CHAIN} from '../../constants';
+import {SUCCESS, CREATE, PROMISE_TYPES_CHAIN} from '../../constants';
 
 const createReducerActionsByName = (name) => {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {
         if (next === SUCCESS) {
-            acc[`${READ}_${name}_${next}`] = (state, action) => Object.assign({}, state, {
-                result: action.payload.map(val => val['_id']),
-                entities: action.payload.reduce((acc, next)=> {
-                    acc[next['_id']] = next;
-                    return acc;
-                }, {})
+            acc[`${CREATE}_${name}_${next}`] = (state, action) => Object.assign({}, state, {
+                result: state.result.concat(action.payload._id),
+                entities: {
+                    ...state.entities,
+                    [action.payload._id]: action.payload
+                }
             });
         } else {
             acc[`${READ}_${name}_${next}`] = (state, action) => state;
@@ -19,7 +19,7 @@ const createReducerActionsByName = (name) => {
     }, {});
 };
 
-const createReadReducerByTagName = (name = '') => {
+const createCreateReducerByTagName = (name = '') => {
     const reducerActions = createReducerActionsByName(name);
     return (state = {}, action) => { // reducer
         if (reducerActions.hasOwnProperty(action.type)) {
@@ -30,4 +30,4 @@ const createReadReducerByTagName = (name = '') => {
     }
 };
 
-export default createReadReducerByTagName;
+export default createCreateReducerByTagName;

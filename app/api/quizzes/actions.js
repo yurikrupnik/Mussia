@@ -5,38 +5,40 @@ import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/crud/loader/actions';
 import createSchemaActions from '../../redux/crud/schema/actions';
 import createDeleteActions from '../../redux/crud/delete/actions';
+import createReadActions from '../../redux/crud/read/actions';
+import createCreateActions from '../../redux/crud/create/actions';
 import {SUCCESS, READ, DELETE, UPDATE, FAIL, CREATE, PENDING} from '../../redux/constants';
 import {mapToProps} from './selectors';
 
 const loading = createLoading(clientModel);
 const getSchema = createSchemaActions(clientModel, loading, url, mapToProps);
 const remove = createDeleteActions(clientModel, loading, url, mapToProps);
-// const read = createReadActions(clientModel, loading, url, mapToProps);
+const read = createReadActions(clientModel, loading, url, mapToProps);
+const create = createCreateActions(clientModel, loading, url, mapToProps);
 // const update = createUpdateActions(clientModel, loading, url, mapToProps);
-// const create = createCreateActions(clientModel, loading, url, mapToProps);
 
 export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
 export const READ_QUIZZES_SUCCESS = `${READ}_${clientModel}_${SUCCESS}`;
 export const READ_QUIZZES_FAIL = `${READ}_${clientModel}_${FAIL}`;
-const read = (params = {}) => dispatch => {
-    dispatch({type: READ_QUIZZES_PENDING, params});
-    dispatch(loading.toggle());
-    return axios({
-        method: 'get',
-        url: `${handleHostAndPrefix()}${url}`,
-    })
-        .then(res => {
-            dispatch({type: READ_QUIZZES_SUCCESS, payload: res.data});
-            dispatch(loading.toggle());
-            // return payload;
-        })
-        .catch(error => {
-            dispatch({type: READ_QUIZZES_FAIL, error});
-            dispatch(loading.toggle());
-            dispatch(errorReceived(error));
-            return error;
-        });
-};
+// const read = (params = {}) => dispatch => {
+//     dispatch({type: READ_QUIZZES_PENDING, params});
+//     dispatch(loading.toggle());
+//     return axios({
+//         method: 'get',
+//         url: `${handleHostAndPrefix()}${url}`,
+//     })
+//         .then(res => {
+//             dispatch({type: READ_QUIZZES_SUCCESS, payload: res.data});
+//             dispatch(loading.toggle());
+//             // return payload;
+//         })
+//         .catch(error => {
+//             dispatch({type: READ_QUIZZES_FAIL, error});
+//             dispatch(loading.toggle());
+//             dispatch(errorReceived(error));
+//             return error;
+//         });
+// };
 
 // ============ delete
 export const DELETE_QUIZZES_PENDING = `${DELETE}_${clientModel}_${PENDING}`;
@@ -70,27 +72,27 @@ export const DELETE_QUIZZES_FAIL = `${DELETE}_${clientModel}_${FAIL}`;
 export const CREATE_QUIZZES_PENDING = `${CREATE}_${clientModel}_${PENDING}`;
 export const CREATE_QUIZZES_SUCCESS = `${CREATE}_${clientModel}_${SUCCESS}`;
 export const CREATE_QUIZZES_FAIL = `${CREATE}_${clientModel}_${FAIL}`;
-const create = payload => dispatch => {
-    dispatch({type: CREATE_QUIZZES_PENDING, payload});
-    dispatch(loading.toggle());
-    return axios({
-        method: 'post',
-        url: `${handleHostAndPrefix()}${url}`,
-        data: payload
-    })
-        .then(res => {
-            dispatch({
-                type: CREATE_QUIZZES_SUCCESS, payload: res.data
-            });
-            dispatch(loading.toggle());
-        })
-        .catch(error => {
-            dispatch({type: CREATE_QUIZZES_FAIL, error});
-            dispatch(loading.toggle());
-            dispatch(errorReceived(error));
-            return error;
-        });
-};
+// const create = payload => dispatch => {
+//     dispatch({type: CREATE_QUIZZES_PENDING, payload});
+//     dispatch(loading.toggle());
+//     return axios({
+//         method: 'post',
+//         url: `${handleHostAndPrefix()}${url}`,
+//         data: payload
+//     })
+//         .then(res => {
+//             dispatch({
+//                 type: CREATE_QUIZZES_SUCCESS, payload: res.data
+//             });
+//             dispatch(loading.toggle());
+//         })
+//         .catch(error => {
+//             dispatch({type: CREATE_QUIZZES_FAIL, error});
+//             dispatch(loading.toggle());
+//             dispatch(errorReceived(error));
+//             return error;
+//         });
+// };
 
 export const UPDATE_QUIZZES_PENDING = `${UPDATE}_${clientModel}_${PENDING}`;
 export const UPDATE_QUIZZES_SUCCESS = `${UPDATE}_${clientModel}_${SUCCESS}`;

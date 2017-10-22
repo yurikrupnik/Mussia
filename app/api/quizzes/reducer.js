@@ -6,7 +6,7 @@ import {
     READ_QUIZZES_PENDING,
     READ_QUIZZES_SUCCESS,
     READ_QUIZZES_FAIL,
-
+    //
     DELETE_QUIZZES_PENDING,
     DELETE_QUIZZES_SUCCESS,
     DELETE_QUIZZES_FAIL,
@@ -67,4 +67,6 @@ export default combineReducers({
     schema: createSchemaReducerByTagName(clientModel),
     loading: createLoadingWithNamedType(clientModel),
     data,
+    // selected = [id]
+    // editing ? {id, odlVal, newVal}
 })

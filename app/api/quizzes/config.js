@@ -1,4 +1,4 @@
-
+import {READ, DELETE, UPDATE, CREATE} from '../../redux/constants'
 
 export default {
     url: '/quizzes', // server url
@@ -6,5 +6,5 @@ export default {
     selector: 'quizzes', // reducer state to take from to put on smart components
     dbModel: 'Quiz', // mongoose model name
     clientModel: 'QUIZZES',
-    crud: ['GET', 'DELETE', 'PUT', 'POST']
+    crud: [READ, DELETE, UPDATE, CREATE]
 }
