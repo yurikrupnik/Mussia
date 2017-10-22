@@ -11,7 +11,10 @@ function createStatusActions(name) {
 }
 function createGetSchema(name, loading, url) {
     const statusActions = createStatusActions(name);
-    return (payload) => dispatch => {
+    return (payload) => (dispatch, getState) => {
+        console.log('getState', getState);
+        console.log('dispatch', dispatch);
+
         const param = typeof payload === 'string' ? payload : '';
         const ids = Array.isArray(payload) ? payload : [payload];
         dispatch(statusActions.pending());

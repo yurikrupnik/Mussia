@@ -5,10 +5,11 @@ import {errorReceived} from '../../redux/errors/actions';
 import createLoading from '../../redux/crud/loader/actions';
 import createSchemaActions from '../../redux/crud/schema/actions';
 import createDeleteActions from '../../redux/crud/delete/actions';
-import {SUCCESS, READ, DELETE,UPDATE,FAIL, CREATE, PENDING} from '../../redux/constants';
+import {SUCCESS, READ, DELETE, UPDATE, FAIL, CREATE, PENDING} from '../../redux/constants';
+import {mapToProps} from './selectors';
 
 const loading = createLoading(clientModel);
-const getSchema = createSchemaActions(clientModel, loading, url);
+const getSchema = createSchemaActions(clientModel, loading, url, mapToProps);
 // const remove = createDeleteActions(clientModel, loading, url);
 
 export const READ_QUIZZES_PENDING = `${READ}_${clientModel}_${PENDING}`;
@@ -50,7 +51,7 @@ const remove = payload => dispatch => {
     })
         .then(res => {
             dispatch({
-                type: DELETE_QUIZZES_SUCCESS, payload: Array.isArray(payload) ? payload : [payload]
+                type: DELETE_QUIZZES_SUCCESS, payload: ids
             });
             dispatch(loading.toggle());
             return dispatch(read());
