@@ -1,8 +1,8 @@
-import {url, clientModel, selector} from './config';
-import createLoading from '../../redux/crud/loader/actions';
-import createSchemaActions from '../../redux/crud/schema/actions';
-import createCrudActions from '../../redux/crud/actions';
-import {createSelectorByName} from '../../redux/crud/selectors';
+import {url, clientModel, selector} from '../../../api/quizzes/config';
+import createLoading from '../../../redux/crud/loader/actions';
+import createSchemaActions from '../../../redux/crud/schema/actions';
+import createCrudActions from '../../../redux/crud/actions';
+import {createSelectorByName} from '../../../redux/crud/selectors';
 
 const loading = createLoading(clientModel);
 

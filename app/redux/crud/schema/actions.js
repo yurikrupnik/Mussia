@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {handleHostAndPrefix} from '../../../api/utils';
-import {READ, SCHEMA, PROMISE_TYPES_CHAIN} from '../../constants';
+import {READ, SCHEMA, PROMISE_TYPES_CHAIN} from '../../../constants';
 import {isEmpty} from 'lodash';
 import {mapToProps as getSchema} from './selectors';
 

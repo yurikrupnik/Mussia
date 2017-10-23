@@ -1,10 +1,12 @@
-import {READ, DELETE, UPDATE, CREATE} from '../../redux/constants'
+import {READ, DELETE, UPDATE, CREATE, SCHEMA} from '../../constants';
+
+const collection = 'quizzes';
 
 export default {
-    url: '/quizzes', // server url
-    schemaUrl: '/quizzes/schema', // server url
-    selector: 'quizzes', // reducer state to take from to put on smart components
     dbModel: 'Quiz', // mongoose model name
-    clientModel: 'QUIZZES',
+    url: `/${collection}`, // server url
+    schemaUrl: `/${collection}/${SCHEMA.toLowerCase()}`, // schema url
+    selector: `${collection}`, // reducer state to take from to put on smart components
+    clientModel: collection.toUpperCase(),
     crud: [READ, DELETE, UPDATE, CREATE]
 }

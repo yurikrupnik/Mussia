@@ -1,5 +1,4 @@
 import Model from './model';
-import {} from 'lodash';
 
 const getSchema = (request, response) => response.json(Model.schema);
 

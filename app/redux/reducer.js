@@ -3,7 +3,7 @@ import configReducer from './config';
 
 import users from '../api/users/reducer';
 import results from '../api/results/reducer';
-import quizzes from '../api/quizzes/reducer';
+import quizzes from '../components/routes/quizzes/reducer';
 import errors from './errors/reducer';
 
 

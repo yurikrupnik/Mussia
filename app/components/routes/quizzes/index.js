@@ -11,7 +11,7 @@ import {
     dispatchActions,
     mapToProps as quizzesMapToProps,
     actions as quizzesActions
-} from '../../../api/quizzes/selectors';
+} from './selectors';
 
 class Quiz extends Component {
 

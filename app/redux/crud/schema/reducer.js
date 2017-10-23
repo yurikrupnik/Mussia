@@ -1,4 +1,4 @@
-import {SUCCESS, READ, SCHEMA, PROMISE_TYPES_CHAIN} from '../../constants';
+import {SUCCESS, READ, SCHEMA, PROMISE_TYPES_CHAIN} from '../../../constants';
 
 const createReducerActionsByName = (name) => {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {

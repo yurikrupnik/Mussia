@@ -1,4 +1,4 @@
-import {SUCCESS, CREATE, PROMISE_TYPES_CHAIN} from '../../constants';
+import {SUCCESS, CREATE, PROMISE_TYPES_CHAIN} from '../../../constants';
 
 const createCreateReducerHandlers = (name) => {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {

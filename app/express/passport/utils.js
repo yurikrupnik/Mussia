@@ -1,8 +1,8 @@
 import passport from 'passport';
 import faker from 'faker';
 import shortid from 'shortid';
-import {validatePassword, generateHash} from '../../../node/pass-hash';
-import Users from '../../../../api/users/model';
+import {validatePassword, generateHash} from '../../services/node/pass-hash';
+import Users from '../../api/users/model';
 
 let serialize = (user, done) => done(null, user.id);
 

@@ -1,4 +1,4 @@
-import {SUCCESS, DELETE, PROMISE_TYPES_CHAIN} from '../../constants';
+import {SUCCESS, DELETE, PROMISE_TYPES_CHAIN} from '../../../constants';
 
 const createDeleteReducerHandlers = (name) => {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {

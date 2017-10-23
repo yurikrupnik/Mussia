@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {isEmpty} from 'lodash';
-import {dispatchActions, mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../../api/quizzes/selectors';
+import {dispatchActions, mapToProps as quizzesMapToProps, actions as quizzesActions} from './selectors';
 import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../../api/results/selectors';
 
 class Container extends Component {

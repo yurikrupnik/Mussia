@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {handleHostAndPrefix} from '../../../api/utils';
-import {CREATE, PROMISE_TYPES_CHAIN} from '../../constants';
+import {CREATE, PROMISE_TYPES_CHAIN} from '../../../constants';
 import {errorReceived} from './../../errors/actions';
 
 function createStatusActions(name) {

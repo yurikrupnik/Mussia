@@ -1,7 +1,7 @@
 import React from 'react';
 import {hydrate} from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
-import App from './components/views';
+import App from './components/routes';
 import './services/node/socket/client'; // connect to socket client
 import './styles/vars.scss';
 import './styles/custom-styles.scss';

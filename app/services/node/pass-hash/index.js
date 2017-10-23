@@ -1,13 +1,8 @@
 import bcrypt from 'bcrypt';
 
-function generateHash(password) {
-    return bcrypt.hash(password, bcrypt.genSaltSync(10));
-}
+const generateHash = (password) => bcrypt.hash(password, bcrypt.genSaltSync(10));
 
-function validatePassword(password, hash) {
-    return bcrypt.compare(password, hash);
-}
-
+const validatePassword = (password, hash) => bcrypt.compare(password, hash);
 
 export {
     generateHash,

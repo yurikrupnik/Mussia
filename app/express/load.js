@@ -8,10 +8,11 @@ import passport from './passport';
 import api from './api';
 import router from './router';
 import errors from './errors';
+import {databaseUrl} from '../config/env';
 
 export default (app) => {
     logger(app);
-    session(app);
+    session(app, databaseUrl);
     setters(app);
     webpack(app);
     serveStatics(app);

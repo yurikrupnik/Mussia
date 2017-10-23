@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../api/quizzes/selectors';
+import {mapToProps as quizzesMapToProps, actions as quizzesActions} from '../../components/routes/quizzes/selectors';
 import {mapToProps as resultsMapToProps, actions as resultsActions} from '../../api/results/selectors';
 import {mapToProps as usersMapToProps, actions as usersActions} from '../../api/users/selectors';
 

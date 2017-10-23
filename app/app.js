@@ -1,5 +1,5 @@
 import express from 'express';
-import loadExpressMiddlewares from './services/express/middlewares/load';
+import loadExpressMiddlewares from './express/load';
 
 const app = express();
 loadExpressMiddlewares(app);
