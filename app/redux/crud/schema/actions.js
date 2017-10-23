@@ -4,6 +4,7 @@ import {READ, SCHEMA, PROMISE_TYPES_CHAIN} from '../../constants';
 import {isEmpty} from 'lodash';
 import {mapToProps as getSchema} from './selectors';
 
+
 function createStatusActions(name) {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {
         // map to actions with lowercase - via pending, success, fail
@@ -11,10 +12,14 @@ function createStatusActions(name) {
         return acc;
     }, {});
 }
-function createGetSchema(name, loading, url, getDataSelector) {
+function createGetSchema(name, loading, url, selector) {
     const statusActions = createStatusActions(name);
     return () => (dispatch, getState) => {
-        const schema = getSchema(getDataSelector(getState()));
+        const state = selector(getState())
+        console.log('state', state);
+
+        debugger;
+        const schema = getSchema(selector(getState()));
         if (isEmpty(schema)) {
             dispatch(statusActions.pending());
             dispatch(loading.toggle());

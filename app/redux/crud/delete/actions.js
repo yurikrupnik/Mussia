@@ -1,10 +1,8 @@
 import axios from 'axios';
 import {handleHostAndPrefix} from '../../../api/utils';
 import {DELETE, PROMISE_TYPES_CHAIN} from '../../constants';
-import {isEmpty} from 'lodash';
-import {read} from '../../../api/quizzes/actions';
-// import {mapToProps} from './selectors';
 import {errorReceived} from './../../errors/actions';
+
 function createStatusActions(name) {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {
         // map to actions with lowercase - via pending, success, fail
@@ -12,7 +10,8 @@ function createStatusActions(name) {
         return acc;
     }, {});
 }
-function createDeleteSchema(name, loading, url, dataMapToProps) {
+
+function createDeleteSchema(name, loading, url, dataMapToProps, read) {
     const statusActions = createStatusActions(name);
     return (payload) => (dispatch, getState) => {
         const param = typeof payload === 'string' ? payload : '';

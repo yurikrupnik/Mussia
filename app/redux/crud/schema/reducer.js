@@ -1,4 +1,3 @@
-import {createActionsType} from './actions';
 import {SUCCESS, READ, SCHEMA, PROMISE_TYPES_CHAIN} from '../../constants';
 
 const createReducerActionsByName = (name) => {

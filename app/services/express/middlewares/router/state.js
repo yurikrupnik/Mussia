@@ -1,6 +1,6 @@
 import configureStore from '../../../../redux/store';
 import {setCurrentUser, fetchUsers} from '../../../../api/users/actions';
-import {getSchema} from '../../../../api/quizzes/actions';
+// import {getSchema} from '../../../../api/quizzes/actions';
 import {setSession} from '../../../../redux/config/session/actions';
 import {setCurrent} from '../../../../redux/ui/current/actions';
 

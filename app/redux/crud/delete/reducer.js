@@ -1,17 +1,16 @@
-
-import {createActionsType} from './actions';
 import {SUCCESS, DELETE, PROMISE_TYPES_CHAIN} from '../../constants';
 
-const createReducerActionsByName = (name) => {
+const createDeleteReducerHandlers = (name) => {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {
         if (next === SUCCESS) {
-            acc[`${DELETE}_${name}_${next}`] = (state, action) => action.payload;
+            acc[`${DELETE}_${name}_${next}`] = (state, action) => state;
         } else {
             acc[`${DELETE}_${name}_${next}`] = (state, action) => state;
         }
         return acc;
     }, {});
 };
+
 
 const createSchemaReducerByTagName = (name = '') => {
     const reducerActions = createReducerActionsByName(name);
@@ -24,4 +23,4 @@ const createSchemaReducerByTagName = (name = '') => {
     }
 };
 
-export default createSchemaReducerByTagName;
+export default createDeleteReducerHandlers;

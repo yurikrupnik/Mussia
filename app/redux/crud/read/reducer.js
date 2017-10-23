@@ -1,8 +1,6 @@
-
-import {createActionsType} from './actions';
 import {SUCCESS, READ, PROMISE_TYPES_CHAIN} from '../../constants';
 
-const createReducerActionsByName = (name) => {
+const createReadReducerHandlers = (name) => {
     return PROMISE_TYPES_CHAIN.reduce((acc, next) => {
         if (next === SUCCESS) {
             acc[`${READ}_${name}_${next}`] = (state, action) => Object.assign({}, state, {
@@ -19,15 +17,4 @@ const createReducerActionsByName = (name) => {
     }, {});
 };
 
-const createReadReducerByTagName = (name = '') => {
-    const reducerActions = createReducerActionsByName(name);
-    return (state = {}, action) => { // reducer
-        if (reducerActions.hasOwnProperty(action.type)) {
-            return reducerActions[action.type](state, action);
-        } else {
-            return state;
-        }
-    }
-};
-
-export default createReadReducerByTagName;
+export default createReadReducerHandlers;
