@@ -1,4 +1,4 @@
-import React, {Component, isValidElement} from 'react';
+import React, {Component, PureComponent, isValidElement} from 'react';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -13,7 +13,7 @@ import {
     actions as quizzesActions
 } from './selectors';
 
-class Quiz extends Component {
+class Quiz extends PureComponent {
 
     static propTypes = {
         quizzes: PropTypes.shape({
@@ -127,6 +127,8 @@ class Quiz extends Component {
 
     render() {
         const {quizzes, location, actions, schema} = this.props;
+        console.log('quizzes', quizzes);
+
         const {pathname} = location;
         const {loading, data} = quizzes;
         const {entities, result} = data;

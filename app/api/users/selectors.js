@@ -4,7 +4,7 @@ import * as actions from './actions';
 function mapToProps(state, ownProps) {
     // console.log('state', state);
 
-    return state.api.users;
+    return state.users;
 }
 
 const dispatchActions = (dispatch) => {

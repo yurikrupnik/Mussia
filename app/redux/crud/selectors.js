@@ -1,9 +1,5 @@
 
-function createSelectorByName(name) {
-    return function (state, ownProps) {
-        return state.api[name]
-    }
-}
+const createSelectorByName = (name) => (state, ownProps) => state[name];
 
 export {
     createSelectorByName,

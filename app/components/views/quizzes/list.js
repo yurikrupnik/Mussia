@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 
-class Quiz extends Component {
+class Quiz extends PureComponent {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);

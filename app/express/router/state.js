@@ -1,6 +1,6 @@
 import configureStore from '../../redux/store';
 import {setCurrentUser, fetchUsers} from '../../api/users/actions';
-// import {getSchema} from '../../../../api/quizzes/actions';
+import {getSchema} from '../../components/views/quizzes/actions';
 import {setSession} from '../../redux/config/session/actions';
 import {setCurrent} from '../../redux/ui/current/actions';
 
@@ -11,8 +11,8 @@ const setStateOnLocals = (req, res, next, store) => () => {
 
 export default (req, res, next) => {
     let store = configureStore();
-    // store.dispatch(getSchema())
-    //     .then(() => {
+    store.dispatch(getSchema())
+        .then(() => {
             if (req.isAuthenticated()) {
                 store.dispatch(setSession(req.user.id));
                 store.dispatch(setCurrent(req.user));
@@ -25,5 +25,5 @@ export default (req, res, next) => {
             } else {
                 setStateOnLocals(req, res, next, store)();
             }
-        // });
-}
+        });
+};

@@ -2,7 +2,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from './actions';
 
 const mapToProps = (state, ownProps) => {
-    return state.api.results.data;
+    return state.results.data;
 };
 
 const dispatchActions = (dispatch) => {
