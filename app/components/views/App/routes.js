@@ -11,13 +11,10 @@ import Admin from '../admin';
 
 import Quiz from '../../Quiz';
 import Quizzes from '../quizzes';
-
 const routes = [
     {
-        path: '/dashboard',
-        component: () => {
-            return <div>dashboard</div>
-        }
+        path: '/shows',
+        component: Hello
     },
     {
         path: '/admin',
