@@ -1,5 +1,7 @@
 # Mussia Docs
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/yurikrupnik/Mussia.svg)](https://greenkeeper.io/)
+
 Minimal Universal App Boilerplate - node, express, mongodb, react, redux, react-router, babel and webpack  
 
 # DB Structure and data fetching: 
